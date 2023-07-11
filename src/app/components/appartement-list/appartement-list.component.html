@@ -1,20 +1,26 @@
-<div class="appartement-list">
-  <h2>Liste des appartements</h2>
-  <ul>
-    <li *ngFor="let appartement of appartements" class="appartement-item">
-      <div class="appartement-info">
-        <div class="adresse">
-          <h3><strong>{{ appartement.numero }} {{ appartement.adresse }}</strong></h3>
-          <p>, {{ appartement.codePostal }} {{ appartement.ville }}</p>
+
+<section class="appartement-list">
+  <div class="container">
+    <h2>Biens immobiliers :</h2>
+    <ul>
+      <li *ngFor="let appartement of appartements" class="appartement-item">
+        <div class="appartement-info">
+          <div class="adresse">
+            <div>
+              <h3>{{ appartement.numero }} {{ appartement.adresse }}</h3>
+              <p>{{ appartement.codePostal }} {{ appartement.ville }}</p>
+            </div>
+            <img src="./assets/img/plus-icon.svg">
+          </div>
+          <!--<p>{{ appartement.nombrePieces }} pièces | {{ appartement.surface }} m²</p>
+          <p>Loyer mensuel : {{ appartement.loyerMensuel }} €</p>
+          <p>Coût : {{appartement.prix}} €</p>-->
         </div>
-        <p>{{ appartement.nombrePieces }} pièces | {{ appartement.surface }} m²</p>
-        <p>Loyer mensuel : {{ appartement.loyerMensuel }} €</p>
-        <p>Coût : {{appartement.prix}} €</p>
-      </div>
-      <div class="appartement-actions">
-        <!-- Ajoutez ici les actions pour chaque appartement, par exemple, boutons de détails ou de modification -->
-      </div>
-    </li>
-  </ul>
-</div>
+        <div class="appartement-actions">
+          <!-- Ajoutez ici les actions pour chaque appartement, par exemple, boutons de détails ou de modification -->
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
 
