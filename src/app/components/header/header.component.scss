@@ -1,0 +1,21 @@
+
+/* Feuille de style intégrée #3 | http://localhost:4200/appartement/3 */
+
+
+
+
+
+header {
+  background-color: #143b86;
+  ul {
+    display: flex;
+    li{
+      a {
+        display: block;
+        padding: 1.5rem;
+        text-decoration: none;
+        color: white;
+      }
+    }
+  }
+}
