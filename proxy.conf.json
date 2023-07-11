@@ -1,7 +1,6 @@
 {
   "/api": {
-    "target": "https://gestion-quin-06f134c36699.herokuapp.com",
-    "secure": true,
-    "changeOrigin": true
+    "target": "http://localhost:8080",
+    "secure": false
   }
 }
