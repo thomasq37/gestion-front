@@ -1,9 +1,9 @@
 
 <section class="appartement-list">
   <div class="container">
-    <h2>Biens immobiliers :</h2>
+    <h2>Biens immobiliers</h2>
     <ul>
-      <li *ngFor="let appartement of appartements" class="appartement-item">
+      <li *ngFor="let appartement of appartements" class="appartement-item" (click)="viewAppartement(appartement.id)">
         <div class="appartement-info">
           <div class="adresse">
             <div>

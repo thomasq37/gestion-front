@@ -8,11 +8,14 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class GestionService {
-
-  private apiUrl = `${environment.apiUrl}/appartements`;
+  private apiUrl = '/api/appartements'
+  //private apiUrl = `${environment.apiUrl}/appartements`;
   constructor(private http: HttpClient) { }
 
   getAppartements(): Observable<Appartement[]> {
     return this.http.get<Appartement[]>(this.apiUrl);
+  }
+  getAppartementById(appartementId: number): Observable<Appartement> {
+    return this.http.get<Appartement>(this.apiUrl + '/' + appartementId)
   }
 }

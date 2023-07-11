@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {GestionService} from "../../services/gestion.service";
 import {Appartement} from "../../models/appartement";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-appartement-list',
@@ -10,7 +11,7 @@ import {Appartement} from "../../models/appartement";
 export class AppartementListComponent implements OnInit {
   appartements: Appartement[];
 
-  constructor(private gestionService: GestionService) {
+  constructor(private gestionService: GestionService, private router: Router) {
     this.appartements = [];
   }
 
@@ -19,5 +20,8 @@ export class AppartementListComponent implements OnInit {
       .subscribe(appartements => {
         this.appartements = appartements;
       });
+  }
+  viewAppartement(appartementId: number) {
+    this.router.navigate(['/appartement', appartementId]);
   }
 }

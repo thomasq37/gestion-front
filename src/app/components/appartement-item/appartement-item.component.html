@@ -1,1 +1,83 @@
-<p>appartement-item works!</p>
+
+<section class="appartement-item" *ngIf="appartement">
+  <div class="container">
+    <h2>Vue d'ensemble</h2>
+    <div class="appartement-baniere-info">
+      <img src="assets/img/appart-icon.svg">
+      <ul>
+        <li>
+          <p>Moyenne bénéfice</p>
+          <p>350 € par mois<img class="arrow" src="assets/img/arrow-down.svg"></p>
+        </li>
+        <li>
+          <p>Rentabilité nette</p>
+          <p>5% <span><img class="arrow" src="assets/img/arrow-up.svg"></span></p>
+        </li>
+        <li>
+          <p>Fini de rembourser dans</p>
+          <p>12 ans</p>
+        </li>
+      </ul>
+    </div>
+    <h2>Critères</h2>
+    <ul class="appartement-details">
+      <li>
+        <img src="./assets/img/is-loue-icon.png">
+        <div>
+          <p>Ce bien est :</p>
+          <p>{{ appartement.loue ? 'Loué' : 'Non loué' }}</p>
+        </div>
+      </li>
+      <li>
+        <img src="./assets/img/adresse-icon.png">
+        <div>
+          <p>Adresse:</p>
+          <p>{{appartement.numero}} {{ appartement.adresse }}, {{ appartement.codePostal }} {{ appartement.ville }}</p>
+        </div>
+
+      </li>
+      <li>
+        <img src="./assets/img/adresse-icon.png">
+        <div>
+          <p>Nombre de pièces:</p>
+          <p>{{ appartement.nombrePieces }}</p>
+        </div>
+      </li>
+      <li>
+        <img src="./assets/img/adresse-icon.png">
+        <div>
+          <p>Surface:</p>
+          <p>{{ appartement.surface }} m²</p>
+        </div>
+      </li>
+      <li>
+        <img src="./assets/img/adresse-icon.png">
+        <div>
+          <p>Balcon:</p>
+          <p>{{ appartement.balcon ? 'Oui' : 'Non' }}</p>
+        </div>
+      </li>
+      <li>
+        <img src="./assets/img/adresse-icon.png">
+        <div>
+          <p>Loyer Mensuel:</p>
+          <p>{{ appartement.loyerMensuel }} €</p>
+        </div>
+      </li>
+      <li>
+        <img src="./assets/img/adresse-icon.png">
+        <div>
+          <p>Prix:</p>
+          <p>{{ appartement.prix }} €</p>
+        </div>
+      </li>
+      <!--<li><p></p>Frais:</li>
+      <ul>
+        <li *ngFor="let frais of appartement.frais">
+          {{ frais.id }} - Montant: {{ frais.montant }} - Fréquence: {{ frais.frequence }}
+        </li>
+      </ul>-->
+    </ul>
+  </div>
+
+</section>

@@ -1,0 +1,55 @@
+.appartement-item{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background-color: white;
+  .container{
+    .appartement-baniere-info{
+      padding-bottom: 4rem;
+      border-bottom: 1px solid #b8b8b8;
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      img{
+        width: 100%;
+      }
+      ul{
+        li{
+          padding-block: .5rem;
+          p:last-child{
+            display: flex;
+            align-items: baseline;
+            font-size: 1.3rem;
+            color: #C5C5C5;
+            padding: 0.4em;
+            .arrow{
+              margin-left: 2rem;
+              width: 2rem;
+            }
+          }
+        }
+      }
+    }
+
+    h2{
+      margin-top: 2rem;
+    }
+    .appartement-details{
+      li{
+        display: grid;
+        grid-template-columns: auto 1fr;
+        div{
+          padding-top: 1.5rem;
+          padding-left: 1rem;
+          p:first-child{
+            font-size: 1.3rem;
+            color: #C5C5C5;
+          }
+        }
+        img{
+          width: 3.5rem;
+        }
+      }
+    }
+  }
+}

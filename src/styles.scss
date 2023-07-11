@@ -4,12 +4,26 @@
   padding: 0;
   box-sizing: border-box;
 }
+h2{
+  font-weight: 400;
+  padding-bottom: 1rem;
+}
 html{
   font-size: 62.5%;
 }
 body{
   font-family: Arial, sans-serif;
   font-size: 1.5rem;
+  min-height: 100vh;
+  background-color: #FCFCFC;
+
+}
+.container {
+
+  max-width: 120rem;
+  margin: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 ul{
