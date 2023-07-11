@@ -11,6 +11,7 @@ export interface Appartement {
   loyerMensuel: number;
   prix: number;
   frais: Frais[];
+  images: string[]
 }
 
 export enum FrequenceFrais {

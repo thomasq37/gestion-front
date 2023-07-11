@@ -2,7 +2,9 @@
 <section class="appartement-item" *ngIf="appartement">
   <div class="container">
     <div class="appartement-baniere-info">
-      <img src="assets/img/appart-icon.svg">
+      <div *ngFor="let image of appartement.images">
+        <img [src]="image" alt="Image de l'appartement">
+      </div>
       <ul>
         <li>
           <p>Moyenne bénéfice</p>
