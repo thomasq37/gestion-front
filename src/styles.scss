@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'node_modules/bootstrap/scss/bootstrap';
+
 *{
   margin: auto 0;
   padding: 0;
@@ -31,4 +33,3 @@ ul{
 p{
   margin: 0 !important;
 }
-@import 'node_modules/bootstrap/scss/bootstrap';
