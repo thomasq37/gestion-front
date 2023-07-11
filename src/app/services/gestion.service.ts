@@ -8,14 +8,19 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class GestionService {
-  //private apiUrl = '/api/appartements'
-  private apiUrl = `${environment.apiUrl}/appartements`;
+  //private apiUrl = '/api'
+  private apiUrl = `${environment.apiUrl}`;
+  private urlAppartement  = this.apiUrl + '/appartements'
+  private urlRentaNetteAppartement = '/calcul-rentabilite'
   constructor(private http: HttpClient) { }
 
   getAppartements(): Observable<Appartement[]> {
-    return this.http.get<Appartement[]>(this.apiUrl);
+    return this.http.get<Appartement[]>(this.urlAppartement);
   }
   getAppartementById(appartementId: number): Observable<Appartement> {
-    return this.http.get<Appartement>(this.apiUrl + '/' + appartementId)
+    return this.http.get<Appartement>(this.urlAppartement + '/' + appartementId)
+  }
+  getRentabiliteByAppartementId(appartement: Appartement): Observable<number> {
+    return this.http.post<number>(this.apiUrl + '/' + appartement.id + this.urlRentaNetteAppartement, appartement)
   }
 }

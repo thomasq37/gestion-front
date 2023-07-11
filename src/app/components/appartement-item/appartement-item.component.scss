@@ -5,27 +5,36 @@
   background-color: white;
   .container{
     .appartement-baniere-info{
+      .carousel-container{
+        margin-bottom: 2rem;
+        ngb-carousel{
+          border-radius: 1rem;
+          overflow: hidden;
+          img{
+            min-height: 280px;
+            width: 100%;
+          }
+        }
+
+      }
       .appartement-images{
         margin-top: 2rem
       }
       border-bottom: 1px solid #b8b8b8;
       margin-top: 2rem;
-      img{
-        width: 100%;
-        border-radius: 1rem;
-      }
+
       ul{
         li{
           padding-block: .5rem;
           p:last-child{
             display: flex;
+            justify-content: space-between;
             align-items: baseline;
             font-size: 1rem;
             color: #C5C5C5;
             padding: 0.4em;
             .arrow{
               border-radius: 0;
-              margin-left: 2rem;
               width: 2rem;
             }
           }
@@ -49,7 +58,7 @@
           }
         }
         img{
-          width: 3.5rem;
+          width: 3rem;
         }
       }
     }

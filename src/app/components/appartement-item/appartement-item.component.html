@@ -4,7 +4,8 @@
   <div class="container">
     <div class="appartement-baniere-info">
       <h2>Recherche « 7 rue de la grève »</h2>
-      <ngb-carousel *ngIf="images">
+      <div class="carousel-container">
+        <ngb-carousel *ngIf="images">
         <ng-template ngbSlide>
           <div class="picsum-img-wrapper">
             <img [src]="images[0]" alt="Random first slide" />
@@ -21,14 +22,15 @@
           </div>
         </ng-template>
       </ngb-carousel>
+      </div>
       <ul>
         <li>
           <p>Moyenne bénéfice</p>
-          <p>350 € par mois<img class="arrow" src="assets/img/arrow-down.svg"></p>
+          <p><span>350 € par mois</span><img class="arrow" src="assets/img/arrow-down.svg"></p>
         </li>
         <li>
           <p>Rentabilité nette</p>
-          <p>5% <span><img class="arrow" src="assets/img/arrow-up.svg"></span></p>
+          <p><span>{{rentabiliteNette }}</span><img class="arrow" src="assets/img/arrow-up.svg"></p>
         </li>
         <li>
           <p>Fini de rembourser dans</p>
