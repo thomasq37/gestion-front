@@ -1,0 +1,21 @@
+.appartement-list {
+  .appartement-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 10px;
+
+    .appartement-info {
+      flex: 1;
+      .adresse{
+        display: flex;
+        align-items: baseline;
+      }
+    }
+
+    .appartement-actions {
+      /* Ajoutez ici les styles pour les actions des appartements */
+    }
+  }
+}
