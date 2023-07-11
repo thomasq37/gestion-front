@@ -8,8 +8,8 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class GestionService {
-  private apiUrl = '/api/appartements'
-  //private apiUrl = `${environment.apiUrl}/appartements`;
+  //private apiUrl = '/api/appartements'
+  private apiUrl = `${environment.apiUrl}/appartements`;
   constructor(private http: HttpClient) { }
 
   getAppartements(): Observable<Appartement[]> {
