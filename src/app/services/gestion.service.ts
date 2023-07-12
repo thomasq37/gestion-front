@@ -19,10 +19,10 @@ export class GestionService {
     return this.http.get<Appartement>(this.urlAppartement + appartementId)
   }
   getRentabiliteNetteByAppartementId(appartementId: number): Observable<number> {
-    return this.http.post<number>(this.urlAppartement + appartementId + '/calcul-rentabilite', null)
+    return this.http.get<number>(this.urlAppartement + appartementId + '/calcul-rentabilite')
   }
   getMoyenneBeneficesByAppartementId(appartementId: number): Observable<number> {
-    return this.http.post<number>(this.urlAppartement + appartementId + '/moyenne-benefices', null)
+    return this.http.get<number>(this.urlAppartement + appartementId + '/moyenne-benefices')
   }
   getTauxVacancesLocativesByAppartementId(appartementId: number): Observable<number> {
     return this.http.get<number>(this.urlAppartement + appartementId + '/taux-vacances-locatives')
