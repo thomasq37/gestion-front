@@ -10,7 +10,7 @@ import {environment} from "../../environments/environment";
 export class GestionService {
   //private apiUrl = '/api'
   private apiUrl = `${environment.apiUrl}`;
-  private urlAppartement  = '/api/appartements/'
+  private urlAppartement  = this.apiUrl + '/api/appartements/'
   constructor(private http: HttpClient) { }
 
   getAppartements(): Observable<Appartement[]> {
