@@ -11,7 +11,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 export class AppartementItemComponent implements OnInit{
   images: string[] = [];
   appartement!: Appartement;
-  currentIndex = 0;
+
   rentabiliteNette = 0;
   moyenneBenefices = 0;
   tauxVacanceLocatives = 0;
