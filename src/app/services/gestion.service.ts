@@ -10,17 +10,16 @@ import {environment} from "../../environments/environment";
 export class GestionService {
   //private apiUrl = '/api'
   private apiUrl = `${environment.apiUrl}`;
-  private urlAppartement  = this.apiUrl + '/appartements'
-  private urlRentaNetteAppartement = '/calcul-rentabilite'
+  private urlAppartement  = '/api/appartements/'
   constructor(private http: HttpClient) { }
 
   getAppartements(): Observable<Appartement[]> {
-    return this.http.get<Appartement[]>(this.urlAppartement);
+    return this.http.get<Appartement[]>(this.urlAppartement + 'list');
   }
   getAppartementById(appartementId: number): Observable<Appartement> {
-    return this.http.get<Appartement>(this.urlAppartement + '/' + appartementId)
+    return this.http.get<Appartement>(this.urlAppartement + appartementId)
   }
-  getRentabiliteByAppartementId(appartement: Appartement): Observable<number> {
-    return this.http.post<number>(this.apiUrl + '/' + appartement.id + this.urlRentaNetteAppartement, appartement)
+  getRentabiliteByAppartementId(appartementId: number): Observable<number> {
+    return this.http.post<number>(this.urlAppartement + appartementId + '/calcul-rentabilite', null)
   }
 }

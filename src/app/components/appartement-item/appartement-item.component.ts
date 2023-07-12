@@ -9,7 +9,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
   styleUrls: ['./appartement-item.component.scss']
 })
 export class AppartementItemComponent implements OnInit{
-  images: string[] = []; // Tableau des chemins d'accès aux images
+  images: string[] = [];
   appartement!: Appartement;
   currentIndex = 0;
   rentabiliteNette = 0;
@@ -19,21 +19,16 @@ export class AppartementItemComponent implements OnInit{
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const appartementId = Number(params.get('id'));
-
+      this.gestionService.getRentabiliteByAppartementId(appartementId)
+        .subscribe(rentabiliteNette => {
+          this.rentabiliteNette = +rentabiliteNette.toFixed(2);
+        });
       this.gestionService.getAppartementById(appartementId)
         .subscribe(appartement => {
           this.appartement = appartement;
           this.images = appartement.images;
-          this.gestionService.getRentabiliteByAppartementId(appartement)
-            .subscribe(rentabiliteNette => {
-              this.rentabiliteNette = +rentabiliteNette.toFixed(2);
-            });
+
         });
-
-      // Ici, vous devez implémenter la logique pour récupérer l'appartement avec l'ID spécifié
-      // par exemple, en utilisant un service ou une requête HTTP
-      // Pour les besoins de l'exemple, nous créons simplement un objet appartement factice
-
     });
   }
 }
