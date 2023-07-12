@@ -1,112 +1,115 @@
 <app-header></app-header>
-<section class="appartement-item" *ngIf="appartement">
+<div class="flex">
+  <img class="loader" *ngIf="loadingCount > 0" src="assets/img/loader.gif"/>
+</div>
+  <section class="appartement-item" *ngIf="appartement">
 
-  <div class="container">
-    <div class="appartement-baniere-info">
-      <h2>Recherche « 7 rue de la grève »</h2>
-      <div class="carousel-container">
-        <ngb-carousel *ngIf="images">
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img [src]="images[0]" alt="Random first slide" />
-          </div>
-        </ng-template>
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img [src]="images[1]" alt="Random second slide" />
-          </div>
-        </ng-template>
-        <ng-template ngbSlide>
-          <div class="picsum-img-wrapper">
-            <img [src]="images[2]" alt="Random third slide" />
-          </div>
-        </ng-template>
-      </ngb-carousel>
+    <div class="container">
+      <div class="appartement-baniere-info">
+        <h2>Recherche « 7 rue de la grève »</h2>
+        <div class="carousel-container">
+          <ngb-carousel *ngIf="images">
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img [src]="images[0]" alt="Random first slide" />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img [src]="images[1]" alt="Random second slide" />
+              </div>
+            </ng-template>
+            <ng-template ngbSlide>
+              <div class="picsum-img-wrapper">
+                <img [src]="images[2]" alt="Random third slide" />
+              </div>
+            </ng-template>
+          </ngb-carousel>
+        </div>
+        <ul>
+          <li *ngIf="moyenneBenefices !== 0" (click)="showInfo($event)">
+            <p>Moyenne bénéfices</p>
+            <p>{{moyenneBenefices}}€ par mois
+              <span>(renvenus annuels - dépenses annuels) ÷ 12</span>
+              <img class="arrow" src="assets/img/arrow-down.svg">
+            </p>
+          </li>
+          <li *ngIf="rentabiliteNette !== 0" (click)="showInfo($event)">
+            <p>Rentabilité nette</p>
+            <p>{{rentabiliteNette }}%
+              <span>((renvenus annuels - dépenses annuels) ÷ prix) x 100</span>
+              <img class="arrow" src="assets/img/arrow-up.svg">
+            </p>
+          </li>
+          <li *ngIf="tauxVacanceLocatives !== 0" (click)="showInfo($event)">
+            <p>Taux de vacance locatives</p>
+            <p>{{tauxVacanceLocatives}}%
+              <span>(jours vacants ÷ jours total) x 100</span>
+              <img class="arrow" src="assets/img/arrow-down.svg">
+            </p>
+          </li>
+        </ul>
       </div>
-      <ul>
-        <li *ngIf="moyenneBenefices !== 0" (click)="showInfo($event)">
-          <p>Moyenne bénéfices</p>
-          <p>{{moyenneBenefices}}€ par mois
-            <span>(renvenus annuels - dépenses annuels) ÷ 12</span>
-            <img class="arrow" src="assets/img/arrow-down.svg">
-          </p>
+      <h2>Critères</h2>
+      <ul class="appartement-details">
+        <li>
+          <img src="./assets/img/is-loue-icon.png">
+          <div>
+            <p>Ce bien est :</p>
+            <p>{{ appartement.loue ? 'Loué' : 'Non loué' }}</p>
+          </div>
         </li>
-        <li *ngIf="rentabiliteNette !== 0" (click)="showInfo($event)">
-          <p>Rentabilité nette</p>
-          <p>{{rentabiliteNette }}%
-            <span>((renvenus annuels - dépenses annuels) ÷ prix) x 100</span>
-            <img class="arrow" src="assets/img/arrow-up.svg">
-          </p>
+        <li>
+          <img src="./assets/img/adresse-icon.png">
+          <div>
+            <p>Adresse:</p>
+            <p>{{appartement.numero}} {{ appartement.adresse }}, {{ appartement.codePostal }} {{ appartement.ville }}</p>
+          </div>
+
         </li>
-        <li *ngIf="tauxVacanceLocatives !== 0" (click)="showInfo($event)">
-          <p>Taux de vacance locatives</p>
-          <p>{{tauxVacanceLocatives}}%
-            <span>(jours vacants ÷ jours total) x 100</span>
-            <img class="arrow" src="assets/img/arrow-down.svg">
-          </p>
+        <li>
+          <img src="./assets/img/adresse-icon.png">
+          <div>
+            <p>Nombre de pièces:</p>
+            <p>{{ appartement.nombrePieces }}</p>
+          </div>
         </li>
+        <li>
+          <img src="./assets/img/adresse-icon.png">
+          <div>
+            <p>Surface:</p>
+            <p>{{ appartement.surface }} m²</p>
+          </div>
+        </li>
+        <li>
+          <img src="./assets/img/adresse-icon.png">
+          <div>
+            <p>Balcon:</p>
+            <p>{{ appartement.balcon ? 'Oui' : 'Non' }}</p>
+          </div>
+        </li>
+        <li>
+          <img src="./assets/img/adresse-icon.png">
+          <div>
+            <p>Loyer Mensuel:</p>
+            <p>{{ appartement.loyerMensuel }} €</p>
+          </div>
+        </li>
+        <li>
+          <img src="./assets/img/adresse-icon.png">
+          <div>
+            <p>Prix:</p>
+            <p>{{ appartement.prix }} €</p>
+          </div>
+        </li>
+        <!--<li><p></p>Frais:</li>
+        <ul>
+          <li *ngFor="let frais of appartement.frais">
+            {{ frais.id }} - Montant: {{ frais.montant }} - Fréquence: {{ frais.frequence }}
+          </li>
+        </ul>-->
       </ul>
     </div>
-    <h2>Critères</h2>
-    <ul class="appartement-details">
-      <li>
-        <img src="./assets/img/is-loue-icon.png">
-        <div>
-          <p>Ce bien est :</p>
-          <p>{{ appartement.loue ? 'Loué' : 'Non loué' }}</p>
-        </div>
-      </li>
-      <li>
-        <img src="./assets/img/adresse-icon.png">
-        <div>
-          <p>Adresse:</p>
-          <p>{{appartement.numero}} {{ appartement.adresse }}, {{ appartement.codePostal }} {{ appartement.ville }}</p>
-        </div>
 
-      </li>
-      <li>
-        <img src="./assets/img/adresse-icon.png">
-        <div>
-          <p>Nombre de pièces:</p>
-          <p>{{ appartement.nombrePieces }}</p>
-        </div>
-      </li>
-      <li>
-        <img src="./assets/img/adresse-icon.png">
-        <div>
-          <p>Surface:</p>
-          <p>{{ appartement.surface }} m²</p>
-        </div>
-      </li>
-      <li>
-        <img src="./assets/img/adresse-icon.png">
-        <div>
-          <p>Balcon:</p>
-          <p>{{ appartement.balcon ? 'Oui' : 'Non' }}</p>
-        </div>
-      </li>
-      <li>
-        <img src="./assets/img/adresse-icon.png">
-        <div>
-          <p>Loyer Mensuel:</p>
-          <p>{{ appartement.loyerMensuel }} €</p>
-        </div>
-      </li>
-      <li>
-        <img src="./assets/img/adresse-icon.png">
-        <div>
-          <p>Prix:</p>
-          <p>{{ appartement.prix }} €</p>
-        </div>
-      </li>
-      <!--<li><p></p>Frais:</li>
-      <ul>
-        <li *ngFor="let frais of appartement.frais">
-          {{ frais.id }} - Montant: {{ frais.montant }} - Fréquence: {{ frais.frequence }}
-        </li>
-      </ul>-->
-    </ul>
-  </div>
-
-</section>
+  </section>
 <app-footer></app-footer>

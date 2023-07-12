@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Appartement, FrequenceFrais} from "../../models/appartement";
 import {GestionService} from "../../services/gestion.service";
-import { OwlOptions } from 'ngx-owl-carousel-o';
 @Component({
   selector: 'app-appartement-item',
   templateUrl: './appartement-item.component.html',
@@ -11,7 +10,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 export class AppartementItemComponent implements OnInit{
   images: string[] = [];
   appartement!: Appartement;
-
+  loadingCount = 4;
   rentabiliteNette = 0;
   moyenneBenefices = 0;
   tauxVacanceLocatives = 0;
@@ -24,20 +23,23 @@ export class AppartementItemComponent implements OnInit{
       this.gestionService.getTauxVacancesLocativesByAppartementId(appartementId)
         .subscribe(tauxVacanceLocatives => {
           this.tauxVacanceLocatives = tauxVacanceLocatives
+          this.loadingCount--;
         });
       this.gestionService.getMoyenneBeneficesByAppartementId(appartementId)
         .subscribe(moyenneBenefices => {
-          this.moyenneBenefices = moyenneBenefices
+          this.moyenneBenefices = moyenneBenefices;
+          this.loadingCount--;
         });
       this.gestionService.getRentabiliteNetteByAppartementId(appartementId)
         .subscribe(rentabiliteNette => {
           this.rentabiliteNette = +rentabiliteNette.toFixed(2);
+          this.loadingCount--;
         });
       this.gestionService.getAppartementById(appartementId)
         .subscribe(appartement => {
           this.appartement = appartement;
           this.images = appartement.images;
-
+          this.loadingCount--;
         });
     });
   }

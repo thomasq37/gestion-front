@@ -1,4 +1,12 @@
 /* Importing Bootstrap SCSS file. */
+.flex{
+  display: flex;
+  justify-content: center;
+  .loader{
+    width: 10rem;
+  }
+}
+
 .appartement-item{
   padding-bottom: 2rem;
   background-color: white;
