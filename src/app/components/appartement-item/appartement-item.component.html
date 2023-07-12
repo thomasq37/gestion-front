@@ -24,17 +24,26 @@
       </ngb-carousel>
       </div>
       <ul>
-        <li>
-          <p>Moyenne bénéfice</p>
-          <p><span>350 € par mois</span><img class="arrow" src="assets/img/arrow-down.svg"></p>
+        <li (click)="showInfo($event)">
+          <p>Moyenne bénéfices</p>
+          <p>{{moyenneBenefices}}€ par mois
+            <span>(renvenus annuels - dépenses annuels) ÷ 12</span>
+            <img class="arrow" src="assets/img/arrow-down.svg">
+          </p>
         </li>
-        <li>
+        <li (click)="showInfo($event)">
           <p>Rentabilité nette</p>
-          <p><span>{{rentabiliteNette }}</span><img class="arrow" src="assets/img/arrow-up.svg"></p>
+          <p>{{rentabiliteNette }}%
+            <span>((renvenus annuels - dépenses annuels) ÷ prix) x 100</span>
+            <img class="arrow" src="assets/img/arrow-up.svg">
+          </p>
         </li>
-        <li>
-          <p>Fini de rembourser dans</p>
-          <p>12 ans</p>
+        <li (click)="showInfo($event)">
+          <p>Taux de vacance locatives</p>
+          <p>{{tauxVacanceLocatives}}%
+            <span>(jours vacants ÷ jours total) x 100</span>
+            <img class="arrow" src="assets/img/arrow-down.svg">
+          </p>
         </li>
       </ul>
     </div>

@@ -18,7 +18,13 @@ export class GestionService {
   getAppartementById(appartementId: number): Observable<Appartement> {
     return this.http.get<Appartement>(this.urlAppartement + appartementId)
   }
-  getRentabiliteByAppartementId(appartementId: number): Observable<number> {
+  getRentabiliteNetteByAppartementId(appartementId: number): Observable<number> {
     return this.http.post<number>(this.urlAppartement + appartementId + '/calcul-rentabilite', null)
+  }
+  getMoyenneBeneficesByAppartementId(appartementId: number): Observable<number> {
+    return this.http.post<number>(this.urlAppartement + appartementId + '/moyenne-benefices', null)
+  }
+  getTauxVacancesLocativesByAppartementId(appartementId: number): Observable<number> {
+    return this.http.get<number>(this.urlAppartement + appartementId + '/taux-vacances-locatives')
   }
 }
