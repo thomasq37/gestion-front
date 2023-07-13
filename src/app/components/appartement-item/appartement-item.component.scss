@@ -27,7 +27,6 @@
       .appartement-images{
         margin-top: 2rem
       }
-      border-bottom: 1px solid #b8b8b8;
       margin-top: 2rem;
 
       ul{
@@ -59,17 +58,23 @@
 
     h2{
       margin-top: 2rem;
+
+    }
+    .appartement-list-stats{
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #b8b8b8;
+
     }
     .appartement-details{
+      border-bottom: 1px solid #b8b8b8;
+      padding-bottom: 1rem;
       li{
         display: grid;
         grid-template-columns: auto 1fr;
         div{
-          padding-top: 1.5rem;
           padding-left: 1rem;
           p:first-child{
             font-size: .9rem;
-            color: #C5C5C5;
           }
         }
         img{
