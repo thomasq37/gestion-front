@@ -1,8 +1,6 @@
 <section class="appartement-list">
   <div class="container">
     <h2>Biens immobiliers : </h2>
-    <!--<img src="./assets/img/plus-icon.svg">-->
-
     <ul>
       <li *ngFor="let appartement of appartements" class="appartement-item" (click)="viewAppartement(appartement.id)">
         <div class="appartement-info">
@@ -11,6 +9,8 @@
               <h3>{{ appartement.numero }} {{ appartement.adresse }}</h3>
               <p>{{ appartement.codePostal }} {{ appartement.ville }}</p>
             </div>
+            <img src="./assets/img/view-more-icon.svg">
+
             <!--<img src="./assets/img/plus-icon.svg">-->
           </div>
           <!--<p>{{ appartement.nombrePieces }} pièces | {{ appartement.surface }} m²</p>
