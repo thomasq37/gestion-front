@@ -13,8 +13,12 @@
   .container{
     .appartement-baniere-info{
       .carousel-container{
+
         margin-bottom: 2rem;
         ngb-carousel{
+          .carousel-inner {
+            aspect-ratio: 16 / 9;
+          }
           border-radius: 1rem;
           overflow: hidden;
           img{
