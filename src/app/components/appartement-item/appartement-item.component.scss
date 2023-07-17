@@ -13,13 +13,11 @@
   .container{
     .appartement-baniere-info{
       .carousel-container{
-        min-height: 32rem;
         margin-bottom: 2rem;
         ngb-carousel{
           border-radius: 1rem;
           overflow: hidden;
           img{
-            height: 280px;
             width: 100%;
           }
         }
