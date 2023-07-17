@@ -14,7 +14,11 @@ export class AppartementItemComponent implements OnInit{
   rentabiliteNette = 0;
   moyenneBenefices = 0;
   tauxVacanceLocatives = 0;
+  isLoading: boolean = true;
   constructor(private gestionService: GestionService, private route: ActivatedRoute) {
+  }
+  imageLoaded() {
+    this.isLoading = false;
   }
 
   ngOnInit() {

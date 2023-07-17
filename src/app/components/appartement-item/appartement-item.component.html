@@ -11,10 +11,13 @@
           <ngb-carousel>
             <ng-template ngbSlide *ngFor="let image of images">
               <div class="picsum-img-wrapper">
-                <img [src]="image" [alt]="'Image appartement'" />
+                <img [src]="image" [alt]="'Image appartement'" (load)="imageLoaded()" />
               </div>
             </ng-template>
           </ngb-carousel>
+        </div>
+        <div *ngIf="isLoading" class="loader">
+          <img class="loader" *ngIf="!appartement" src="assets/img/loader.gif"/>
         </div>
       <h2>Description</h2>
       <ul class="appartement-details">
