@@ -12,6 +12,30 @@
   background-color: white;
   .container{
     .appartement-baniere-info{
+      .appartement-list-frais{
+        margin-bottom: 2rem;
+      }
+      .container-titler{
+
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+        border-top: 1px solid #cdcdcd;
+        h2{
+          padding: .5rem;
+          padding-bottom: 0;
+        }
+        a{
+          background-color: #143b86;
+          color: white;
+          border-radius: .5rem;
+          padding: .5rem;
+          margin-top: 2rem;
+          text-decoration: none;
+        }
+      }
 
       table {
         width: 100%;
@@ -19,7 +43,7 @@
 
       thead, tbody, tfoot, tr, td, th {
         padding: 1rem;
-        border: 1px solid;
+        border: 1px solid #d7d7d7;
         font-size: .7rem;
       }
       @media screen and (min-width: 720px) {
@@ -80,11 +104,9 @@
     }
     .appartement-list-stats{
       padding-bottom: 1rem;
-      border-bottom: 1px solid #b8b8b8;
 
     }
     .appartement-details{
-      border-bottom: 1px solid #b8b8b8;
       padding-bottom: 1rem;
       li{
         display: grid;

@@ -1,36 +1,38 @@
-<div>
-  <h2>Créer</h2>
+<app-header></app-header>
+<div class="new-appart">
+  <h2>Nouvel appartement</h2>
   <form>
     <label for="numero">Numéro de l'Appartement :</label>
-    <input type="number" id="numero" name="numero" [(ngModel)]="appartement.numero">
+    <input type="number" id="numero" name="numero" [(ngModel)]="appartement.numero" placeholder="Numéro de l'appartement">
 
     <label for="adresse">Adresse :</label>
-    <input type="text" id="adresse" name="adresse" [(ngModel)]="appartement.adresse">
+    <input type="text" id="adresse" name="adresse" [(ngModel)]="appartement.adresse" placeholder="Adresse">
 
     <label for="codePostal">Code Postal :</label>
-    <input type="text" id="codePostal" name="codePostal" [(ngModel)]="appartement.codePostal">
+    <input type="text" id="codePostal" name="codePostal" [(ngModel)]="appartement.codePostal" placeholder="Code postal">
 
     <label for="ville">Ville :</label>
-    <input type="text" id="ville" name="ville" [(ngModel)]="appartement.ville">
+    <input type="text" id="ville" name="ville" [(ngModel)]="appartement.ville" placeholder="Ville">
 
     <label for="nombrePieces">Nombre de Pièces :</label>
-    <input type="number" id="nombrePieces" name="nombrePieces" [(ngModel)]="appartement.nombrePieces">
+    <input type="number" id="nombrePieces" name="nombrePieces" [(ngModel)]="appartement.nombrePieces" placeholder="Nombre de pièces">
 
     <label for="surface">Surface (m²) :</label>
-    <input type="number" id="surface" name="surface" [(ngModel)]="appartement.surface">
+    <input type="number" id="surface" name="surface" [(ngModel)]="appartement.surface" placeholder="Surface en m²">
 
     <label for="balcon">Balcon (0 - Non, 1 - Oui) :</label>
-    <input type="number" id="balcon" name="balcon" [(ngModel)]="appartement.balcon">
+    <input type="number" id="balcon" name="balcon" [(ngModel)]="appartement.balcon" placeholder="Balcon (0 - Non, 1 - Oui)">
 
     <label for="loue">Loué (0 - Non, 1 - Oui) :</label>
-    <input type="number" id="loue" name="loue" [(ngModel)]="appartement.loue">
+    <input type="number" id="loue" name="loue" [(ngModel)]="appartement.loue" placeholder="Loué (0 - Non, 1 - Oui)">
 
     <label for="loyerMensuel">Loyer Mensuel :</label>
-    <input type="number" id="loyerMensuel" name="loyerMensuel" [(ngModel)]="appartement.loyerMensuel">
+    <input type="number" id="loyerMensuel" name="loyerMensuel" [(ngModel)]="appartement.loyerMensuel" placeholder="Loyer mensuel en €">
 
     <label for="prix">Prix :</label>
-    <input type="number" id="prix" name="prix" [(ngModel)]="appartement.prix">
+    <input type="number" id="prix" name="prix" [(ngModel)]="appartement.prix" placeholder="Prix en €">
 
     <button type="button" (click)="addAppartement()">Enregistrer</button>
   </form>
 </div>
+<app-footer></app-footer>

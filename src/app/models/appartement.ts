@@ -1,15 +1,15 @@
 export interface Appartement {
-  id: number;
-  numero: number;
-  adresse: string;
-  codePostal: string;
-  ville: string;
-  nombrePieces: number;
-  surface: number;
-  balcon: boolean;
-  loue: boolean;
-  loyerMensuel: number;
-  prix: number;
+  id?: number;
+  numero?: number;
+  adresse?: string;
+  codePostal?: string;
+  ville?: string;
+  nombrePieces?: number;
+  surface?: number;
+  balcon?: boolean;
+  loue?: boolean;
+  loyerMensuel?: number;
+  prix?: number;
   frais: any[];
   mouvements: any[];
   images: string[]

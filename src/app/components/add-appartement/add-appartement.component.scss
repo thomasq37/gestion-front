@@ -1,0 +1,51 @@
+/* Style pour le formulaire */
+.new-appart{
+  padding: 1rem;
+
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style pour les champs d'entrée */
+input {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+/* Style pour les labels cachés (accessibilité) */
+label {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+/* Style pour les placeholders */
+input::placeholder {
+  color: #aaa;
+}
+
+/* Style pour le bouton */
+button {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 10px 20px;
+  background-color: #143b86;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

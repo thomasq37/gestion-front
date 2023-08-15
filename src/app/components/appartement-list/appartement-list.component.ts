@@ -19,6 +19,8 @@ export class AppartementListComponent implements OnInit {
     this.gestionService.getAppartements()
       .subscribe(appartements => {
         this.appartements = appartements;
+        console.log(this.appartements)
+
       });
   }
   viewAppartement(appartementId: number) {

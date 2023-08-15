@@ -1,18 +1,25 @@
-<h2>Ajouter un Frais</h2>
-<form (ngSubmit)="addFraisToAppartement()">
-  <label for="montant">Montant:</label>
-  <input type="number" id="montant" name="montant" [(ngModel)]="nouveauFrais.montant" required>
-  <label for="typeFrais">Type de frais :</label>
-  <select id="typeFrais" name="typeFrais" [(ngModel)]="selectedTypeFrais" required>
-    <option *ngFor="let typeFrais of typesFrais" [value]="typeFrais.id">{{ typeFrais.nom }}</option>
-  </select>
-  <label for="frequence">Fréquence:</label>
-  <select id="frequence" name="frequence" [(ngModel)]="nouveauFrais.frequence" required>
-    <option value="MENSUELLE">Mensuelle</option>
-    <option value="TRIMESTRIELLE">Trimestrielle</option>
-    <option value="ANNUELLE">Annuelle</option>
-  </select>
+<app-header></app-header>
+<div class="new-frais">
+  <h2>Ajouter un Frais</h2>
+  <form (ngSubmit)="addFraisToAppartement()">
+    <label for="montant">Montant:</label>
+    <input type="number" id="montant" name="montant" [(ngModel)]="nouveauFrais.montant" required placeholder="Montant">
 
-  <button type="submit">Ajouter</button>
-</form>
+    <label for="typeFrais">Type de frais :</label>
+    <select id="typeFrais" name="typeFrais" [(ngModel)]="selectedTypeFrais" required>
+      <option disabled selected value="">Type de frais</option>
+      <option *ngFor="let typeFrais of typesFrais" [value]="typeFrais.id">{{ typeFrais.nom }}</option>
+    </select>
 
+    <label for="frequence">Fréquence:</label>
+    <select id="frequence" name="frequence" [(ngModel)]="nouveauFrais.frequence" required>
+      <option disabled selected value="">Fréquence</option>
+      <option value="MENSUELLE">Mensuelle</option>
+      <option value="TRIMESTRIELLE">Trimestrielle</option>
+      <option value="ANNUELLE">Annuelle</option>
+    </select>
+
+    <button type="submit">Ajouter</button>
+  </form>
+</div>
+<app-footer></app-footer>

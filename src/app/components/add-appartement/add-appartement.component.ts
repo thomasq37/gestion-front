@@ -11,31 +11,31 @@ import {Appartement, Frais} from "../../models/appartement";
 export class AddAppartementComponent {
   constructor(private gestionService: GestionService, private router: Router) {}
   appartement: Appartement = {
-    id: 0,
-    numero: 0,
+    id: undefined,
+    numero: undefined,
     adresse: '',
     codePostal: '',
     ville: '',
-    nombrePieces: 0,
-    surface: 0,
+    nombrePieces: undefined,
+    surface: undefined,
     balcon: false,
     loue: false,
-    loyerMensuel: 0,
-    prix: 0,
+    loyerMensuel: undefined,
+    prix: undefined,
     frais: [],
     mouvements: [],
     images: [],
   };
   addAppartement() {
     if (
-      this.appartement.numero === 0 ||
+      this.appartement.numero === undefined ||
       this.appartement.adresse === '' ||
       this.appartement.codePostal === '' ||
       this.appartement.ville === '' ||
-      this.appartement.nombrePieces === 0 ||
-      this.appartement.surface === 0 ||
-      this.appartement.loyerMensuel === 0 ||
-      this.appartement.prix === 0
+      this.appartement.nombrePieces === undefined ||
+      this.appartement.surface === undefined ||
+      this.appartement.loyerMensuel === undefined ||
+      this.appartement.prix === undefined
     ) {
       alert("Veuillez remplir tous les champs obligatoires." + this.appartement.numero);
       return;

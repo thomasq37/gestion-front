@@ -1,0 +1,65 @@
+/* Style pour le formulaire de modification */
+.update-appart {
+  padding: 1rem;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    .container-checkbox{
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      input{
+        width: 1.3rem;
+
+      }
+    }
+    label{
+      padding-left: .3rem;
+
+    }
+    label.label-hidden {
+      padding-top: 1rem;
+      /*position: absolute;
+      clip: rect(1px, 1px, 1px, 1px);
+      padding: 0;
+      border: 0;
+      height: 1px;
+      width: 1px;
+      overflow: hidden;*/
+    }
+
+    input, select {
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+
+      &::placeholder {
+        color: #aaa;
+      }
+    }
+
+    button {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      padding: 10px 20px;
+      background-color: #143b86;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+}
