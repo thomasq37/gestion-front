@@ -10,7 +10,8 @@ export interface Appartement {
   loue: boolean;
   loyerMensuel: number;
   prix: number;
-  frais: Frais[];
+  frais: any[];
+  mouvements: any[];
   images: string[]
 }
 
@@ -21,7 +22,13 @@ export enum FrequenceFrais {
 }
 
 export interface Frais {
-  id: number;
-  montant: number;
-  frequence: FrequenceFrais;
+  id?: number;        // Optional since it will be generated on the server
+  montant?: number;
+  frequence?: string;  // Assuming you have an enum for "frequence" on the server
+  appartement?: Appartement;
+  typeFrais?: TypeFrais;
+}
+export interface TypeFrais {
+  id: number
+  nom: string;
 }

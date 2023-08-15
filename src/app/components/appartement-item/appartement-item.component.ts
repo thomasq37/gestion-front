@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {Appartement, FrequenceFrais} from "../../models/appartement";
+import {Appartement, Frais, FrequenceFrais} from "../../models/appartement";
 import {GestionService} from "../../services/gestion.service";
 @Component({
   selector: 'app-appartement-item',
@@ -10,6 +10,7 @@ import {GestionService} from "../../services/gestion.service";
 export class AppartementItemComponent implements OnInit{
   images: string[] = [];
   appartement!: Appartement;
+  frais: Frais[] = [];
   loadingCount = 4;
   rentabiliteNette = 0;
   moyenneBenefices = 0;
@@ -29,6 +30,10 @@ export class AppartementItemComponent implements OnInit{
           this.tauxVacanceLocatives = tauxVacanceLocatives
           this.loadingCount--;
         });
+      this.gestionService.getFraisByAppartementId(appartementId)
+        .subscribe(response => {
+          this.frais = response
+        })
       this.gestionService.getMoyenneBeneficesByAppartementId(appartementId)
         .subscribe(moyenneBenefices => {
           this.moyenneBenefices = moyenneBenefices;

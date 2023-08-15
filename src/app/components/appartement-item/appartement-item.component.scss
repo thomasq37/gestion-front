@@ -12,6 +12,23 @@
   background-color: white;
   .container{
     .appartement-baniere-info{
+
+      table {
+        width: 100%;
+      }
+
+      thead, tbody, tfoot, tr, td, th {
+        padding: 1rem;
+        border: 1px solid;
+        font-size: .7rem;
+      }
+      @media screen and (min-width: 720px) {
+        thead, tbody, tfoot, tr, td, th {
+          font-size: 1rem;
+        }
+      }
+
+
       .carousel-container{
 
         margin-bottom: 2rem;
