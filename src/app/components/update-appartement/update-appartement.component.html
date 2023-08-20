@@ -2,6 +2,10 @@
 <div class="update-appart">
   <h2>Modifier appartement</h2>
   <form *ngIf="appartement !== null" (ngSubmit)="updateAppartement()">
+
+    <label for="images">Images (URLs séparées par des virgules) :</label>
+    <input type="text" id="images" name="images" [(ngModel)]="imageUrls" placeholder="URLs d'images">
+
     <label class="label-hidden" for="numero">Numéro de l'Appartement :</label>
     <input type="number" id="numero" name="numero" [(ngModel)]="appartement.numero" required placeholder="Numéro de l'appartement">
 

@@ -12,7 +12,7 @@ import {FormsModule} from "@angular/forms";
 export class UpdateAppartementComponent implements OnInit{
 
   appartement!: Appartement;
-
+  imageUrls: string = ''; // Chaîne contenant les URLs séparées par des virgules
   constructor(
     private gestionService: GestionService,
     private router: Router,
@@ -25,6 +25,7 @@ export class UpdateAppartementComponent implements OnInit{
       this.gestionService.getAppartementById(appartementId).subscribe(
         (appartement: Appartement) => {
           this.appartement = appartement;
+          this.imageUrls = this.appartement.images.join(', ');
         },
         error => {
           console.error('Erreur lors de la récupération de l\'appartement :', error);
@@ -34,6 +35,7 @@ export class UpdateAppartementComponent implements OnInit{
   }
 
   updateAppartement(){
+    this.appartement.images = this.imageUrls.split(',').map(url => url.trim());
     this.gestionService.updateAppartement(this.appartement).subscribe(
       (response) => {
         console.log('Appartement modifié :', response);
