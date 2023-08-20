@@ -1,25 +1,77 @@
 <app-header></app-header>
-<div class="new-frais">
-  <h2>Ajouter un Frais</h2>
-  <form (ngSubmit)="addFraisToAppartement()">
-    <label for="montant">Montant:</label>
-    <input type="number" id="montant" name="montant" [(ngModel)]="nouveauFrais.montant" required placeholder="Montant">
+<div class="actual-frais">
+  <h2>Dépenses</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Type de Frais</th>
+      <th>Montant</th>
+      <th>Fréquence</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let frais of actualFrais">
+      <td>{{ frais.typeFrais?.nom }}</td>
+      <td>{{ frais.montant }}</td>
+      <td>{{ frais.frequence }}</td>
+      <td  class="actions-container">
+        <img *ngIf="frais.id" (click)="displayModifyFraisForm(frais.id)" src="assets/img/modify-icon.svg" alt="to change icon"/>
+        <img *ngIf="frais.id" (click)="deleteOneFrais(frais.id)" src="assets/img/trash-icon.svg" alt="trash icon"/>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="inModification" class="modify-frais">
 
-    <label for="typeFrais">Type de frais :</label>
-    <select id="typeFrais" name="typeFrais" [(ngModel)]="selectedTypeFrais" required>
+  <h2>Modifier une dépense</h2>
+  <form (ngSubmit)="updateFrais()">
+    <label for="modifie-montant">Montant:</label>
+    <input type="number" id="modifie-montant" name="modifie-montant" [(ngModel)]="modifieFrais.montant" required placeholder="Montant">
+
+    <label for="modifie-typeFrais">Type de frais :</label>
+    <select id="modifie-typeFrais" name="modifie-typeFrais" [(ngModel)]="modifieFraisSelectedTypeFrais" required>
+      <option disabled value="">Type de frais</option>
+      <option *ngFor="let typeFrais of typesFrais" [value]="typeFrais.id">{{ typeFrais.nom }}</option>
+    </select>
+
+    <label for="modifie-frequence">Fréquence:</label>
+    <select id="modifie-frequence" name="modifie-frequence" [(ngModel)]="modifieFrais.frequence" required>
+      <option disabled selected value="">Fréquence</option>
+      <option value="MENSUELLE">Mensuelle</option>
+      <option value="TRIMESTRIELLE">Trimestrielle</option>
+      <option value="ANNUELLE">Annuelle</option>
+    </select>
+    <div class="modify-frais-container-button">
+      <button class="bg-danger" type="submit">Modifier</button>
+      <button (click)="inModification = false" type="button">Annuler</button>
+    </div>
+
+  </form>
+</div>
+<div *ngIf="!inModification"  class="new-frais">
+
+  <h2>Ajouter une dépense</h2>
+  <form (ngSubmit)="addFraisToAppartement()">
+    <label for="new-montant">Montant:</label>
+    <input type="number" id="new-montant" name="new-montant" [(ngModel)]="nouveauFrais.montant" required placeholder="Montant">
+
+    <label for="new-typeFrais">Type de frais :</label>
+    <select id="new-typeFrais" name="new-typeFrais" [(ngModel)]="nouveauFraisSelectedTypeFrais" required>
       <option disabled selected value="">Type de frais</option>
       <option *ngFor="let typeFrais of typesFrais" [value]="typeFrais.id">{{ typeFrais.nom }}</option>
     </select>
 
-    <label for="frequence">Fréquence:</label>
-    <select id="frequence" name="frequence" [(ngModel)]="nouveauFrais.frequence" required>
+    <label for="new-frequence">Fréquence:</label>
+    <select id="new-frequence" name="new-frequence" [(ngModel)]="nouveauFrais.frequence" required>
       <option disabled selected value="">Fréquence</option>
       <option value="MENSUELLE">Mensuelle</option>
       <option value="TRIMESTRIELLE">Trimestrielle</option>
       <option value="ANNUELLE">Annuelle</option>
     </select>
 
-    <button type="submit">Ajouter</button>
+    <button class="{{formIsValid() ? '' : 'disabled'}}" type="submit" [disabled]="!formIsValid()">Ajouter</button>
   </form>
 </div>
 <app-footer></app-footer>

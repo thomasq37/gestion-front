@@ -14,6 +14,7 @@ export class GestionService {
   private urlTypeFrais = this.apiUrl + '/api/type-frais/'
   constructor(private http: HttpClient) { }
 
+  // APPARTEMENT
   getAppartements(): Observable<Appartement[]> {
     return this.http.get<Appartement[]>(this.urlAppartement + 'liste');
   }
@@ -36,15 +37,29 @@ export class GestionService {
     return this.http.get<number>(this.urlAppartement + appartementId + '/taux-vacances-locatives')
   }
 
+  // FRAIS
   getFraisByAppartementId(appartementId: number): Observable<Frais[]>{
     return this.http.get<Frais[]>(this.urlFrais + 'appartement/' + appartementId)
   }
   addFraisToAppartement(frais: Frais): Observable<any>{
     return this.http.post(this.urlFrais + 'ajouter', frais)
   }
+  updateFrais(frais: Frais): Observable<any> {
+    return this.http.put(this.urlFrais + 'modifier/' + frais.id, frais);
+  }
+  getFraisById(fraisId: number): Observable<Frais> {
+    return this.http.get<Frais>(this.urlFrais + fraisId)
+  }
+  deleteOneFrais(fraisId: number): Observable<any> {
+    return this.http.delete(this.urlFrais + fraisId, { responseType: 'text' });
+  }
 
-
+  // TYPE FRAIS
   getTypesFrais(): Observable<TypeFrais[]>{
     return this.http.get<TypeFrais[]>(this.urlTypeFrais + 'liste');
+  }
+
+  getTypeFrais(typeFraisId: number | undefined): Observable<TypeFrais>{
+    return this.http.get<TypeFrais>(this.urlTypeFrais + typeFraisId);
   }
 }
