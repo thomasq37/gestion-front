@@ -2,6 +2,9 @@
 <div class="new-appart">
   <h2>Nouvel appartement</h2>
   <form>
+    <label for="images">Images (URLs séparées par des virgules) :</label>
+    <input type="text" id="images" name="images" [(ngModel)]="imageUrls" placeholder="URLs d'images">
+
     <label for="numero">Numéro de l'Appartement :</label>
     <input type="number" id="numero" name="numero" [(ngModel)]="appartement.numero" placeholder="Numéro de l'appartement">
 

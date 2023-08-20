@@ -10,6 +10,7 @@ import {Appartement, Frais} from "../../models/appartement";
 })
 export class AddAppartementComponent {
   constructor(private gestionService: GestionService, private router: Router) {}
+  imageUrls: string = ''; // Chaîne contenant les URLs séparées par des virgules
   appartement: Appartement = {
     id: undefined,
     numero: undefined,
@@ -40,6 +41,7 @@ export class AddAppartementComponent {
       alert("Veuillez remplir tous les champs obligatoires." + this.appartement.numero);
       return;
     }
+    this.appartement.images = this.imageUrls.split(',').map(url => url.trim());
     this.gestionService.addAppartement(this.appartement).subscribe(
       (response) => {
         console.log('Nouvel appartement ajouté :', response);
