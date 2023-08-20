@@ -90,7 +90,7 @@ export class AppartementUpdateFraisComponent implements OnInit{
       }
     );
   }
-  deleteOneFrais(id :number) {
+  supprimerUnFrais(id :number) {
     if (confirm("Êtes-vous sûr de vouloir supprimer ce frais ?")) {
       this.gestionService.deleteOneFrais(id).subscribe(
         () => {
@@ -104,6 +104,7 @@ export class AppartementUpdateFraisComponent implements OnInit{
       );
     }
   }
+
 
   formIsValid(): boolean {
     return (

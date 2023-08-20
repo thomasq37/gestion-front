@@ -17,7 +17,7 @@
       <td>{{ frais.frequence }}</td>
       <td  class="actions-container">
         <img *ngIf="frais.id" (click)="displayModifyFraisForm(frais.id)" src="assets/img/modify-icon.svg" alt="to change icon"/>
-        <img *ngIf="frais.id" (click)="deleteOneFrais(frais.id)" src="assets/img/trash-icon.svg" alt="trash icon"/>
+        <img *ngIf="frais.id" (click)="supprimerUnFrais(frais.id)" src="assets/img/trash-icon.svg" alt="trash icon"/>
       </td>
     </tr>
     </tbody>

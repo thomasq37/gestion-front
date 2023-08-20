@@ -57,18 +57,19 @@ export class AppartementItemComponent implements OnInit{
     event.target.parentElement.lastChild.firstElementChild.classList.toggle('visible');
   }
 
-  deleteOneAppartement(id :number) {
+  deleteOneAppartement(appartementId: number) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cet appartement ?")) {
-      this.gestionService.deleteOneAppartement(id).subscribe(
-        () => {
-          console.log('Appartement supprimé avec succès.');
-          this.router.navigate(['/dashboard']);
-        },
-        error => {
-          alert("Une erreur est survenue lors de la suppression de l'appartement.")
-          console.error('Erreur lors de la suppression du frais :', error);
-        }
-      );
+    this.gestionService.deleteOneAppartement(appartementId).subscribe(
+      () => {
+        console.log('Appartement supprimé avec succès.');
+        this.router.navigate(['/dashboard']);
+      },
+      error => {
+        alert("Une erreur est survenue lors de la suppression de l'appartement.");
+        console.error('Erreur lors de la suppression de l\'appartement :', error);
+      }
+    );
     }
   }
+
 }
