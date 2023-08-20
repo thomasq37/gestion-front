@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Appartement, Frais, FrequenceFrais} from "../../models/appartement";
 import {GestionService} from "../../services/gestion.service";
+
 @Component({
   selector: 'app-appartement-item',
   templateUrl: './appartement-item.component.html',
@@ -16,7 +17,10 @@ export class AppartementItemComponent implements OnInit{
   moyenneBenefices = 0;
   tauxVacanceLocatives = 0;
   isLoading: boolean = true;
-  constructor(private gestionService: GestionService, private route: ActivatedRoute, private router: Router) {
+  constructor(
+    private gestionService: GestionService,
+    private route: ActivatedRoute,
+    private router: Router) {
   }
   imageLoaded() {
     this.isLoading = false;

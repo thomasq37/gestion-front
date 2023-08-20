@@ -11,7 +11,7 @@
         <!--Caroussel-->
         <div class="container-titler">
           <h2>Photos</h2>
-          <a routerLink="/modifier-appart-images/{{appartement.id}}">Modifier</a>
+          <a [routerLink]="['/modifier-appart', appartement.id ]" [queryParams]="{section: 'photos'}">Modifier</a>
         </div>
         <div class="carousel-container" *ngIf="images">
           <ngb-carousel>
@@ -28,7 +28,7 @@
         <!--Descriptif-->
         <div class="container-titler">
           <h2>Description</h2>
-          <a routerLink="/modifier-appart/{{appartement.id}}">Modifier</a>
+          <a [routerLink]="['/modifier-appart', appartement.id ]" [queryParams]="{section: 'description'}">Modifier</a>
         </div>
         <ul class="appartement-details">
         <li>
