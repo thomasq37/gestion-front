@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Appartement, Frais, FrequenceFrais} from "../../models/appartement";
 import {GestionService} from "../../services/gestion.service";
 @Component({
@@ -16,7 +16,7 @@ export class AppartementItemComponent implements OnInit{
   moyenneBenefices = 0;
   tauxVacanceLocatives = 0;
   isLoading: boolean = true;
-  constructor(private gestionService: GestionService, private route: ActivatedRoute) {
+  constructor(private gestionService: GestionService, private route: ActivatedRoute, private router: Router) {
   }
   imageLoaded() {
     this.isLoading = false;
@@ -55,5 +55,20 @@ export class AppartementItemComponent implements OnInit{
 
   showInfo(event: any){
     event.target.parentElement.lastChild.firstElementChild.classList.toggle('visible');
+  }
+
+  deleteOneAppartement(id :number) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cet appartement ?")) {
+      this.gestionService.deleteOneAppartement(id).subscribe(
+        () => {
+          console.log('Appartement supprimé avec succès.');
+          this.router.navigate(['/dashboard']);
+        },
+        error => {
+          alert("Une erreur est survenue lors de la suppression de l'appartement.")
+          console.error('Erreur lors de la suppression du frais :', error);
+        }
+      );
+    }
   }
 }

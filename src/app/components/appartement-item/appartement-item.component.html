@@ -131,7 +131,7 @@
           <h2>Contacts</h2>
         </div>
       </div>
+      <button *ngIf="appartement.id" (click)="deleteOneAppartement(appartement.id)" class="appartement-item-btn-delete btn bg-danger">Suprimmer l'appartement</button>
     </div>
-
   </section>
 <app-footer></app-footer>

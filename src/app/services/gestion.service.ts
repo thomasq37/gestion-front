@@ -36,6 +36,9 @@ export class GestionService {
   getTauxVacancesLocativesByAppartementId(appartementId: number): Observable<number> {
     return this.http.get<number>(this.urlAppartement + appartementId + '/taux-vacances-locatives')
   }
+  deleteOneAppartement(appartementId: number): Observable<any> {
+    return this.http.delete(this.urlAppartement + appartementId, { responseType: 'text' });
+  }
 
   // FRAIS
   getFraisByAppartementId(appartementId: number): Observable<Frais[]>{
