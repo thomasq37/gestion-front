@@ -32,7 +32,7 @@
 
     <label for="modifie-typeFrais">Type de frais :</label>
     <select id="modifie-typeFrais" name="modifie-typeFrais" [(ngModel)]="modifieFraisSelectedTypeFrais" required>
-      <option disabled value="">Type de frais</option>
+      <option selected disabled value="">Type de frais</option>
       <option *ngFor="let typeFrais of typesFrais" [value]="typeFrais.id">{{ typeFrais.nom }}</option>
     </select>
 
