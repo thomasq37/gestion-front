@@ -11,9 +11,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AddAppartementComponent } from './components/add-appartement/add-appartement.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { UpdateAppartementComponent } from './components/update-appartement/update-appartement.component';
 import { AppartementUpdateFraisComponent } from './components/appartement-update-frais/appartement-update-frais.component';
+import { LoginComponent } from './components/login/login.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,13 +27,16 @@ import { AppartementUpdateFraisComponent } from './components/appartement-update
     AddAppartementComponent,
     UpdateAppartementComponent,
     AppartementUpdateFraisComponent,
+    LoginComponent,
+    CreateUserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

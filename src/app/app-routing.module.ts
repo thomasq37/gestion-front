@@ -5,9 +5,13 @@ import {AppartementItemComponent} from "./components/appartement-item/appartemen
 import {AddAppartementComponent} from "./components/add-appartement/add-appartement.component";
 import {UpdateAppartementComponent} from "./components/update-appartement/update-appartement.component";
 import {AppartementUpdateFraisComponent} from "./components/appartement-update-frais/appartement-update-frais.component";
+import {LoginComponent} from "./components/login/login.component";
+import {CreateUserComponent} from "./components/create-user/create-user.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/login',pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'create', component: CreateUserComponent, pathMatch: 'full'  },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'appartement/:id', component: AppartementItemComponent },
   { path: 'ajouter-appart', component: AddAppartementComponent},

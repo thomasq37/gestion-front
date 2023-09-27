@@ -1,0 +1,33 @@
+<!-- create-user.component.html -->
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="username">Nom d'utilisateur</label>
+    <input
+      type="text"
+      id="username"
+      formControlName="username"
+      class="form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="password">Mot de passe</label>
+    <input
+      type="password"
+      id="password"
+      formControlName="password"
+      class="form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="token">Code d'invitation</label>
+    <input
+      type="text"
+      id="token"
+      formControlName="token"
+      class="form-control"
+    />
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">
+    Créer votre compte
+  </button>
+</form>

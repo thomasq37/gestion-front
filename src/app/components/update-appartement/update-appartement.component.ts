@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {GestionService} from "../../services/gestion.service";
 import {Appartement} from "../../models/appartement";
-import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-update-appartement',
