@@ -3,6 +3,7 @@
     <button (click)="onLogout()">Déconnexion</button>
   </li>
   <li *ngIf="!isLoggedIn()">
+    <button [routerLink]="'/create'">Créer un compte</button>
     <button (click)="onLogin()">Connexion</button>
   </li>
 </ul>
