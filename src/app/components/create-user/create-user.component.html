@@ -1,5 +1,5 @@
-<!-- create-user.component.html -->
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+<app-header></app-header>
+<form class="create-user" [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="username">Nom d'utilisateur</label>
     <input
@@ -31,3 +31,4 @@
     Créer votre compte
   </button>
 </form>
+<app-footer></app-footer>

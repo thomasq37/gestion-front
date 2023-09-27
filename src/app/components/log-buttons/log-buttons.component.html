@@ -1,0 +1,9 @@
+<ul class="log-btn-list">
+  <li *ngIf="isLoggedIn()">
+    <button (click)="onLogout()">Déconnexion</button>
+  </li>
+  <li *ngIf="!isLoggedIn()">
+    <button (click)="onLogin()">Connexion</button>
+  </li>
+</ul>
+

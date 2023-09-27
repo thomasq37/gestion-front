@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
       const { username, password } = this.loginForm.value;
       this.authenticationService.login(username, password).subscribe(
         (token) => {
-          console.log('Login successful!', token);
+          console.log('Login successful!');
         },
         (error) => {
           console.error('Login failed!', error);

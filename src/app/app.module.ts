@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {AppartementListComponent} from "./components/appartement-list/appartement-list.component";
 import {AppartementItemComponent} from "./components/appartement-item/appartement-item.component";
@@ -16,6 +16,8 @@ import { UpdateAppartementComponent } from './components/update-appartement/upda
 import { AppartementUpdateFraisComponent } from './components/appartement-update-frais/appartement-update-frais.component';
 import { LoginComponent } from './components/login/login.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
+import {TokenInterceptor} from "./interceptors/token.interceptor";
+import { LogButtonsComponent } from './components/log-buttons/log-buttons.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +31,7 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     AppartementUpdateFraisComponent,
     LoginComponent,
     CreateUserComponent,
+    LogButtonsComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,13 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
