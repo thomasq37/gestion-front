@@ -62,7 +62,7 @@
     <label for="new-date">Date :</label>
     <input type="date" id="new-date" name="new-date" [(ngModel)]="nouveauMouvement.date" required placeholder="Date">
 
-    <button class="{{formIsValid() ? '' : 'disabled'}}" type="submit" [disabled]="!formIsValid()">Ajouter</button>
+    <button type="submit" >Ajouter</button>
   </form>
 </div>
 <app-footer></app-footer>

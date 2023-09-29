@@ -79,4 +79,8 @@ export class GestionService {
   deleteOneMouvement(mouvementId: number): Observable<any> {
     return this.http.delete(this.urlMouvements + mouvementId, { responseType: 'text' });
   }
+
+  addMouvementToAppartement(nouveauMouvement: Mouvement) {
+    return this.http.post(this.urlMouvements + 'ajouter', nouveauMouvement)
+  }
 }

@@ -33,14 +33,14 @@ export class AppartementUpdateMouvementComponent {
   }
 
   addMouvementToAppartement() {
-    this.gestionService.addFraisToAppartement(this.nouveauMouvement).subscribe(
+    this.gestionService.addMouvementToAppartement(this.nouveauMouvement).subscribe(
       (response) => {
-        console.log('Nouveau frais ajouté :', response);
+        console.log('Nouveau mouvement ajouté :', response);
         this.actualMouvement.push(response)
         this.nouveauMouvement = {};
       },
       (error) => {
-        console.error('Erreur lors de l\'ajout du frais :', error);
+        console.error('Erreur lors de l\'ajout du mouvement :', error);
       }
     );
   }
@@ -98,6 +98,7 @@ export class AppartementUpdateMouvementComponent {
 
 
   formIsValid(): boolean {
+    console.log(this.nouveauMouvement.estEntree)
     return (
       this.nouveauMouvement.estEntree !== undefined &&
       this.nouveauMouvement.date !== undefined
