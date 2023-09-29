@@ -17,7 +17,6 @@ import { AppartementUpdateFraisComponent } from './components/appartement-update
 import { LoginComponent } from './components/login/login.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
-import { LogButtonsComponent } from './components/log-buttons/log-buttons.component';
 import {AuthGuard} from "./guards/auth.guard";
 @NgModule({
   declarations: [
@@ -32,7 +31,6 @@ import {AuthGuard} from "./guards/auth.guard";
     AppartementUpdateFraisComponent,
     LoginComponent,
     CreateUserComponent,
-    LogButtonsComponent,
   ],
   imports: [
     BrowserModule,

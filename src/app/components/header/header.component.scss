@@ -3,24 +3,95 @@
 
 
 
-
-
 header {
+  position: relative;
+  .burger-icon {
+    cursor: pointer;
+    width: 1.5rem;
+    margin: 2.1rem;
+  }
   background-color: #143b86;
   nav{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: none;
+
+    &.open {
+      transition: all 1s ease-in-out;
+      display: block;
+    }
+    left: 1rem;
+    top:6.7rem;
+    position: absolute;
+    ul:last-child li >*{
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+    }
+    ul:first-child li> *{
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+    }
     ul {
-      display: flex;
+      border: 1px solid #143b86;
+      border-radius: 1rem;
+      background-color: #143b86;
       li{
-        a {
+        a:hover, button:hover{
+          background-color: white ;
+          color:#143b86;
+        }
+        a, button {
+          font-style: italic;
+          text-align: left;
+          width: 100%;
           display: block;
-          padding: 1.5rem;
-          padding-right: 0;
+          padding:1rem;
+          background: none;
+          border: none;
           text-decoration: none;
           color: white;
         }
+      }
+    }
+  }
+
+  // Pour les écrans supérieurs à 720px
+  @media (min-width: 720px) {
+    .burger-icon{
+      display: none;
+    }
+    nav {
+      padding: 1rem;
+      display: block;  // montrer le nav par défaut
+      position: static;  // désactive la position absolue
+      &.open {
+        display: block;  // le menu est toujours ouvert
+      }
+
+      ul {
+        margin-bottom: 0;
+        border: none;
+        border-radius: 0;  // désactiver le border-radius
+        background-color: transparent;
+
+        li {
+          border: none;
+          a, button {
+            width: max-content;
+            border-radius: 0;
+          }
+        }
+
+      }
+      ul > div {
+        display: flex;
+        width: 100%;
+
+        > *:nth-child(n+3) {
+          margin-left: auto;
+        }
+      }
+      // Suppression des bordures arrondies spécifiques pour le premier et le dernier élément
+      ul:last-child li >*, ul:first-child li >* {
+        border-radius: 0;
       }
     }
   }

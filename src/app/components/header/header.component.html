@@ -1,9 +1,26 @@
 <header>
-  <nav>
+  <img (click)="toggleMenu()" src="./assets/img/burger-icon.svg" class="burger-icon" alt="burger menu"/>
+  <nav [class.open]="menuOpen">
     <ul>
-        <li><a [routerLink]="'/dashboard'">Appartements</a></li>
-        <li><a href="#">SCPI</a></li>
+      <div *ngIf="isLoggedIn()">
+        <li>
+          <a [routerLink]="'/dashboard'">Appartements</a>
+        </li>
+        <li>
+          <a href="#">SCPI</a>
+        </li>
+        <li>
+          <button (click)="onLogout()">Déconnexion</button>
+        </li>
+      </div>
+      <div *ngIf="!isLoggedIn()">
+        <li>
+          <button [routerLink]="'/create'">Créer un compte</button>
+        </li>
+        <li>
+          <button (click)="onLogin()">Connexion</button>
+        </li>
+      </div>
     </ul>
-    <app-log-buttons></app-log-buttons>
   </nav>
 </header>
