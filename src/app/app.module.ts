@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import { LogButtonsComponent } from './components/log-buttons/log-buttons.component';
+import {AuthGuard} from "./guards/auth.guard";
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { LogButtonsComponent } from './components/log-buttons/log-buttons.compon
     ReactiveFormsModule
   ],
   providers: [
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

@@ -7,16 +7,17 @@ import {UpdateAppartementComponent} from "./components/update-appartement/update
 import {AppartementUpdateFraisComponent} from "./components/appartement-update-frais/appartement-update-frais.component";
 import {LoginComponent} from "./components/login/login.component";
 import {CreateUserComponent} from "./components/create-user/create-user.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login',pathMatch: 'full' },
+  { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'create', component: CreateUserComponent, pathMatch: 'full'  },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'appartement/:id', component: AppartementItemComponent },
-  { path: 'ajouter-appart', component: AddAppartementComponent},
-  { path: 'modifier-appart/:id', component: UpdateAppartementComponent},
-  { path: 'modifier-appart-frais/:id', component: AppartementUpdateFraisComponent}
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'appartement/:id', component: AppartementItemComponent, canActivate: [AuthGuard] },
+  { path: 'ajouter-appart', component: AddAppartementComponent, canActivate: [AuthGuard]},
+  { path: 'modifier-appart/:id', component: UpdateAppartementComponent, canActivate: [AuthGuard]},
+  { path: 'modifier-appart-frais/:id', component: AppartementUpdateFraisComponent, canActivate: [AuthGuard]}
 
 ];
 @NgModule({
@@ -25,4 +26,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
