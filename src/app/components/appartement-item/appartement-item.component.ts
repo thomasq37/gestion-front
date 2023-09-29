@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Appartement, Frais, FrequenceFrais} from "../../models/appartement";
+import {Appartement, Frais, FrequenceFrais, Mouvement} from "../../models/appartement";
 import {GestionService} from "../../services/gestion.service";
 
 @Component({
@@ -11,6 +11,8 @@ import {GestionService} from "../../services/gestion.service";
 export class AppartementItemComponent implements OnInit{
   images: string[] = [];
   appartement!: Appartement;
+  mouvements: Mouvement[] = [];
+  mouvementsFormated: any[] = [];
   frais: Frais[] = [];
   loadingCount = 4;
   rentabiliteNette = 0;
@@ -51,6 +53,12 @@ export class AppartementItemComponent implements OnInit{
       this.gestionService.getAppartementById(appartementId)
         .subscribe(appartement => {
           this.appartement = appartement;
+          this.mouvements = this.appartement.mouvements
+          for (const mouvement of this.mouvements){
+            const estEntreeFormatted = this.determineEntreeOrSortie(mouvement.estEntree)
+            const dateFormatted = this.formatDate(mouvement.date)
+            this.mouvementsFormated.push({"date" : dateFormatted, "estEntree" : estEntreeFormatted})
+          }
           this.images = appartement.images;
           this.loadingCount--;
         });
@@ -63,17 +71,30 @@ export class AppartementItemComponent implements OnInit{
 
   deleteOneAppartement(appartementId: number) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cet appartement ?")) {
-    this.gestionService.deleteOneAppartement(appartementId).subscribe(
-      () => {
-        console.log('Appartement supprimé avec succès.');
-        this.router.navigate(['/dashboard']);
-      },
-      error => {
-        alert("Une erreur est survenue lors de la suppression de l'appartement.");
-        console.error('Erreur lors de la suppression de l\'appartement :', error);
-      }
-    );
+      this.gestionService.deleteOneAppartement(appartementId).subscribe(
+        () => {
+          console.log('Appartement supprimé avec succès.');
+          this.router.navigate(['/dashboard']);
+        },
+        error => {
+          alert("Une erreur est survenue lors de la suppression de l'appartement.");
+          console.error('Erreur lors de la suppression de l\'appartement :', error);
+        }
+      );
     }
   }
+  formatDate(dateStr?: string): string {
+    const monthNames = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 
+    const date = new Date(dateStr ? dateStr : "");
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+
+    return `${day} ${monthNames[month]} ${year}`;
+  }
+
+  determineEntreeOrSortie(estEntree?: boolean): string {
+    return estEntree ? "Entrée" : "Sortie";
+  }
 }

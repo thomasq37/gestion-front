@@ -1,0 +1,68 @@
+<app-header></app-header>
+<div class="actual-mouvements">
+  <h2>Mouvements</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Mouvement</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let mouvement of actualMouvement">
+      <td>{{ mouvement.estEntree }}</td>
+      <td>{{ mouvement.date }}</td>
+      <td  class="actions-container">
+        <img *ngIf="mouvement.id" (click)="displayModifyMouvementForm(mouvement.id)" src="assets/img/modify-icon.svg" alt="to change icon"/>
+        <img *ngIf="mouvement.id" (click)="supprimerUnMouvement(mouvement.id)" src="assets/img/trash-icon.svg" alt="trash icon"/>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="inModification" class="modify-mouvement">
+
+  <h2>Modifier une mouvement</h2>
+  <form (ngSubmit)="updateMouvement()">
+    <label for="modifie-est-entree">Est entrée ?</label>
+    <input
+      type="number"
+      id="modifie-est-entree"
+      name="modifie-est-entree"
+      [ngModel]="convertBoolToNumber(modifieMouvement.estEntree)"
+      (ngModelChange)="convertNumberToBool($event)"
+      required
+      placeholder="Est entrée ? Oui 1 - Non 0"
+      min="0" max="1">
+    <label for="modifie-date">Date :</label>
+    <input type="date" id="modifie-date" name="modifie-date" [(ngModel)]="modifieMouvement.date" required placeholder="Date">
+
+    <div class="modify-mouvement-container-button">
+      <button class="bg-danger" type="submit">Modifier</button>
+      <button (click)="inModification = false" type="button">Annuler</button>
+    </div>
+
+  </form>
+</div>
+<div *ngIf="!inModification"  class="new-mouvement">
+
+  <h2>Ajouter un mouvement</h2>
+  <form (ngSubmit)="addMouvementToAppartement()">
+    <label for="new-est-entree">Est entrée ?</label>
+    <input
+      type="number"
+      id="new-est-entree"
+      name="new-est-entree"
+      [ngModel]="convertBoolToNumber(modifieMouvement.estEntree)"
+      (ngModelChange)="convertNumberToBool($event)"
+      required
+      placeholder="Est entrée ? Oui 1 - Non 0"
+      min="0" max="1">
+    <label for="new-date">Date :</label>
+    <input type="date" id="new-date" name="new-date" [(ngModel)]="nouveauMouvement.date" required placeholder="Date">
+
+    <button class="{{formIsValid() ? '' : 'disabled'}}" type="submit" [disabled]="!formIsValid()">Ajouter</button>
+  </form>
+</div>
+<app-footer></app-footer>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Appartement, Frais, TypeFrais} from "../models/appartement";
+import {Appartement, Frais, Mouvement, TypeFrais} from "../models/appartement";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
@@ -12,6 +12,8 @@ export class GestionService {
   private urlAppartement  = this.apiUrl + '/api/appartements/'
   private urlFrais = this.apiUrl + '/api/frais/'
   private urlTypeFrais = this.apiUrl + '/api/type-frais/'
+  private urlMouvements = this.apiUrl + '/api/mouvements/'
+
   constructor(private http: HttpClient) { }
 
   // APPARTEMENT
@@ -64,5 +66,17 @@ export class GestionService {
 
   getTypeFrais(typeFraisId: number | undefined): Observable<TypeFrais>{
     return this.http.get<TypeFrais>(this.urlTypeFrais + typeFraisId);
+  }
+
+  // MOUVEMENTS
+  getMouvementById(mouvementId: number): Observable<Mouvement> {
+    return this.http.get<Mouvement>(this.urlMouvements + mouvementId)
+  }
+  updateMouvement(mouvement: Mouvement): Observable<any> {
+    return this.http.put(this.urlMouvements + 'modifier/' + mouvement.id, mouvement);
+  }
+
+  deleteOneMouvement(mouvementId: number): Observable<any> {
+    return this.http.delete(this.urlMouvements + mouvementId, { responseType: 'text' });
   }
 }

@@ -29,6 +29,12 @@ export interface Frais {
   typeFrais?: TypeFrais;
 }
 export interface TypeFrais {
-  id: number
+  id?: number
   nom: string;
+}
+
+export interface Mouvement {
+  id?: number;
+  date?: string;
+  estEntree?: boolean;
 }

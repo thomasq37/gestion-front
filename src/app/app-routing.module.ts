@@ -8,6 +8,7 @@ import {AppartementUpdateFraisComponent} from "./components/appartement-update-f
 import {LoginComponent} from "./components/login/login.component";
 import {CreateUserComponent} from "./components/create-user/create-user.component";
 import {AuthGuard} from "./guards/auth.guard";
+import {AppartementUpdateMouvementComponent} from "./components/appartement-update-mouvement/appartement-update-mouvement.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'appartement/:id', component: AppartementItemComponent, canActivate: [AuthGuard] },
   { path: 'ajouter-appart', component: AddAppartementComponent, canActivate: [AuthGuard]},
   { path: 'modifier-appart/:id', component: UpdateAppartementComponent, canActivate: [AuthGuard]},
-  { path: 'modifier-appart-frais/:id', component: AppartementUpdateFraisComponent, canActivate: [AuthGuard]}
+  { path: 'modifier-appart-frais/:id', component: AppartementUpdateFraisComponent, canActivate: [AuthGuard]},
+  { path: 'modifier-appart-mouvement/:id', component: AppartementUpdateMouvementComponent, canActivate: [AuthGuard]}
 
 ];
 @NgModule({

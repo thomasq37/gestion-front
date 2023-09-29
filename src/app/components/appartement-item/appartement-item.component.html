@@ -31,57 +31,58 @@
           <a [routerLink]="['/modifier-appart', appartement.id ]" [queryParams]="{section: 'description'}">Modifier</a>
         </div>
         <ul class="appartement-details">
-        <li>
-          <img src="./assets/img/is-loue-icon.png" alt="">
-          <div>
-            <p>Ce bien est :</p>
-            <p>{{ appartement.loue ? 'Loué' : 'Non loué' }}</p>
-          </div>
-        </li>
-        <li>
-          <img src="./assets/img/adresse-icon.png" alt="">
-          <div>
-            <p>Adresse:</p>
-            <p>{{appartement.numero}} {{ appartement.adresse }}, {{ appartement.codePostal }} {{ appartement.ville }}</p>
-          </div>
+          <li>
+            <img src="./assets/img/is-loue-icon.png" alt="">
+            <div>
+              <p>Ce bien est :</p>
+              <p>{{ appartement.loue ? 'Loué' : 'Non loué' }}</p>
+            </div>
+          </li>
+          <li>
+            <img src="./assets/img/adresse-icon.png" alt="">
+            <div>
+              <p>Adresse:</p>
+              <p>{{appartement.numero}} {{ appartement.adresse }}, {{ appartement.codePostal }} {{ appartement.ville }}</p>
+            </div>
 
-        </li>
-        <li>
-          <img src="./assets/img/adresse-icon.png" alt="">
-          <div>
-            <p>Nombre de pièces:</p>
-            <p>{{ appartement.nombrePieces }}</p>
-          </div>
-        </li>
-        <li>
-          <img src="./assets/img/adresse-icon.png" alt="">
-          <div>
-            <p>Surface:</p>
-            <p>{{ appartement.surface }} m²</p>
-          </div>
-        </li>
-        <li>
-          <img src="./assets/img/adresse-icon.png" alt="">
-          <div>
-            <p>Balcon:</p>
-            <p>{{ appartement.balcon ? 'Oui' : 'Non' }}</p>
-          </div>
-        </li>
-        <li>
-          <img src="./assets/img/adresse-icon.png" alt="">
-          <div>
-            <p>Loyer Mensuel:</p>
-            <p>{{ appartement.loyerMensuel }} €</p>
-          </div>
-        </li>
-        <li>
-          <img src="./assets/img/adresse-icon.png" alt="">
-          <div>
-            <p>Prix:</p>
-            <p>{{ appartement.prix }} €</p>
-          </div>
-        </li>
-      </ul>
+          </li>
+          <li>
+            <img src="./assets/img/adresse-icon.png" alt="">
+            <div>
+              <p>Nombre de pièces:</p>
+              <p>{{ appartement.nombrePieces }}</p>
+            </div>
+          </li>
+          <li>
+            <img src="./assets/img/adresse-icon.png" alt="">
+            <div>
+              <p>Surface:</p>
+              <p>{{ appartement.surface }} m²</p>
+            </div>
+          </li>
+          <li>
+            <img src="./assets/img/adresse-icon.png" alt="">
+            <div>
+              <p>Balcon:</p>
+              <p>{{ appartement.balcon ? 'Oui' : 'Non' }}</p>
+            </div>
+          </li>
+          <li>
+            <img src="./assets/img/adresse-icon.png" alt="">
+            <div>
+              <p>Loyer Mensuel:</p>
+              <p>{{ appartement.loyerMensuel }} €</p>
+            </div>
+          </li>
+          <li>
+            <img src="./assets/img/adresse-icon.png" alt="">
+            <div>
+              <p>Prix:</p>
+              <p>{{ appartement.prix }} €</p>
+            </div>
+          </li>
+        </ul>
+        <!--Frais-->
         <div class="container-titler">
           <h2>Frais</h2>
           <a routerLink="/modifier-appart-frais/{{appartement.id}}">Modifier</a>
@@ -100,6 +101,26 @@
             <td>{{ f.montant }}</td>
             <td>{{ f.frequence }}</td>
           </tr>
+          </tbody>
+        </table>
+        <!--Entrées/Sorties-->
+        <div class="container-titler">
+          <h2>Entrées / Sorties</h2>
+          <a routerLink="/modifier-appart-mouvement/{{appartement.id}}">Modifier</a>
+        </div>
+        <table class="appartement-list-frais">
+          <thead>
+          <tr>
+            <th>Mouvement(s)</th>
+            <th>Date</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of mouvementsFormated">
+              <td>{{ m.estEntree }}</td>
+              <td>{{ m.date }}</td>
+            </tr>
+
           </tbody>
         </table>
         <!--Statistiques-->
