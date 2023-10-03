@@ -10,18 +10,21 @@ import {GestionService} from "../../services/gestion.service";
 })
 export class AppartementUpdatePeriodesComponent {
   periodLocationList: PeriodLocation[] = [];
+  appartementId: number = 0;
   modifiePeriode: PeriodLocation = <PeriodLocation>{};
   newPeriode: PeriodLocation = <PeriodLocation>{};
   inModification: boolean = false;
   constructor(
     private gestionService: GestionService,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
     this.periodLocationList = Object.values(history.state).filter(item => typeof item !== 'number') as PeriodLocation[];;
-    console.log();
-
+    this.route.params.subscribe(params => {
+      this.appartementId = +params['id'];
+    })
   }
 
   afficherFormModificationPeriode(id : number) {
@@ -74,7 +77,7 @@ export class AppartementUpdatePeriodesComponent {
   }
 
   ajouterUnePeriodePourAppartement() {
-    this.gestionService.ajouterUnePeriodePourAppartement(this.periodLocationList[0].appartementId, this.newPeriode).subscribe(
+    this.gestionService.ajouterUnePeriodePourAppartement(this.appartementId, this.newPeriode).subscribe(
       (response) => {
         console.log('Nouvelle période ajoutée :', response);
         this.periodLocationList.push(response)
