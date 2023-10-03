@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Appartement, Frais, TypeFrais} from "../../models/appartement";
+import {Appartement, Frais, TypeFrais} from "../../models/gestion";
 import {GestionService} from "../../services/gestion.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -9,10 +9,9 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./appartement-update-frais.component.scss']
 })
 export class AppartementUpdateFraisComponent implements OnInit{
-  nouveauFrais: Frais = {};
-  modifieFrais: Frais = {};
-
-  appartement!: Appartement;
+  nouveauFrais: Frais = <Frais>{};
+  modifieFrais:  Frais = <Frais>{};
+  appartement: Appartement = <Appartement>{};
   typesFrais: TypeFrais[] = [];
   nouveauFraisSelectedTypeFrais!: any;
   actualFrais: Frais[] = [];
@@ -28,14 +27,12 @@ export class AppartementUpdateFraisComponent implements OnInit{
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.gestionService.getFraisByAppartementId(+params['id']).subscribe(response => {
-        this.actualFrais = response
-      })
-      this.gestionService.getAppartementById(+params['id']).subscribe(response => {
-        this.nouveauFrais.appartement = response
+      this.gestionService.obtenirUnAppartementParId(+params['id']).subscribe(appartement => {
+        this.appartement = appartement
+        this.actualFrais = this.appartement.fraisFixe
       })
     });
-    this.gestionService.getTypesFrais().subscribe(
+    this.gestionService.obtenirTousLesTypesDeFrais().subscribe(
       (typesFrais: TypeFrais[]) => {
         this.typesFrais = typesFrais;
       },
@@ -43,16 +40,17 @@ export class AppartementUpdateFraisComponent implements OnInit{
         console.error('Erreur lors de la récupération des types de frais :', error);
       }
     );
+
   }
 
-  addFraisToAppartement() {
+  ajouterUnFraisPourAppartement() {
     this.nouveauFraisSelectedTypeFrais = this.typesFrais.find(typeFrais => this.nouveauFraisSelectedTypeFrais == typeFrais.id)
     this.nouveauFrais.typeFrais = this.nouveauFraisSelectedTypeFrais;
-    this.gestionService.addFraisToAppartement(this.nouveauFrais).subscribe(
+    this.gestionService.ajouterUnFraisPourAppartement(this.appartement.id, this.nouveauFrais).subscribe(
       (response) => {
         console.log('Nouveau frais ajouté :', response);
         this.actualFrais.push(response)
-        this.nouveauFrais = {};
+        this.nouveauFrais = <Frais>{};
       },
       (error) => {
         console.error('Erreur lors de l\'ajout du frais :', error);
@@ -60,18 +58,20 @@ export class AppartementUpdateFraisComponent implements OnInit{
     );
   }
 
-  displayModifyFraisForm(id: number) {
-    this.gestionService.getFraisById(id).subscribe(response => {
-      this.modifieFrais = response
-      this.modifieFraisSelectedTypeFrais = this.modifieFrais.typeFrais?.id
-      this.inModification = true;
-    })
+  afficherFormModificationFrais(id: number) {
+    const foundFrais = this.appartement.fraisFixe.find(frais => id == frais.id);
+    if (!foundFrais) {
+      throw new Error("Frais non trouvé avec l'ID: " + id);
+    }
+    this.modifieFrais = foundFrais;
+    this.modifieFraisSelectedTypeFrais = this.modifieFrais.typeFrais.id
+    this.inModification = true;
   }
 
-  updateFrais() {
+  mettreAJourUnFraisPourAppartement() {
     this.modifieFraisSelectedTypeFrais = this.typesFrais.find(typeFrais => this.modifieFraisSelectedTypeFrais == typeFrais.id)
     this.modifieFrais.typeFrais = this.modifieFraisSelectedTypeFrais
-    this.gestionService.updateFrais(this.modifieFrais).subscribe(
+    this.gestionService.mettreAJourUnFraisPourAppartement(this.appartement.id, this.modifieFrais).subscribe(
       (response) => {
         console.log('Frais modifié :', response);
         const index = this.actualFrais.findIndex(frais => frais.id === response.id);
@@ -90,12 +90,13 @@ export class AppartementUpdateFraisComponent implements OnInit{
       }
     );
   }
-  supprimerUnFrais(id :number) {
+
+  supprimerUnFraisPourAppartement(appartementId :number, fraisId: number) {
     if (confirm("Êtes-vous sûr de vouloir supprimer ce frais ?")) {
-      this.gestionService.deleteOneFrais(id).subscribe(
+      this.gestionService.supprimerUnFraisPourAppartement(appartementId, fraisId).subscribe(
         () => {
           // Supprimer le frais de la liste actualFrais
-          this.actualFrais = this.actualFrais.filter(frais => frais.id !== id);
+          this.actualFrais = this.actualFrais.filter(frais => frais.id !== fraisId);
           console.log('Frais supprimé avec succès.');
         },
         error => {
@@ -103,14 +104,5 @@ export class AppartementUpdateFraisComponent implements OnInit{
         }
       );
     }
-  }
-
-
-  formIsValid(): boolean {
-    return (
-      this.nouveauFrais.montant !== undefined &&
-      this.nouveauFraisSelectedTypeFrais !== undefined &&
-      this.nouveauFrais.frequence !== undefined
-    );
   }
 }

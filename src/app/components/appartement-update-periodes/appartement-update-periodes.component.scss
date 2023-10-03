@@ -1,0 +1,100 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style pour les champs d'entrée */
+input, select {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+/* Style pour les labels cachés (accessibilité) */
+label {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+label.visible{
+  position: initial;
+  height: initial;
+  width: initial;
+}
+.container-checkbox {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+
+  input {
+    width: 1.3rem;
+
+  }
+}
+
+/* Style pour les placeholders */
+input::placeholder, select::placeholder {
+  color: #aaa;
+}
+
+.disabled{
+  background-color: #e9e9ed;
+  color: #c1c1c1
+}
+
+/* Style pour le bouton */
+button {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 10px 20px;
+  background-color: #143b86;
+  border: 1px solid #ccc;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+main{
+  margin: 1rem;
+  .container-appartement-list-periode{
+    table {
+      width: 100%;
+      tr{
+        .actions-container{
+          border: none;
+          display: flex;
+          justify-content: space-between;
+          img{
+            width: 1rem;
+          }
+        }
+      }
+    }
+
+    thead, tbody, tfoot, tr, td, th {
+      padding: 1rem;
+      border: 1px solid #d7d7d7;
+      font-size: .7rem;
+    }
+    @media screen and (min-width: 720px) {
+      thead, tbody, tfoot, tr, td, th {
+        font-size: 1rem;
+      }
+    }
+  }
+  .container-appartement-modify-periode{
+
+  }
+}

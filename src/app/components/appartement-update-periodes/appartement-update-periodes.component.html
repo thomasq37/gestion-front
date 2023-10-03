@@ -1,0 +1,77 @@
+<app-header></app-header>
+<main>
+    <section class="container-appartement-list-periode">
+        <h2>Entrées / Sorties</h2>
+        <table class="appartement-list-periode">
+            <thead>
+            <tr>
+                <th>Entrée</th>
+                <th>Sortie</th>
+                <th>AirBnB</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let periode of periodLocationList">
+                <td>{{ periode.estEntree | customDate  }}</td>
+                <td>{{ periode.estSortie | customDate }}</td>
+                <td>{{ periode.locVac ? 'Oui' : 'Non' }}</td>
+                <td>{{ periode.prix}}€ {{ periode.locVac ? '/jour' : '/mois'}}</td>
+                <td  class="actions-container">
+                    <img *ngIf="periode.id" (click)="afficherFormModificationPeriode(periode.id)" src="assets/img/modify-icon.svg" alt="to change icon"/>
+                    <img *ngIf="periode.id" (click)="supprimerUnePeriodePourAppartement(periode.appartementId, periode.id)" src="assets/img/trash-icon.svg" alt="trash icon"/>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </section>
+    <section class="container-appartement-modify-periode">
+        <div *ngIf="inModification" class="modify-periode">
+
+            <h2>Modifier une période</h2>
+            <form (ngSubmit)="mettreAJourUnePeriodePourAppartement()">
+                <label class="visible" for="prix">Prix:</label>
+                <input type="number" name="prix" id="prix" [(ngModel)]="modifiePeriode.prix">
+
+                <label for="estEntree">Entrée:</label>
+                <input type="date" name="estEntree" id="estEntree" [(ngModel)]="modifiePeriode.estEntree">
+
+                <label for="estSortie">Sortie:</label>
+                <input type="date" name="estSortie" id="estSortie" [(ngModel)]="modifiePeriode.estSortie">
+                <div class="container-checkbox">
+                    <label class="visible" for="locVac">Location vacances :</label>
+                    <input type="checkbox" name="locVac" id="locVac" [(ngModel)]="modifiePeriode.locVac">
+                </div>
+
+                <button type="submit">Mettre à jour</button>
+                <button type="button" (click)="inModification = false">Annuler</button>
+
+            </form>
+        </div>
+    </section>
+    <section class="container-appartement-new-periode">
+        <div *ngIf="!inModification" class="new-periode">
+
+            <h2>Ajouter une période</h2>
+            <form (ngSubmit)="ajouterUnePeriodePourAppartement()">
+                <label class="visible"for="prix">Prix:</label>
+                <input type="number" name="prix" id="prix" [(ngModel)]="newPeriode.prix">
+
+                <label for="estEntree">Entrée:</label>
+                <input type="date" name="estEntree" id="estEntree" [(ngModel)]="newPeriode.estEntree">
+
+                <label for="estSortie">Sortie:</label>
+                <input type="date" name="estSortie" id="estSortie" [(ngModel)]="newPeriode.estSortie">
+                <div class="container-checkbox">
+                    <label class="visible" for="locVac">Location vacances :</label>
+                    <input type="checkbox" name="locVac" id="locVac" [(ngModel)]="newPeriode.locVac">
+                </div>
+
+                <button type="submit">Ajouter</button>
+            </form>
+        </div>
+    </section>
+</main>
+<app-footer></app-footer>

@@ -1,11 +1,8 @@
 <app-header></app-header>
 <div class="new-appart">
   <h2>Nouvel appartement</h2>
-  <form>
-    <label for="images">Images (URLs séparées par des virgules) :</label>
-    <input type="text" id="images" name="images" [(ngModel)]="imageUrls" placeholder="URLs d'images">
-
-    <label for="numero">Numéro de l'Appartement :</label>
+  <form (ngSubmit)="ajouterAppartement()">
+    <label for="numero">Numéro de l'Gestion :</label>
     <input type="number" id="numero" name="numero" [(ngModel)]="appartement.numero" placeholder="Numéro de l'appartement">
 
     <label for="adresse">Adresse :</label>
@@ -26,16 +23,10 @@
     <label for="balcon">Balcon (0 - Non, 1 - Oui) :</label>
     <input type="number" id="balcon" name="balcon" [(ngModel)]="appartement.balcon" placeholder="Balcon (0 - Non, 1 - Oui)">
 
-    <label for="loue">Loué (0 - Non, 1 - Oui) :</label>
-    <input type="number" id="loue" name="loue" [(ngModel)]="appartement.loue" placeholder="Loué (0 - Non, 1 - Oui)">
-
-    <label for="loyerMensuel">Loyer Mensuel :</label>
-    <input type="number" id="loyerMensuel" name="loyerMensuel" [(ngModel)]="appartement.loyerMensuel" placeholder="Loyer mensuel en €">
-
     <label for="prix">Prix :</label>
     <input type="number" id="prix" name="prix" [(ngModel)]="appartement.prix" placeholder="Prix en €">
 
-    <button type="button" (click)="addAppartement()">Enregistrer</button>
+    <button type="submit">Enregistrer</button>
   </form>
 </div>
 <app-footer></app-footer>

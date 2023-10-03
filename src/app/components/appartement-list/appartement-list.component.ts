@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GestionService} from "../../services/gestion.service";
-import {Appartement} from "../../models/appartement";
+import {AdresseDTO} from "../../models/gestion";
 import {Router} from "@angular/router";
 
 @Component({
@@ -9,16 +9,17 @@ import {Router} from "@angular/router";
   styleUrls: ['./appartement-list.component.scss']
 })
 export class AppartementListComponent implements OnInit {
-  appartements: Appartement[];
+  appartementListOverview: AdresseDTO[];
 
   constructor(private gestionService: GestionService, private router: Router) {
-    this.appartements = [];
+    this.appartementListOverview = [];
   }
 
   ngOnInit() {
-    this.gestionService.getAppartements()
-      .subscribe(appartements => {
-        this.appartements = appartements;
+    this.gestionService.obtenirToutesLesAdressesAppartements()
+      .subscribe(appartementListOverview => {
+        this.appartementListOverview = appartementListOverview;
+
       });
   }
   viewAppartement(appartementId: number) {

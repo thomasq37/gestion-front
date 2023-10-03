@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Appartement, Frais, Mouvement, TypeFrais} from "../models/appartement";
+import {Frais, TypeFrais, AdresseDTO, Appartement, PeriodLocation} from "../models/gestion";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
@@ -9,78 +9,57 @@ import {environment} from "../../environments/environment";
 })
 export class GestionService {
   private apiUrl = `${environment.apiUrl}`;
-  private urlAppartement  = this.apiUrl + '/api/appartements/'
-  private urlFrais = this.apiUrl + '/api/frais/'
+  private urlAppartements  = this.apiUrl + '/api/appartements/'
+  private urlAppartementOverview  = this.urlAppartements +  'adresses'
   private urlTypeFrais = this.apiUrl + '/api/type-frais/'
-  private urlMouvements = this.apiUrl + '/api/mouvements/'
 
   constructor(private http: HttpClient) { }
 
   // APPARTEMENT
-  getAppartements(): Observable<Appartement[]> {
-    return this.http.get<Appartement[]>(this.urlAppartement + 'liste');
+  obtenirToutesLesAdressesAppartements(): Observable<AdresseDTO[]> {
+    return this.http.get<AdresseDTO[]>(this.urlAppartementOverview);
   }
-  addAppartement(appartement: Appartement): Observable<any> {
-    return this.http.post(this.urlAppartement + 'ajouter', appartement)
+  obtenirUnAppartementParId(id: number): Observable<Appartement>{
+    return this.http.get<Appartement>(this.urlAppartements + id)
   }
-  updateAppartement(appartement: Appartement): Observable<any> {
-    return this.http.put(this.urlAppartement + 'modifier/' + appartement.id, appartement);
+  supprimerUnAppartement(appartementId: number): Observable<any> {
+    return this.http.delete(this.urlAppartements + appartementId, { responseType: 'text' });
   }
-  getAppartementById(appartementId: number): Observable<Appartement> {
-    return this.http.get<Appartement>(this.urlAppartement + appartementId)
+  ajouterAppartement(appartement: Appartement): Observable<any> {
+    return this.http.post(this.urlAppartements + 'ajouter', appartement)
   }
-  getRentabiliteNetteByAppartementId(appartementId: number): Observable<number> {
-    return this.http.get<number>(this.urlAppartement + appartementId + '/calcul-rentabilite')
-  }
-  getMoyenneBeneficesByAppartementId(appartementId: number): Observable<number> {
-    return this.http.get<number>(this.urlAppartement + appartementId + '/moyenne-benefices')
-  }
-  getTauxVacancesLocativesByAppartementId(appartementId: number): Observable<number> {
-    return this.http.get<number>(this.urlAppartement + appartementId + '/taux-vacances-locatives')
-  }
-  deleteOneAppartement(appartementId: number): Observable<any> {
-    return this.http.delete(this.urlAppartement + appartementId, { responseType: 'text' });
+  modifierAppartement(appartement: Appartement): Observable<any> {
+    return this.http.put(this.urlAppartements + 'modifier/' + appartement.id, appartement);
   }
 
   // FRAIS
-  getFraisByAppartementId(appartementId: number): Observable<Frais[]>{
-    return this.http.get<Frais[]>(this.urlFrais + 'appartement/' + appartementId)
+
+  ajouterUnFraisPourAppartement(appartementId: number, nouveauFrais: Frais): Observable<any>{
+    return this.http.post(this.urlAppartements + appartementId + "/frais", nouveauFrais)
   }
-  addFraisToAppartement(frais: Frais): Observable<any>{
-    return this.http.post(this.urlFrais + 'ajouter', frais)
+  mettreAJourUnFraisPourAppartement(appartementId: number, modifieFrais: Frais): Observable<any> {
+    return this.http.put(this.urlAppartements + appartementId + "/frais/" + modifieFrais.id, modifieFrais)
   }
-  updateFrais(frais: Frais): Observable<any> {
-    return this.http.put(this.urlFrais + 'modifier/' + frais.id, frais);
-  }
-  getFraisById(fraisId: number): Observable<Frais> {
-    return this.http.get<Frais>(this.urlFrais + fraisId)
-  }
-  deleteOneFrais(fraisId: number): Observable<any> {
-    return this.http.delete(this.urlFrais + fraisId, { responseType: 'text' });
+  supprimerUnFraisPourAppartement(appartementId: number, fraisId: number): Observable<any> {
+    return this.http.delete(this.urlAppartements + appartementId + "/frais/" + fraisId);
   }
 
   // TYPE FRAIS
-  getTypesFrais(): Observable<TypeFrais[]>{
+  obtenirTousLesTypesDeFrais(): Observable<TypeFrais[]>{
     return this.http.get<TypeFrais[]>(this.urlTypeFrais + 'liste');
   }
 
-  getTypeFrais(typeFraisId: number | undefined): Observable<TypeFrais>{
-    return this.http.get<TypeFrais>(this.urlTypeFrais + typeFraisId);
+  // PERIODES
+
+  mettreAJourUnePeriodePourAppartement(appartementId: number, modifiePeriode: PeriodLocation): Observable<any> {
+    return this.http.put(this.urlAppartements + appartementId + "/periodes/" + modifiePeriode.id, modifiePeriode)
   }
 
-  // MOUVEMENTS
-  getMouvementById(mouvementId: number): Observable<Mouvement> {
-    return this.http.get<Mouvement>(this.urlMouvements + mouvementId)
-  }
-  updateMouvement(mouvement: Mouvement): Observable<any> {
-    return this.http.put(this.urlMouvements + 'modifier/' + mouvement.id, mouvement);
+  supprimerUnePeriodePourAppartement(appartementId: number, periodeId: number) {
+    return this.http.delete(this.urlAppartements + appartementId + "/periodes/" + periodeId);
   }
 
-  deleteOneMouvement(mouvementId: number): Observable<any> {
-    return this.http.delete(this.urlMouvements + mouvementId, { responseType: 'text' });
-  }
-
-  addMouvementToAppartement(nouveauMouvement: Mouvement) {
-    return this.http.post(this.urlMouvements + 'ajouter', nouveauMouvement)
+  ajouterUnePeriodePourAppartement(appartementId: number, newPeriode: PeriodLocation) : Observable<any> {
+    return this.http.post(this.urlAppartements + appartementId + "/periodes", newPeriode)
   }
 }

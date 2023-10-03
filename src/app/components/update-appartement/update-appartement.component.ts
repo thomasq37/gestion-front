@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {GestionService} from "../../services/gestion.service";
-import {Appartement} from "../../models/appartement";
+import {Appartement} from "../../models/gestion";
 
 @Component({
   selector: 'app-update-appartement',
@@ -10,14 +10,15 @@ import {Appartement} from "../../models/appartement";
 })
 export class UpdateAppartementComponent implements OnInit{
 
-  appartement!: Appartement;
+  appartement: Appartement = <Appartement>{} ;
   imageUrls: string[] = [''];
   section: string = '';
   constructor(
     private gestionService: GestionService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -25,8 +26,7 @@ export class UpdateAppartementComponent implements OnInit{
     })
     this.route.params.subscribe(params => {
       const appartementId = +params['id'];
-      console.log(params)
-      this.gestionService.getAppartementById(appartementId).subscribe(
+      this.gestionService.obtenirUnAppartementParId(appartementId).subscribe(
         (appartement: Appartement) => {
           this.appartement = appartement;
           this.imageUrls = this.appartement.images
@@ -38,11 +38,11 @@ export class UpdateAppartementComponent implements OnInit{
     });
   }
 
-  updateAppartement(){
+  modifierAppartement(){
     this.appartement.images = this.imageUrls;
-    this.gestionService.updateAppartement(this.appartement).subscribe(
+    this.gestionService.modifierAppartement(this.appartement).subscribe(
       (response) => {
-        console.log('Appartement modifié :', response);
+        console.log('Gestion modifié :', response);
         this.router.navigate(['/appartement', this.appartement.id]);
       },
       (error) => {

@@ -9,35 +9,28 @@
         <!--Titre-->
         <h2>Recherche « {{appartement.numero}} {{appartement.adresse}} »</h2>
         <!--Caroussel-->
-        <div class="container-titler">
-          <h2>Photos</h2>
-          <a [routerLink]="['/modifier-appart', appartement.id ]" [queryParams]="{section: 'photos'}">Modifier</a>
-        </div>
-        <div class="carousel-container" *ngIf="images">
-          <ngb-carousel>
-            <ng-template ngbSlide *ngFor="let image of images">
-              <div class="picsum-img-wrapper">
-                <img [src]="image" [alt]="'Image appartement'" (load)="imageLoaded()" />
-              </div>
-            </ng-template>
-          </ngb-carousel>
-        </div>
-        <div *ngIf="isLoading" class="loader">
-          <img class="loader" *ngIf="!appartement" src="assets/img/loader.gif" alt=""/>
+        <div>
+          <div class="container-title">
+            <h2>Photos</h2>
+            <a [routerLink]="['/modifier-appart', appartement.id ]" [queryParams]="{section: 'photos'}">Modifier</a>
+          </div>
+
+          <div class="carousel-container">
+            <ngb-carousel *ngIf="images && images.length">
+              <ng-template ngbSlide *ngFor="let image of images">
+                <div class="picsum-img-wrapper">
+                  <img [src]="image" [alt]="'Image appartement'" />
+                </div>
+              </ng-template>
+            </ngb-carousel>
+          </div>
         </div>
         <!--Descriptif-->
-        <div class="container-titler">
+        <div class="container-title">
           <h2>Description</h2>
           <a [routerLink]="['/modifier-appart', appartement.id ]" [queryParams]="{section: 'description'}">Modifier</a>
         </div>
         <ul class="appartement-details">
-          <li>
-            <img src="./assets/img/is-loue-icon.png" alt="">
-            <div>
-              <p>Ce bien est :</p>
-              <p>{{ appartement.loue ? 'Loué' : 'Non loué' }}</p>
-            </div>
-          </li>
           <li>
             <img src="./assets/img/adresse-icon.png" alt="">
             <div>
@@ -70,21 +63,14 @@
           <li>
             <img src="./assets/img/adresse-icon.png" alt="">
             <div>
-              <p>Loyer Mensuel:</p>
-              <p>{{ appartement.loyerMensuel }} €</p>
-            </div>
-          </li>
-          <li>
-            <img src="./assets/img/adresse-icon.png" alt="">
-            <div>
-              <p>Prix:</p>
+              <p>Prix d'achat:</p>
               <p>{{ appartement.prix }} €</p>
             </div>
           </li>
         </ul>
         <!--Frais-->
-        <div class="container-titler">
-          <h2>Frais</h2>
+        <div class="container-title">
+          <h2>Frais fixes</h2>
           <a routerLink="/modifier-appart-frais/{{appartement.id}}">Modifier</a>
         </div>
         <table class="appartement-list-frais">
@@ -96,7 +82,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let f of frais">
+          <tr *ngFor="let f of appartement.fraisFixe">
             <td>{{ f.typeFrais?.nom }}</td>
             <td>{{ f.montant }}</td>
             <td>{{ f.frequence }}</td>
@@ -104,55 +90,59 @@
           </tbody>
         </table>
         <!--Entrées/Sorties-->
-        <div class="container-titler">
+        <div class="container-title">
           <h2>Entrées / Sorties</h2>
-          <a routerLink="/modifier-appart-mouvement/{{appartement.id}}">Modifier</a>
+          <a [routerLink]="['/appartement/' +  appartement.id + '/periodes']" [state]=appartement.periodLocation>Modifier</a>
         </div>
-        <table class="appartement-list-frais">
+        <table class="appartement-list-periode">
           <thead>
           <tr>
-            <th>Mouvement(s)</th>
-            <th>Date</th>
+            <th>Entrée</th>
+            <th>Sortie</th>
+            <th>AirBnB</th>
+            <th>Prix</th>
           </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let m of mouvementsFormated">
-              <td>{{ m.estEntree }}</td>
-              <td>{{ m.date }}</td>
+            <tr *ngFor="let m of appartement.periodLocation">
+              <td>{{ m.estEntree | customDate  }}</td>
+              <td>{{ m.estSortie | customDate }}</td>
+              <td>{{ m.locVac ? 'Oui' : 'Non' }}</td>
+              <td>{{ m.prix}}€ {{ m.locVac ? '/jour' : '/mois'}}</td>
             </tr>
 
           </tbody>
         </table>
         <!--Statistiques-->
-        <div class="container-titler">
+        <div class="container-title">
           <h2>Statistiques</h2>
         </div>
         <ul class="appartement-list-stats">
-          <li *ngIf="moyenneBenefices !== 0" (click)="showInfo($event)">
-            <p>Moyenne bénéfices</p>
-            <p>{{moyenneBenefices}}€ par mois
+          <li *ngIf="appartement.moyenneBeneficesNetParMois !== 0" (click)="showInfo($event)">
+            <p>Moyenne bénéfices / mois</p>
+            <p>{{appartement.moyenneBeneficesNetParMois}}€ par mois
               <span>(renvenus annuels - dépenses annuels) ÷ 12</span>
             </p>
           </li>
-          <li *ngIf="rentabiliteNette !== 0" (click)="showInfo($event)">
+          <li *ngIf="appartement.rentabiliteNette !== 0" (click)="showInfo($event)">
             <p>Rentabilité nette</p>
-            <p>{{rentabiliteNette }}%
+            <p>Bénéfices : {{appartement.rentabiliteNette }}€ | Prix d'achat : {{appartement.prix}}€ | différence {{ appartement.rentabiliteNette - appartement.prix}}€
               <span>((renvenus annuels - dépenses annuels) ÷ prix) x 100</span>
             </p>
           </li>
-          <li *ngIf="tauxVacanceLocatives !== 0" (click)="showInfo($event)">
+          <li *ngIf="appartement.tauxVacanceLocative !== 0" (click)="showInfo($event)">
             <p>Taux de vacance locatives</p>
-            <p>{{tauxVacanceLocatives}}%
+            <p>{{appartement.tauxVacanceLocative}}%
               <span>(jours vacants ÷ jours total) x 100</span>
             </p>
           </li>
         </ul>
         <!--Contacts-->
-        <div class="container-titler">
+        <div class="container-title">
           <h2>Contacts</h2>
         </div>
       </div>
-      <button *ngIf="appartement.id" (click)="deleteOneAppartement(appartement.id)" class="appartement-item-btn-delete btn bg-danger">Suprimmer l'appartement</button>
+      <button *ngIf="appartement.id" (click)="supprimerUnAppartement(appartement.id)" class="appartement-item-btn-delete btn bg-danger">Suprimmer l'appartement</button>
     </div>
   </section>
 <app-footer></app-footer>

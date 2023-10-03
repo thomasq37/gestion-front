@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {AppartementListComponent} from "./components/appartement-list/appartement-list.component";
-import {AppartementItemComponent} from "./components/appartement-item/appartement-item.component";
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {AppartementItemComponent, CustomDatePipe} from "./components/appartement-item/appartement-item.component";
+import {NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AddAppartementComponent } from './components/add-appartement/add-appartement.component';
@@ -18,7 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {AuthGuard} from "./guards/auth.guard";
-import { AppartementUpdateMouvementComponent } from './components/appartement-update-mouvement/appartement-update-mouvement.component';
+import { AppartementUpdatePeriodesComponent } from './components/appartement-update-periodes/appartement-update-periodes.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +32,8 @@ import { AppartementUpdateMouvementComponent } from './components/appartement-up
     AppartementUpdateFraisComponent,
     LoginComponent,
     CreateUserComponent,
-    AppartementUpdateMouvementComponent,
+    CustomDatePipe,
+    AppartementUpdatePeriodesComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +41,8 @@ import { AppartementUpdateMouvementComponent } from './components/appartement-up
     HttpClientModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbCarouselModule,
   ],
   providers: [
     AuthGuard,

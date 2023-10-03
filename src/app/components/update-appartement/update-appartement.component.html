@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="update-appart">
   <h2>Modifier {{section}}</h2>
-  <form *ngIf="appartement !== null" (ngSubmit)="updateAppartement()">
+  <form *ngIf="appartement !== undefined" (ngSubmit)="modifierAppartement()">
     <section *ngIf="section === 'photos'"  class="form-photos">
       <div class="imgs" *ngFor="let imageUrl of imageUrls; let i = index">
         <label for="image{{i}}"><img src="assets/img/picture-logo.svg" alt="picture-logo" >{{i + 1}}</label>
@@ -11,10 +11,10 @@
       <button class="add-img-btn" type="button" (click)="addImage()">Ajouter une image</button>
     </section>
     <section *ngIf="section === 'description'" class="form-description">
-      <label class="label-hidden" for="numero">Numéro de l'Appartement :</label>
+      <label class="label-hidden" for="numero">Numéro de l'appartement :</label>
       <input type="number" id="numero" name="numero" [(ngModel)]="appartement.numero" required placeholder="Numéro de l'appartement">
 
-      <label class="label-hidden" for="adresse">Adresse :</label>
+      <label class="label-hidden" for="adresse">Voie :</label>
       <input type="text" id="adresse" name="adresse" [(ngModel)]="appartement.adresse" required placeholder="Adresse">
 
       <label class="label-hidden" for="codePostal">Code Postal :</label>
@@ -29,19 +29,12 @@
       <label class="label-hidden" for="surface">Surface (m²) :</label>
       <input type="number" id="surface" name="surface" [(ngModel)]="appartement.surface" required placeholder="Surface en m²">
 
-      <label class="label-hidden" for="loyerMensuel">Loyer Mensuel :</label>
-      <input type="number" id="loyerMensuel" name="loyerMensuel" [(ngModel)]="appartement.loyerMensuel" required placeholder="Loyer mensuel en €">
-
       <label class="label-hidden" for="prix">Prix :</label>
       <input type="number" id="prix" name="prix" [(ngModel)]="appartement.prix" required placeholder="Prix en €">
 
       <div class="container-checkbox">
         <label for="balcon">Balcon :</label>
         <input type="checkbox" id="balcon" name="balcon" [(ngModel)]="appartement.balcon" required placeholder="Balcon (0 - Non, 1 - Oui)">
-      </div>
-      <div class="container-checkbox">
-        <label for="loue">Loué :</label>
-        <input type="checkbox" id="loue" name="loue" [(ngModel)]="appartement.loue" required placeholder="Loué (0 - Non, 1 - Oui)">
       </div>
     </section>
     <button type="submit">Enregistrer</button>

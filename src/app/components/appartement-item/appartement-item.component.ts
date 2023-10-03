@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Appartement, Frais, FrequenceFrais, Mouvement} from "../../models/appartement";
+import { Frais} from "../../models/gestion";
 import {GestionService} from "../../services/gestion.service";
 
 @Component({
@@ -10,57 +10,22 @@ import {GestionService} from "../../services/gestion.service";
 })
 export class AppartementItemComponent implements OnInit{
   images: string[] = [];
-  appartement!: Appartement;
-  mouvements: Mouvement[] = [];
-  mouvementsFormated: any[] = [];
+  appartement : any;
   frais: Frais[] = [];
-  loadingCount = 4;
-  rentabiliteNette = 0;
-  moyenneBenefices = 0;
-  tauxVacanceLocatives = 0;
-  isLoading: boolean = true;
   constructor(
     private gestionService: GestionService,
     private route: ActivatedRoute,
     private router: Router) {
   }
-  imageLoaded() {
-    this.isLoading = false;
-  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const appartementId = Number(params.get('id'));
-      this.gestionService.getTauxVacancesLocativesByAppartementId(appartementId)
-        .subscribe(tauxVacanceLocatives => {
-          this.tauxVacanceLocatives = tauxVacanceLocatives
-          this.loadingCount--;
-        });
-      this.gestionService.getFraisByAppartementId(appartementId)
-        .subscribe(response => {
-          this.frais = response
-        })
-      this.gestionService.getMoyenneBeneficesByAppartementId(appartementId)
-        .subscribe(moyenneBenefices => {
-          this.moyenneBenefices = moyenneBenefices;
-          this.loadingCount--;
-        });
-      this.gestionService.getRentabiliteNetteByAppartementId(appartementId)
-        .subscribe(rentabiliteNette => {
-          this.rentabiliteNette = +rentabiliteNette.toFixed(2);
-          this.loadingCount--;
-        });
-      this.gestionService.getAppartementById(appartementId)
+      this.gestionService.obtenirUnAppartementParId(appartementId)
         .subscribe(appartement => {
           this.appartement = appartement;
-          this.mouvements = this.appartement.mouvements
-          for (const mouvement of this.mouvements){
-            const estEntreeFormatted = this.determineEntreeOrSortie(mouvement.estEntree)
-            const dateFormatted = this.formatDate(mouvement.date)
-            this.mouvementsFormated.push({"date" : dateFormatted, "estEntree" : estEntreeFormatted})
-          }
-          this.images = appartement.images;
-          this.loadingCount--;
+          this.images = this.appartement.images
+
         });
     });
   }
@@ -69,11 +34,11 @@ export class AppartementItemComponent implements OnInit{
     event.target.parentElement.lastChild.firstElementChild.classList.toggle('visible');
   }
 
-  deleteOneAppartement(appartementId: number) {
+  supprimerUnAppartement(appartementId: number) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cet appartement ?")) {
-      this.gestionService.deleteOneAppartement(appartementId).subscribe(
+      this.gestionService.supprimerUnAppartement(appartementId).subscribe(
         () => {
-          console.log('Appartement supprimé avec succès.');
+          console.log('Gestion supprimé avec succès.');
           this.router.navigate(['/dashboard']);
         },
         error => {
@@ -83,18 +48,24 @@ export class AppartementItemComponent implements OnInit{
       );
     }
   }
-  formatDate(dateStr?: string): string {
-    const monthNames = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
-
-    const date = new Date(dateStr ? dateStr : "");
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-
-    return `${day} ${monthNames[month]} ${year}`;
-  }
 
   determineEntreeOrSortie(estEntree?: boolean): string {
     return estEntree ? "Entrée" : "Sortie";
+  }
+}
+
+
+@Pipe({ name: 'customDate' })
+export class CustomDatePipe implements PipeTransform {
+  transform(value: string | null): string {
+    if(value === null){
+      return "Pas de sortie"
+    }
+    const date = new Date(value);
+    const monthNames = [
+      "jan", "fév", "mar", "avr", "mai", "juin",
+      "juil", "août", "sept", "oct", "nov", "déc"
+    ];
+    return `${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
   }
 }

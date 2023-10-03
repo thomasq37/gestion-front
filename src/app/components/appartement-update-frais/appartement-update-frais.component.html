@@ -12,12 +12,12 @@
     </thead>
     <tbody>
     <tr *ngFor="let frais of actualFrais">
-      <td>{{ frais.typeFrais?.nom }}</td>
+      <td>{{ frais.typeFrais.nom }}</td>
       <td>{{ frais.montant }}</td>
       <td>{{ frais.frequence }}</td>
       <td  class="actions-container">
-        <img *ngIf="frais.id" (click)="displayModifyFraisForm(frais.id)" src="assets/img/modify-icon.svg" alt="to change icon"/>
-        <img *ngIf="frais.id" (click)="supprimerUnFrais(frais.id)" src="assets/img/trash-icon.svg" alt="trash icon"/>
+        <img *ngIf="frais.id" (click)="afficherFormModificationFrais(frais.id)" src="assets/img/modify-icon.svg" alt="to change icon"/>
+        <img *ngIf="frais.id" (click)="supprimerUnFraisPourAppartement(appartement.id, frais.id)" src="assets/img/trash-icon.svg" alt="trash icon"/>
       </td>
     </tr>
     </tbody>
@@ -26,7 +26,7 @@
 <div *ngIf="inModification" class="modify-frais">
 
   <h2>Modifier une dépense</h2>
-  <form (ngSubmit)="updateFrais()">
+  <form (ngSubmit)="mettreAJourUnFraisPourAppartement()">
     <label for="modifie-montant">Montant:</label>
     <input type="number" id="modifie-montant" name="modifie-montant" [(ngModel)]="modifieFrais.montant" required placeholder="Montant">
 
@@ -53,7 +53,7 @@
 <div *ngIf="!inModification"  class="new-frais">
 
   <h2>Ajouter une dépense</h2>
-  <form (ngSubmit)="addFraisToAppartement()">
+  <form (ngSubmit)="ajouterUnFraisPourAppartement()">
     <label for="new-montant">Montant:</label>
     <input type="number" id="new-montant" name="new-montant" [(ngModel)]="nouveauFrais.montant" required placeholder="Montant">
 
@@ -69,9 +69,10 @@
       <option value="MENSUELLE">Mensuelle</option>
       <option value="TRIMESTRIELLE">Trimestrielle</option>
       <option value="ANNUELLE">Annuelle</option>
+      <option value="PONCTUELLE">Ponctuelle</option>
     </select>
 
-    <button class="{{formIsValid() ? '' : 'disabled'}}" type="submit" [disabled]="!formIsValid()">Ajouter</button>
+    <button type="submit">Ajouter</button>
   </form>
 </div>
 <app-footer></app-footer>
