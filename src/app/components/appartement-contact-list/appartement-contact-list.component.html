@@ -1,7 +1,10 @@
 <section class="appartement-contact-list">
     <div class="container">
-        <div>
-            <h2>Contacts</h2>
+        <div class="custom-card">
+            <div class="custom-card-header">
+                <h2>Contacts</h2>
+                <a *ngIf="!isEditable" [routerLink]="['/appartement/' +  appartementId + '/contacts']">Modifier</a>
+            </div>
             <table>
                 <thead>
                 <tr>

@@ -2,14 +2,30 @@
   margin-bottom: 2rem;
   margin-top: 2rem;
   .container{
-    div{
+    .custom-card{
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 1rem;
       border: 1px solid #ccc;
       border-radius: 4px;
-      h2{
-        font-size: .9rem;
+      .custom-card-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h2{
+          font-size: .9rem;
+        }
+        a{
+          padding: .5rem;
+          background-color: #143b86;
+          border-radius: 4px;
+          color: white;
+          text-decoration: none;
+          font-size: .8rem;
+          margin: 0;
+          height: max-content;
+        }
       }
+
       table{
         width: 100%;
         thead, tbody, tfoot, tr, td, th {
