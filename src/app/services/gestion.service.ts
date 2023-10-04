@@ -19,11 +19,16 @@ export class GestionService {
   // UTILISATEURS
 
   obtenirAdressesAppartementsParUserId(userId: string | null): Observable<Appartement[]> {
-    return this.http.get<Appartement[]>(this.apiUrl + '/utilisateurs/'+ userId + "/appartements")
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements`;
+    return this.http.get<Appartement[]>(url)
   }
 
   // APPARTEMENT
 
+  getAppartmentByUserIdAndApartmentId(userId: string | null, apartmentId: number): Observable<Appartement> {
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${apartmentId}`;
+    return this.http.get<Appartement>(url);
+  }
   obtenirUnAppartementParId(id: number): Observable<Appartement>{
     return this.http.get<Appartement>(this.urlAppartements + id)
   }

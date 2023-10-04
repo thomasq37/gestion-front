@@ -21,12 +21,14 @@ export class AppartementItemComponent implements OnInit{
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const appartementId = Number(params.get('id'));
-      this.gestionService.obtenirUnAppartementParId(appartementId)
+      this.gestionService.getAppartmentByUserIdAndApartmentId(localStorage.getItem('userId'), appartementId)
         .subscribe(appartement => {
           this.appartement = appartement;
           this.images = this.appartement.images
-
-        });
+        },
+          error => {
+            this.router.navigate(['/dashboard']);
+          });
     });
   }
 
