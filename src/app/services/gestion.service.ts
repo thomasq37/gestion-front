@@ -10,7 +10,7 @@ import {environment} from "../../environments/environment";
 export class GestionService {
   private apiUrl = `${environment.apiUrl}`;
   private urlAppartements  = this.apiUrl + '/api/appartements/'
-  private urlAppartementOverview  = this.urlAppartements +  'adresses'
+  private urlAppartementByUserOverview  = this.urlAppartements +  'adresses/'
   private urlTypeFrais = this.apiUrl + '/api/type-frais/'
   contactAddedSubject = new Subject<Contact>();
   contactUpdatedSubject = new Subject<Contact>();
@@ -18,8 +18,12 @@ export class GestionService {
   constructor(private http: HttpClient) { }
 
   // APPARTEMENT
-  obtenirToutesLesAdressesAppartements(): Observable<AdresseDTO[]> {
+  /*obtenirToutesLesAdressesAppartements(): Observable<AdresseDTO[]> {
     return this.http.get<AdresseDTO[]>(this.urlAppartementOverview);
+  }*/
+
+  obtenirAdressesAppartementsParUserId(userId: string | null): Observable<AdresseDTO[]> {
+    return this.http.get<AdresseDTO[]>(this.urlAppartementByUserOverview + userId)
   }
   obtenirUnAppartementParId(id: number): Observable<Appartement>{
     return this.http.get<Appartement>(this.urlAppartements + id)

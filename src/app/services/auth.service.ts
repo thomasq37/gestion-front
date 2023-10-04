@@ -16,10 +16,14 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(this.urlLogin, { username, password }, { responseType: 'text' }).pipe(
-      tap(token => {
-        if (token) {
-          localStorage.setItem('auth_token', token);
+    return this.http.post(this.urlLogin, { username, password }, { responseType: 'json' }).pipe(
+      tap(credentials => {
+        if (credentials) {
+
+          console.log(localStorage.getItem('app_user_id'))
+
+          localStorage.setItem('auth_token', (credentials as any).token);
+          localStorage.setItem('app_user_id', (credentials as any).appUserId);
           this.router.navigate(['/dashboard']); // Redirect to dashboard page
 
         }
@@ -29,6 +33,8 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('auth_token'); // Remove the authentication token
+    localStorage.removeItem('app_user_id'); // Remove the authentication token
+    console.log(localStorage.getItem('app_user_id'))
     this.router.navigate(['/login']); // Redirect to login page
   }
   loginRedirection() {

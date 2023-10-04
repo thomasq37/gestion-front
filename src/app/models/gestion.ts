@@ -1,3 +1,5 @@
+import {User} from "../services/auth.service";
+
 export interface Appartement {
   id:number;
   numero: number;
@@ -15,7 +17,14 @@ export interface Appartement {
   fraisFixe: Frais[];
   images: string[];
   periodLocation: PeriodLocation[];
+  appUser: User
 }
+
+export interface AppUser {
+  id: number;
+  pseudo: string;
+}
+
 export interface Contact{
   id: number
   pseudo: string;
