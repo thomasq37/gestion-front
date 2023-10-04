@@ -12,8 +12,7 @@ export class GestionService {
   private urlAppartements  = this.apiUrl + '/api/appartements/'
   private urlAppartementOverview  = this.urlAppartements +  'adresses'
   private urlTypeFrais = this.apiUrl + '/api/type-frais/'
-  private contactAddedSubject = new BehaviorSubject<Contact | null>(null);
-  contactAdded$ = this.contactAddedSubject.asObservable();
+  contactAddedSubject = new Subject<Contact>();
   contactUpdatedSubject = new Subject<Contact>();
 
   constructor(private http: HttpClient) { }
@@ -81,10 +80,6 @@ export class GestionService {
 
   obtenirContactsPourAppartement(appartementId: number): Observable<Contact[]>{
     return this.http.get<Contact[]>(this.urlAppartements + appartementId + "/contacts")
-  }
-
-  notifyContactAdded(contact: Contact) {
-    this.contactAddedSubject.next(contact);
   }
   ajouterUnContactPourAppartement(appartementId: number, nouveauContact: Contact): Observable<any>{
     return this.http.post(this.urlAppartements + appartementId + "/contacts", nouveauContact)

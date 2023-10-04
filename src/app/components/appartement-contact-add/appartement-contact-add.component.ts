@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup, Validators} from "@angular/forms";
 import {FormControl} from "@angular/forms";
 import {GestionService} from "../../services/gestion.service";
-import {ActivatedRoute, Router} from "@angular/router";
 import {Contact} from "../../models/gestion";
 
 @Component({
@@ -29,7 +28,7 @@ export class AppartementContactAddComponent implements OnInit{
     const contact: Contact = this.contactForm.value;
     this.gestionService.ajouterUnContactPourAppartement(this.appartementId, contact).subscribe(contact => {
         console.log('Contact ajouté:', contact);
-        this.gestionService.notifyContactAdded(contact);
+        this.gestionService.contactAddedSubject.next(contact);
         this.contactForm.reset()
       },
       (error) => {

@@ -17,11 +17,12 @@ export class AppartementContactListComponent {
 
 
   private subscription!: Subscription;
+  private updateSubscription!: Subscription;
 
   constructor(private gestionService: GestionService) {}
 
   ngOnInit() {
-    this.gestionService.contactUpdatedSubject.subscribe(
+    this.updateSubscription = this.gestionService.contactUpdatedSubject.subscribe(
       (updatedContact: Contact) => {
         const index = this.appartementContacts.findIndex(c => c.id === updatedContact.id);
         if (index !== -1) {
@@ -29,7 +30,7 @@ export class AppartementContactListComponent {
         }
       }
     );
-    this.subscription = this.gestionService.contactAdded$.subscribe(contact => {
+    this.subscription = this.gestionService.contactAddedSubject.subscribe(contact => {
       if (contact) {
         this.appartementContacts.push(contact);
       }
@@ -47,6 +48,7 @@ export class AppartementContactListComponent {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.updateSubscription.unsubscribe()
   }
 
   onUpdateContact(contact: Contact) {
