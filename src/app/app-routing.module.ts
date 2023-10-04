@@ -11,9 +11,11 @@ import {AuthGuard} from "./guards/auth.guard";
 import {AppartementUpdatePeriodesComponent} from "./components/appartement-update-periodes/appartement-update-periodes.component";
 import {AppartementContactManageComponent} from "./components/appartement-contact-manage/appartement-contact-manage.component";
 import {AppartementContactAddComponent} from "./components/appartement-contact-add/appartement-contact-add.component";
+import {UnauthorizedComponent} from "./components/unauthorized/unauthorized.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'unauthorized', component: UnauthorizedComponent },
   { path: 'login', component: LoginComponent },
   { path: 'create', component: CreateUserComponent, pathMatch: 'full'  },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -24,7 +26,6 @@ const routes: Routes = [
   { path: 'appartement/:id/contacts/add', component: AppartementContactAddComponent, canActivate: [AuthGuard] },
   { path: 'modifier-appart/:id', component: UpdateAppartementComponent, canActivate: [AuthGuard]},
   { path: 'modifier-appart-frais/:id', component: AppartementUpdateFraisComponent, canActivate: [AuthGuard]},
-
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

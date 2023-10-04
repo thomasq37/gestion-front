@@ -23,7 +23,7 @@ export class AuthService {
           console.log(localStorage.getItem('app_user_id'))
 
           localStorage.setItem('auth_token', (credentials as any).token);
-          localStorage.setItem('app_user_id', (credentials as any).appUserId);
+          localStorage.setItem('userToken', (credentials as any).userToken);
           this.router.navigate(['/dashboard']); // Redirect to dashboard page
 
         }
@@ -33,8 +33,8 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('auth_token'); // Remove the authentication token
-    localStorage.removeItem('app_user_id'); // Remove the authentication token
-    console.log(localStorage.getItem('app_user_id'))
+    localStorage.removeItem('userToken'); // Remove the authentication token
+    console.log(localStorage.getItem('userToken'))
     this.router.navigate(['/login']); // Redirect to login page
   }
   loginRedirection() {

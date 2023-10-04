@@ -23,6 +23,7 @@ import { AppartementContactListComponent } from './components/appartement-contac
 import { AppartementContactManageComponent } from './components/appartement-contact-manage/appartement-contact-manage.component';
 import { AppartementContactAddComponent } from './components/appartement-contact-add/appartement-contact-add.component';
 import { AppartementContactUpdateComponent } from './components/appartement-contact-update/appartement-contact-update.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { AppartementContactUpdateComponent } from './components/appartement-cont
     AppartementContactListComponent,
     AppartementContactManageComponent,
     AppartementContactAddComponent,
-    AppartementContactUpdateComponent
+    AppartementContactUpdateComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,

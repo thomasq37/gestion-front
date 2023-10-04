@@ -17,12 +17,13 @@ export interface Appartement {
   fraisFixe: Frais[];
   images: string[];
   periodLocation: PeriodLocation[];
-  appUser: User
+  appUser: AppUser
 }
 
 export interface AppUser {
   id: number;
   pseudo: string;
+  userToken: string;
 }
 
 export interface Contact{

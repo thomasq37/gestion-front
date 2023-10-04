@@ -25,6 +25,9 @@ export class GestionService {
   obtenirAdressesAppartementsParUserId(userId: string | null): Observable<AdresseDTO[]> {
     return this.http.get<AdresseDTO[]>(this.urlAppartementByUserOverview + userId)
   }
+  obtenirAdressesAppartementsParUserToken(userToken: string | null): Observable<AdresseDTO[]> {
+    return this.http.get<AdresseDTO[]>(this.urlAppartementByUserOverview + userToken)
+  }
   obtenirUnAppartementParId(id: number): Observable<Appartement>{
     return this.http.get<Appartement>(this.urlAppartements + id)
   }
