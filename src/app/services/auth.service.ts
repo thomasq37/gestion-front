@@ -20,10 +20,10 @@ export class AuthService {
       tap(credentials => {
         if (credentials) {
 
-          console.log(localStorage.getItem('app_user_id'))
-
           localStorage.setItem('auth_token', (credentials as any).token);
           localStorage.setItem('userToken', (credentials as any).userToken);
+          localStorage.setItem('userId', (credentials as any).userId);
+
           this.router.navigate(['/dashboard']); // Redirect to dashboard page
 
         }
@@ -34,7 +34,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('auth_token'); // Remove the authentication token
     localStorage.removeItem('userToken'); // Remove the authentication token
-    console.log(localStorage.getItem('userToken'))
+    localStorage.removeItem('userId'); // Remove the authentication token
     this.router.navigate(['/login']); // Redirect to login page
   }
   loginRedirection() {

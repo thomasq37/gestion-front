@@ -16,7 +16,7 @@ export class AppartementListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gestionService.obtenirAdressesAppartementsParUserToken(localStorage.getItem('userToken'))
+    this.gestionService.obtenirAdressesAppartementsParUserId(localStorage.getItem('userId'))
       .subscribe(appartementListOverview => {
         this.appartementListOverview = appartementListOverview;
 

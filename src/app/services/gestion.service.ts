@@ -18,8 +18,8 @@ export class GestionService {
 
   // UTILISATEURS
 
-  obtenirAdressesAppartementsParUserToken(userToken: string | null): Observable<Appartement[]> {
-    return this.http.get<Appartement[]>(this.apiUrl + '/utilisateurs/'+ userToken + "/appartements")
+  obtenirAdressesAppartementsParUserId(userId: string | null): Observable<Appartement[]> {
+    return this.http.get<Appartement[]>(this.apiUrl + '/utilisateurs/'+ userId + "/appartements")
   }
 
   // APPARTEMENT
