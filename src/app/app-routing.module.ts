@@ -9,6 +9,8 @@ import {LoginComponent} from "./components/login/login.component";
 import {CreateUserComponent} from "./components/create-user/create-user.component";
 import {AuthGuard} from "./guards/auth.guard";
 import {AppartementUpdatePeriodesComponent} from "./components/appartement-update-periodes/appartement-update-periodes.component";
+import {AppartementContactManageComponent} from "./components/appartement-contact-manage/appartement-contact-manage.component";
+import {AppartementContactAddComponent} from "./components/appartement-contact-add/appartement-contact-add.component";
 
 const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -18,7 +20,8 @@ const routes: Routes = [
   { path: 'appartement/:id', component: AppartementItemComponent, canActivate: [AuthGuard] },
   { path: 'ajouter-appart', component: AddAppartementComponent, canActivate: [AuthGuard]},
   { path: 'appartement/:id/periodes', component: AppartementUpdatePeriodesComponent, canActivate: [AuthGuard] },
-
+  { path: 'appartement/:id/contacts', component: AppartementContactManageComponent, canActivate: [AuthGuard] },
+  { path: 'appartement/:id/contacts/add', component: AppartementContactAddComponent, canActivate: [AuthGuard] },
   { path: 'modifier-appart/:id', component: UpdateAppartementComponent, canActivate: [AuthGuard]},
   { path: 'modifier-appart-frais/:id', component: AppartementUpdateFraisComponent, canActivate: [AuthGuard]},
 

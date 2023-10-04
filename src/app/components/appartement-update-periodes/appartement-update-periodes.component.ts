@@ -16,11 +16,14 @@ export class AppartementUpdatePeriodesComponent {
   newPeriode: PeriodLocation = <PeriodLocation>{};
   inModification: boolean = false;
   inCreation:boolean = true
-  fraisParPeriodeIsVisible: boolean = false;
+  fraisParPeriodeCreationIsVisible: boolean = false;
   fraisParPeriode: Frais[] = [];
   nouveauFrais: Frais = <Frais>{}
   nouveauFraisSelectedTypeFrais!: any;
   typesFrais: TypeFrais[] = [];
+  fraisParPeriodeModifyIsVisible: any;
+  modifieFrais:  Frais = <Frais>{};
+  modifieFraisSelectedTypeFrais!: any;
 
   constructor(
     private gestionService: GestionService,
@@ -51,11 +54,14 @@ export class AppartementUpdatePeriodesComponent {
     this.modifiePeriode = foundPeriode;
     console.log(this.modifiePeriode)
     this.inModification = true;
+    this.inCreation = false
+    this.fraisParPeriodeCreationIsVisible = false
   }
 
   supprimerUnePeriodePourAppartement(appartementId :number, periodeId: number) {
     this.inModification = false
-    if (confirm("Êtes-vous sûr de vouloir supprimer ce frais ?")) {
+    this.inCreation = true
+    if (confirm("Êtes-vous sûr de vouloir supprimer ce frais ? Tout les frais associés seront également supprimés.")) {
       this.gestionService.supprimerUnePeriodePourAppartement(appartementId, periodeId).subscribe(
         () => {
           // Supprimer la periode de la liste periodLocationList
@@ -107,10 +113,8 @@ export class AppartementUpdatePeriodesComponent {
   }
 
   afficherFraisParPeriode(periodeId: number, fraisFixe: Frais[]) {
-
     this.fraisParPeriode = fraisFixe
-
-    this.fraisParPeriodeIsVisible = true
+    this.fraisParPeriodeCreationIsVisible = true
     this.inCreation = false
     this.currentPeriodeId = periodeId
   }
@@ -118,10 +122,15 @@ export class AppartementUpdatePeriodesComponent {
   ajouterUnFraisPourPeriode() {
     this.nouveauFraisSelectedTypeFrais = this.typesFrais.find(typeFrais => this.nouveauFraisSelectedTypeFrais == typeFrais.id)
     this.nouveauFrais.typeFrais = this.nouveauFraisSelectedTypeFrais;
-    this.gestionService.ajouterUnFraisPourPeriode(this.appartementId, this.currentPeriodeId, this.nouveauFrais).subscribe(
+    this.gestionService.ajouterUnFraisPourPeriode(this.currentPeriodeId, this.nouveauFrais).subscribe(
       (response) => {
         console.log('Nouveau frais ajouté :', response);
         this.fraisParPeriode.push(response)
+        const p = this.periodLocationList.find(period => period.id === this.currentPeriodeId)
+        if(p !== undefined){
+          p.frais = this.fraisParPeriode
+          history.replaceState(this.periodLocationList, '', location.href);
+        }
         this.nouveauFrais = <Frais>{};
       },
       (error) => {
@@ -130,8 +139,74 @@ export class AppartementUpdatePeriodesComponent {
     );
   }
 
+  afficherFormModificationFraisPourPeriode(fraisId: number) {
+
+    const foundFrais = this.fraisParPeriode.find(frais => fraisId == frais.id);
+    if (!foundFrais) {
+      throw new Error("Frais non trouvé avec l'ID: " + fraisId);
+    }
+    this.modifieFrais = foundFrais;
+    this.modifieFraisSelectedTypeFrais = this.modifieFrais.typeFrais.id
+    this.fraisParPeriodeModifyIsVisible = true
+    this.fraisParPeriodeCreationIsVisible = false
+    this.inCreation = false
+  }
+
+  mettreAJourUnFraisPourPeriode() {
+    this.modifieFraisSelectedTypeFrais = this.typesFrais.find(typeFrais => this.modifieFraisSelectedTypeFrais == typeFrais.id)
+    this.modifieFrais.typeFrais = this.modifieFraisSelectedTypeFrais
+    this.gestionService.mettreAJourUnFraisPourPeriode(this.currentPeriodeId, this.modifieFrais).subscribe(
+      (response) => {
+        console.log('Frais modifié :', response);
+        const index = this.fraisParPeriode.findIndex(frais => frais.id === response.id);
+        if (index !== -1) {
+          this.fraisParPeriode[index] = response;
+          const p = this.periodLocationList.find(period => period.id === this.currentPeriodeId)
+          if(p !== undefined){
+            p.frais = this.fraisParPeriode
+            history.replaceState(this.periodLocationList, '', location.href);
+          }
+          this.inModification = false;
+        }
+        else{
+          alert("Une erreur est survenue lors de la modification de l'appartement.");
+        }
+
+      },
+      (error) => {
+        alert("Une erreur est survenue lors de la modification de l'appartement.");
+        console.error('Erreur lors de la modification de l\'appartement :', error);
+      }
+    );
+  }
+
+  supprimerUnFraisPourPeriode(periodeId: number, fraisId :number) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer ce frais ?")) {
+      this.gestionService.supprimerUnFraisPourPeriode(periodeId, fraisId).subscribe(
+        () => {
+          // Supprimer le frais de la liste actualFrais*
+          const p = this.periodLocationList.find(period => period.id === periodeId)
+          this.fraisParPeriode = this.fraisParPeriode.filter(frais => frais.id !== fraisId);
+          if(p !== undefined){
+            p.frais = this.fraisParPeriode
+            history.replaceState(this.periodLocationList, '', location.href);
+          }
+          console.log('Frais supprimé avec succès.');
+        },
+        error => {
+          console.error('Erreur lors de la suppression du frais :', error);
+        }
+      );
+    }
+  }
+
   cancelCreation() {
-    this.fraisParPeriodeIsVisible = false
+    this.fraisParPeriodeCreationIsVisible = false
+    this.inCreation = true
+  }
+
+  cancelModification() {
+    this.inModification = false
     this.inCreation = true
   }
 }

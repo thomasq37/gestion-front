@@ -4,7 +4,6 @@
 </div>
   <section class="appartement-item" *ngIf="appartement">
 
-    <div class="container">
       <div class="appartement-baniere-info">
         <!--Titre-->
         <h2>Recherche « {{appartement.numero}} {{appartement.adresse}} »</h2>
@@ -140,9 +139,10 @@
         <!--Contacts-->
         <div class="container-title">
           <h2>Contacts</h2>
+          <a [routerLink]="['/appartement/' +  appartement.id + '/contacts']">Modifier</a>
         </div>
+        <app-appartement-contact-list [appartementContacts]="appartement.contacts"></app-appartement-contact-list>
       </div>
       <button *ngIf="appartement.id" (click)="supprimerUnAppartement(appartement.id)" class="appartement-item-btn-delete btn bg-danger">Suprimmer l'appartement</button>
-    </div>
   </section>
 <app-footer></app-footer>

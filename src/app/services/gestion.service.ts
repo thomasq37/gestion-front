@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Frais, TypeFrais, AdresseDTO, Appartement, PeriodLocation} from "../models/gestion";
-import {Observable} from "rxjs";
+import {Frais, TypeFrais, AdresseDTO, Appartement, PeriodLocation, Contact} from "../models/gestion";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 
@@ -12,6 +12,9 @@ export class GestionService {
   private urlAppartements  = this.apiUrl + '/api/appartements/'
   private urlAppartementOverview  = this.urlAppartements +  'adresses'
   private urlTypeFrais = this.apiUrl + '/api/type-frais/'
+  private contactAddedSubject = new BehaviorSubject<Contact | null>(null);
+  contactAdded$ = this.contactAddedSubject.asObservable();
+  contactUpdatedSubject = new Subject<Contact>();
 
   constructor(private http: HttpClient) { }
 
@@ -63,11 +66,31 @@ export class GestionService {
     return this.http.post(this.urlAppartements + appartementId + "/periodes", newPeriode)
   }
 
-  ajouterUnFraisPourPeriode(appartementId: number, periodeId: number, nouveauFrais: Frais) : Observable<any> {
-    console.log(appartementId)
-    console.log(periodeId)
-    console.log(nouveauFrais)
-    return this.http.post(this.urlAppartements + appartementId + "/periodes/" + periodeId + "/frais", nouveauFrais)
-
+  ajouterUnFraisPourPeriode(periodeId: number, nouveauFrais: Frais) : Observable<any> {
+    return this.http.post(this.urlAppartements + "periodes/" + periodeId + "/frais", nouveauFrais)
   }
+
+  mettreAJourUnFraisPourPeriode(periodeId: number, modifieFrais: Frais) :Observable<any>{
+    return this.http.put(this.urlAppartements +"periodes/" + periodeId + "/frais/" + modifieFrais.id, modifieFrais)
+  }
+  supprimerUnFraisPourPeriode(periodeId: number, fraisId: number): Observable<any> {
+    return this.http.delete(this.urlAppartements  +"periodes/" + periodeId + "/frais/" + fraisId);
+  }
+
+  // CONTACTS
+
+  obtenirContactsPourAppartement(appartementId: number): Observable<Contact[]>{
+    return this.http.get<Contact[]>(this.urlAppartements + appartementId + "/contacts")
+  }
+
+  notifyContactAdded(contact: Contact) {
+    this.contactAddedSubject.next(contact);
+  }
+  ajouterUnContactPourAppartement(appartementId: number, nouveauContact: Contact): Observable<any>{
+    return this.http.post(this.urlAppartements + appartementId + "/contacts", nouveauContact)
+  }
+  mettreAJourUnContactPourAppartement(appartementId: number, modifieContact: Contact): Observable<any> {
+    return this.http.put(this.urlAppartements + appartementId + "/contacts/" + modifieContact.id, modifieContact)
+  }
+
 }

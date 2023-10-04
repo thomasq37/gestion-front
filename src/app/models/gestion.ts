@@ -3,6 +3,7 @@ export interface Appartement {
   numero: number;
   adresse: string;
   codePostal: string;
+  contacts: Contact[]
   ville: string;
   nombrePieces: number;
   surface: number;
@@ -15,7 +16,13 @@ export interface Appartement {
   images: string[];
   periodLocation: PeriodLocation[];
 }
-
+export interface Contact{
+  id: number
+  pseudo: string;
+  email: string;
+  phoneNumber: string;
+  appartement: Appartement;
+}
 export interface AdresseDTO {
   id: number;
   numero: number;
@@ -43,7 +50,7 @@ export interface Frais {
   montant: number;
   frequence: 'MENSUELLE' | 'TRIMESTRIELLE' | 'ANNUELLE' | 'PONCTUELLE';
   appartement?: Appartement;
-  periodLocationId?: number;
+  periodLocation?: PeriodLocation;
   typeFrais: TypeFrais;
 }
 

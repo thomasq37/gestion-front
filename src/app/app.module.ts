@@ -19,6 +19,10 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {AuthGuard} from "./guards/auth.guard";
 import { AppartementUpdatePeriodesComponent } from './components/appartement-update-periodes/appartement-update-periodes.component';
+import { AppartementContactListComponent } from './components/appartement-contact-list/appartement-contact-list.component';
+import { AppartementContactManageComponent } from './components/appartement-contact-manage/appartement-contact-manage.component';
+import { AppartementContactAddComponent } from './components/appartement-contact-add/appartement-contact-add.component';
+import { AppartementContactUpdateComponent } from './components/appartement-contact-update/appartement-contact-update.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +37,11 @@ import { AppartementUpdatePeriodesComponent } from './components/appartement-upd
     LoginComponent,
     CreateUserComponent,
     CustomDatePipe,
-    AppartementUpdatePeriodesComponent
+    AppartementUpdatePeriodesComponent,
+    AppartementContactListComponent,
+    AppartementContactManageComponent,
+    AppartementContactAddComponent,
+    AppartementContactUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +51,7 @@ import { AppartementUpdatePeriodesComponent } from './components/appartement-upd
     FormsModule,
     ReactiveFormsModule,
     NgbCarouselModule,
+    ReactiveFormsModule,
   ],
   providers: [
     AuthGuard,
