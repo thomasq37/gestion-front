@@ -9,6 +9,7 @@
                 <th>Sortie</th>
                 <th>AirBnB</th>
                 <th>Prix</th>
+                <th>Frais</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -18,7 +19,10 @@
                 <td>{{ periode.estSortie | customDate }}</td>
                 <td>{{ periode.locVac ? 'Oui' : 'Non' }}</td>
                 <td>{{ periode.prix}}€ {{ periode.locVac ? '/jour' : '/mois'}}</td>
-                <td  class="actions-container">
+                <td (click)="afficherFraisParPeriode(periode.id, periode.frais)" class="frais-view logo-container">
+                  Afficher
+                </td>
+                <td  class="actions-container logo-container">
                     <img *ngIf="periode.id" (click)="afficherFormModificationPeriode(periode.id)" src="assets/img/modify-icon.svg" alt="to change icon"/>
                     <img *ngIf="periode.id" (click)="supprimerUnePeriodePourAppartement(periode.appartementId, periode.id)" src="assets/img/trash-icon.svg" alt="trash icon"/>
                 </td>
@@ -26,6 +30,60 @@
 
             </tbody>
         </table>
+    </section>
+    <section class="container-appartement-periode-frais">
+
+      <div *ngIf="fraisParPeriodeIsVisible" class="actual-frais">
+        <h2>Dépenses</h2>
+        <table>
+          <thead>
+          <tr>
+            <th>Type de Frais</th>
+            <th>Montant</th>
+            <th>Fréquence</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let frais of fraisParPeriode">
+            <td>{{ frais.typeFrais.nom }}</td>
+            <td>{{ frais.montant }}</td>
+            <td>{{ frais.frequence }}</td>
+            <td  class="actions-container">
+              <!--<img *ngIf="frais.id" (click)="afficherFormModificationFrais(frais.id)" src="assets/img/modify-icon.svg" alt="to change icon"/>
+              <img *ngIf="frais.id" (click)="supprimerUnFraisPourAppartement(appartement.id, frais.id)" src="assets/img/trash-icon.svg" alt="trash icon"/>
+            --></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="fraisParPeriodeIsVisible">
+        <h2>
+          Ajouter un frais
+        </h2>
+        <form (ngSubmit)="ajouterUnFraisPourPeriode()">
+          <label for="new-montant">Montant:</label>
+          <input type="number" id="new-montant" name="new-montant" [(ngModel)]="nouveauFrais.montant" required placeholder="Montant">
+
+          <label for="new-typeFrais">Type de frais :</label>
+          <select id="new-typeFrais" name="new-typeFrais" [(ngModel)]="nouveauFraisSelectedTypeFrais" required>
+            <option disabled selected value="">Type de frais</option>
+            <option *ngFor="let typeFrais of typesFrais" [value]="typeFrais.id">{{ typeFrais.nom }}</option>
+          </select>
+
+          <label for="new-frequence">Fréquence:</label>
+          <select id="new-frequence" name="new-frequence" [(ngModel)]="nouveauFrais.frequence" required>
+            <option disabled selected value="">Fréquence</option>
+            <option value="MENSUELLE">Mensuelle</option>
+            <option value="TRIMESTRIELLE">Trimestrielle</option>
+            <option value="ANNUELLE">Annuelle</option>
+            <option value="PONCTUELLE">Ponctuelle</option>
+          </select>
+
+          <button type="submit">Ajouter</button>
+          <button (click)="cancelCreation()" type="button">Annuler</button>
+        </form>
+      </div>
     </section>
     <section class="container-appartement-modify-periode">
         <div *ngIf="inModification" class="modify-periode">
@@ -52,7 +110,7 @@
         </div>
     </section>
     <section class="container-appartement-new-periode">
-        <div *ngIf="!inModification" class="new-periode">
+        <div *ngIf="!inModification && inCreation" class="new-periode">
 
             <h2>Ajouter une période</h2>
             <form (ngSubmit)="ajouterUnePeriodePourAppartement()">

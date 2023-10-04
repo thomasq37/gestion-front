@@ -62,4 +62,12 @@ export class GestionService {
   ajouterUnePeriodePourAppartement(appartementId: number, newPeriode: PeriodLocation) : Observable<any> {
     return this.http.post(this.urlAppartements + appartementId + "/periodes", newPeriode)
   }
+
+  ajouterUnFraisPourPeriode(appartementId: number, periodeId: number, nouveauFrais: Frais) : Observable<any> {
+    console.log(appartementId)
+    console.log(periodeId)
+    console.log(nouveauFrais)
+    return this.http.post(this.urlAppartements + appartementId + "/periodes/" + periodeId + "/frais", nouveauFrais)
+
+  }
 }

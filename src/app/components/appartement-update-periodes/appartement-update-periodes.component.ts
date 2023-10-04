@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Frais, PeriodLocation} from "../../models/gestion";
+import {Frais, PeriodLocation, TypeFrais} from "../../models/gestion";
 import {GestionService} from "../../services/gestion.service";
 
 @Component({
@@ -11,9 +11,17 @@ import {GestionService} from "../../services/gestion.service";
 export class AppartementUpdatePeriodesComponent {
   periodLocationList: PeriodLocation[] = [];
   appartementId: number = 0;
+  currentPeriodeId: number = 0;
   modifiePeriode: PeriodLocation = <PeriodLocation>{};
   newPeriode: PeriodLocation = <PeriodLocation>{};
   inModification: boolean = false;
+  inCreation:boolean = true
+  fraisParPeriodeIsVisible: boolean = false;
+  fraisParPeriode: Frais[] = [];
+  nouveauFrais: Frais = <Frais>{}
+  nouveauFraisSelectedTypeFrais!: any;
+  typesFrais: TypeFrais[] = [];
+
   constructor(
     private gestionService: GestionService,
     private route: ActivatedRoute
@@ -25,6 +33,14 @@ export class AppartementUpdatePeriodesComponent {
     this.route.params.subscribe(params => {
       this.appartementId = +params['id'];
     })
+    this.gestionService.obtenirTousLesTypesDeFrais().subscribe(
+      (typesFrais: TypeFrais[]) => {
+        this.typesFrais = typesFrais;
+      },
+      error => {
+        console.error('Erreur lors de la récupération des types de frais :', error);
+      }
+    );
   }
 
   afficherFormModificationPeriode(id : number) {
@@ -88,5 +104,34 @@ export class AppartementUpdatePeriodesComponent {
         console.error('Erreur lors de l\'ajout de la période :', error);
       }
     );
+  }
+
+  afficherFraisParPeriode(periodeId: number, fraisFixe: Frais[]) {
+
+    this.fraisParPeriode = fraisFixe
+
+    this.fraisParPeriodeIsVisible = true
+    this.inCreation = false
+    this.currentPeriodeId = periodeId
+  }
+
+  ajouterUnFraisPourPeriode() {
+    this.nouveauFraisSelectedTypeFrais = this.typesFrais.find(typeFrais => this.nouveauFraisSelectedTypeFrais == typeFrais.id)
+    this.nouveauFrais.typeFrais = this.nouveauFraisSelectedTypeFrais;
+    this.gestionService.ajouterUnFraisPourPeriode(this.appartementId, this.currentPeriodeId, this.nouveauFrais).subscribe(
+      (response) => {
+        console.log('Nouveau frais ajouté :', response);
+        this.fraisParPeriode.push(response)
+        this.nouveauFrais = <Frais>{};
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout du frais :', error);
+      }
+    );
+  }
+
+  cancelCreation() {
+    this.fraisParPeriodeIsVisible = false
+    this.inCreation = true
   }
 }

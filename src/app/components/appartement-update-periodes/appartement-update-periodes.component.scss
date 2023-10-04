@@ -68,28 +68,38 @@ button:hover {
 
 main{
   margin: 1rem;
-  .container-appartement-list-periode{
+  .container-appartement-list-periode, .container-appartement-periode-frais{
     table {
       width: 100%;
       tr{
+        .frais-view{
+          text-decoration: underline;
+          color: #143b86;
+          cursor: pointer;
+        }
+        .logo-container{
+          img{
+            width: 1rem;
+          }
+        }
         .actions-container{
           border: none;
           display: flex;
           justify-content: space-between;
-          img{
-            width: 1rem;
-          }
+
         }
       }
     }
 
     thead, tbody, tfoot, tr, td, th {
-      padding: 1rem;
       border: 1px solid #d7d7d7;
       font-size: .7rem;
+      padding: .2rem;
     }
     @media screen and (min-width: 720px) {
       thead, tbody, tfoot, tr, td, th {
+        padding: 1rem;
+
         font-size: 1rem;
       }
     }
