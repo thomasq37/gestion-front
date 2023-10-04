@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class AuthService {
   private apiUrl = `${environment.apiUrl}`;
-  private urlAuth = this.apiUrl + "/api/auth/"
+  private urlAuth = this.apiUrl + "/auth/"
   private urlLogin = this.urlAuth + 'login'
   private urlCreateUser = this.urlAuth + 'create'
   constructor(private http: HttpClient, private router: Router) {}

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GestionService} from "../../services/gestion.service";
-import {AdresseDTO} from "../../models/gestion";
+import {AdresseDTO, Appartement} from "../../models/gestion";
 import {Router} from "@angular/router";
 
 @Component({
@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./appartement-list.component.scss']
 })
 export class AppartementListComponent implements OnInit {
-  appartementListOverview: AdresseDTO[];
+  appartementListOverview: Appartement[];
 
   constructor(private gestionService: GestionService, private router: Router) {
     this.appartementListOverview = [];

@@ -23,10 +23,6 @@ export class AppartementItemComponent implements OnInit{
       const appartementId = Number(params.get('id'));
       this.gestionService.obtenirUnAppartementParId(appartementId)
         .subscribe(appartement => {
-          if (appartement.appUser.userToken != localStorage.getItem('userToken')) {
-            // Redirect to an unauthorized page or any other page
-            this.router.navigate(['/dashboard']);
-          }
           this.appartement = appartement;
           this.images = this.appartement.images
 
