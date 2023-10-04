@@ -1,6 +1,6 @@
 import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import { Frais} from "../../models/gestion";
+import {Appartement, Frais} from "../../models/gestion";
 import {GestionService} from "../../services/gestion.service";
 
 @Component({
@@ -10,7 +10,7 @@ import {GestionService} from "../../services/gestion.service";
 })
 export class AppartementItemComponent implements OnInit{
   images: string[] = [];
-  appartement : any;
+  appartement!: Appartement;
   frais: Frais[] = [];
   constructor(
     private gestionService: GestionService,

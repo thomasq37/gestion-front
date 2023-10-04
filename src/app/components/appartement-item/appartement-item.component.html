@@ -137,7 +137,7 @@
           </li>
         </ul>
         <!--Contacts-->
-        <app-appartement-contact-list [appartementContacts]="appartement.contacts"></app-appartement-contact-list>
+        <app-appartement-contact-list [appartementId]="appartement.id" [appartementContacts]="appartement.contacts"></app-appartement-contact-list>
       </div>
       <button *ngIf="appartement.id" (click)="supprimerUnAppartement(appartement.id)" class="appartement-item-btn-delete btn bg-danger">Suprimmer l'appartement</button>
   </section>

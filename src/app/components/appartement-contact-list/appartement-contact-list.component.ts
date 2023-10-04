@@ -9,7 +9,7 @@ import {GestionService} from "../../services/gestion.service";
   styleUrls: ['./appartement-contact-list.component.scss']
 })
 export class AppartementContactListComponent {
-  @Input() appartementId: number | undefined;
+  @Input() appartementId!: number;
   @Input() appartementContacts: Contact[] = [];
   @Input() isEditable: boolean = false
   @Output() contactToUpdate = new EventEmitter<Contact>();
