@@ -68,50 +68,9 @@
           </li>
         </ul>
         <!--Frais-->
-        <div class="container-title">
-          <h2>Frais fixes</h2>
-          <a routerLink="/modifier-appart-frais/{{appartement.id}}">Modifier</a>
-        </div>
-        <table class="appartement-list-frais">
-          <thead>
-          <tr>
-            <th>Type de Frais</th>
-            <th>Montant (€)</th>
-            <th>Fréquence</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let f of appartement.fraisFixe">
-            <td>{{ f.typeFrais.nom }}</td>
-            <td>{{ f.montant }}</td>
-            <td>{{ f.frequence }}</td>
-          </tr>
-          </tbody>
-        </table>
+        <app-appartement-frais-list [appartementId]="appartement.id" [appartementFrais]="appartement.fraisFixe"></app-appartement-frais-list>
         <!--Entrées/Sorties-->
-        <div class="container-title">
-          <h2>Entrées / Sorties</h2>
-          <a [routerLink]="['/appartement/' +  appartement.id + '/periodes']" [state]=appartement.periodLocation>Modifier</a>
-        </div>
-        <table class="appartement-list-periode">
-          <thead>
-          <tr>
-            <th>Entrée</th>
-            <th>Sortie</th>
-            <th>AirBnB</th>
-            <th>Prix</th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let m of appartement.periodLocation">
-              <td>{{ m.estEntree | customDate  }}</td>
-              <td>{{ m.estSortie | customDate }}</td>
-              <td>{{ m.locVac ? 'Oui' : 'Non' }}</td>
-              <td>{{ m.prix}}€ {{ m.locVac ? '/jour' : '/mois'}}</td>
-            </tr>
-
-          </tbody>
-        </table>
+        <app-appartement-periode-list [appartementId]="appartement.id" [appartPeriodLocation]="appartement.periodLocation"></app-appartement-periode-list>
         <!--Statistiques-->
         <div class="container-title">
           <h2>Statistiques</h2>

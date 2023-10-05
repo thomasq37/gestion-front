@@ -1,0 +1,71 @@
+.appartement-frais-update{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  .container{
+    form {
+      font-size: .7rem;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+      h2 {
+        font-size: .9rem;
+      }
+
+      div {
+        margin-bottom: 20px;
+
+        label {
+          display: block;
+          margin-bottom: 5px;
+          font-weight: bold;
+
+          span {
+            color: red;
+          }
+        }
+
+        input, select {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+
+          &:focus {
+            outline: 2px solid #143b86; // Couleur de mise au point bleue
+          }
+        }
+      }
+      button.disabled{
+        opacity: .7;
+        background-color: gray;
+      }
+      button {
+        background-color: #143b86;
+        margin-right: .5rem;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-bottom: 1rem;
+
+        &:hover {
+          background-color: #0056b3; // Une teinte plus foncée pour le survol
+        }
+      }
+
+      p {
+        color: #777;
+
+        span {
+          color: red;
+        }
+      }
+    }
+  }
+}

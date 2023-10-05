@@ -1,0 +1,31 @@
+<section class="appartement-contact-list">
+    <div class="container">
+        <div class="custom-card">
+            <div class="custom-card-header">
+                <h2>Contacts</h2>
+                <a *ngIf="!isEditable" [routerLink]="['/appartement/' +  appartementId + '/contacts']">Modifier</a>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>Email</th>
+                    <td>Téléphone</td>
+                    <td *ngIf="isEditable">Actions</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let contact of appartementContacts">
+                    <td>{{ contact.pseudo }}</td>
+                    <td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
+                    <td><a href="tel:{{ contact.phoneNumber }}">{{ contact.phoneNumber }}</a></td>
+                    <td *ngIf="isEditable"  class="actions-container">
+                        <img src="../../../../assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdateContact(contact)"/>
+                        <img src="../../../../assets/img/trash-icon.svg" alt="trash icon" (click)="onDeleteContact(contact.id)"/>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

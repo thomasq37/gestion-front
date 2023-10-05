@@ -13,17 +13,23 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AddAppartementComponent } from './components/add-appartement/add-appartement.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { UpdateAppartementComponent } from './components/update-appartement/update-appartement.component';
-import { AppartementUpdateFraisComponent } from './components/appartement-update-frais/appartement-update-frais.component';
 import { LoginComponent } from './components/login/login.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {AuthGuard} from "./guards/auth.guard";
-import { AppartementUpdatePeriodesComponent } from './components/appartement-update-periodes/appartement-update-periodes.component';
-import { AppartementContactListComponent } from './components/appartement-contact-list/appartement-contact-list.component';
-import { AppartementContactManageComponent } from './components/appartement-contact-manage/appartement-contact-manage.component';
-import { AppartementContactAddComponent } from './components/appartement-contact-add/appartement-contact-add.component';
-import { AppartementContactUpdateComponent } from './components/appartement-contact-update/appartement-contact-update.component';
+import { AppartementContactListComponent } from './components/appartement-contact/appartement-contact-list/appartement-contact-list.component';
+import { AppartementContactManageComponent } from './components/appartement-contact/appartement-contact-manage/appartement-contact-manage.component';
+import { AppartementContactAddComponent } from './components/appartement-contact/appartement-contact-add/appartement-contact-add.component';
+import { AppartementContactUpdateComponent } from './components/appartement-contact/appartement-contact-update/appartement-contact-update.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { AppartementFraisListComponent } from './components/appartement-frais/appartement-frais-list/appartement-frais-list.component';
+import { AppartementFraisManageComponent } from './components/appartement-frais/appartement-frais-manage/appartement-frais-manage.component';
+import { AppartementFraisAddComponent } from './components/appartement-frais/appartement-frais-add/appartement-frais-add.component';
+import { AppartementFraisUpdateComponent } from './components/appartement-frais/appartement-frais-update/appartement-frais-update.component';
+import { AppartementPeriodeListComponent } from './components/appartement-periode/appartement-periode-list/appartement-periode-list.component';
+import { AppartementPeriodeManageComponent } from './components/appartement-periode/appartement-periode-manage/appartement-periode-manage.component';
+import { AppartementPeriodeAddComponent } from './components/appartement-periode/appartement-periode-add/appartement-periode-add.component';
+import { AppartementPeriodeUpdateComponent } from './components/appartement-periode/appartement-periode-update/appartement-periode-update.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,16 +40,22 @@ import { UnauthorizedComponent } from './components/unauthorized/unauthorized.co
     FooterComponent,
     AddAppartementComponent,
     UpdateAppartementComponent,
-    AppartementUpdateFraisComponent,
     LoginComponent,
     CreateUserComponent,
     CustomDatePipe,
-    AppartementUpdatePeriodesComponent,
     AppartementContactListComponent,
     AppartementContactManageComponent,
     AppartementContactAddComponent,
     AppartementContactUpdateComponent,
-    UnauthorizedComponent
+    UnauthorizedComponent,
+    AppartementFraisListComponent,
+    AppartementFraisManageComponent,
+    AppartementFraisAddComponent,
+    AppartementFraisUpdateComponent,
+    AppartementPeriodeListComponent,
+    AppartementPeriodeManageComponent,
+    AppartementPeriodeAddComponent,
+    AppartementPeriodeUpdateComponent
   ],
   imports: [
     BrowserModule,

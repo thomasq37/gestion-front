@@ -1,0 +1,10 @@
+<app-header></app-header>
+<app-appartement-frais-list
+        [isEditable]="true"
+        [appartementId]="appartementId"
+        (fraisToUpdate)="setFraisToUpdate($event)"
+        >
+</app-appartement-frais-list>
+<app-appartement-frais-add *ngIf="!isUpdateMode" [typesFrais]="typesFrais" [appartementId]="appartementId"></app-appartement-frais-add>
+<app-appartement-frais-update *ngIf="isUpdateMode" [typesFrais]="typesFrais" [frais]="fraisToUpdate" (cancelUpdateEvent)="handleCancelUpdate()"></app-appartement-frais-update>
+<app-footer></app-footer>

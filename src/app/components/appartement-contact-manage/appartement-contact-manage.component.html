@@ -1,8 +1,0 @@
-<app-header></app-header>
-<div class="container">
-    <h2>Contacts</h2>
-</div>
-<app-appartement-contact-list [isEditable]="true" [appartementId]="appartementId" (contactToUpdate)="setContactToUpdate($event)"></app-appartement-contact-list>
-<app-appartement-contact-add *ngIf="!isUpdateMode" [appartementId]="appartementId"></app-appartement-contact-add>
-<app-appartement-contact-update *ngIf="isUpdateMode" [contact]="contactToUpdate" (cancelUpdateEvent)="handleCancelUpdate()"></app-appartement-contact-update>
-<app-footer></app-footer>
