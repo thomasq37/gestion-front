@@ -5,11 +5,23 @@
 
 header {
   position: relative;
-  .burger-icon {
-    cursor: pointer;
-    width: 1.5rem;
-    margin: 2.1rem;
+  .actions-container{
+    display: flex;
+    justify-content: space-between;
+    button.switched {
+      order: 1;
+    }
+    button{
+      border:none;
+      background-color: #FCFCFC;
+    }
+    img {
+      cursor: pointer;
+      width: 1.5rem;
+      margin: 2.1rem;
+    }
   }
+
   background-color: #143b86;
   nav{
     display: none;

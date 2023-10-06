@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header [goBackIsHidden]="true"></app-header>
 <form class="create-user" [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="username">Nom d'utilisateur</label>

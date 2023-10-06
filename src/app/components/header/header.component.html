@@ -1,5 +1,26 @@
 <header>
-  <img (click)="toggleMenu()" src="./assets/img/burger-icon.svg" class="burger-icon" alt="burger menu"/>
+  <div class="actions-container">
+    <button
+      *ngIf="!goBackIsHidden"
+    draggable="true"
+    (click)="goBack()"
+    src="./assets/img/back-icon.svg"
+    class="back-icon" alt="back icon menu"
+    (dragstart)="onDragStart($event)"
+    (dragend)="onDragEnd($event)">
+      <img
+
+        src="./assets/img/back-icon.svg"
+        class="back-icon" alt="back icon menu"
+      >
+    </button>
+    <img
+      (click)="toggleMenu()"
+      src="./assets/img/burger-icon.svg"
+      class="burger-icon" alt="burger menu"
+      (dragover)="onDragOver($event)"
+      (drop)="onDrop($event)">
+  </div>
   <nav [class.open]="menuOpen">
     <ul>
       <div *ngIf="isLoggedIn()">
