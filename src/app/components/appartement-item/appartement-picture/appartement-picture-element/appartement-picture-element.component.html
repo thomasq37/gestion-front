@@ -1,0 +1,19 @@
+<section class="appartement-picture-element">
+    <div class="container">
+        <div class="custom-card">
+            <div class="custom-card-header">
+                <h2>Photos</h2>
+                <a (click)="onModifyClick()">Modifier</a>
+            </div>
+            <div class="carousel-container">
+                <ngb-carousel *ngIf="appartement.images && appartement.images.length">
+                    <ng-template ngbSlide *ngFor="let image of appartement.images">
+                        <div class="picsum-img-wrapper">
+                            <img [src]="image" [alt]="'Image appartement'" />
+                        </div>
+                    </ng-template>
+                </ngb-carousel>
+            </div>
+        </div>
+    </div>
+</section>

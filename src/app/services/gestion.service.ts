@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Frais, TypeFrais, AdresseDTO, Appartement, PeriodLocation, Contact} from "../models/gestion";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {Frais, TypeFrais, Appartement, PeriodLocation, Contact} from "../models/gestion";
+import { Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 
@@ -101,11 +101,24 @@ export class GestionService {
     return this.http.delete(url);
   }
 
+  // ---------------------- PERIODES-FRAIS ---------------------- //
+
+
+  obtenirFraisFixePourPeriode(userId: number | null, appartementId: number, periodeId): Observable<Frais[]> {
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/periodes/${periodeId}/frais`;
+    return this.http.get<Frais[]>(url)
+  }
+
   // ---------------------- TYPE FRAIS ---------------------- //
 
   obtenirTousLesTypesDeFrais(): Observable<TypeFrais[]>{
     const url = `${this.apiUrl}/type-frais/liste`;
     return this.http.get<TypeFrais[]>(url);
+  }
+
+  mettreAJourUnAppartementPourUtilisateur(userId: number | null, appartementId: number | null, appartModifie: Appartement): Observable<Appartement> {
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}`;
+    return this.http.put<Appartement>(url, appartModifie);
   }
 
   // PAS A JOUR

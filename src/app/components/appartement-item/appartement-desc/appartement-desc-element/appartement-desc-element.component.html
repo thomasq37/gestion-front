@@ -1,0 +1,47 @@
+<section class="appartement-desc-element">
+    <div class="container">
+        <div class="custom-card">
+            <div class="custom-card-header">
+                <h2>Description</h2>
+                <a (click)="onModifyClick()">Modifier</a>
+            </div>
+            <dl class="appartement-details">
+                <div class="detail-item">
+                    <dt><img src="./assets/img/adresse-icon.png" alt="Icône d'adresse"></dt>
+                    <dd>
+                        <strong>Adresse:</strong>
+                        <p>{{appartement.numero}} {{ appartement.adresse }}, {{ appartement.codePostal }} {{ appartement.ville }}</p>
+                    </dd>
+                </div>
+                <div class="detail-item">
+                    <dt><img src="./assets/img/adresse-icon.png" alt="Icône de pièces"></dt>
+                    <dd>
+                        <strong>Nombre de pièces:</strong>
+                        <p>{{ appartement.nombrePieces }}</p>
+                    </dd>
+                </div>
+                <div class="detail-item">
+                    <dt><img src="./assets/img/adresse-icon.png" alt="Icône de surface"></dt>
+                    <dd>
+                        <strong>Surface:</strong>
+                        <p>{{ appartement.surface }} m²</p>
+                    </dd>
+                </div>
+                <div class="detail-item">
+                    <dt><img src="./assets/img/adresse-icon.png" alt="Icône de balcon"></dt>
+                    <dd>
+                        <strong>Balcon:</strong>
+                        <p>{{ appartement.balcon ? 'Oui' : 'Non' }}</p>
+                    </dd>
+                </div>
+                <div class="detail-item">
+                    <dt><img src="./assets/img/adresse-icon.png" alt="Icône de prix"></dt>
+                    <dd>
+                        <strong>Prix d'achat:</strong>
+                        <p>{{ appartement.prix }} €</p>
+                    </dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+</section>

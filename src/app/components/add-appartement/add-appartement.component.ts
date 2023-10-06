@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import {GestionService} from "../../services/gestion.service";
 import {Router} from "@angular/router";
-import {Appartement, AppUser, Frais} from "../../models/gestion";
-import number = CSS.number;
+import {Appartement, AppUser} from "../../models/gestion";
 
 @Component({
   selector: 'app-add-appartement',

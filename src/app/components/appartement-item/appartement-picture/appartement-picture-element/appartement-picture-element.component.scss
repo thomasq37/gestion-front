@@ -1,0 +1,42 @@
+.appartement-picture-element {
+  .container {
+    .custom-card {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      .custom-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+          font-size: .9rem;
+        }
+
+        a {
+          padding: .5rem;
+          background-color: #143b86;
+          border-radius: 4px;
+          color: white;
+          text-decoration: none;
+          font-size: .8rem;
+          margin: 0;
+          height: max-content;
+        }
+      }
+
+      .carousel-container {
+        ngb-carousel {
+          aspect-ratio: 16/9;
+          border-radius: 1rem;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

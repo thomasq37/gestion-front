@@ -1,5 +1,3 @@
-import {User} from "../services/auth.service";
-
 export interface Appartement {
   id:number;
   numero: number;

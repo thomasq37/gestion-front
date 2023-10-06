@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GestionService} from "../../services/gestion.service";
-import {AdresseDTO, Appartement} from "../../models/gestion";
+import {Appartement} from "../../models/gestion";
 import {Router} from "@angular/router";
 
 @Component({

@@ -1,0 +1,51 @@
+<section class="appartement-desc-update">
+    <div class="container">
+        <form [formGroup]="appartementForm" (ngSubmit)="mettreAJourUnAppartementPourUtilisateur()" aria-labelledby="appartementFormTitle">
+
+            <h2 id="appartementFormTitle">Mise à jour de la description de l'appartement</h2>
+
+            <div>
+                <label for="numero">Numéro de l'appartement <span aria-hidden="true">*</span></label>
+                <input type="number" id="numero" formControlName="numero" aria-required="true" placeholder="Numéro de l'appartement">
+            </div>
+
+            <div>
+                <label for="adresse">Voie <span aria-hidden="true">*</span></label>
+                <input type="text" id="adresse" formControlName="adresse" aria-required="true" placeholder="Adresse">
+            </div>
+
+            <div>
+                <label for="codePostal">Code Postal <span aria-hidden="true">*</span></label>
+                <input type="text" id="codePostal" formControlName="codePostal" aria-required="true" placeholder="Code postal">
+            </div>
+
+            <div>
+                <label for="ville">Ville <span aria-hidden="true">*</span></label>
+                <input type="text" id="ville" formControlName="ville" aria-required="true" placeholder="Ville">
+            </div>
+
+            <div>
+                <label for="nombrePieces">Nombre de Pièces <span aria-hidden="true">*</span></label>
+                <input type="number" id="nombrePieces" formControlName="nombrePieces" aria-required="true" placeholder="Nombre de pièces">
+            </div>
+
+            <div>
+                <label for="surface">Surface (m²) <span aria-hidden="true">*</span></label>
+                <input type="number" id="surface" formControlName="surface" aria-required="true" placeholder="Surface en m²">
+            </div>
+
+            <div>
+                <label for="prix">Prix <span aria-hidden="true">*</span></label>
+                <input type="number" id="prix" formControlName="prix" aria-required="true" placeholder="Prix en €">
+            </div>
+
+            <div class="checkbox-container">
+                <label for="balcon">Balcon</label>
+                <input type="checkbox" id="balcon" formControlName="balcon">
+            </div>
+
+            <button class="{{appartementForm.valid ? '' : 'disabled'}}" type="submit" [disabled]="!appartementForm.valid">Mettre à jour</button>
+            <p><span aria-hidden="true">*</span> Veuillez remplir tous les champs obligatoires</p>
+        </form>
+    </div>
+</section>

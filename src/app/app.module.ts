@@ -17,19 +17,26 @@ import { LoginComponent } from './components/login/login.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {AuthGuard} from "./guards/auth.guard";
-import { AppartementContactListComponent } from './components/appartement-contact/appartement-contact-list/appartement-contact-list.component';
-import { AppartementContactManageComponent } from './components/appartement-contact/appartement-contact-manage/appartement-contact-manage.component';
-import { AppartementContactAddComponent } from './components/appartement-contact/appartement-contact-add/appartement-contact-add.component';
-import { AppartementContactUpdateComponent } from './components/appartement-contact/appartement-contact-update/appartement-contact-update.component';
-import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
-import { AppartementFraisListComponent } from './components/appartement-frais/appartement-frais-list/appartement-frais-list.component';
-import { AppartementFraisManageComponent } from './components/appartement-frais/appartement-frais-manage/appartement-frais-manage.component';
-import { AppartementFraisAddComponent } from './components/appartement-frais/appartement-frais-add/appartement-frais-add.component';
-import { AppartementFraisUpdateComponent } from './components/appartement-frais/appartement-frais-update/appartement-frais-update.component';
-import { AppartementPeriodeListComponent } from './components/appartement-periode/appartement-periode-list/appartement-periode-list.component';
-import { AppartementPeriodeManageComponent } from './components/appartement-periode/appartement-periode-manage/appartement-periode-manage.component';
-import { AppartementPeriodeAddComponent } from './components/appartement-periode/appartement-periode-add/appartement-periode-add.component';
-import { AppartementPeriodeUpdateComponent } from './components/appartement-periode/appartement-periode-update/appartement-periode-update.component';
+import {AppartementContactListComponent} from "./components/appartement-item/appartement-contact/appartement-contact-list/appartement-contact-list.component";
+import {AppartementContactManageComponent} from "./components/appartement-item/appartement-contact/appartement-contact-manage/appartement-contact-manage.component";
+import {AppartementFraisManageComponent} from "./components/appartement-item/appartement-frais/appartement-frais-manage/appartement-frais-manage.component";
+import {AppartementFraisListComponent} from "./components/appartement-item/appartement-frais/appartement-frais-list/appartement-frais-list.component";
+import {UnauthorizedComponent} from "./components/unauthorized/unauthorized.component";
+import {AppartementContactUpdateComponent} from "./components/appartement-item/appartement-contact/appartement-contact-update/appartement-contact-update.component";
+import {AppartementContactAddComponent} from "./components/appartement-item/appartement-contact/appartement-contact-add/appartement-contact-add.component";
+import {AppartementFraisAddComponent} from "./components/appartement-item/appartement-frais/appartement-frais-add/appartement-frais-add.component";
+import {AppartementFraisUpdateComponent} from "./components/appartement-item/appartement-frais/appartement-frais-update/appartement-frais-update.component";
+import {AppartementPeriodeUpdateComponent} from "./components/appartement-item/appartement-periode/appartement-periode-update/appartement-periode-update.component";
+import {AppartementPeriodeAddComponent} from "./components/appartement-item/appartement-periode/appartement-periode-add/appartement-periode-add.component";
+import {AppartementPeriodeManageComponent} from "./components/appartement-item/appartement-periode/appartement-periode-manage/appartement-periode-manage.component";
+import {AppartementPeriodeListComponent} from "./components/appartement-item/appartement-periode/appartement-periode-list/appartement-periode-list.component";
+import {AppartementDescElementComponent} from "./components/appartement-item/appartement-desc/appartement-desc-element/appartement-desc-element.component";
+import {AppartementPictureElementComponent} from "./components/appartement-item/appartement-picture/appartement-picture-element/appartement-picture-element.component";
+import {AppartementMetriqueElementComponent} from "./components/appartement-item/appartement-metrique/appartement-metrique-element/appartement-metrique-element.component";
+import { AppartementDescManageComponent } from './components/appartement-item/appartement-desc/appartement-desc-manage/appartement-desc-manage.component';
+import { AppartementDescUpdateComponent } from './components/appartement-item/appartement-desc/appartement-desc-update/appartement-desc-update.component';
+import { AppartementPictureUpdateComponent } from './components/appartement-item/appartement-picture/appartement-picture-update/appartement-picture-update.component';
+import {AppartementPictureManageComponent} from "./components/appartement-item/appartement-picture/appartement-picture-manage/appartement-picture-manage.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +62,14 @@ import { AppartementPeriodeUpdateComponent } from './components/appartement-peri
     AppartementPeriodeListComponent,
     AppartementPeriodeManageComponent,
     AppartementPeriodeAddComponent,
-    AppartementPeriodeUpdateComponent
+    AppartementPeriodeUpdateComponent,
+    AppartementDescElementComponent,
+    AppartementPictureElementComponent,
+    AppartementMetriqueElementComponent,
+    AppartementPictureManageComponent,
+    AppartementDescManageComponent,
+    AppartementDescUpdateComponent,
+    AppartementPictureUpdateComponent
   ],
   imports: [
     BrowserModule,

@@ -32,10 +32,6 @@ export class AppartementItemComponent implements OnInit{
     });
   }
 
-  showInfo(event: any){
-    event.target.parentElement.lastChild.firstElementChild.classList.toggle('visible');
-  }
-
   supprimerUnAppartement(appartementId: number) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cet appartement ?")) {
       this.gestionService.supprimerUnAppartement(appartementId).subscribe(

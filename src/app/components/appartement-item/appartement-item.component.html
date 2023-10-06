@@ -4,100 +4,26 @@
 </div>
   <section class="appartement-item" *ngIf="appartement">
 
-      <div class="appartement-baniere-info">
-        <!--Titre-->
+    <div class="appartement-baniere-info">
+      <!--Titre-->
+      <div class="container">
         <h2>Recherche « {{appartement.numero}} {{appartement.adresse}} »</h2>
-        <!--Caroussel-->
-        <div>
-          <div class="container-title">
-            <h2>Photos</h2>
-            <a [routerLink]="['/modifier-appart', appartement.id ]" [queryParams]="{section: 'photos'}">Modifier</a>
-          </div>
-
-          <div class="carousel-container">
-            <ngb-carousel *ngIf="images && images.length">
-              <ng-template ngbSlide *ngFor="let image of images">
-                <div class="picsum-img-wrapper">
-                  <img [src]="image" [alt]="'Image appartement'" />
-                </div>
-              </ng-template>
-            </ngb-carousel>
-          </div>
-        </div>
-        <!--Descriptif-->
-        <div class="container-title">
-          <h2>Description</h2>
-          <a [routerLink]="['/modifier-appart', appartement.id ]" [queryParams]="{section: 'description'}">Modifier</a>
-        </div>
-        <ul class="appartement-details">
-          <li>
-            <img src="./assets/img/adresse-icon.png" alt="">
-            <div>
-              <p>Adresse:</p>
-              <p>{{appartement.numero}} {{ appartement.adresse }}, {{ appartement.codePostal }} {{ appartement.ville }}</p>
-            </div>
-
-          </li>
-          <li>
-            <img src="./assets/img/adresse-icon.png" alt="">
-            <div>
-              <p>Nombre de pièces:</p>
-              <p>{{ appartement.nombrePieces }}</p>
-            </div>
-          </li>
-          <li>
-            <img src="./assets/img/adresse-icon.png" alt="">
-            <div>
-              <p>Surface:</p>
-              <p>{{ appartement.surface }} m²</p>
-            </div>
-          </li>
-          <li>
-            <img src="./assets/img/adresse-icon.png" alt="">
-            <div>
-              <p>Balcon:</p>
-              <p>{{ appartement.balcon ? 'Oui' : 'Non' }}</p>
-            </div>
-          </li>
-          <li>
-            <img src="./assets/img/adresse-icon.png" alt="">
-            <div>
-              <p>Prix d'achat:</p>
-              <p>{{ appartement.prix }} €</p>
-            </div>
-          </li>
-        </ul>
-        <!--Frais-->
-        <app-appartement-frais-list [appartementId]="appartement.id" [appartementFrais]="appartement.fraisFixe"></app-appartement-frais-list>
-        <!--Entrées/Sorties-->
-        <app-appartement-periode-list [appartementId]="appartement.id" [appartPeriodLocation]="appartement.periodLocation"></app-appartement-periode-list>
-        <!--Statistiques-->
-        <div class="container-title">
-          <h2>Statistiques</h2>
-        </div>
-        <ul class="appartement-list-stats">
-          <li *ngIf="appartement.moyenneBeneficesNetParMois !== 0" (click)="showInfo($event)">
-            <p>Moyenne bénéfices / mois</p>
-            <p>{{appartement.moyenneBeneficesNetParMois}}€ par mois
-              <span>(renvenus annuels - dépenses annuels) ÷ 12</span>
-            </p>
-          </li>
-          <li *ngIf="appartement.rentabiliteNette !== 0" (click)="showInfo($event)">
-            <p>Rentabilité nette</p>
-            <p>Bénéfices : {{appartement.rentabiliteNette }}€ | Prix d'achat : {{appartement.prix}}€ | différence {{ appartement.rentabiliteNette - appartement.prix}}€
-              <span>((renvenus annuels - dépenses annuels) ÷ prix) x 100</span>
-            </p>
-          </li>
-          <li *ngIf="appartement.tauxVacanceLocative !== 0" (click)="showInfo($event)">
-            <p>Taux de vacance locatives</p>
-            <p>{{appartement.tauxVacanceLocative}}%
-              <span>(jours vacants ÷ jours total) x 100</span>
-            </p>
-          </li>
-        </ul>
-        <!--Contacts-->
-        <app-appartement-contact-list [appartementId]="appartement.id" [appartementContacts]="appartement.contacts"></app-appartement-contact-list>
       </div>
+        <!--Caroussel-->
+      <app-appartement-picture-element [appartement]="appartement"></app-appartement-picture-element>
+      <!--Descriptif-->
+      <app-appartement-desc-element [appartement]="appartement"></app-appartement-desc-element>
+      <!--Frais-->
+      <app-appartement-frais-list [appartementId]="appartement.id" [appartementFrais]="appartement.fraisFixe"></app-appartement-frais-list>
+      <!--Entrées/Sorties-->
+      <app-appartement-periode-list [appartementId]="appartement.id" [appartPeriodLocation]="appartement.periodLocation"></app-appartement-periode-list>
+      <!--Statistiques-->
+      <app-appartement-metrique-element [appartement]="appartement"></app-appartement-metrique-element>
+      <!--Contacts-->
+      <app-appartement-contact-list [appartementId]="appartement.id" [appartementContacts]="appartement.contacts"></app-appartement-contact-list>
+    </div>
+    <div class="container">
       <button *ngIf="appartement.id" (click)="supprimerUnAppartement(appartement.id)" class="appartement-item-btn-delete btn bg-danger">Suprimmer l'appartement</button>
+    </div>
   </section>
 <app-footer></app-footer>

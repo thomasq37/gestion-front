@@ -1,0 +1,18 @@
+<section class="appartement-picture-update">
+    <div class="container">
+        <form *ngIf="pictureUpdateForm" [formGroup]="pictureUpdateForm" aria-labelledby="pictureUpdateFormTitle">
+
+            <h2 id="pictureUpdateFormTitle">Mise à jour des images de l'appartement</h2>
+
+            <div *ngFor="let control of imagesFormArray.controls; let i = index">
+                <label for="image{{i}}">
+                    Image {{i + 1}}
+                </label>
+                <textarea [formControl]="getFormControl(i)" id="image{{i}}" rows="3" placeholder="URL d'image"></textarea>
+                <button class="bg-danger" type="button" (click)="removeImage(i)">Supprimer</button>
+            </div>
+            <button class="add-img-btn" type="button" (click)="addImage()">Ajouter une image</button>
+            <button class=" bg-success add-img-btn" type="button" (click)="mettreAJourUnAppartementPourUtilisateur()">Mettre à jour</button>
+        </form>
+    </div>
+</section>

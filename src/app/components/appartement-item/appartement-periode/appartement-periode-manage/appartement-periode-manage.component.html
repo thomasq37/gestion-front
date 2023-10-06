@@ -1,0 +1,18 @@
+<app-header></app-header>
+<app-appartement-periode-list
+        [isEditable]="true"
+        [appartementId]="appartementId"
+        (periodeToUpdate)="setPeriodeToUpdate($event)">
+</app-appartement-periode-list>
+<app-appartement-periode-add  *ngIf="!isUpdateMode" [appartementId]="appartementId"></app-appartement-periode-add>
+<app-appartement-frais-list
+        *ngIf="isUpdateMode"
+        [isPeriode]="true"
+        [isEditable]="true"
+        [appartementId]="appartementId"
+        [periode]="periodeToUpdate">
+
+</app-appartement-frais-list>
+<app-appartement-periode-update *ngIf="isUpdateMode" [periode]="periodeToUpdate" (cancelUpdateEvent)="handleCancelUpdate()"></app-appartement-periode-update>
+
+<app-footer></app-footer>
