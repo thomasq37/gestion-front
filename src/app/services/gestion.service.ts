@@ -109,6 +109,16 @@ export class GestionService {
     return this.http.get<Frais[]>(url)
   }
 
+  ajouterUnFraisFixePourPeriode(userId: number | null, appartementId: number | null, periodeId,  nouveauFrais: Frais) :Observable<Frais>{
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/periodes/${periodeId}/frais`;
+    return this.http.post<Frais>(url, nouveauFrais)
+  }
+
+  mettreAJourUnFraisPourPeriode(userId: number | null, appartementId: number | null, periodeId: number, fraisId: number | null, modifieFrais: Frais) :Observable<any>{
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/periodes/${periodeId}/frais/${fraisId}`;
+    return this.http.put<Frais>(url, modifieFrais)
+  }
+
   // ---------------------- TYPE FRAIS ---------------------- //
 
   obtenirTousLesTypesDeFrais(): Observable<TypeFrais[]>{
@@ -142,9 +152,7 @@ export class GestionService {
     return this.http.post(this.urlAppartements + "periodes/" + periodeId + "/frais", nouveauFrais)
   }
 
-  mettreAJourUnFraisPourPeriode(periodeId: number, modifieFrais: Frais) :Observable<any>{
-    return this.http.put(this.urlAppartements +"periodes/" + periodeId + "/frais/" + modifieFrais.id, modifieFrais)
-  }
+
   supprimerUnFraisPourPeriode(periodeId: number, fraisId: number): Observable<any> {
     return this.http.delete(this.urlAppartements  +"periodes/" + periodeId + "/frais/" + fraisId);
   }

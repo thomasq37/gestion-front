@@ -2,7 +2,7 @@
     <div class="container">
         <form [formGroup]="fraisForm" (ngSubmit)="mettreAJourUnFraisPourAppartement()" aria-labelledby="formTitle">
 
-            <h2 id="formTitleFrais">Mettre à jour un frais pour l'appartement</h2>
+            <h2 id="formTitleFrais">Mettre à jour un frais pour {{this.periode !== null ? "la période" : "l'appartement"}}</h2>
 
             <div>
                 <label for="new-montant">Montant <span aria-hidden="true">*</span></label>

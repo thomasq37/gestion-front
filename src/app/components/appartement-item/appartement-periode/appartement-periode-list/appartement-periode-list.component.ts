@@ -53,7 +53,7 @@ export class AppartementPeriodeListComponent implements OnInit{
   }
 
   onDeletePeriode(periodeId : number) {
-    if (confirm("Êtes-vous sûr de vouloir supprimer cette période ?")) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cette période ? Cela entrainera la suppression de tous les frais associés.")) {
       const userId = parseInt(<string>localStorage.getItem('userId'));
       this.gestionService.supprimerUnePeriodePourAppartement(userId, this.appartementId, periodeId).subscribe(response => {
         this.appartPeriodLocation = this.appartPeriodLocation.filter(f => f.id !== periodeId);

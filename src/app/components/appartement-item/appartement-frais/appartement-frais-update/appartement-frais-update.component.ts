@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {Frais, TypeFrais} from "../../../../models/gestion";
+import {Frais, PeriodLocation, TypeFrais} from "../../../../models/gestion";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {GestionService} from "../../../../services/gestion.service";
 import {ActivatedRoute} from "@angular/router";
@@ -15,6 +15,7 @@ export class AppartementFraisUpdateComponent implements OnInit, OnChanges{
   fraisForm!: FormGroup;
   appartementId!: number;
   @Input() typesFrais: TypeFrais[] = [];
+  @Input() periode: PeriodLocation | null = null;
 
   constructor(
     private gestionService: GestionService,
@@ -24,7 +25,12 @@ export class AppartementFraisUpdateComponent implements OnInit, OnChanges{
 
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("Changes:", changes);
+    console.log(this.periode)
     if (changes["frais"] && changes["frais"].currentValue) {
+      this.initializeForm();
+    }
+    if (changes["periode"] && changes["periode"].currentValue) {
       this.initializeForm();
     }
   }
@@ -48,15 +54,31 @@ export class AppartementFraisUpdateComponent implements OnInit, OnChanges{
     const userId = parseInt(<string>localStorage.getItem('userId'))
     const frais: any = this.fraisForm.value;
     frais.typeFrais = this.typesFrais.find(typeFrais => frais.typeFrais == typeFrais.id)
-    this.gestionService.mettreAJourUnFraisPourAppartement(userId, this.appartementId, this.frais?.id, frais).subscribe(frais => {
-        console.log('Frais mis à jour:', frais);
-        this.fraisForm.reset()
-        this.gestionService.fraisUpdatedSubject.next(frais);
-        this.cancelUpdateEvent.emit();
-      },
-      (error) => {
-        console.error('Erreur lors de l\'ajout du contact :', error);
-      })
+    if(this.periode){
+      console.log(frais)
+      this.gestionService.mettreAJourUnFraisPourPeriode(userId, this.appartementId, this.periode.id, this.frais?.id, frais).subscribe(frais => {
+          console.log('Frais mis à jour:', frais);
+          this.fraisForm.reset()
+          this.gestionService.fraisUpdatedSubject.next(frais);
+          this.cancelUpdateEvent.emit();
+        },
+        (error) => {
+          console.error('Erreur lors de l\'ajout du contact :', error);
+        })
+    }
+    else{
+      this.gestionService.mettreAJourUnFraisPourAppartement(userId, this.appartementId, this.frais?.id, frais).subscribe(frais => {
+          console.log('Frais mis à jour:', frais);
+          this.fraisForm.reset()
+          this.gestionService.fraisUpdatedSubject.next(frais);
+          this.cancelUpdateEvent.emit();
+        },
+        (error) => {
+          console.error('Erreur lors de l\'ajout du contact :', error);
+        })
+    }
+
+
   }
 
   cancelUpdate() {

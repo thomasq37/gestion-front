@@ -1,8 +1,8 @@
 <section class="appartement-frais-add">
     <div class="container">
-        <form [formGroup]="fraisForm" (ngSubmit)="ajouterUnFraisFixePourAppartement()" aria-labelledby="formTitleFrais">
+        <form [formGroup]="fraisForm" (ngSubmit)="ajouterUnFraisFixe()" aria-labelledby="formTitleFrais">
 
-            <h2 id="formTitleFrais">Ajouter un frais pour l'appartement</h2>
+            <h2 id="formTitleFrais">Ajouter un frais pour {{ periode ? "la période" : "l'appartement"}}</h2>
 
             <div>
                 <label for="new-montant">Montant <span aria-hidden="true">*</span></label>

@@ -48,6 +48,9 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
     );
     this.addedFraisSubscription = this.gestionService.fraisAddedSubject.subscribe(frais => {
       if (frais) {
+        if(!this.appartementFrais) {
+          this.appartementFrais = [];
+        }
         this.appartementFrais.push(frais);
       }
     });
@@ -55,6 +58,16 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
     if(!this.isPeriode && this.isEditable && this.appartementId !== null){
       const userId = parseInt(<string>localStorage.getItem('userId'))
       this.gestionService.obtenirFraisFixePourAppartement(userId, this.appartementId).subscribe(
+        frais =>{
+          this.appartementFrais = frais
+        },
+        error => {
+          console.log("Erreur survenue lors de la récupération des contacts : " + error)
+        })
+    }
+    if(this.isPeriode && this.isEditable && this.appartementId !== null && this.periode){
+      const userId = parseInt(<string>localStorage.getItem('userId'))
+      this.gestionService.obtenirFraisFixePourPeriode(userId, this.appartementId, this.periode.id).subscribe(
         frais =>{
           this.appartementFrais = frais
         },
@@ -73,6 +86,9 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
       const userId = parseInt(<string>localStorage.getItem('userId'));
       this.gestionService.supprimerUnFraisPourAppartement(userId, this.appartementId, fraisId).subscribe(response => {
         this.appartementFrais = this.appartementFrais.filter(f => f.id !== fraisId);
+        if(this.isPeriode){
+          return
+        }
         this.fraisToUpdate.emit(undefined);
       })
     }
