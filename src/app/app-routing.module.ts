@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
-import {AppartementItemComponent} from "./components/appartement-item/appartement-item.component";
-import {AddAppartementComponent} from "./components/add-appartement/add-appartement.component";
-import {LoginComponent} from "./components/login/login.component";
-import {CreateUserComponent} from "./components/create-user/create-user.component";
+import {AppartementItemComponent} from "./components/appartement/appartement-item/appartement-item.component";
 import {AuthGuard} from "./guards/auth.guard";
-import {AppartementPeriodeManageComponent} from "./components/appartement-item/appartement-periode/appartement-periode-manage/appartement-periode-manage.component";
-import {AppartementContactManageComponent} from "./components/appartement-item/appartement-contact/appartement-contact-manage/appartement-contact-manage.component";
-import {AppartementFraisManageComponent} from "./components/appartement-item/appartement-frais/appartement-frais-manage/appartement-frais-manage.component";
-import {AppartementDescManageComponent} from "./components/appartement-item/appartement-desc/appartement-desc-manage/appartement-desc-manage.component";
-import {AppartementPictureManageComponent} from "./components/appartement-item/appartement-picture/appartement-picture-manage/appartement-picture-manage.component";
+import {AppartementPeriodeManageComponent} from "./components/appartement/appartement-item/appartement-periode/appartement-periode-manage/appartement-periode-manage.component";
+import {AppartementContactManageComponent} from "./components/appartement/appartement-item/appartement-contact/appartement-contact-manage/appartement-contact-manage.component";
+import {AppartementFraisManageComponent} from "./components/appartement/appartement-item/appartement-frais/appartement-frais-manage/appartement-frais-manage.component";
+import {AppartementDescManageComponent} from "./components/appartement/appartement-item/appartement-desc/appartement-desc-manage/appartement-desc-manage.component";
+import {AppartementPictureManageComponent} from "./components/appartement/appartement-item/appartement-picture/appartement-picture-manage/appartement-picture-manage.component";
+import {AppartementAddComponent} from "./components/appartement/appartement-add/appartement-add.component";
+import {UtilisateurAddComponent} from "./components/utilisateur/utilisateur-add/utilisateur-add.component";
+import {UtilisateurLoginComponent} from "./components/utilisateur/utilisateur-login/utilisateur-login.component";
 
 const routes: Routes = [
 
@@ -21,12 +21,12 @@ const routes: Routes = [
 
   // Registration
 
-  { path: 'login', component: LoginComponent },
-  { path: 'create', component: CreateUserComponent, pathMatch: 'full'  },
+  { path: 'login', component: UtilisateurLoginComponent },
+  { path: 'create', component: UtilisateurAddComponent, pathMatch: 'full'  },
 
 
   { path: 'appartement/:id', component: AppartementItemComponent, canActivate: [AuthGuard] },
-  { path: 'appartements/add', component: AddAppartementComponent, canActivate: [AuthGuard]},
+  { path: 'appartements/add', component: AppartementAddComponent, canActivate: [AuthGuard]},
 
   // Manage
 
