@@ -1,36 +1,57 @@
 
 .appartement-list {
-  width: 100%;
-  .container{
-    .appartement-item {
-      h3{
-        font-size: 1.3rem;
-        color: black;
-        padding-bottom: 0.3rem;
-        font-weight: 300;
-      }
-      box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
-      background-color: white;
+  font-size: 1rem;
+
+  .container {
+    .custom-card {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 1rem;
-      display: flex;
-      align-items: center;
-      border: 1px solid #939393;
-      border-radius: 10px;
-      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
 
-      .appartement-info {
+      .custom-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-        flex: 1;
+        h2 {
+          font-size: 1.1rem;
+        }
+      }
 
-        .adresse{
-          div{
-            p:last-child{
-              color:#C5C5C5;
+      .appartement-item {
+        h3 {
+          font-size: 1rem;
+
+          color: black;
+          padding-bottom: 0.3rem;
+          font-weight: 300;
+        }
+
+        box-shadow: rgba(0, 0, 0, 0) 0 1px 1px;
+        background-color: white;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        border: 1px solid #e7e7e7;
+        border-radius: 10px;
+        margin-bottom: 10px;
+
+        .appartement-info {
+
+          flex: 1;
+
+          .adresse {
+            div {
+              p:last-child {
+                color: #C5C5C5;
+              }
             }
+
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
           }
-          display: flex;
-          align-items: baseline;
-          justify-content: space-between;
         }
       }
     }

@@ -1,3 +1,9 @@
+h1{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f3f3f3;
+  margin-bottom: 2rem;
+}
 .link-container{
   display: flex;
   font-size: 1rem;
@@ -5,15 +11,19 @@
   padding: .8rem;
   padding-top: 0;
   .link{
-    margin: .2rem;
-    padding: 1rem;
+    margin: .5rem;
     display: block;
-    background-color: white;
     width: max-content;
-    color: #143b86;
     text-decoration: none;
     border-radius: .5rem;
-    border: 2px solid;
+    padding: .5rem;
+    background-color: #143b86;
+    color: white;
+    margin-left: 0;
+    margin-top:1rem
+  }
+  .decomptes{
+    background-color: black;
   }
 }
 
