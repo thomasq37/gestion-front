@@ -12,7 +12,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AddAppartementComponent } from './components/add-appartement/add-appartement.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { UpdateAppartementComponent } from './components/update-appartement/update-appartement.component';
 import { LoginComponent } from './components/login/login.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import {TokenInterceptor} from "./interceptors/token.interceptor";
@@ -21,7 +20,6 @@ import {AppartementContactListComponent} from "./components/appartement-item/app
 import {AppartementContactManageComponent} from "./components/appartement-item/appartement-contact/appartement-contact-manage/appartement-contact-manage.component";
 import {AppartementFraisManageComponent} from "./components/appartement-item/appartement-frais/appartement-frais-manage/appartement-frais-manage.component";
 import {AppartementFraisListComponent} from "./components/appartement-item/appartement-frais/appartement-frais-list/appartement-frais-list.component";
-import {UnauthorizedComponent} from "./components/unauthorized/unauthorized.component";
 import {AppartementContactUpdateComponent} from "./components/appartement-item/appartement-contact/appartement-contact-update/appartement-contact-update.component";
 import {AppartementContactAddComponent} from "./components/appartement-item/appartement-contact/appartement-contact-add/appartement-contact-add.component";
 import {AppartementFraisAddComponent} from "./components/appartement-item/appartement-frais/appartement-frais-add/appartement-frais-add.component";
@@ -46,7 +44,6 @@ import {AppartementPictureManageComponent} from "./components/appartement-item/a
     HeaderComponent,
     FooterComponent,
     AddAppartementComponent,
-    UpdateAppartementComponent,
     LoginComponent,
     CreateUserComponent,
     CustomDatePipe,
@@ -54,7 +51,6 @@ import {AppartementPictureManageComponent} from "./components/appartement-item/a
     AppartementContactManageComponent,
     AppartementContactAddComponent,
     AppartementContactUpdateComponent,
-    UnauthorizedComponent,
     AppartementFraisListComponent,
     AppartementFraisManageComponent,
     AppartementFraisAddComponent,

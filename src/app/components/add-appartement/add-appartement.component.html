@@ -1,32 +1,53 @@
 <app-header></app-header>
-<div class="new-appart">
-  <h2>Nouvel appartement</h2>
-  <form (ngSubmit)="ajouterAppartement()">
-    <label for="numero">Numéro de l'Gestion :</label>
-    <input type="number" id="numero" name="numero" [(ngModel)]="appartement.numero" placeholder="Numéro de l'appartement">
+<section class="add-appartement">
+  <div class="container">
+    <form [formGroup]="appartementForm" (ngSubmit)="ajouterAppartement()" aria-labelledby="formTitle">
 
-    <label for="adresse">Adresse :</label>
-    <input type="text" id="adresse" name="adresse" [(ngModel)]="appartement.adresse" placeholder="Adresse">
+      <h2 id="formTitle">Nouvel appartement</h2>
 
-    <label for="codePostal">Code Postal :</label>
-    <input type="text" id="codePostal" name="codePostal" [(ngModel)]="appartement.codePostal" placeholder="Code postal">
+      <div>
+        <label for="numero">Numéro de l'Gestion <span aria-hidden="true">*</span></label>
+        <input type="number" id="numero" formControlName="numero" aria-required="true">
+      </div>
 
-    <label for="ville">Ville :</label>
-    <input type="text" id="ville" name="ville" [(ngModel)]="appartement.ville" placeholder="Ville">
+      <div>
+        <label for="adresse">Adresse <span aria-hidden="true">*</span></label>
+        <input type="text" id="adresse" formControlName="adresse" aria-required="true">
+      </div>
 
-    <label for="nombrePieces">Nombre de Pièces :</label>
-    <input type="number" id="nombrePieces" name="nombrePieces" [(ngModel)]="appartement.nombrePieces" placeholder="Nombre de pièces">
+      <div>
+        <label for="codePostal">Code Postal <span aria-hidden="true">*</span></label>
+        <input type="text" id="codePostal" formControlName="codePostal" aria-required="true">
+      </div>
 
-    <label for="surface">Surface (m²) :</label>
-    <input type="number" id="surface" name="surface" [(ngModel)]="appartement.surface" placeholder="Surface en m²">
+      <div>
+        <label for="ville">Ville <span aria-hidden="true">*</span></label>
+        <input type="text" id="ville" formControlName="ville" aria-required="true">
+      </div>
 
-    <label for="balcon">Balcon (0 - Non, 1 - Oui) :</label>
-    <input type="number" id="balcon" name="balcon" [(ngModel)]="appartement.balcon" placeholder="Balcon (0 - Non, 1 - Oui)">
+      <div>
+        <label for="nombrePieces">Nombre de Pièces <span aria-hidden="true">*</span></label>
+        <input type="number" id="nombrePieces" formControlName="nombrePieces" aria-required="true">
+      </div>
 
-    <label for="prix">Prix :</label>
-    <input type="number" id="prix" name="prix" [(ngModel)]="appartement.prix" placeholder="Prix en €">
+      <div>
+        <label for="surface">Surface (m²) <span aria-hidden="true">*</span></label>
+        <input type="number" id="surface" formControlName="surface" aria-required="true">
+      </div>
 
-    <button type="submit">Enregistrer</button>
-  </form>
-</div>
+      <div>
+        <label for="balcon">Balcon (0 - Non, 1 - Oui)</label>
+        <input type="number" id="balcon" formControlName="balcon">
+      </div>
+
+      <div>
+        <label for="prix">Prix <span aria-hidden="true">*</span></label>
+        <input type="number" id="prix" formControlName="prix" aria-required="true">
+      </div>
+
+      <button class="{{appartementForm.valid ? '' : 'disabled'}}" type="submit" [disabled]="!appartementForm.valid">Enregistrer</button>
+      <p><span aria-hidden="true">*</span> Veuillez remplir tous les champs</p>
+    </form>
+  </div>
+</section>
 <app-footer></app-footer>
