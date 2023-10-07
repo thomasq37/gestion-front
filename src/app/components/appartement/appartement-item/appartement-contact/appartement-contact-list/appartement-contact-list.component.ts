@@ -14,7 +14,9 @@ export class AppartementContactListComponent {
   @Input() isEditable: boolean = false
   @Output() contactToUpdate = new EventEmitter<Contact>();
 
-
+  isProprietaire(): boolean {
+    return localStorage.getItem('userRole') === "PROPRIETAIRE";
+  }
 
   private subscription!: Subscription;
   private updateSubscription!: Subscription;

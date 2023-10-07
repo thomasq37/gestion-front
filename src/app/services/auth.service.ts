@@ -23,6 +23,7 @@ export class AuthService {
           localStorage.setItem('auth_token', (credentials as any).token);
           localStorage.setItem('userToken', (credentials as any).userToken);
           localStorage.setItem('userId', (credentials as any).userId);
+          localStorage.setItem('userRole', (credentials as any).userRole);
 
           this.router.navigate(['/dashboard']); // Redirect to dashboard page
 
@@ -35,6 +36,8 @@ export class AuthService {
     localStorage.removeItem('auth_token'); // Remove the authentication token
     localStorage.removeItem('userToken'); // Remove the authentication token
     localStorage.removeItem('userId'); // Remove the authentication token
+    localStorage.removeItem('userRole');
+
     this.router.navigate(['/login']); // Redirect to login page
   }
   loginRedirection() {

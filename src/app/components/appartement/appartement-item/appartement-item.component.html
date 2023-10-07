@@ -14,16 +14,16 @@
       <!--Descriptif-->
       <app-appartement-desc-element [appartement]="appartement"></app-appartement-desc-element>
       <!--Frais-->
-      <app-appartement-frais-list [appartementId]="appartement.id" [appartementFrais]="appartement.fraisFixe"></app-appartement-frais-list>
+      <app-appartement-frais-list  *ngIf="isProprietaire()" [appartementId]="appartement.id" [appartementFrais]="appartement.fraisFixe"></app-appartement-frais-list>
       <!--Entrées/Sorties-->
       <app-appartement-periode-list [appartementId]="appartement.id" [appartPeriodLocation]="appartement.periodLocation"></app-appartement-periode-list>
       <!--Statistiques-->
-      <app-appartement-metrique-element [appartement]="appartement"></app-appartement-metrique-element>
+      <app-appartement-metrique-element *ngIf="isProprietaire()" [appartement]="appartement"></app-appartement-metrique-element>
       <!--Contacts-->
       <app-appartement-contact-list [appartementId]="appartement.id" [appartementContacts]="appartement.contacts"></app-appartement-contact-list>
     </div>
     <div class="container">
-      <button *ngIf="appartement.id" (click)="supprimerUnAppartement(appartement.id)" class="appartement-item-btn-delete btn bg-danger">Suprimmer l'appartement</button>
+      <button *ngIf="appartement.id && isProprietaire()" (click)="supprimerUnAppartement(appartement.id)" class="appartement-item-btn-delete btn bg-danger">Suprimmer l'appartement</button>
     </div>
   </section>
 <app-footer></app-footer>

@@ -10,7 +10,9 @@ import {NavigationService} from "../../../../../services/navigation.service";
 })
 export class AppartementDescElementComponent {
   @Input() appartement: Appartement | null = null;
-
+  isProprietaire(): boolean {
+    return localStorage.getItem('userRole') === "PROPRIETAIRE";
+  }
   constructor(private navigationService: NavigationService, private router: Router) { }
 
   onModifyClick() {

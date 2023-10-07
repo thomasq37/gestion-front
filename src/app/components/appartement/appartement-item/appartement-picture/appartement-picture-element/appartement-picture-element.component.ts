@@ -11,7 +11,9 @@ import {Appartement} from "../../../../../models/gestion";
 export class AppartementPictureElementComponent {
   @Input() appartement: Appartement | null = null;
   constructor(private navigationService: NavigationService, private router: Router) { }
-
+  isProprietaire(): boolean {
+    return localStorage.getItem('userRole') === "PROPRIETAIRE";
+  }
   onModifyClick() {
     this.navigationService.setData(this.appartement);
     this.router.navigate(['/appartement/', this.appartement.id, 'photos']);

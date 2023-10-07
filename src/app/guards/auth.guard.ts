@@ -21,4 +21,8 @@ export class AuthGuard implements CanActivate {
   isLoggedIn(): boolean {
     return !!localStorage.getItem('auth_token');
   }
+
+  isProprietaire(): boolean {
+    return localStorage.getItem('userRole') === "PROPRIETAIRE";
+  }
 }

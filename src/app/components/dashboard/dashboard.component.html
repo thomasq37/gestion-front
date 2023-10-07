@@ -4,7 +4,7 @@
   <h1>Dashboard</h1>
 </div>
 <app-appartement-list></app-appartement-list>
-<div class="link-container">
+<div *ngIf="isProprietaire()" class="link-container">
   <a class="link decomptes" href="https://drive.google.com/drive/folders/1tDhWA98QwR2GQAB9jg4M-zqfBUM3j2aS?usp=sharing">Décomptes de gérance</a>
   <a class="link" routerLink="/appartements/add">Ajouter appartement</a>
 </div>

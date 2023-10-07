@@ -17,7 +17,9 @@ export class AppartementItemComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router) {
   }
-
+  isProprietaire(): boolean {
+    return localStorage.getItem('userRole') === "PROPRIETAIRE";
+  }
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const appartementId = Number(params.get('id'));

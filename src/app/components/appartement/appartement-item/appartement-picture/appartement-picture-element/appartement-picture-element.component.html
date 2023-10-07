@@ -3,7 +3,7 @@
         <div class="custom-card">
             <div class="custom-card-header">
                 <h2>Photos</h2>
-                <a (click)="onModifyClick()">Modifier</a>
+                <a *ngIf="isProprietaire()" (click)="onModifyClick()">Modifier</a>
             </div>
             <div class="carousel-container">
                 <ngb-carousel *ngIf="appartement.images && appartement.images.length">
