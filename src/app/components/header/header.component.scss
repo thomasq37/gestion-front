@@ -1,10 +1,8 @@
-
-/* Feuille de style intégrée #3 | http://localhost:4200/appartement/3 */
-
-
-
 header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
   .actions-container{
     display: flex;
     justify-content: space-between;
