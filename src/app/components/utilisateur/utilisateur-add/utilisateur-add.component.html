@@ -1,39 +1,35 @@
 <app-header [goBackIsHidden]="true"></app-header>
-<form class="create-user" [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="username">Nom d'utilisateur</label>
-    <input
-      type="text"
-      id="username"
-      formControlName="username"
-      class="form-control"
-    />
-  </div>
-  <div class="form-group">
-    <label for="password">Mot de passe</label>
-    <input
-      type="password"
-      id="password"
-      formControlName="password"
-      class="form-control"
-    />
-  </div>
-  <div class="form-group">
-    <label for="token">Code d'invitation</label>
-    <input
-      type="text"
-      id="token"
-      formControlName="token"
-      class="form-control"
-    />
-  </div>
-  <p>{{message}}</p>
+<section class="utilisateur-add">
+  <div class="container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" aria-labelledby="formTitle">
 
-  <button *ngIf="!accountIsCreated" type="submit" class="btn btn-primary" [disabled]="!userForm.valid">
-    Créer votre compte
-  </button>
-  <a href="/login" *ngIf="accountIsCreated" type="submit" class="btn btn-primary">
-    Revenir à la connexion
-  </a>
-</form>
+      <h2 id="formTitle">Créer votre compte</h2>
+
+      <div>
+        <label for="username">Nom d'utilisateur <span aria-hidden="true">*</span></label>
+        <input type="text" id="username" formControlName="username" class="form-control" aria-required="true">
+      </div>
+
+      <div>
+        <label for="password">Mot de passe <span aria-hidden="true">*</span></label>
+        <input type="password" id="password" formControlName="password" class="form-control" aria-required="true">
+      </div>
+
+      <div>
+        <label for="token">Code d'invitation <span aria-hidden="true">*</span></label>
+        <input type="text" id="token" formControlName="token" class="form-control" aria-required="true">
+      </div>
+
+      <p>{{ message }}</p>
+
+      <button *ngIf="!accountIsCreated" type="submit" class="btn btn-primary" [disabled]="!userForm.valid">
+        Créer votre compte
+      </button>
+
+      <a href="/login" *ngIf="accountIsCreated" type="submit" class="btn btn-primary">
+        Revenir à la connexion
+      </a>
+    </form>
+  </div>
+</section>
 <app-footer></app-footer>
