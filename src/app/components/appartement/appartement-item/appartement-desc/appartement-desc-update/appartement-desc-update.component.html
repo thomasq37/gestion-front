@@ -25,6 +25,13 @@
             </div>
 
             <div>
+              <label for="pays">Pays <span aria-hidden="true">*</span></label>
+              <select id="pays" class="form-control" formControlName="pays">
+                <option *ngFor="let pays of paysList" [value]="pays">{{pays}}</option>
+              </select>
+            </div>
+
+            <div>
                 <label for="nombrePieces">Nombre de Pièces <span aria-hidden="true">*</span></label>
                 <input type="number" id="nombrePieces" formControlName="nombrePieces" aria-required="true" placeholder="Nombre de pièces">
             </div>

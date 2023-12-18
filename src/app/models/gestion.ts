@@ -9,6 +9,7 @@ export interface Appartement {
   surface: number;
   balcon: boolean;
   prix: number;
+  pays: string;
   rentabiliteNette: number;
   tauxVacanceLocative: number;
   moyenneBeneficesNetParMois: number;

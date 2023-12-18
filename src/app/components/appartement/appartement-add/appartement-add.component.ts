@@ -11,13 +11,18 @@ import {AppUser} from "../../../models/gestion";
 })
 export class AppartementAddComponent {
   appartementForm: FormGroup;
+  paysList: string[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private gestionService: GestionService,
     private router: Router
   ) {
+    this.gestionService.obtenirListePays().subscribe(data => {
+      this.paysList = data;
+    });
     this.createForm();
+
   }
 
   createForm() {
@@ -26,10 +31,11 @@ export class AppartementAddComponent {
       adresse: ['', Validators.required],
       codePostal: ['', Validators.required],
       ville: ['', Validators.required],
+      pays: ['', Validators.required],
       nombrePieces: ['', Validators.required],
       surface: ['', Validators.required],
       balcon: [''],
-      prix: ['', Validators.required]
+      prix: ['', Validators.required],
     });
   }
 

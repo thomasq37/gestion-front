@@ -26,6 +26,13 @@
       </div>
 
       <div>
+        <label for="pays">Pays</label>
+        <select id="pays" class="form-control" formControlName="pays">
+          <option *ngFor="let pays of paysList" [value]="pays">{{pays}}</option>
+        </select>
+      </div>
+
+      <div>
         <label for="nombrePieces">Nombre de Pièces <span aria-hidden="true">*</span></label>
         <input type="number" id="nombrePieces" formControlName="nombrePieces" aria-required="true">
       </div>
@@ -44,6 +51,7 @@
         <label for="prix">Prix <span aria-hidden="true">*</span></label>
         <input type="number" id="prix" formControlName="prix" aria-required="true">
       </div>
+
 
       <button class="{{appartementForm.valid ? '' : 'disabled'}}" type="submit" [disabled]="!appartementForm.valid">Enregistrer</button>
       <p><span aria-hidden="true">*</span> Veuillez remplir tous les champs</p>

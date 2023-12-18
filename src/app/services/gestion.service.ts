@@ -137,6 +137,13 @@ export class GestionService {
     const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/gestionnaires`;
     return this.http.get<AppUserDTO[]>(url)
   }
+
+
+  // ---------------------- PAYS ---------------------- //
+
+  obtenirListePays(): Observable<string[]> {
+    return this.http.get<string[]>('/api/pays');
+  }
   // PAS A JOUR
 
   obtenirUnAppartementParId(id: number): Observable<Appartement>{

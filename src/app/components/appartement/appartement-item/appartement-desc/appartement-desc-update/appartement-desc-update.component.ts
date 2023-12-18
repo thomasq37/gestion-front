@@ -13,6 +13,8 @@ import {Router} from "@angular/router";
 export class AppartementDescUpdateComponent {
   appartement: Appartement = <Appartement>{};
   appartementForm: FormGroup;
+  paysList: string[] = [];
+
 
   constructor(
     private navigationService: NavigationService,
@@ -24,7 +26,12 @@ export class AppartementDescUpdateComponent {
   }
 
   ngOnInit(): void {
+    this.gestionService.obtenirListePays().subscribe(data => {
+      this.paysList = data;
+
+    });
     this.initAppartementForm();
+
   }
 
   initAppartementForm() {
@@ -33,10 +40,11 @@ export class AppartementDescUpdateComponent {
       adresse: [this.appartement.adresse, Validators.required],
       codePostal: [this.appartement.codePostal, Validators.required],
       ville: [this.appartement.ville, Validators.required],
+      pays: [this.appartement.pays, Validators.required],
       nombrePieces: [this.appartement.nombrePieces, Validators.required],
       surface: [this.appartement.surface, Validators.required],
       prix: [this.appartement.prix, Validators.required],
-      balcon: [this.appartement.balcon]
+      balcon: [this.appartement.balcon],
     });
   }
 
