@@ -8,6 +8,8 @@ import {AuthService} from "../../../services/auth.service";
   styleUrls: ['./utilisateur-add.component.scss']
 })
 export class UtilisateurAddComponent {
+  accountIsCreated = false;
+  message = ''
   constructor(private fb: FormBuilder, private authService: AuthService) {}
 
 
@@ -23,8 +25,14 @@ export class UtilisateurAddComponent {
       const { username, password, token } = this.userForm.value;
       if(username && password && token) {
         this.authService.createUser(username, password, token).subscribe(
-          () => console.log('Utilisateur ajouté avec succès.'),
-          (error) => console.error('Erreur lors de la création de l\'uitlisateur : ', error)
+          (response) => {
+            this.accountIsCreated = true
+            console.log(response)
+            this.message = response.message
+          },
+
+          (response) =>
+            this.message = response.error.message
         );
       }
     }
