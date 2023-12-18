@@ -142,7 +142,8 @@ export class GestionService {
   // ---------------------- PAYS ---------------------- //
 
   obtenirListePays(): Observable<string[]> {
-    return this.http.get<string[]>('/api/pays');
+    const url = `${this.apiUrl}/pays`;
+    return this.http.get<string[]>(url);
   }
   // PAS A JOUR
 
