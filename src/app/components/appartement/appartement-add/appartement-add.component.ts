@@ -20,7 +20,6 @@ export class AppartementAddComponent {
   ) {
     this.gestionService.obtenirListePays().subscribe(data => {
       this.paysList = data;
-      console.log(this.paysList)
     });
     this.createForm();
 

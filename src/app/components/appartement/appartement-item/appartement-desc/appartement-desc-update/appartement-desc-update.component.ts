@@ -23,7 +23,6 @@ export class AppartementDescUpdateComponent {
     private router: Router
   ) {
     this.appartement = this.navigationService.getData();
-    console.log(this.appartement)
   }
 
   ngOnInit(): void {

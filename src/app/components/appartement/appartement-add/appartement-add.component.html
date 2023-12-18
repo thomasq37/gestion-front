@@ -42,17 +42,16 @@
         <input type="number" id="surface" formControlName="surface" aria-required="true">
       </div>
 
-      <div>
-        <label for="balcon">Balcon (0 - Non, 1 - Oui)</label>
-        <input type="number" id="balcon" formControlName="balcon">
-      </div>
 
       <div>
         <label for="prix">Prix <span aria-hidden="true">*</span></label>
         <input type="number" id="prix" formControlName="prix" aria-required="true">
       </div>
 
-
+      <div class="checkbox-container">
+        <label for="balcon">Balcon</label>
+        <input type="checkbox" id="balcon" formControlName="balcon">
+      </div>
       <button class="{{appartementForm.valid ? '' : 'disabled'}}" type="submit" [disabled]="!appartementForm.valid">Enregistrer</button>
       <p><span aria-hidden="true">*</span> Veuillez remplir tous les champs</p>
     </form>

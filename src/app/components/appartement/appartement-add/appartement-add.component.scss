@@ -5,13 +5,23 @@
   .container {
     form {
       font-size: .8rem;
+      .form-control{
+        font-size: .8rem;
+
+      }
       width: 100%;
       margin: 0 auto;
       padding: 1rem;
       border: 1px solid #ccc;
       border-radius: 4px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
+      .checkbox-container {
+        display: flex;
+        justify-content: space-between;
+        #balcon {
+          width: 1rem;
+        }
+      }
       h2 {
         font-size: .9rem;
       }
