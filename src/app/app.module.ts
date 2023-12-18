@@ -35,6 +35,10 @@ import {AppartementPictureManageComponent} from "./components/appartement/appart
 import { AppartementAddComponent } from './components/appartement/appartement-add/appartement-add.component';
 import { UtilisateurAddComponent } from './components/utilisateur/utilisateur-add/utilisateur-add.component';
 import { UtilisateurLoginComponent } from './components/utilisateur/utilisateur-login/utilisateur-login.component';
+import { AppartementGestionnaireManageComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-manage/appartement-gestionnaire-manage.component';
+import { AppartementGestionnaireAddComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-add/appartement-gestionnaire-add.component';
+import { AppartementGestionnaireListComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-list/appartement-gestionnaire-list.component';
+import { AppartementGestionnaireUpdateComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-update/appartement-gestionnaire-update.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +69,11 @@ import { UtilisateurLoginComponent } from './components/utilisateur/utilisateur-
     AppartementPictureUpdateComponent,
     AppartementAddComponent,
     UtilisateurAddComponent,
-    UtilisateurLoginComponent
+    UtilisateurLoginComponent,
+    AppartementGestionnaireManageComponent,
+    AppartementGestionnaireAddComponent,
+    AppartementGestionnaireListComponent,
+    AppartementGestionnaireUpdateComponent
   ],
   imports: [
     BrowserModule,

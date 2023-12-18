@@ -1,0 +1,8 @@
+<app-header></app-header>
+<app-appartement-gestionnaire-list
+  [isEditable]=true [appartementId]="appartementId"
+  (gestionnaireToUpdate)="setGestionnaireToUpdate($event)"></app-appartement-gestionnaire-list>
+<app-appartement-gestionnaire-add [appartementId]="appartementId"></app-appartement-gestionnaire-add>
+<app-appartement-gestionnaire-update *ngIf="isUpdateMode" [gestionnaire]="gestionnaireToUpdate" (cancelUpdateEvent)="handleCancelUpdate()"></app-appartement-gestionnaire-update>
+
+<app-footer></app-footer>

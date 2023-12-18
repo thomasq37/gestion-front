@@ -11,6 +11,7 @@ import {AppartementPictureManageComponent} from "./components/appartement/appart
 import {AppartementAddComponent} from "./components/appartement/appartement-add/appartement-add.component";
 import {UtilisateurAddComponent} from "./components/utilisateur/utilisateur-add/utilisateur-add.component";
 import {UtilisateurLoginComponent} from "./components/utilisateur/utilisateur-login/utilisateur-login.component";
+import {AppartementGestionnaireManageComponent} from "./components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-manage/appartement-gestionnaire-manage.component";
 
 const routes: Routes = [
 
@@ -35,6 +36,8 @@ const routes: Routes = [
   { path: 'appartement/:id/frais', component: AppartementFraisManageComponent, canActivate: [AuthGuard] },
   { path: 'appartement/:id/description', component: AppartementDescManageComponent, canActivate: [AuthGuard] },
   { path: 'appartement/:id/photos', component: AppartementPictureManageComponent, canActivate: [AuthGuard] },
+  { path: 'appartement/:id/gestionnaires', component: AppartementGestionnaireManageComponent, canActivate: [AuthGuard] },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

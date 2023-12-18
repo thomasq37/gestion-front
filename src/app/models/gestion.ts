@@ -23,7 +23,12 @@ export interface AppUser {
   pseudo: string;
   userToken: string;
 }
-
+export interface AppUserDTO{
+  id: number
+  username: string;
+  email: string;
+  phoneNumber: string;
+}
 export interface Contact{
   id: number
   pseudo: string;
@@ -67,4 +72,12 @@ export enum Frequence {
   TRIMESTRIELLE = 'Trimestrielle',
   ANNUELLE = 'Annuelle',
   PONCTUELLE = 'Ponctuelle'
+}
+
+export interface UserRequest {
+  user: {
+    username: string;
+    password: string;
+  };
+  token: string;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Frais, TypeFrais, Appartement, PeriodLocation, Contact} from "../models/gestion";
+import {Frais, TypeFrais, Appartement, PeriodLocation, Contact, AppUserDTO} from "../models/gestion";
 import { Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
@@ -131,6 +131,12 @@ export class GestionService {
     return this.http.put<Appartement>(url, appartModifie);
   }
 
+  // ---------------------- GESTIONNAIRES ---------------------- //
+
+  obtenirGestionnairesPourAppartement(userId: number | null, appartementId: number) : Observable<AppUserDTO[]> {
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/gestionnaires`;
+    return this.http.get<AppUserDTO[]>(url)
+  }
   // PAS A JOUR
 
   obtenirUnAppartementParId(id: number): Observable<Appartement>{
@@ -140,10 +146,12 @@ export class GestionService {
     return this.http.delete(this.urlAppartements + appartementId, { responseType: 'text' });
   }
   ajouterAppartement(appartement: Appartement): Observable<any> {
-    return this.http.post(this.urlAppartements + 'ajouter', appartement)
+    const url = `${this.apiUrl}/utilisateurs/${appartement.appUser.id}/appartements/ajouter`;
+    return this.http.post<Appartement[]>(url, appartement)
   }
   modifierAppartement(appartement: Appartement): Observable<any> {
-    return this.http.put(this.urlAppartements + appartement.id, appartement);
+    const url = `${this.apiUrl}/utilisateurs/${appartement.appUser.id}/appartements/${appartement.id}/gestionnaires`;
+    return this.http.put<Appartement[]>(url, appartement)
   }
 
   // PERIODES

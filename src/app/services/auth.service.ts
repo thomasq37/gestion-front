@@ -50,6 +50,15 @@ export class AuthService {
     };
     return this.http.post(this.urlCreateUser, userRequest,{ responseType: 'json' });
   }
+
+  createGestionnaire(userId: number, appartementId: number, username: any, password: any, token: any) {
+    const url = `${this.apiUrl}/auth/utilisateurs/${userId}/appartements/${appartementId}/gestionnaire/ajouter`;
+    const userRequest = {
+      user: { username, password },
+      token
+    };
+    return this.http.post(url, userRequest,{ responseType: 'json' });
+  }
 }
 export interface User {
   username: string;
