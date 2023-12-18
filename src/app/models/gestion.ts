@@ -9,7 +9,7 @@ export interface Appartement {
   surface: number;
   balcon: boolean;
   prix: number;
-  pays: string;
+  pays: Pays;
   rentabiliteNette: number;
   tauxVacanceLocative: number;
   moyenneBeneficesNetParMois: number;
@@ -67,7 +67,10 @@ export interface Frais {
   periodLocation?: PeriodLocation;
   typeFrais: TypeFrais;
 }
-
+export interface Pays{
+  id: number;
+  name: string;
+}
 export enum Frequence {
   MENSUELLE = 'Mensuelle',
   TRIMESTRIELLE = 'Trimestrielle',

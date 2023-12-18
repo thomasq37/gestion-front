@@ -6,7 +6,7 @@
       <h2 id="formTitle">Nouvel appartement</h2>
 
       <div>
-        <label for="numero">Numéro de l'Gestion <span aria-hidden="true">*</span></label>
+        <label for="numero">Numéro de l'appartement <span aria-hidden="true">*</span></label>
         <input type="number" id="numero" formControlName="numero" aria-required="true">
       </div>
 
@@ -28,7 +28,7 @@
       <div>
         <label for="pays">Pays</label>
         <select id="pays" class="form-control" formControlName="pays">
-          <option *ngFor="let pays of paysList" [value]="pays">{{pays}}</option>
+          <option *ngFor="let pays of paysList" [value]="pays.name">{{pays.name}}</option>
         </select>
       </div>
 

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GestionService} from "../../../services/gestion.service";
 import {Router} from "@angular/router";
-import {AppUser} from "../../../models/gestion";
+import {AppUser, Pays} from "../../../models/gestion";
 
 @Component({
   selector: 'app-appartement-add',
@@ -11,7 +11,7 @@ import {AppUser} from "../../../models/gestion";
 })
 export class AppartementAddComponent {
   appartementForm: FormGroup;
-  paysList: string[] = [];
+  paysList: Pays[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,6 +20,7 @@ export class AppartementAddComponent {
   ) {
     this.gestionService.obtenirListePays().subscribe(data => {
       this.paysList = data;
+      console.log(this.paysList)
     });
     this.createForm();
 
@@ -31,7 +32,7 @@ export class AppartementAddComponent {
       adresse: ['', Validators.required],
       codePostal: ['', Validators.required],
       ville: ['', Validators.required],
-      pays: ['', Validators.required],
+      pays: [{}, Validators.required],
       nombrePieces: ['', Validators.required],
       surface: ['', Validators.required],
       balcon: [''],
@@ -42,6 +43,9 @@ export class AppartementAddComponent {
   ajouterAppartement() {
     if (this.appartementForm.valid) {
       const appartementData = this.appartementForm.value;
+      // Find the Pays object corresponding to the selected value
+      appartementData.pays = this.paysList.find(p => p.name === appartementData.pays); // Assign the found Pays object
+
       appartementData.appUser = <AppUser>{
         id:  parseInt(<string>localStorage.getItem("userId"))
       }

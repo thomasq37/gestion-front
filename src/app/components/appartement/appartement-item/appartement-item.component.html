@@ -25,7 +25,7 @@
     <div class="container">
       <button [routerLink]="['/appartement/' +  appartement.id + '/gestionnaires']"
        class="appartement-tem-btn-gestionnaires" >Voir gestionnaires</button>
-      <button *ngIf="appartement.id && isProprietaire()" (click)="supprimerUnAppartement(appartement.id)" class="appartement-item-btn-delete btn bg-danger">Suprimmer l'appartement</button>
+      <button *ngIf="appartement.id && isProprietaire()" (click)="supprimerUnAppartement(appartement)" class="appartement-item-btn-delete btn bg-danger">Suprimmer l'appartement</button>
     </div>
   </section>
 <app-footer></app-footer>

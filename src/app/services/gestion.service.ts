@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Frais, TypeFrais, Appartement, PeriodLocation, Contact, AppUserDTO} from "../models/gestion";
+import {Frais, TypeFrais, Appartement, PeriodLocation, Contact, AppUserDTO, Pays} from "../models/gestion";
 import { Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
@@ -141,17 +141,18 @@ export class GestionService {
 
   // ---------------------- PAYS ---------------------- //
 
-  obtenirListePays(): Observable<string[]> {
+  obtenirListePays(): Observable<Pays[]> {
     const url = `${this.apiUrl}/pays`;
-    return this.http.get<string[]>(url);
+    return this.http.get<Pays[]>(url);
   }
   // PAS A JOUR
 
   obtenirUnAppartementParId(id: number): Observable<Appartement>{
     return this.http.get<Appartement>(this.urlAppartements + id)
   }
-  supprimerUnAppartement(appartementId: number): Observable<any> {
-    return this.http.delete(this.urlAppartements + appartementId, { responseType: 'text' });
+  supprimerUnAppartement(appartement: Appartement): Observable<any> {
+    const url = `${this.apiUrl}/utilisateurs/${appartement.appUser.id}/appartements/${appartement.id}`;
+    return this.http.delete(url, { responseType: 'text' });
   }
   ajouterAppartement(appartement: Appartement): Observable<any> {
     const url = `${this.apiUrl}/utilisateurs/${appartement.appUser.id}/appartements/ajouter`;
