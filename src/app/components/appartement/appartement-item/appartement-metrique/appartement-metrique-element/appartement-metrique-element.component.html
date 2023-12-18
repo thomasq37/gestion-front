@@ -1,33 +1,3 @@
-<!--
-<section class="appartement-metrique-element">
-    <div class="description-card">
-        <div class="card-header">
-            <h2>Métriques</h2>
-        </div>
-        <ul class="appartement-list-stats">
-            <li *ngIf="appartement.moyenneBeneficesNetParMois !== 0" (click)="showInfo($event)">
-                <p>Moyenne bénéfices / mois</p>
-                <p>{{appartement.moyenneBeneficesNetParMois}}€ par mois
-                    <span>(renvenus annuels - dépenses annuels) ÷ 12</span>
-                </p>
-            </li>
-            <li *ngIf="appartement.rentabiliteNette !== 0" (click)="showInfo($event)">
-                <p>Rentabilité nette</p>
-                <p>Bénéfices : {{appartement.rentabiliteNette }}€ | Prix d'achat : {{appartement.prix}}€ | différence {{ appartement.rentabiliteNette - appartement.prix}}€
-                    <span>((renvenus annuels - dépenses annuels) ÷ prix) x 100</span>
-                </p>
-            </li>
-            <li *ngIf="appartement.tauxVacanceLocative !== 0" (click)="showInfo($event)">
-                <p>Taux de vacance locatives</p>
-                <p>{{appartement.tauxVacanceLocative}}%
-                    <span>(jours vacants ÷ jours total) x 100</span>
-                </p>
-            </li>
-        </ul>
-    </div>
-</section>
-
--->
 <section class="appartement-stats-list">
     <div class="container">
         <div class="custom-card">
@@ -53,10 +23,7 @@
                 <tr *ngIf="appartement.rentabiliteNette !== 0" (click)="showInfo('rentabilite_nette')">
                     <td>Rentabilité nette</td>
                     <td>{{appartement.rentabiliteNette }}€ depuis l'achat</td>
-<!--
-                    <td>Bénéfices : {{appartement.rentabiliteNette }}€ | Prix d'achat : {{appartement.prix}}€ | différence {{ appartement.rentabiliteNette - appartement.prix}}€</td>
--->
-                    <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
+                   <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
                 <tr *ngIf="appartement.tauxVacanceLocative !== 0" (click)="showInfo('taux_vacance_locative')">
                     <td>Taux de vacance locatives</td>
