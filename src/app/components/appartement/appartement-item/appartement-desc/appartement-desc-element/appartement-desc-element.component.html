@@ -2,7 +2,6 @@
     <div class="container">
         <div class="custom-card">
             <div class="custom-card-header">
-                <h2>Description</h2>
                 <a *ngIf="isProprietaire()" (click)="onModifyClick()">Modifier</a>
             </div>
             <dl class="appartement-details">
@@ -14,32 +13,39 @@
                     </dd>
                 </div>
                 <div class="detail-item">
-                    <dt><img src="./assets/img/adresse-icon.png" alt="Icône de pièces"></dt>
+                    <dt><img src="./assets/img/nb-pieces-icon.png" alt="Icône de pièces"></dt>
                     <dd>
                         <strong>Nombre de pièces:</strong>
                         <p>{{ appartement.nombrePieces }}</p>
                     </dd>
                 </div>
                 <div class="detail-item">
-                    <dt><img src="./assets/img/adresse-icon.png" alt="Icône de surface"></dt>
+                    <dt><img src="./assets/img/surface-icon.png" alt="Icône de surface"></dt>
                     <dd>
                         <strong>Surface:</strong>
                         <p>{{ appartement.surface }} m²</p>
                     </dd>
                 </div>
                 <div class="detail-item">
-                    <dt><img src="./assets/img/adresse-icon.png" alt="Icône de balcon"></dt>
+                    <dt><img src="./assets/img/balcon-icon.png" alt="Icône de balcon"></dt>
                     <dd>
                         <strong>Balcon:</strong>
                         <p>{{ appartement.balcon ? 'Oui' : 'Non' }}</p>
                     </dd>
                 </div>
                 <div *ngIf="isProprietaire()" class="detail-item">
-                    <dt><img src="./assets/img/adresse-icon.png" alt="Icône de prix"></dt>
+                    <dt><img src="./assets/img/euro-icon.svg" alt="Icône de prix"></dt>
                     <dd>
                         <strong>Prix d'achat:</strong>
                         <p>{{ appartement.prix }} €</p>
                     </dd>
+                </div>
+                <div *ngIf="isProprietaire()" class="detail-item energie">
+                  <dt><img src="./assets/img/energie-icon.png" alt="Icône de la classe énergie"></dt>
+                  <dd>
+                    <strong>Classe énergie:</strong>
+                    <img src="./assets/img/energie-c-icon.png" alt="Icône de la classe énergie C">
+                  </dd>
                 </div>
             </dl>
         </div>

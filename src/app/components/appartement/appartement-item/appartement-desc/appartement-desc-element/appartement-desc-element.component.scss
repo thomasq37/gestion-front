@@ -9,7 +9,7 @@
       border-radius: 4px;
       .custom-card-header{
         display: flex;
-        justify-content: space-between;
+        justify-content: end;
         align-items: center;
         h2{
           font-size: .9rem;
@@ -28,6 +28,7 @@
 
       .appartement-details {
         font-size: .8rem;
+
         .detail-item {
           display: flex;
           align-items: center;
@@ -41,7 +42,16 @@
             width: 2.5rem;
           }
         }
-
+        .detail-item.energie {
+          dd{
+            display: flex;
+            flex-direction: column;
+            margin-top: 0;
+            img{
+              width: 6rem;
+            }
+          }
+        }
       }
     }
   }
