@@ -14,6 +14,7 @@ export class AppartementDescUpdateComponent {
   appartement: Appartement = <Appartement>{};
   appartementForm: FormGroup;
   paysList: Pays[] = [];
+  dpeLetterList: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
 
   constructor(
@@ -44,6 +45,7 @@ export class AppartementDescUpdateComponent {
       nombrePieces: [this.appartement.nombrePieces, Validators.required],
       surface: [this.appartement.surface, Validators.required],
       prix: [this.appartement.prix, Validators.required],
+      dpe: [this.appartement.dpe, Validators.required],
       balcon: [this.appartement.balcon],
     });
   }

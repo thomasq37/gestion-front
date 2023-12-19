@@ -12,6 +12,7 @@ import {AppUser, Pays} from "../../../models/gestion";
 export class AppartementAddComponent {
   appartementForm: FormGroup;
   paysList: Pays[] = [];
+  dpeLetterList: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,6 +37,7 @@ export class AppartementAddComponent {
       surface: ['', Validators.required],
       balcon: [''],
       prix: ['', Validators.required],
+      dpe: ['', Validators.required],
     });
   }
 

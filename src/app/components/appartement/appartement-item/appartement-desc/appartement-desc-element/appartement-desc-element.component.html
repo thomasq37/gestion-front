@@ -2,6 +2,7 @@
     <div class="container">
         <div class="custom-card">
             <div class="custom-card-header">
+              <h2>Description</h2>
                 <a *ngIf="isProprietaire()" (click)="onModifyClick()">Modifier</a>
             </div>
             <dl class="appartement-details">
@@ -44,7 +45,7 @@
                   <dt><img src="./assets/img/energie-icon.png" alt="Icône de la classe énergie"></dt>
                   <dd>
                     <strong>Classe énergie:</strong>
-                    <img src="./assets/img/energie-c-icon.png" alt="Icône de la classe énergie C">
+                    <img src="./assets/img/energie-{{appartement.dpe.toLowerCase()}}-icon.png" alt="Icône de la classe énergie C">
                   </dd>
                 </div>
             </dl>
