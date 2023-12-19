@@ -152,8 +152,9 @@ export class GestionService {
   }
   // PAS A JOUR
 
-  obtenirUnAppartementParId(id: number): Observable<Appartement>{
-    return this.http.get<Appartement>(this.urlAppartements + id)
+  obtenirUnAppartementParId(userId: number | null, appartementId: number): Observable<Appartement>{
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}`
+    return this.http.get<Appartement>(url);
   }
   supprimerUnAppartement(appartement: Appartement): Observable<any> {
     const url = `${this.apiUrl}/utilisateurs/${appartement.appUser.id}/appartements/${appartement.id}`;
