@@ -25,7 +25,12 @@ export class AppartementItemComponent implements OnInit{
     this.route.paramMap.subscribe(params => {
       const appartementId = Number(params.get('id'));
       this.gestionService.obtenirPeriodeLocationPourAppartement(parseInt(localStorage.getItem('userId')), appartementId, 1).subscribe(periodes => {
-        this.periodLocation = periodes.content
+        if (periodes && periodes.content) {
+          this.periodLocation = periodes.content;
+        } else {
+          // Gérer le cas où content est vide ou non défini
+          this.periodLocation = [];
+        }
       })
       this.gestionService.getAppartmentByUserIdAndApartmentId(localStorage.getItem('userId'), appartementId)
         .subscribe(appartement => {

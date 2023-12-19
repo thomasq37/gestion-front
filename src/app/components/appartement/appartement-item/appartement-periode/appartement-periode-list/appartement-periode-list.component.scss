@@ -2,7 +2,11 @@
   margin-bottom: 1rem;
   margin-top: 1rem;
   .container{
+    .no-page{
+      min-height: 0 !important;
+    }
     .custom-card{
+
       min-height: 25rem;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 1rem;

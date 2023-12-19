@@ -36,14 +36,26 @@ export class AppartementPeriodeListComponent implements OnInit{
         if (!this.appartPeriodLocation) {
           this.appartPeriodLocation = [];
         }
-        this.appartPeriodLocation.push(periode);
+        if(this.currentPage === this.totalPages){
+          this.appartPeriodLocation.push(periode);
+        }
+        if(document.querySelector('.no-page') !== null){
+          document.querySelector('.no-page').classList.remove('no-page')
+        }
       }
     });
     if(this.appartementId !== null){
       this.gestionService.obtenirPeriodeLocationPourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
         periodes =>{
-          this.appartPeriodLocation = periodes.content
-          this.totalPages = periodes.totalPages
+          if (periodes && periodes.content) {
+            this.appartPeriodLocation = periodes.content
+            this.totalPages = periodes.totalPages
+          } else {
+            // Gérer le cas où content est vide ou non défini
+            this.appartPeriodLocation = [];
+            this.totalPages = 0;
+          }
+
         },
         error => {
           console.log("Erreur lors de la récupération des périodes de locations : ", error)
