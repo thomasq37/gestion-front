@@ -28,6 +28,7 @@ export class AppartementPeriodeListComponent implements OnInit{
         const index = this.appartPeriodLocation.findIndex(c => c.id === updatedPeriod.id);
         if (index !== -1) {
           this.appartPeriodLocation[index] = updatedPeriod;
+
         }
       }
     );
@@ -37,10 +38,16 @@ export class AppartementPeriodeListComponent implements OnInit{
           this.appartPeriodLocation = [];
         }
         if(this.currentPage === this.totalPages){
-          this.appartPeriodLocation.push(periode);
-        }
-        if(document.querySelector('.no-page') !== null){
-          document.querySelector('.no-page').classList.remove('no-page')
+          if(this.appartPeriodLocation.length + 1 === 6){
+            this.totalPages = 2
+          }
+          else{
+            this.appartPeriodLocation.push(periode);
+            if(this.totalPages === 0){
+              this.totalPages = 1;
+            }
+          }
+
         }
       }
     });
@@ -72,6 +79,25 @@ export class AppartementPeriodeListComponent implements OnInit{
     if (confirm("Êtes-vous sûr de vouloir supprimer cette période ? Cela entrainera la suppression de tous les frais associés.")) {
       const userId = parseInt(<string>localStorage.getItem('userId'));
       this.gestionService.supprimerUnePeriodePourAppartement(userId, this.appartementId, periodeId).subscribe(response => {
+        console.log(this.appartPeriodLocation.length)
+        if(this.appartPeriodLocation.length === 1){
+          this.currentPage = 0
+          this.gestionService.obtenirPeriodeLocationPourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
+            periodes =>{
+              if (periodes && periodes.content) {
+                this.appartPeriodLocation = periodes.content
+                this.totalPages = periodes.totalPages
+              } else {
+                // Gérer le cas où content est vide ou non défini
+                this.appartPeriodLocation = [];
+                this.totalPages = 0;
+              }
+
+            },
+            error => {
+              console.log("Erreur lors de la récupération des périodes de locations : ", error)
+            })
+        }
         this.appartPeriodLocation = this.appartPeriodLocation.filter(f => f.id !== periodeId);
         this.periodeToUpdate.emit(undefined);
       })
