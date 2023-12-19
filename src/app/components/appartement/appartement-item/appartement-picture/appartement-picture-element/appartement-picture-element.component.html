@@ -2,8 +2,8 @@
     <div class="container">
         <div class="custom-card">
             <div class="custom-card-header">
-                <h2>Photos</h2>
-                <a *ngIf="isProprietaire()" (click)="onModifyClick()">Modifier</a>
+              <h2>Photos</h2>
+              <img *ngIf="isProprietaire()" (click)="onModifyClick()" src="./assets/img/edit-icon.svg" alt="icone de modification">
             </div>
             <div class="carousel-container">
                 <ngb-carousel *ngIf="appartement.images && appartement.images.length">

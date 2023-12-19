@@ -3,7 +3,8 @@
         <div class="custom-card">
             <div class="custom-card-header">
               <h2>Description</h2>
-                <a *ngIf="isProprietaire()" (click)="onModifyClick()">Modifier</a>
+              <img *ngIf="isProprietaire()" (click)="onModifyClick()" src="./assets/img/edit-icon.svg" alt="icone de modification">
+                <!--<a *ngIf="isProprietaire()" (click)="onModifyClick()">Modifier</a>-->
             </div>
             <dl class="appartement-details">
                 <div class="detail-item">

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   data-name="Layer 1"
+   viewBox="0 0 94.779625 93.189644"
+   x="0px"
+   y="0px"
+   version="1.1"
+   id="svg19038"
+   sodipodi:docname="edit-icon.svg"
+   width="94.779625"
+   height="93.189644"
+   inkscape:version="1.2.2 (b0a84865, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs19042" />
+  <sodipodi:namedview
+     id="namedview19040"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.888"
+     inkscape:cx="42.637712"
+     inkscape:cy="50.847458"
+     inkscape:window-width="1440"
+     inkscape:window-height="456"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg19038" />
+  <title
+     id="title19028">Edit</title>
+  <path
+     d="m 66.739814,11.276525 -48.74,48.74 -0.033,0.149 -3.922,18.295 18.295,-3.922 0.149,-0.032 48.74,-48.74 z m -34.342,60.027 -11.2,-11.2 35.6,-35.594 11.2,11.2 z"
+     id="path19032"
+     style="fill:#143b86;fill-opacity:1" />
+</svg>
