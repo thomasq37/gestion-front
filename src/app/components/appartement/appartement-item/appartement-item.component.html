@@ -16,7 +16,7 @@
       <!--Frais-->
       <app-appartement-frais-list  *ngIf="isProprietaire()" [appartementId]="appartement.id" [appartementFrais]="appartement.fraisFixe"></app-appartement-frais-list>
       <!--Entrées/Sorties-->
-      <app-appartement-periode-list [appartementId]="appartement.id" [appartPeriodLocation]="appartement.periodLocation"></app-appartement-periode-list>
+      <app-appartement-periode-list [appartementId]="appartement.id" [appartPeriodLocation]="periodLocation"></app-appartement-periode-list>
       <!--Statistiques-->
       <app-appartement-metrique-element *ngIf="isProprietaire()" [appartement]="appartement"></app-appartement-metrique-element>
       <!--Contacts-->

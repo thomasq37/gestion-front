@@ -1,6 +1,6 @@
 import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Appartement, Frais} from "../../../models/gestion";
+import {Appartement, Frais, PeriodLocation} from "../../../models/gestion";
 import {GestionService} from "../../../services/gestion.service";
 
 @Component({
@@ -12,6 +12,7 @@ export class AppartementItemComponent implements OnInit{
   images: string[] = [];
   appartement!: Appartement;
   frais: Frais[] = [];
+  periodLocation: PeriodLocation[] = [];
   constructor(
     private gestionService: GestionService,
     private route: ActivatedRoute,
@@ -23,6 +24,9 @@ export class AppartementItemComponent implements OnInit{
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const appartementId = Number(params.get('id'));
+      this.gestionService.obtenirPeriodeLocationPourAppartement(parseInt(localStorage.getItem('userId')), appartementId, 1).subscribe(periodes => {
+        this.periodLocation = periodes.content
+      })
       this.gestionService.getAppartmentByUserIdAndApartmentId(localStorage.getItem('userId'), appartementId)
         .subscribe(appartement => {
           this.appartement = appartement;

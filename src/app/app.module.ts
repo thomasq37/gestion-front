@@ -39,6 +39,7 @@ import { AppartementGestionnaireManageComponent } from './components/appartement
 import { AppartementGestionnaireAddComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-add/appartement-gestionnaire-add.component';
 import { AppartementGestionnaireListComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-list/appartement-gestionnaire-list.component';
 import { AppartementGestionnaireUpdateComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-update/appartement-gestionnaire-update.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +74,8 @@ import { AppartementGestionnaireUpdateComponent } from './components/appartement
     AppartementGestionnaireManageComponent,
     AppartementGestionnaireAddComponent,
     AppartementGestionnaireListComponent,
-    AppartementGestionnaireUpdateComponent
+    AppartementGestionnaireUpdateComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,50 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <!-- Go to first page -->
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <button class="page-link" (click)="selectPage(1)">&laquo;&laquo;</button>
+    </li>
+    <!-- Go to previous page -->
+    <li class="page-item" [class.disabled]="currentPage === 1">
+      <button class="page-link" (click)="selectPage(currentPage - 1)">&laquo;</button>
+    </li>
+
+    <!-- Show ellipsis and jump to first page if not on first two pages -->
+    <li class="page-item" *ngIf="currentPage > 3">
+      <button class="page-link" (click)="selectPage(1)">1</button>
+    </li>
+    <li class="page-item" *ngIf="currentPage > 3">
+      <p class="page-link" disabled>...</p>
+    </li>
+
+    <!-- Show previous page number if current page is greater than 1 -->
+    <li class="page-item" *ngIf="currentPage > 1">
+      <button class="page-link" (click)="selectPage(currentPage - 1)">{{ currentPage - 1 }}</button>
+    </li>
+    <!-- Current page number -->
+    <li class="page-item active">
+      <button class="page-link">{{ currentPage }}</button>
+    </li>
+    <!-- Show next page number if current page is less than totalPages -->
+    <li class="page-item" *ngIf="currentPage < totalPages">
+      <button class="page-link" (click)="selectPage(currentPage + 1)">{{ currentPage + 1 }}</button>
+    </li>
+
+    <!-- Show ellipsis and jump to last page if not on last two pages -->
+    <li class="page-item" *ngIf="currentPage < totalPages - 2">
+      <p class="page-link" disabled>...</p>
+    </li>
+    <li class="page-item" *ngIf="currentPage < totalPages - 2">
+      <button class="page-link" (click)="selectPage(totalPages)">{{ totalPages }}</button>
+    </li>
+
+    <!-- Go to next page -->
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <button class="page-link" (click)="selectPage(currentPage + 1)">&raquo;</button>
+    </li>
+    <!-- Go to last page -->
+    <li class="page-item" [class.disabled]="currentPage === totalPages">
+      <button class="page-link" (click)="selectPage(totalPages)">&raquo;&raquo;</button>
+    </li>
+  </ul>
+</nav>

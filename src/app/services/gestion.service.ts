@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Frais, TypeFrais, Appartement, PeriodLocation, Contact, AppUserDTO, Pays} from "../models/gestion";
+import {PageableResponse} from "../models/pageable";
+
 import { Observable, Subject} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -81,9 +83,12 @@ export class GestionService {
 
   // ---------------------- PERIODES ---------------------- //
 
-  obtenirPeriodeLocationPourAppartement(userId: number | null, appartementId: number) : Observable<PeriodLocation[]> {
+  obtenirPeriodeLocationPourAppartement(userId: number | null, appartementId: number, currentPage: number) : Observable<PageableResponse<PeriodLocation>> {
+    const params = new HttpParams()
+      .set('page', currentPage.toString())
+      .set('size', '5');
     const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/periodes`;
-    return this.http.get<PeriodLocation[]>(url)
+    return this.http.get<PageableResponse<PeriodLocation>>(url, {params})
   }
 
   ajouterUnePeriodeLocationPourAppartement(userId: number | null, appartementId: number | null, newPeriode: PeriodLocation) : Observable<PeriodLocation> {

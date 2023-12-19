@@ -34,6 +34,9 @@ export class AppartementContactListComponent {
     );
     this.subscription = this.gestionService.contactAddedSubject.subscribe(contact => {
       if (contact) {
+        if (!this.appartementContacts) {
+          this.appartementContacts = [];
+        }
         this.appartementContacts.push(contact);
       }
     });

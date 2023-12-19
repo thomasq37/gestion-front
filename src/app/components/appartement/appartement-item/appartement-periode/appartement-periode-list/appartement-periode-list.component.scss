@@ -3,10 +3,18 @@
   margin-top: 1rem;
   .container{
     .custom-card{
+      min-height: 25rem;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 1rem;
       border: 1px solid #ccc;
       border-radius: 4px;
+      position: relative;
+      app-pagination{
+        position: absolute;
+        bottom:1rem;
+        width: 100%;
+        left: 0;
+      }
       .custom-card-header{
         display: flex;
         justify-content: space-between;

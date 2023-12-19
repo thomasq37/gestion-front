@@ -13,9 +13,11 @@ export class AppartementPeriodeListComponent implements OnInit{
   @Input() appartPeriodLocation: PeriodLocation[] = [];
   @Input() isEditable: boolean = false
   @Output() periodeToUpdate = new EventEmitter<PeriodLocation>();
-
+  totalPages: number;
+  currentPage: number = 1;
   protected periodeAddedSubject!: Subscription
   protected periodeUpdatedSubject!: Subscription
+  userId = parseInt(<string>localStorage.getItem('userId'))
 
   constructor(private gestionService: GestionService) {}
 
@@ -31,14 +33,17 @@ export class AppartementPeriodeListComponent implements OnInit{
     );
     this.periodeAddedSubject = this.gestionService.periodeAddedSubject.subscribe(periode => {
       if (periode) {
+        if (!this.appartPeriodLocation) {
+          this.appartPeriodLocation = [];
+        }
         this.appartPeriodLocation.push(periode);
       }
     });
-    if(this.isEditable && this.appartementId !== null){
-      const userId = parseInt(<string>localStorage.getItem('userId'))
-      this.gestionService.obtenirPeriodeLocationPourAppartement(userId, this.appartementId).subscribe(
+    if(this.appartementId !== null){
+      this.gestionService.obtenirPeriodeLocationPourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
         periodes =>{
-          this.appartPeriodLocation = periodes
+          this.appartPeriodLocation = periodes.content
+          this.totalPages = periodes.totalPages
         },
         error => {
           console.log("Erreur lors de la récupération des périodes de locations : ", error)
@@ -59,5 +64,17 @@ export class AppartementPeriodeListComponent implements OnInit{
         this.periodeToUpdate.emit(undefined);
       })
     }
+  }
+
+  onPageChange($event: any) {
+    this.currentPage = $event
+    this.gestionService.obtenirPeriodeLocationPourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
+      periodes =>{
+        this.appartPeriodLocation = periodes.content
+        this.totalPages = periodes.totalPages
+      },
+      error => {
+        console.log("Erreur lors de la récupération des périodes de locations : ", error)
+      })
   }
 }
