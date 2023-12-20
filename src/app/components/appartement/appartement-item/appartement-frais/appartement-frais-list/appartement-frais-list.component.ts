@@ -48,7 +48,6 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
   }
 
   ngOnInit(): void {
-    this.totalPages = 2
     this.updateFraisSubscription = this.gestionService.fraisUpdatedSubject.subscribe(
       (updatedFrais: Frais) => {
         const index = this.appartementFrais.findIndex(c => c.id === updatedFrais.id);
@@ -73,7 +72,7 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
       }
     });
 
-    if(!this.isPeriode && this.isEditable && this.appartementId !== null){
+    if(!this.isPeriode && this.appartementId !== null){
       this.gestionService.obtenirFraisFixePourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
         frais =>{
           if (frais && frais.content) {
@@ -83,6 +82,7 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
             // Gérer le cas où content est vide ou non défini
             this.appartementFrais = [];
             this.totalPages = 0;
+            console.log(this.totalPages)
           }
         },
         error => {
