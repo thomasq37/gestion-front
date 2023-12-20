@@ -111,20 +111,56 @@
         }
       }
     }
-    .appartement-item-btn-delete{
-      width: 100%;
-      color: white;
-      margin-bottom: 1rem;
-      padding: .8rem;
-    }
-    .appartement-tem-btn-gestionnaires{
+    .actions-container{
+      display:flex;
+      flex-direction:column;
+      gap:.5rem;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      border: 1px solid #ccc;
       border-radius: 4px;
-      font-size: .9rem;
-      width: 100%;
-      padding: .5rem;
       margin-bottom: 1rem;
-      background-color: #143b86;
-      border: none;
-      color: white;
+      h2{
+        font-size: .9rem;
+      }
+      button{
+        background: none;
+        border:none
+
+      }
+      .appartement-actions {
+        width:100%;
+        display: inline-flex; /* Utilisez flex pour aligner l'image et le texte */
+        align-items: center; /* Centrer les éléments verticalement */
+        justify-content: space-between; /* Centrer les éléments horizontalement */
+        padding: 10px 20px; /* Ajoutez un padding pour augmenter la taille */
+        border: 1px solid #ccc; /* Pas de bordure */
+        cursor: pointer; /* Change le curseur pour indiquer qu'il est cliquable */
+        color:#143b86;
+        text-decoration: none; /* Aucune décoration de texte pour ressembler à un lien */
+        border-radius: 5px; /* Bordures arrondies */
+        font-weight: bold; /* Rendre le texte en gras */
+        font-size: 1rem; /* Taille du texte */
+        transition: color 0.3s; /* Transition douce pour les interactions */
+      }
+      .corbeille{
+        color: #ff0a0a;
+      }
+
+      .appartement-actions:hover{
+        color: #081c43;
+
+      }
+      .corbeille:hover{
+        color: #ff0a0a;
+      }
+
+      .appartement-actions img {
+        margin-left: 10px; /* Espace entre l'image et le texte */
+        width: 24px; /* Taille de l'image */
+        height: auto; /* Pour maintenir le ratio aspect de l'image */
+      }
+
     }
+
 }

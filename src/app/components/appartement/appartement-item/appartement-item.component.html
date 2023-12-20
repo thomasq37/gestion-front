@@ -23,9 +23,18 @@
       <app-appartement-contact-list [appartementId]="appartement.id" [appartementContacts]="appartement.contacts"></app-appartement-contact-list>
     </div>
     <div class="container">
-      <button [routerLink]="['/appartement/' +  appartement.id + '/gestionnaires']"
-       class="appartement-tem-btn-gestionnaires" >Voir gestionnaires</button>
-      <button *ngIf="appartement.id && isProprietaire()" (click)="supprimerUnAppartement(appartement)" class="appartement-item-btn-delete btn bg-danger">Suprimmer l'appartement</button>
-    </div>
+      <div class="actions-container">
+        <div class="appartement-actions" [routerLink]="['/appartement/' +  appartement.id + '/gestionnaires']"
+        >
+          <span>Gestionnaires</span>
+          <img src="./assets/img/gest-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
+        </div>
+        <div class="appartement-actions corbeille" *ngIf="appartement.id && isProprietaire()" (click)="supprimerUnAppartement(appartement)">
+          <span>Corbeille</span>
+          <img src="./assets/img/trash-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
+        </div>
+
+      </div>
+      </div>
   </section>
 <app-footer></app-footer>
