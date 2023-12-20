@@ -13,7 +13,7 @@ export class AppartementDescUpdateComponent implements OnInit {
   appartement: Appartement;
   appartementForm: FormGroup;
   paysList: Pays[] = [];
-  dpeLetterList: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+  dpeLetterList: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'Non renseigné'];
 
   constructor(
     private formBuilder: FormBuilder,

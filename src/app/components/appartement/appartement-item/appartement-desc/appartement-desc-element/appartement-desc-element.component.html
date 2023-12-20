@@ -46,7 +46,8 @@
                   <dt><img src="./assets/img/energie-icon.png" alt="Icône de la classe énergie"></dt>
                   <dd>
                     <strong>Classe énergie:</strong>
-                    <img src="./assets/img/energie-{{appartement.dpe.toLowerCase()}}-icon.png" alt="Icône de la classe énergie C">
+                    <img *ngIf="appartement.dpe !== 'Non renseigné'" src="./assets/img/energie-{{appartement.dpe.toLowerCase()}}-icon.png" alt="Icône de la classe énergie C">
+                    <p *ngIf="appartement.dpe === 'Non renseigné'">Non renseigné</p>
                   </dd>
                 </div>
             </dl>
