@@ -14,6 +14,8 @@ export class GestionService {
   private urlAppartements  = this.apiUrl + '/appartements/'
   contactAddedSubject = new Subject<Contact>();
   contactUpdatedSubject = new Subject<Contact>();
+  gestionnaireAddedSubject = new Subject<AppUserDTO>()
+  gestionnaireUpdatedSubject = new Subject<AppUserDTO>()
   fraisAddedSubject = new Subject<Frais>();
   fraisUpdatedSubject = new Subject<Frais>();
   periodeAddedSubject = new Subject<PeriodLocation>();
@@ -61,9 +63,12 @@ export class GestionService {
 
   // ---------------------- FRAIS ---------------------- //
 
-  obtenirFraisFixePourAppartement(userId: number | null, appartementId: number): Observable<Frais[]> {
+  obtenirFraisFixePourAppartement(userId: number | null, appartementId: number, currentPage: number): Observable<PageableResponse<Frais>> {
+    const params = new HttpParams()
+      .set('page', currentPage.toString())
+      .set('size', '5');
     const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/frais`;
-    return this.http.get<Frais[]>(url)
+    return this.http.get<PageableResponse<Frais>>(url, {params})
   }
 
   ajouterUnFraisFixePourAppartement(userId: number | null, appartementId: number | null, nouveauFrais: Frais) :Observable<Frais>{
@@ -109,9 +114,12 @@ export class GestionService {
   // ---------------------- PERIODES-FRAIS ---------------------- //
 
 
-  obtenirFraisFixePourPeriode(userId: number | null, appartementId: number, periodeId): Observable<Frais[]> {
+  obtenirFraisFixePourPeriode(userId: number | null, appartementId: number, periodeId, currentPage: number): Observable<PageableResponse<Frais>> {
+    const params = new HttpParams()
+      .set('page', currentPage.toString())
+      .set('size', '5');
     const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/periodes/${periodeId}/frais`;
-    return this.http.get<Frais[]>(url)
+    return this.http.get<PageableResponse<Frais>>(url, {params})
   }
 
   ajouterUnFraisFixePourPeriode(userId: number | null, appartementId: number | null, periodeId,  nouveauFrais: Frais) :Observable<Frais>{
@@ -143,7 +151,15 @@ export class GestionService {
     return this.http.get<AppUserDTO[]>(url)
   }
 
+  mettreAJourUnGestionnairePourAppartement(userId: number | null, appartementId: number | null, gestionnaireId: number | undefined, modifieGestionnaire: AppUserDTO): Observable<AppUserDTO> {
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/gestionnaires/${gestionnaireId}`;
+    return this.http.put<AppUserDTO>(url, modifieGestionnaire)
+  }
 
+  supprimerUnGestionnairePourAppartement(userId: number, appartementId: number, gestionnaireId) {
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/gestionnaires/${gestionnaireId}`;
+    return this.http.delete(url);
+  }
   // ---------------------- PAYS ---------------------- //
 
   obtenirListePays(): Observable<Pays[]> {
@@ -179,4 +195,5 @@ export class GestionService {
   supprimerUnFraisPourPeriode(periodeId: number, fraisId: number): Observable<any> {
     return this.http.delete(this.urlAppartements  +"periodes/" + periodeId + "/frais/" + fraisId);
   }
+
 }

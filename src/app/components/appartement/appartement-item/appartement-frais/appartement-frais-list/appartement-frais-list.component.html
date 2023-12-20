@@ -27,6 +27,8 @@
                 </tr>
                 </tbody>
             </table>
+          <app-pagination *ngIf="totalPages > 1" [currentPage]="currentPage" [totalPages]="totalPages" (pageChanged)="onPageChange($event)"></app-pagination>
+
         </div>
     </div>
 </section>

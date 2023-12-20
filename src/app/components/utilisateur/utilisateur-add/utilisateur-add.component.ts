@@ -27,7 +27,6 @@ export class UtilisateurAddComponent {
         this.authService.createUser(username, password, token).subscribe(
           (response) => {
             this.accountIsCreated = true
-            console.log(response)
             this.message = response.message
           },
 

@@ -18,6 +18,10 @@
         <label for="token">Code d'invitation <span aria-hidden="true">*</span></label>
         <input type="text" id="token" formControlName="token" aria-required="true" class="form-control">
       </div>
+      <div>
+        <p>{{message}}</p>
+
+      </div>
 
       <button type="submit" class="{{appGestionnaireForm.valid ? '' : 'disabled'}}" [disabled]="!appGestionnaireForm.valid">Créer le compte</button>
       <p><span aria-hidden="true">*</span> Veuillez remplir tous les champs</p>

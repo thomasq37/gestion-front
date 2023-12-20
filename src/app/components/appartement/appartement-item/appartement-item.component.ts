@@ -11,7 +11,7 @@ import {GestionService} from "../../../services/gestion.service";
 export class AppartementItemComponent implements OnInit{
   images: string[] = [];
   appartement!: Appartement;
-  frais: Frais[] = [];
+  fraisFixe: Frais[] = [];
   periodLocation: PeriodLocation[] = [];
   constructor(
     private gestionService: GestionService,
@@ -30,6 +30,13 @@ export class AppartementItemComponent implements OnInit{
         } else {
           // Gérer le cas où content est vide ou non défini
           this.periodLocation = [];
+        }
+      })
+      this.gestionService.obtenirFraisFixePourAppartement(parseInt(localStorage.getItem('userId')), appartementId, 0).subscribe(fraisFixe => {
+        if (fraisFixe && fraisFixe.content) {
+          this.fraisFixe = fraisFixe.content;
+        } else {
+          this.fraisFixe = [];
         }
       })
       this.gestionService.getAppartmentByUserIdAndApartmentId(localStorage.getItem('userId'), appartementId)

@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../../services/auth.service";
+import {GestionService} from "../../../../../services/gestion.service";
 
 @Component({
   selector: 'app-appartement-gestionnaire-add',
@@ -9,10 +10,12 @@ import {AuthService} from "../../../../../services/auth.service";
 })
 export class AppartementGestionnaireAddComponent {
   appGestionnaireForm!: FormGroup;
+  message: '';
   @Input() appartementId: number;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private gestionService: GestionService
   ) {}
 
 
@@ -29,8 +32,12 @@ export class AppartementGestionnaireAddComponent {
       const { username, password, token } = this.appGestionnaireForm.value
       const userId = parseInt(<string>localStorage.getItem('userId'))
       this.authService.createGestionnaire(userId, this.appartementId, username, password, token).subscribe(
-        () => console.log('Utilisateur ajouté avec succès.'),
-        (error) => console.error('Erreur lors de la création de l\'uitlisateur : ', error)
+        (userDto) => {
+          this.gestionService.gestionnaireAddedSubject.next(userDto);
+          this.appGestionnaireForm.reset()
+          this.message = ''
+        },(response) =>
+          this.message = response.error.message
       );
     }
 

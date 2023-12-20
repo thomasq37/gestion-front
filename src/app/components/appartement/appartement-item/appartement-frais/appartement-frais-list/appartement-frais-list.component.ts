@@ -15,6 +15,10 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
   @Input() isEditable: boolean = false
   @Input() isPeriode: boolean = false
   @Input() periode: PeriodLocation | null = null;
+  totalPages: number;
+  currentPage: number = 1;
+  userId = parseInt(<string>localStorage.getItem('userId'));
+
 
   protected addedFraisSubscription!: Subscription;
   protected updateFraisSubscription!: Subscription;
@@ -26,10 +30,16 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['periode'] && changes['periode'].currentValue) {
-      const userId = parseInt(<string>localStorage.getItem('userId'))
-      this.gestionService.obtenirFraisFixePourPeriode(userId, this.appartementId, this.periode.id).subscribe(
+      this.gestionService.obtenirFraisFixePourPeriode(this.userId, this.appartementId, this.periode.id,this.currentPage -1).subscribe(
         frais =>{
-          this.appartementFrais = frais
+          if (frais && frais.content) {
+            this.appartementFrais = frais.content
+            this.totalPages = frais.totalPages
+          } else {
+            // Gérer le cas où content est vide ou non défini
+            this.appartementFrais = [];
+            this.totalPages = 0;
+          }
         },
         error => {
           console.log("Erreur lors de la récupération des frais : " + error)
@@ -38,6 +48,7 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
   }
 
   ngOnInit(): void {
+    this.totalPages = 2
     this.updateFraisSubscription = this.gestionService.fraisUpdatedSubject.subscribe(
       (updatedFrais: Frais) => {
         const index = this.appartementFrais.findIndex(c => c.id === updatedFrais.id);
@@ -51,25 +62,44 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
         if(!this.appartementFrais) {
           this.appartementFrais = [];
         }
-        this.appartementFrais.push(frais);
+        this.appartementFrais.unshift(frais);
+        if (this.appartementFrais.length > 5) {
+          this.appartementFrais.pop();
+          this.totalPages = 2
+        }
+        else if(this.totalPages === 0){
+          this.totalPages = 1;
+        }
       }
     });
 
     if(!this.isPeriode && this.isEditable && this.appartementId !== null){
-      const userId = parseInt(<string>localStorage.getItem('userId'))
-      this.gestionService.obtenirFraisFixePourAppartement(userId, this.appartementId).subscribe(
+      this.gestionService.obtenirFraisFixePourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
         frais =>{
-          this.appartementFrais = frais
+          if (frais && frais.content) {
+            this.appartementFrais = frais.content
+            this.totalPages = frais.totalPages
+          } else {
+            // Gérer le cas où content est vide ou non défini
+            this.appartementFrais = [];
+            this.totalPages = 0;
+          }
         },
         error => {
           console.log("Erreur lors de la récupération des frais : " + error)
         })
     }
     if(this.isPeriode && this.isEditable && this.appartementId !== null && this.periode){
-      const userId = parseInt(<string>localStorage.getItem('userId'))
-      this.gestionService.obtenirFraisFixePourPeriode(userId, this.appartementId, this.periode.id).subscribe(
+      this.gestionService.obtenirFraisFixePourPeriode(this.userId, this.appartementId, this.periode.id,this.currentPage -1).subscribe(
         frais =>{
-          this.appartementFrais = frais
+          if (frais && frais.content) {
+            this.appartementFrais = frais.content
+            this.totalPages = frais.totalPages
+          } else {
+            // Gérer le cas où content est vide ou non défini
+            this.appartementFrais = [];
+            this.totalPages = 0;
+          }
         },
         error => {
           console.log("Erreur lors de la récupération des frais : " + error)
@@ -83,8 +113,45 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
 
   onDeleteFrais(fraisId: number | undefined) {
     if (confirm("Êtes-vous sûr de vouloir supprimer ce frais ?")) {
-      const userId = parseInt(<string>localStorage.getItem('userId'));
-      this.gestionService.supprimerUnFraisPourAppartement(userId, this.appartementId, fraisId).subscribe(response => {
+      this.gestionService.supprimerUnFraisPourAppartement(this.userId, this.appartementId, fraisId).subscribe(response => {
+        console.log(this.appartementFrais.length)
+        if (this.appartementFrais.length === 1) {
+          this.totalPages = 1;
+          this.currentPage = 1
+
+          if(!this.isPeriode){
+            this.gestionService.obtenirFraisFixePourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
+              frais =>{
+                if (frais && frais.content) {
+                  this.appartementFrais = frais.content
+                  this.totalPages = frais.totalPages
+                } else {
+                  // Gérer le cas où content est vide ou non défini
+                  this.appartementFrais = [];
+                  this.totalPages = 0;
+                }
+              },
+              error => {
+                console.log("Erreur lors de la récupération des frais : " + error)
+              })
+          }
+          else{
+            this.gestionService.obtenirFraisFixePourPeriode(this.userId, this.appartementId, this.periode.id,this.currentPage -1).subscribe(
+              frais =>{
+                if (frais && frais.content) {
+                  this.appartementFrais = frais.content
+                  this.totalPages = frais.totalPages
+                } else {
+                  // Gérer le cas où content est vide ou non défini
+                  this.appartementFrais = [];
+                  this.totalPages = 0;
+                }
+              },
+              error => {
+                console.log("Erreur lors de la récupération des frais : " + error)
+              })
+          }
+        }
         this.appartementFrais = this.appartementFrais.filter(f => f.id !== fraisId);
         if(this.isPeriode){
           return
@@ -93,5 +160,41 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
       })
     }
 
+  }
+
+  onPageChange($event: number) {
+    this.currentPage = $event
+    if(!this.isPeriode && this.appartementId !== null){
+      this.gestionService.obtenirFraisFixePourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
+        frais =>{
+          if (frais && frais.content) {
+            this.appartementFrais = frais.content
+            this.totalPages = frais.totalPages
+          } else {
+            // Gérer le cas où content est vide ou non défini
+            this.appartementFrais = [];
+            this.totalPages = 0;
+          }
+        },
+        error => {
+          console.log("Erreur lors de la récupération des frais : " + error)
+        })
+    }
+    if(this.isPeriode && this.isEditable && this.appartementId !== null && this.periode){
+      this.gestionService.obtenirFraisFixePourPeriode(this.userId, this.appartementId, this.periode.id,this.currentPage -1).subscribe(
+        frais =>{
+          if (frais && frais.content) {
+            this.appartementFrais = frais.content
+            this.totalPages = frais.totalPages
+          } else {
+            // Gérer le cas où content est vide ou non défini
+            this.appartementFrais = [];
+            this.totalPages = 0;
+          }
+        },
+        error => {
+          console.log("Erreur lors de la récupération des frais : " + error)
+        })
+    }
   }
 }

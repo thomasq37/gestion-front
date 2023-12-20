@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { tap } from 'rxjs/operators';
 import {Router} from "@angular/router";
+import {AppUserDTO} from "../models/gestion";
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +58,7 @@ export class AuthService {
       user: { username, password },
       token
     };
-    return this.http.post(url, userRequest,{ responseType: 'json' });
+    return this.http.post<AppUserDTO>(url, userRequest,{ responseType: 'json' });
   }
 }
 export interface User {

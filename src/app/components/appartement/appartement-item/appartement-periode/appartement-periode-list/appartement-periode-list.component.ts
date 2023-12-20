@@ -37,19 +37,27 @@ export class AppartementPeriodeListComponent implements OnInit{
         if (!this.appartPeriodLocation) {
           this.appartPeriodLocation = [];
         }
-        if(this.currentPage === this.totalPages){
-          if(this.appartPeriodLocation.length + 1 === 6){
-            this.totalPages = 2
-          }
-          else{
-            this.appartPeriodLocation.push(periode);
-            if(this.totalPages === 0){
-              this.totalPages = 1;
-            }
-          }
 
+
+        // Trouver l'index où la période doit être insérée
+        const insertIndex = this.appartPeriodLocation.findIndex(p => p.estEntree < periode.estEntree);
+
+        if (insertIndex === -1) {
+          // Si aucune période n'est plus ancienne, ajouter à la fin
+          this.appartPeriodLocation.push(periode);
+        } else {
+          // Insérer la période au bon endroit
+          this.appartPeriodLocation.splice(insertIndex, 0, periode);
+        }
+        if (this.appartPeriodLocation.length > 5) {
+          this.appartPeriodLocation.pop();
+          this.totalPages = 2
+        }
+        else if(this.totalPages === 0){
+          this.totalPages = 1;
         }
       }
+
     });
     if(this.appartementId !== null){
       this.gestionService.obtenirPeriodeLocationPourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
@@ -79,9 +87,8 @@ export class AppartementPeriodeListComponent implements OnInit{
     if (confirm("Êtes-vous sûr de vouloir supprimer cette période ? Cela entrainera la suppression de tous les frais associés.")) {
       const userId = parseInt(<string>localStorage.getItem('userId'));
       this.gestionService.supprimerUnePeriodePourAppartement(userId, this.appartementId, periodeId).subscribe(response => {
-        console.log(this.appartPeriodLocation.length)
         if(this.appartPeriodLocation.length === 1){
-          this.currentPage = 0
+          this.currentPage = 1
           this.gestionService.obtenirPeriodeLocationPourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
             periodes =>{
               if (periodes && periodes.content) {

@@ -21,11 +21,13 @@ export class AppartementGestionnaireManageComponent implements OnInit{
     })
   }
 
-  setGestionnaireToUpdate($event: AppUserDTO) {
+  setGestionnaireToUpdate(gestionnaire: AppUserDTO) {
+    this.gestionnaireToUpdate = gestionnaire
+    this.isUpdateMode = !!gestionnaire;
 
   }
 
   handleCancelUpdate() {
-
+    this.isUpdateMode = false;
   }
 }
