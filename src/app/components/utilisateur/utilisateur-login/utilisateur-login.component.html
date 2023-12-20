@@ -14,7 +14,9 @@
         <label for="password">Mot de passe <span aria-hidden="true">*</span></label>
         <input type="password" id="password" formControlName="password" class="form-control" aria-required="true">
       </div>
-
+      <div>
+        {{message}}
+      </div>
       <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">
         Se connecter
       </button>

@@ -82,7 +82,6 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
             // Gérer le cas où content est vide ou non défini
             this.appartementFrais = [];
             this.totalPages = 0;
-            console.log(this.totalPages)
           }
         },
         error => {
@@ -114,7 +113,6 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
   onDeleteFrais(fraisId: number | undefined) {
     if (confirm("Êtes-vous sûr de vouloir supprimer ce frais ?")) {
       this.gestionService.supprimerUnFraisPourAppartement(this.userId, this.appartementId, fraisId).subscribe(response => {
-        console.log(this.appartementFrais.length)
         if (this.appartementFrais.length === 1) {
           this.totalPages = 1;
           this.currentPage = 1

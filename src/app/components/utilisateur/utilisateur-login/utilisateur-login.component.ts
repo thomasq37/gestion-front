@@ -9,7 +9,7 @@ import {AuthService} from "../../../services/auth.service";
 })
 export class UtilisateurLoginComponent {
   loginForm: FormGroup;
-
+  message: ''
   constructor(private formBuilder: FormBuilder, private authenticationService: AuthService) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -23,10 +23,11 @@ export class UtilisateurLoginComponent {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
       this.authenticationService.login(username, password).subscribe(
-        (token) => {
+        () => {
           console.log('Connexion effectué avec succès.');
         },
         (error) => {
+          this.message = error.error
           console.error('Erreur lors de la connexion : ', error);
         }
       );

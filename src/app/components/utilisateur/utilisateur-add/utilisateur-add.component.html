@@ -19,8 +19,10 @@
         <label for="token">Code d'invitation <span aria-hidden="true">*</span></label>
         <input type="text" id="token" formControlName="token" class="form-control" aria-required="true">
       </div>
+      <div>
+        <p>{{ message }}</p>
 
-      <p>{{ message }}</p>
+      </div>
 
       <button *ngIf="!accountIsCreated" type="submit" class="btn btn-primary" [disabled]="!userForm.valid">
         Créer votre compte
