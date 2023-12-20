@@ -29,6 +29,23 @@
 
       table{
         width: 100%;
+        /* Pour les entêtes de colonnes */
+        th.email, td.email {
+          max-width: 150px; /* Ajustez en fonction de l'espace disponible */
+        }
+
+        th.phone, td.phone {
+          max-width: 100px; /* Ajustez en fonction de l'espace disponible */
+        }
+
+        /* Pour les cellules de données */
+        td.email a, td.phone a {
+          display: block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
         thead, tbody, tfoot, tr, td, th {
           padding: .7rem .3rem;
           font-size: .8rem;

@@ -17,8 +17,8 @@
                 <tbody>
                 <tr *ngFor="let contact of appartementContacts">
                     <td>{{ contact.pseudo }}</td>
-                    <td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
-                    <td><a href="tel:{{ contact.phoneNumber }}">{{ contact.phoneNumber }}</a></td>
+                    <td class="email"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
+                    <td class="phone"><a href="tel:{{ contact.phoneNumber }}">{{ contact.phoneNumber }}</a></td>
                     <td *ngIf="isEditable"  class="actions-container">
                         <img src="../../../../assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdateContact(contact)"/>
                         <img src="../../../../assets/img/trash-icon.svg" alt="trash icon" (click)="onDeleteContact(contact.id)"/>

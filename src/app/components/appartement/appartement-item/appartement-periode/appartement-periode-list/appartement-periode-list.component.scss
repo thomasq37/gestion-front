@@ -23,7 +23,7 @@
         margin-bottom: 1rem;
         display: flex;
         justify-content: space-between;
-        align-items: end;
+        align-items: flex-end;
 
         h2 {
           font-size: .9rem;
@@ -42,7 +42,7 @@
       table{
         width: 100%;
         thead, tbody, tfoot, tr, td, th {
-          padding: .7rem .3rem;
+          padding: .6rem .2rem;
           font-size: .8rem;
           button{
             margin: 0;
