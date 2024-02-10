@@ -22,8 +22,11 @@ a{
     font-size: 1.1rem;
   }
 }
+tr,td{
+  height: 100%;
+}
 .actions-container{
-  display: flex;
+  display: inline-flex;
   gap:.5rem;
 
 
