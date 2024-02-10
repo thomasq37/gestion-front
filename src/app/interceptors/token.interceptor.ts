@@ -13,7 +13,7 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('auth_token');
     const userToken = localStorage.getItem('userToken');
-    if (token) {
+    if (token && !request.url.includes('/completions')) {
       request = request.clone({
         setHeaders: {
           "X-API-USER-KEY": `${userToken}`,
