@@ -1,37 +1,34 @@
+table{
+  width: 100%;
 
-.mouvement-list{
-  font-size: .7rem;
-}
-a{
-  font-size: .7rem;
-}
-@media (min-width: 400px) {
-  .mouvement-list{
-    font-size: .9rem;
+  thead, tbody, tfoot, tr, td, th {
+    padding: .7rem .3rem;
+    font-size: .8rem;
+    button{
+      margin: 0;
+    }
   }
-  a{
-    font-size: .9rem;
+  tr {
+    border: 1px solid #e3e3e3;
+    .actions-container{
+      display: flex;
+      gap: .2rem;
+      justify-content: space-between;
+      height: 100%;
+      button{
+        margin:auto;
+      }
+      a{
+        color: white;
+      }
+    }
   }
-}
+  td, th{
+    a{
+      color: #143b86;
 
-@media (min-width: 600px) {
-  .mouvement-list{
-    font-size: 1.1rem;
-  }
-
-  a{
-    font-size: 1.1rem;
-  }
-}
-tr,td{
-  height: 100%;
-}
-.actions-container{
-  display: inline-flex;
-  gap:.5rem;
-
-  button{
-    margin:auto;
+    }
+    border-left: 1px solid #d7d7d7;
   }
 
 }
