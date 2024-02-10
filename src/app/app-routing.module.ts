@@ -12,6 +12,9 @@ import {AppartementAddComponent} from "./components/appartement/appartement-add/
 import {UtilisateurAddComponent} from "./components/utilisateur/utilisateur-add/utilisateur-add.component";
 import {UtilisateurLoginComponent} from "./components/utilisateur/utilisateur-login/utilisateur-login.component";
 import {AppartementGestionnaireManageComponent} from "./components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-manage/appartement-gestionnaire-manage.component";
+import {DashboardFinancesComponent} from "./components/finances/dashboard-finances/dashboard-finances.component";
+import {MouvementAddComponent} from "./components/finances/mouvement-add/mouvement-add.component";
+import {MouvementUpdateComponent} from "./components/finances/mouvement-update/mouvement-update.component";
 
 const routes: Routes = [
 
@@ -37,6 +40,9 @@ const routes: Routes = [
   { path: 'appartement/:id/description', component: AppartementDescManageComponent, canActivate: [AuthGuard] },
   { path: 'appartement/:id/photos', component: AppartementPictureManageComponent, canActivate: [AuthGuard] },
   { path: 'appartement/:id/gestionnaires', component: AppartementGestionnaireManageComponent, canActivate: [AuthGuard] },
+  { path: 'finances', component: DashboardFinancesComponent, canActivate: [AuthGuard] },
+  { path: 'finances/ajouter-mouvement', component: MouvementAddComponent, canActivate: [AuthGuard] },
+  { path: 'finances/editer-mouvement/:id', component: MouvementUpdateComponent, canActivate: [AuthGuard] },
 
 ];
 @NgModule({

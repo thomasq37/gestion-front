@@ -40,61 +40,72 @@ import { AppartementGestionnaireAddComponent } from './components/appartement/ap
 import { AppartementGestionnaireListComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-list/appartement-gestionnaire-list.component';
 import { AppartementGestionnaireUpdateComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-update/appartement-gestionnaire-update.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { DashboardFinancesComponent } from './components/finances/dashboard-finances/dashboard-finances.component';
+import { MouvementAddComponent } from './components/finances/mouvement-add/mouvement-add.component';
+import { MouvementListComponent } from './components/finances/mouvement-list/mouvement-list.component';
+import { MouvementUpdateComponent } from './components/finances/mouvement-update/mouvement-update.component';
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    AppartementListComponent,
-    AppartementItemComponent,
-    HeaderComponent,
-    FooterComponent,
-    CustomDatePipe,
-    AppartementContactListComponent,
-    AppartementContactManageComponent,
-    AppartementContactAddComponent,
-    AppartementContactUpdateComponent,
-    AppartementFraisListComponent,
-    AppartementFraisManageComponent,
-    AppartementFraisAddComponent,
-    AppartementFraisUpdateComponent,
-    AppartementPeriodeListComponent,
-    AppartementPeriodeManageComponent,
-    AppartementPeriodeAddComponent,
-    AppartementPeriodeUpdateComponent,
-    AppartementDescElementComponent,
-    AppartementPictureElementComponent,
-    AppartementMetriqueElementComponent,
-    AppartementPictureManageComponent,
-    AppartementDescManageComponent,
-    AppartementDescUpdateComponent,
-    AppartementPictureUpdateComponent,
-    AppartementAddComponent,
-    UtilisateurAddComponent,
-    UtilisateurLoginComponent,
-    AppartementGestionnaireManageComponent,
-    AppartementGestionnaireAddComponent,
-    AppartementGestionnaireListComponent,
-    AppartementGestionnaireUpdateComponent,
-    PaginationComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgbModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbCarouselModule,
-    ReactiveFormsModule,
-  ],
-  providers: [
-    AuthGuard,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        DashboardComponent,
+        AppartementListComponent,
+        AppartementItemComponent,
+        HeaderComponent,
+        FooterComponent,
+        CustomDatePipe,
+        AppartementContactListComponent,
+        AppartementContactManageComponent,
+        AppartementContactAddComponent,
+        AppartementContactUpdateComponent,
+        AppartementFraisListComponent,
+        AppartementFraisManageComponent,
+        AppartementFraisAddComponent,
+        AppartementFraisUpdateComponent,
+        AppartementPeriodeListComponent,
+        AppartementPeriodeManageComponent,
+        AppartementPeriodeAddComponent,
+        AppartementPeriodeUpdateComponent,
+        AppartementDescElementComponent,
+        AppartementPictureElementComponent,
+        AppartementMetriqueElementComponent,
+        AppartementPictureManageComponent,
+        AppartementDescManageComponent,
+        AppartementDescUpdateComponent,
+        AppartementPictureUpdateComponent,
+        AppartementAddComponent,
+        UtilisateurAddComponent,
+        UtilisateurLoginComponent,
+        AppartementGestionnaireManageComponent,
+        AppartementGestionnaireAddComponent,
+        AppartementGestionnaireListComponent,
+        AppartementGestionnaireUpdateComponent,
+        PaginationComponent,
+        DashboardFinancesComponent,
+        MouvementAddComponent,
+        MouvementListComponent,
+        MouvementUpdateComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        NgbModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgbCarouselModule,
+        ReactiveFormsModule,
+    ],
+    providers: [
+        AuthGuard,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        }
+    ],
+    exports: [
+        UtilisateurLoginComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

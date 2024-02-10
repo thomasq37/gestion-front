@@ -1,0 +1,50 @@
+<section class="mouvement-list">
+  <div class="container">
+    <h2>Revenus</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Montant</th>
+        <th>Fréquence</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let mouvement of revenus">
+        <td>{{ mouvement.nom }}</td>
+        <td>{{ mouvement.montant | currency:'EUR' }}</td>
+        <td>{{ getFrequenceDescription(mouvement.frequence) }}</td>
+        <td class="actions-container">
+          <a href="/finances/editer-mouvement/{{mouvement.id}}" class="btn btn-primary btn-sm">MAJ</a>
+          <button class="btn btn-danger btn-sm" (click)="onDelete(mouvement.id)">X</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h2>Dépenses</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Montant</th>
+        <th>Fréquence</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let mouvement of depenses">
+        <td>{{ mouvement.nom }}</td>
+        <td>{{ mouvement.montant | currency:'EUR' }}</td>
+        <td>{{ getFrequenceDescription(mouvement.frequence) }}</td>
+        <td class="actions-container">
+          <a href="/finances/editer-mouvement/{{mouvement.id}}" class="btn btn-primary btn-sm">MAJ</a>
+          <button class="btn btn-danger btn-sm" (click)="onDelete(mouvement.id)">X</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</section>
