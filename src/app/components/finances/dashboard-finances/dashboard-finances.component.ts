@@ -92,7 +92,7 @@ export class DashboardFinancesComponent implements OnInit, AfterViewInit {
               const texteTotal = `Revenus : ${objectifTotal}€`;
 
               // Positionnement du texte sous l'arc de cercle
-              ctx.fillText(texteTotal, width / 2, height / 2 + 30);
+              ctx.fillText(texteTotal, width / 2, height / 2 + 90);
             }
           },
         },
