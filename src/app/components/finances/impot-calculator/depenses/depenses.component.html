@@ -1,0 +1,7 @@
+<p>Choisissez les dépenses étant potentiellement déductibles des impôts (hors charges déduites au réel)</p>
+<ul>
+  <li *ngFor="let mouvement of depensesFormArray.controls; let i = index">
+    <label for="depense-{{i}}">{{ mouvement.get('nom').value }}</label>
+    <input id="depense-{{i}}"  type="checkbox">
+  </li>
+</ul>

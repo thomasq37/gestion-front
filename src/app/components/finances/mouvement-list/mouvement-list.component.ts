@@ -1,6 +1,8 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {FinancesService, Mouvement} from "../../../services/finances.service";
+import {FinancesService} from "../../../services/finances.service";
+import {GptService} from "../../../services/gpt.service";
 import {MistralAiService} from "../../../services/mistralai.service";
+import {Mouvement} from "../../../models/mouvement.model";
 
 @Component({
   selector: 'app-mouvement-list',
@@ -13,23 +15,24 @@ export class MouvementListComponent implements OnInit{
   responseText: string = '';
 
 
-  constructor(private financesService: FinancesService, private mistralAiService: MistralAiService) { }
-
   ngOnInit(): void {
   }
 
+  constructor(
+    private financesService: FinancesService,
+    private gptService: GptService,
+    private mistralAiService: MistralAiService) { }
+
+
+
+
   onClickGetResponse(): void {
-    const prompt = 'Pour calculer le revenu net imposable, suis ces étapes en arrondissant à chaque fois à l\'entier le plus proche avant de passer à l\'étape suivante :\n' +
-      '\n' +
-      '    Calcule 70% de 18 377 (revenus locatifs non meublés). Multiplie 18 377 par 0.7 et arrondis le résultat à l\'entier le plus proche.\n' +
-      '    Calcule 50% de 7 976 (revenus locatifs meublés). Multiplie 7 976 par 0.5 et arrondis le résultat à l\'entier le plus proche.\n' +
-      '    Additionne les montants obtenus aux étapes 1 et 2. Arrondis le total à l\'entier le plus proche avant d\'ajouter.\n' +
-      '    Ajoute le salaire annuel net de 24 000 au total des étapes précédentes. N\'oublie pas d\'arrondir chaque montant avant de l\'ajouter.\n' +
-      '    Soustrais les déductions spécifiques de 600 du total obtenu. Le résultat final doit être arrondi à l\'entier le plus proche pour obtenir le revenu net imposable.\n' +
-      '\n' +
-      'Important : À chaque étape, assure-toi d\'arrondir à l\'entier le plus proche immédiatement après chaque calcul, avant de passer à l\'étape suivante, pour ne pas tenir compte des décimales.'; // Définissez votre prompt ici
-    this.mistralAiService.chatWithMistral(prompt).then(result => {
+    const prompt = 'donne moi le bareme d\'impot sur le revenus en france pour les revenus 2023'; // Définissez votre prompt ici
+    this.gptService.getGptResponse(prompt).subscribe(result => {
       this.responseText = result
+    })
+    this.mistralAiService.chatWithMistral(prompt).then(result => {
+      console.log(result)
     })
   }
 
@@ -77,4 +80,7 @@ export class MouvementListComponent implements OnInit{
   }
 
 
+
 }
+
+// Exemple d'utilisation

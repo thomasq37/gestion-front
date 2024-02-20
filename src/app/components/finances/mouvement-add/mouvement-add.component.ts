@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {FinancesService, Mouvement} from "../../../services/finances.service";
+import {FinancesService} from "../../../services/finances.service";
+import {Mouvement} from "../../../models/mouvement.model";
 
 @Component({
   selector: 'app-mouvement-add',

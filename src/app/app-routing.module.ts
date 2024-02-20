@@ -15,6 +15,8 @@ import {AppartementGestionnaireManageComponent} from "./components/appartement/a
 import {DashboardFinancesComponent} from "./components/finances/dashboard-finances/dashboard-finances.component";
 import {MouvementAddComponent} from "./components/finances/mouvement-add/mouvement-add.component";
 import {MouvementUpdateComponent} from "./components/finances/mouvement-update/mouvement-update.component";
+import {ImpotsCalculateurComponent} from "./components/finances/impots-calculateur/impots-calculateur.component";
+
 
 const routes: Routes = [
 
@@ -43,6 +45,7 @@ const routes: Routes = [
   { path: 'finances', component: DashboardFinancesComponent, canActivate: [AuthGuard] },
   { path: 'finances/ajouter-mouvement', component: MouvementAddComponent, canActivate: [AuthGuard] },
   { path: 'finances/editer-mouvement/:id', component: MouvementUpdateComponent, canActivate: [AuthGuard] },
+  { path: 'finances/calculateur-impots', component: ImpotsCalculateurComponent, canActivate: [AuthGuard] },
 
 ];
 @NgModule({

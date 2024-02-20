@@ -1,12 +1,10 @@
 <app-header></app-header>
 <section class="dashboard-finances">
   <div class="container">
+    <h1>Tableau de bord</h1>
+    <canvas  class="myChart" #myChart></canvas>
     <a href="/finances/ajouter-mouvement">Ajouter un mouvement</a>
     <div *ngIf="mouvements.length > 0">
-      <p>Total Dépenses mensuelles : {{ calculerTotalDepensesMensuelles(this.mouvements) | currency:'EUR' }}</p>
-      <p>Total Revenus mensuels : {{ calculerTotalRevenusMensuels(this.mouvements) | currency:'EUR' }}</p>
-      <p>Reste à vivre : {{ resteAVivre | currency:'EUR' }}</p>
-
       <app-mouvement-list [mouvements]="mouvements" (mouvementsChange)="handleMouvementsChange($event)"></app-mouvement-list>
     </div>
     <p *ngIf="mouvements.length === 0">Aucune dépense ou source de revenu n'est enregistrée.</p>

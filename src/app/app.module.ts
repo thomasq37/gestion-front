@@ -44,6 +44,11 @@ import { DashboardFinancesComponent } from './components/finances/dashboard-fina
 import { MouvementAddComponent } from './components/finances/mouvement-add/mouvement-add.component';
 import { MouvementListComponent } from './components/finances/mouvement-list/mouvement-list.component';
 import { MouvementUpdateComponent } from './components/finances/mouvement-update/mouvement-update.component';
+import { ImpotCalculatorComponent } from './components/finances/impot-calculator/impot-calculator.component';
+import { RevenusComponent } from './components/finances/impot-calculator/revenus/revenus.component';
+import { DepensesComponent } from './components/finances/impot-calculator/depenses/depenses.component';
+import { ImpotsCalculateurComponent } from './components/finances/impots-calculateur/impots-calculateur.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -83,7 +88,11 @@ import { MouvementUpdateComponent } from './components/finances/mouvement-update
         DashboardFinancesComponent,
         MouvementAddComponent,
         MouvementListComponent,
-        MouvementUpdateComponent
+        MouvementUpdateComponent,
+        ImpotCalculatorComponent,
+        RevenusComponent,
+        DepensesComponent,
+        ImpotsCalculateurComponent
     ],
     imports: [
         BrowserModule,

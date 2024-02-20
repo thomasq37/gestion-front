@@ -1,0 +1,15 @@
+<app-header></app-header>
+<p>Les calculs sont sur la base de charges et de revenus fixes sur un an.</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div *ngIf="currentStep === 1" class="revenus-step">
+    <app-revenus></app-revenus>
+    <button type="button" (click)="nextStep()">Suivant</button>
+  </div>
+  <div *ngIf="currentStep === 2" class="depenses-step">
+    <app-depenses></app-depenses>
+    <button type="button" (click)="previousStep()">Précédent</button>
+    <button type="button" (click)="nextStep()">Suivant</button>
+  </div>
+  <!-- Insérez ici d'autres composants d'étape comme <app-depenses> si nécessaire -->
+  <button type="submit">Soumettre le formulaire complet</button>
+</form>

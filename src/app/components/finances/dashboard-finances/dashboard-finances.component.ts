@@ -1,28 +1,113 @@
-import {Component, OnInit} from '@angular/core';
-import {FinancesService, Mouvement} from "../../../services/finances.service";
-
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {FinancesService} from "../../../services/finances.service";
+import {Mouvement} from "../../../models/mouvement.model";
+import {Chart, ChartConfiguration, registerables} from 'chart.js';
 @Component({
   selector: 'app-dashboard-finances',
   templateUrl: './dashboard-finances.component.html',
   styleUrls: ['./dashboard-finances.component.scss']
 })
-export class DashboardFinancesComponent implements OnInit{
+export class DashboardFinancesComponent implements OnInit, AfterViewInit {
+  @ViewChild('myChart') myChart!: ElementRef<HTMLCanvasElement>;
+  chart!: Chart;
   mouvements: Mouvement[] = []
   resteAVivre: number = -1
+  progress: number = 0; // Ajoutez cette ligne pour définir le pourcentage de progression
+  constructor(private financesService: FinancesService) {
+    Chart.register(...registerables);
+  }
 
-  constructor(private financesService: FinancesService) { }
+  ngAfterViewInit(): void {
+    // Montants
+
+  }
+
+
 
   ngOnInit(): void {
     this.loadMouvements();
+    this.updateProgress();
+  }
+
+  updateProgress(): void {
+    const totalRevenus = this.calculerTotalRevenusMensuels(this.mouvements);
+    const totalDepenses = this.calculerTotalDepensesMensuelles(this.mouvements);
+    this.progress = totalDepenses / totalRevenus * 100;
   }
 
 
   loadMouvements(): void {
     this.financesService.getAllMouvements().subscribe(mouvements => {
       this.mouvements = mouvements;
-      this.resteAVivre = this.calculerResteAVivre(this.mouvements)
+      this.resteAVivre = this.calculerResteAVivre(this.mouvements);
+      const objectifTotal = this.calculerTotalRevenusMensuels(this.mouvements);
+      const montantAtteint = this.calculerTotalDepensesMensuelles(this.mouvements);
+
+      // Utiliser les montants réels pour le graphique
+      const montantRestant = objectifTotal - montantAtteint;
+
+      const chartConfiguration: ChartConfiguration<'doughnut', number[]> = {
+        type: 'doughnut',
+        data: {
+          labels: ['Dépensé', 'Restant'],
+          datasets: [{
+            label: 'Budget',
+            data: [montantAtteint, montantRestant],
+            backgroundColor: ['rgb(217,217,217)', 'rgb(255,0,0)'],
+            borderColor: ['rgb(217,217,217)', 'rgb(255,0,0)'],
+            borderWidth: 1,
+          }],
+        },
+        options: {
+
+          responsive: true,
+          rotation: 270, // Démarre à partir du haut
+          circumference: 180, // Demi-cercle
+          cutout: 100, // Ajustez selon votre version de Chart.js
+          plugins: {
+            title: {
+              display: true,
+              text: 'Total du revenu restant après déduction des charges par mois',
+              position: 'bottom'
+            },
+            legend: {
+              display: true, // Cache la légende si non désirée
+
+            },
+            tooltip: {
+              enabled: true
+            }
+          },
+          animation: {
+            onComplete: function () {
+              const ctx = this.ctx;
+              const width = this.width;
+              const height = this.height;
+              ctx.font = '16px Arial';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'middle';
+              ctx.fillStyle = 'black';
+
+              // Texte personnalisé
+              const texteTotal = `Revenus : ${objectifTotal}€`;
+
+              // Positionnement du texte sous l'arc de cercle
+              ctx.fillText(texteTotal, width / 2, height / 2 + 30);
+            }
+          },
+        },
+      };
+
+      // Création du graphique
+      const chart = new Chart(this.myChart.nativeElement.getContext('2d'), chartConfiguration);
+
+      // Forcer l'affichage du tooltip par défaut
+      chart.update();
+      chart.tooltip.setActiveElements([{datasetIndex: 0, index: 1}], {x: 0, y: 0});
+      chart.update();
     });
   }
+
 
   calculerResteAVivre(mouvements: Mouvement[]): number {
     let totalRevenusMensuels = 0;
@@ -106,7 +191,6 @@ export class DashboardFinancesComponent implements OnInit{
   handleMouvementsChange(updatedMouvements: Mouvement[]): void {
     this.mouvements = updatedMouvements;
     this.resteAVivre = this.calculerResteAVivre(this.mouvements)
-    // Vous pouvez également recalculer le reste à vivre ou d'autres valeurs dépendantes ici
   }
 
 }

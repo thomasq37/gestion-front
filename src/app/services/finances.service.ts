@@ -2,15 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import {Mouvement} from "../models/mouvement.model";
 
 // Assurez-vous que l'interface Mouvement correspond à la structure de votre objet Mouvement côté serveur
-export interface Mouvement {
-  id?: number;
-  type: boolean;
-  nom: string;
-  montant: number;
-  frequence: number;
-}
+
 
 @Injectable({
   providedIn: 'root'
