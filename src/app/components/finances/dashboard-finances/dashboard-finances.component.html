@@ -2,7 +2,11 @@
 <section class="dashboard-finances">
   <div class="container">
     <h1>Tableau de bord</h1>
-    <h2>Total revenus : {{calculerTotalRevenusMensuels(mouvements)}}€</h2>
+    <div class="indicator-recette-depenses">
+      <h2>Total revenus<span>{{calculerTotalRevenusMensuels(mouvements)}}€</span></h2>
+      <h2>Total dépenses<span>{{calculerTotalDepensesMensuelles(mouvements)}}€</span></h2>
+    </div>
+
     <canvas  class="myChart" #myChart></canvas>
     <a href="/finances/ajouter-mouvement">Ajouter un mouvement</a>
     <div *ngIf="mouvements.length > 0">

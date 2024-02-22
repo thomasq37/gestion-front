@@ -5,6 +5,20 @@ canvas{
   max-height: 20rem;
 
 }
+.indicator-recette-depenses{
+  display: flex;
+  justify-content: space-between;
+  h2{
+    font-size: 1rem;
+    color:#a4a4a4;
+    span{
+      display: block;
+      font-size: 2rem;
+      color: black;
+    }
+  }
+}
+
 /*.progress-circle {
   display: block;
   margin: 20px auto;
