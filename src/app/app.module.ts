@@ -48,6 +48,7 @@ import { ImpotCalculatorComponent } from './components/finances/impot-calculator
 import { RevenusComponent } from './components/finances/impot-calculator/revenus/revenus.component';
 import { DepensesComponent } from './components/finances/impot-calculator/depenses/depenses.component';
 import { ImpotsCalculateurComponent } from './components/finances/impots-calculateur/impots-calculateur.component';
+import { ConfigInitialeMouvementsComponent } from './components/finances/config-initiale-mouvements/config-initiale-mouvements.component';
 
 @NgModule({
     declarations: [
@@ -92,7 +93,8 @@ import { ImpotsCalculateurComponent } from './components/finances/impots-calcula
         ImpotCalculatorComponent,
         RevenusComponent,
         DepensesComponent,
-        ImpotsCalculateurComponent
+        ImpotsCalculateurComponent,
+        ConfigInitialeMouvementsComponent
     ],
     imports: [
         BrowserModule,

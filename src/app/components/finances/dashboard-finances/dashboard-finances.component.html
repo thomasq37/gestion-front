@@ -7,8 +7,19 @@
       <p>Total dépenses<span>{{calculerTotalDepensesMensuelles(mouvements)}}€</span></p>
     </div>
 
-    <canvas  class="myChart" #myChart></canvas>
-    <a href="/finances/ajouter-mouvement">Ajouter un mouvement</a>
+    <canvas class="myChart" #myChart></canvas>
+    <ul>
+      <li>
+        <div><span class="background mouvement"></span></div>
+        <a href="/finances/ajouter-mouvement">Mouvements</a>
+      </li>
+      <li>
+        <div><span class="background calculate"></span></div>
+
+        <a href="/finances/calculateur-impots">Impôts</a>
+      </li>
+    </ul>
+
     <div *ngIf="mouvements.length > 0">
       <app-mouvement-list [mouvements]="mouvements" (mouvementsChange)="handleMouvementsChange($event)"></app-mouvement-list>
     </div>

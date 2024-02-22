@@ -37,6 +37,9 @@ export class MouvementAddComponent {
         console.log('Le mouvement à bien été créé : ')
         console.log(mouvementCreated)
         this.mouvementWasCreated = true;
+        setTimeout(() => {
+          this.mouvementWasCreated = false
+        }, 200)
       }, () => console.log('Une erreur est survenu lors de la création du mouvement'))
     }
   }
