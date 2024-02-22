@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import {FinancesService} from "../../../services/finances.service";
 import {Mouvement} from "../../../models/mouvement.model";
 import {Chart, ChartConfiguration, registerables} from 'chart.js';
+
 @Component({
   selector: 'app-dashboard-finances',
   templateUrl: './dashboard-finances.component.html',
@@ -45,17 +46,25 @@ export class DashboardFinancesComponent implements OnInit, AfterViewInit {
 
       // Utiliser les montants réels pour le graphique
       const montantRestant = objectifTotal - montantAtteint;
-
+      let couleurRestant;
+      if (montantRestant < 600) {
+        couleurRestant = 'rgb(255,0,0)'; // Rouge
+      } else if (montantRestant < 900) {
+        couleurRestant = '#ffbb3e'; // Orange
+      } else if (montantRestant < 1100) {
+        couleurRestant = 'rgb(96,214,9)'; // Vert
+      } else {
+        couleurRestant = 'rgb(0,0,255)'; // Bleu pour les valeurs au-delà de 1100
+      }
       const chartConfiguration: ChartConfiguration<'doughnut', number[]> = {
         type: 'doughnut',
         data: {
-          labels: ['Dépensé', 'Restant'],
+          labels: ['Dépenses fixes', 'Montant restant'],
           datasets: [{
-            label: 'Budget',
+            label: 'Somme',
             data: [montantAtteint, montantRestant],
-            backgroundColor: ['rgb(217,217,217)', 'rgb(255,0,0)'],
-            borderColor: ['rgb(217,217,217)', 'rgb(255,0,0)'],
-            borderWidth: 1,
+            backgroundColor: ['rgb(217,217,217)', couleurRestant],
+            borderColor: ['rgb(217,217,217)', couleurRestant],
           }],
         },
         options: {
@@ -63,39 +72,65 @@ export class DashboardFinancesComponent implements OnInit, AfterViewInit {
           responsive: true,
           rotation: 270, // Démarre à partir du haut
           circumference: 180, // Demi-cercle
-          cutout: 100, // Ajustez selon votre version de Chart.js
+          cutout: 85, // Ajustez selon votre version de Chart.js
           plugins: {
-            title: {
+            /*title: {
+              padding: 30,
               display: true,
               text: 'Total du revenu restant après déduction des charges par mois',
               position: 'bottom'
-            },
+            },*/
             legend: {
-              display: true, // Cache la légende si non désirée
-
+              display: true,
+              labels: {
+                generateLabels: function() {
+                  return [
+                    {text: 'Dépenses', fillStyle: '#c3c3c3'},
+                    {text: 'Restant: < 600€', fillStyle: 'rgb(255,0,0)'},
+                    {text: 'Restant: < 900€', fillStyle: '#ffbb3e'},
+                    {text: 'Restant: < 1100€', fillStyle: 'rgb(96,214,9)'},
+                  ];
+                }
+              },
+              position: 'bottom'
             },
             tooltip: {
-              enabled: true
-            }
-          },
-          animation: {
-            onComplete: function () {
-              const ctx = this.ctx;
-              const width = this.width;
-              const height = this.height;
-              ctx.font = '16px Arial';
-              ctx.textAlign = 'center';
-              ctx.textBaseline = 'middle';
-              ctx.fillStyle = 'black';
+              enabled: true,
+              callbacks: {
+                label: function(context) {
+                  let label = context.dataset.label || '';
 
-              // Texte personnalisé
-              const texteTotal = `Revenus : ${objectifTotal}€`;
-
-              // Positionnement du texte sous l'arc de cercle
-              ctx.fillText(texteTotal, width / 2, height / 2 + 90);
+                  if (label) {
+                    label += ': ';
+                  }
+                  if (context.parsed !== null) {
+                    label += `${context.parsed}€`;
+                  }
+                  return label;
+                }
+              }
             }
-          },
+          }
         },
+        plugins: [
+          {
+            id: 'customTitlePlugin',
+            afterDraw: function(chart, args, options) {
+              const {ctx, chartArea: {bottom}, width} = chart;
+              const titleText = 'Total du revenu restant après déduction des charges par mois'; // Le titre que vous voulez afficher
+              ctx.save();
+              ctx.font = 'bold 13px Arial'; // Adaptez selon vos besoins
+              ctx.textAlign = 'center';
+              ctx.fillStyle = 'black'; // Adaptez selon vos besoins
+
+              // Calculez la position du titre. Vous pouvez ajuster `bottom - 30` selon vos besoins pour positionner le titre correctement au-dessus des légendes
+              const titlePositionY = bottom - 10; // Ajustez cette valeur pour positionner le titre
+
+              ctx.fillText(titleText, width / 2, titlePositionY);
+              ctx.restore();
+            }
+          }
+        ]
       };
 
       // Création du graphique

@@ -2,6 +2,7 @@
 <section class="dashboard-finances">
   <div class="container">
     <h1>Tableau de bord</h1>
+    <h2>Total revenus : {{calculerTotalRevenusMensuels(mouvements)}}€</h2>
     <canvas  class="myChart" #myChart></canvas>
     <a href="/finances/ajouter-mouvement">Ajouter un mouvement</a>
     <div *ngIf="mouvements.length > 0">
