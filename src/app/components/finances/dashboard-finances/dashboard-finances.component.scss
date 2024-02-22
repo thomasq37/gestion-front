@@ -8,13 +8,17 @@ canvas{
 .indicator-recette-depenses{
   display: flex;
   justify-content: space-between;
-  h2{
+  padding-bottom: 1rem;
+  border-bottom: 1px solid lightgrey;
+  p{
     font-size: 1rem;
     color:#a4a4a4;
     span{
+      font-family: "Arial Rounded MT Bold", sans-serif;
       display: block;
-      font-size: 2rem;
+      font-size: 1.8rem;
       color: black;
+      font-weight: 500;
     }
   }
 }

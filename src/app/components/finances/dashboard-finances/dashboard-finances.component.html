@@ -1,10 +1,10 @@
 <app-header></app-header>
 <section class="dashboard-finances">
   <div class="container">
-    <h1>Tableau de bord</h1>
+    <!--<h1>Tableau de bord</h1>-->
     <div class="indicator-recette-depenses">
-      <h2>Total revenus<span>{{calculerTotalRevenusMensuels(mouvements)}}€</span></h2>
-      <h2>Total dépenses<span>{{calculerTotalDepensesMensuelles(mouvements)}}€</span></h2>
+      <p>Total revenus<span>{{calculerTotalRevenusMensuels(mouvements)}}€</span></p>
+      <p>Total dépenses<span>{{calculerTotalDepensesMensuelles(mouvements)}}€</span></p>
     </div>
 
     <canvas  class="myChart" #myChart></canvas>
