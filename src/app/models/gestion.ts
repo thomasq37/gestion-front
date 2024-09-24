@@ -63,6 +63,8 @@ export interface PeriodLocation {
 export interface Frais {
   id?: number;
   montant: number;
+  nom: string | null;
+  datePaiement: string | null;
   frequence: 'MENSUELLE' | 'TRIMESTRIELLE' | 'ANNUELLE' | 'PONCTUELLE';
   appartement?: Appartement;
   periodLocation?: PeriodLocation;

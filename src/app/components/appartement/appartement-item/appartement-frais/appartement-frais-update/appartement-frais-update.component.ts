@@ -16,6 +16,8 @@ export class AppartementFraisUpdateComponent implements OnInit, OnChanges{
   appartementId!: number;
   @Input() typesFrais: TypeFrais[] = [];
   @Input() periode: PeriodLocation | null = null;
+  isPonctuelle: boolean = false;
+
 
   constructor(
     private gestionService: GestionService,
@@ -42,15 +44,19 @@ export class AppartementFraisUpdateComponent implements OnInit, OnChanges{
 
   private initializeForm(): void {
     this.fraisForm = new FormGroup({
+      nom: new FormControl(this.frais?.nom),
       montant: new FormControl(this.frais?.montant, Validators.required),
       typeFrais: new FormControl(this.frais?.typeFrais.id, Validators.required),
-      frequence: new FormControl(this.frais?.frequence, Validators.required)
+      frequence: new FormControl(this.frais?.frequence, Validators.required),
+      datePaiement: new FormControl(this.frais?.datePaiement),
     });
+    this.isPonctuelle = this.frais?.frequence === 'PONCTUELLE';
   }
 
   mettreAJourUnFraisPourAppartement() {
     const userId = parseInt(<string>localStorage.getItem('userId'))
     const frais: any = this.fraisForm.value;
+    console.log(frais)
     frais.typeFrais = this.typesFrais.find(typeFrais => frais.typeFrais == typeFrais.id)
     if(this.periode){
       this.gestionService.mettreAJourUnFraisPourPeriode(userId, this.appartementId, this.periode.id, this.frais?.id, frais).subscribe(frais => {
@@ -76,6 +82,15 @@ export class AppartementFraisUpdateComponent implements OnInit, OnChanges{
     }
 
 
+  }
+  onFrequenceChange(event: Event) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.isPonctuelle = selectedValue === 'PONCTUELLE';
+
+    // Réinitialiser la date de paiement si autre chose que "PONCTUELLE" est sélectionnée
+    if (!this.isPonctuelle) {
+      this.fraisForm.get('datePaiement')?.setValue(null);
+    }
   }
 
   cancelUpdate() {

@@ -14,14 +14,18 @@ export class AppartementFraisAddComponent {
   fraisForm!: FormGroup;
   @Input() isPeriode: boolean = false
   @Input() periode: PeriodLocation | null = null;
+  isPonctuelle: boolean = false;
 
   constructor(private gestionService: GestionService) {}
 
   ngOnInit() {
     this.fraisForm = new FormGroup({
+      nom: new FormControl(null),
       montant: new FormControl(null, Validators.required),
       typeFrais: new FormControl(null, Validators.required),
-      frequence: new FormControl(null, Validators.required)
+      frequence: new FormControl(null, Validators.required),
+      datePaiement: new FormControl(null),
+
     });
   }
 
@@ -50,5 +54,15 @@ export class AppartementFraisAddComponent {
         })
     }
 
+  }
+
+  onFrequenceChange(event: Event) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.isPonctuelle = selectedValue === 'PONCTUELLE';
+
+    // Réinitialiser la date de paiement si autre chose que "PONCTUELLE" est sélectionnée
+    if (!this.isPonctuelle) {
+      this.fraisForm.get('datePaiement')?.setValue(null);
+    }
   }
 }

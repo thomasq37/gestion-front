@@ -17,9 +17,9 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let frais of appartementFrais">
-                    <td>{{ frais.typeFrais.nom }}</td>
+                    <td>{{ frais.nom !== null ? frais.nom : frais.typeFrais.nom }}</td>
                     <td>{{ frais.montant }}</td>
-                    <td>{{ frais.frequence }}</td>
+                    <td>{{ frais.datePaiement !== null ? (frais.datePaiement | customDate) : frais.frequence }}</td>
                     <td *ngIf="isEditable"  class="actions-container">
                         <img src="../../../../assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdateFrais(frais)"/>
                         <img src="../../../../assets/img/trash-icon.svg" alt="trash icon" (click)="onDeleteFrais(frais.id)"/>
