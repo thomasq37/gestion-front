@@ -21,7 +21,11 @@ export class AppartementMetriqueElementComponent {
         formula = 'Moyenne bénéfices : (renvenus annuels - dépenses annuels) ÷ 12';
         break;
       case 'rentabilite_nette':
-        formula = `Bénéfices :  ${this.appartement.rentabiliteNette}€ \nDifférence : ${this.appartement.rentabiliteNette - this.appartement.prix}€ (prix d'achat (${this.appartement.prix}€) - ${this.appartement.rentabiliteNette}€)`;
+        formula = `
+        Prix d'achat ${this.appartement.prix}€\n
+        Bénéfices :  ${this.appartement.rentabiliteNette}€ \n
+        Différence : ${this.appartement.rentabiliteNette - this.appartement.prix}€`
+
         break;
       case 'taux_vacance_locative':
         formula = 'Taux de vacance locative : (jours vacants ÷ jours total) x 100';
