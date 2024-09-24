@@ -28,6 +28,7 @@ export class AppartementAddComponent {
 
   createForm() {
     this.appartementForm = this.formBuilder.group({
+      dateAchat: ['', Validators.required],
       numero: ['', Validators.required],
       adresse: ['', Validators.required],
       codePostal: ['', Validators.required],

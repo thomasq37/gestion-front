@@ -4,7 +4,10 @@
     <form [formGroup]="appartementForm" (ngSubmit)="ajouterAppartement()" aria-labelledby="formTitle">
 
       <h2 id="formTitle">Nouvel appartement</h2>
-
+      <div>
+        <label for="dateAchat">Date d'achat <span aria-hidden="true">*</span></label>
+        <input type="date" id="dateAchat" formControlName="dateAchat" aria-required="true">
+      </div>
       <div>
         <label for="numero">Numéro de l'appartement <span aria-hidden="true">*</span></label>
         <input type="number" id="numero" formControlName="numero" aria-required="true">

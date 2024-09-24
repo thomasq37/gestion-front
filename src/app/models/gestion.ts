@@ -1,5 +1,6 @@
 export interface Appartement {
   id:number;
+  dateAchat: string;
   numero: number;
   adresse: string;
   codePostal: string;

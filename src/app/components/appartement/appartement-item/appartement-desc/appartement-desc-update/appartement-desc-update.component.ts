@@ -23,6 +23,7 @@ export class AppartementDescUpdateComponent implements OnInit {
   ) {
     this.appartement = <Appartement>{};
     this.appartementForm = this.formBuilder.group({
+      dateAchat: ['', Validators.required],
       numero: ['', Validators.required],
       adresse: ['', Validators.required],
       codePostal: ['', Validators.required],
@@ -51,6 +52,7 @@ export class AppartementDescUpdateComponent implements OnInit {
 
   initAppartementForm(appartement: Appartement) {
     this.appartementForm.patchValue({
+      dateAchat: appartement.dateAchat,
       numero: appartement.numero,
       adresse: appartement.adresse,
       codePostal: appartement.codePostal,
