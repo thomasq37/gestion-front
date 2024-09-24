@@ -10,13 +10,13 @@
             </div>
 
             <div>
-                <label for="email">Email <span aria-hidden="true">*</span></label>
-                <input type="email" id="email" formControlName="email" aria-required="true">
+                <label for="email">Email</label>
+                <input type="email" id="email" formControlName="email">
             </div>
 
             <div>
-                <label for="phoneNumber">Téléphone <span aria-hidden="true">*</span></label>
-                <input type="tel" id="phoneNumber" formControlName="phoneNumber" aria-required="true">
+                <label for="phoneNumber">Téléphone</label>
+                <input type="tel" id="phoneNumber" formControlName="phoneNumber">
             </div>
 
             <button class="{{contactForm.valid ? '' : 'disabled'}}" type="submit" [disabled]="!contactForm.valid">Mettre à jour</button>

@@ -20,8 +20,8 @@ export class AppartementContactAddComponent implements OnInit{
   ngOnInit() {
     this.contactForm = new FormGroup({
       pseudo: new FormControl(null, Validators.required),
-      email: new FormControl(null,  [Validators.required, Validators.email]),
-      phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]{10}$')])
+      email: new FormControl(null,  [Validators.email]),
+      phoneNumber: new FormControl(null, [Validators.pattern('^[0-9]{10}$')])
     });
   }
   ajouterUnContactPourAppartement() {

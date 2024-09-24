@@ -39,8 +39,8 @@ export class AppartementContactUpdateComponent implements OnInit, OnChanges {
   private initializeForm(): void {
     this.contactForm = new FormGroup({
       pseudo: new FormControl(this.contact?.pseudo, Validators.required),
-      email: new FormControl(this.contact?.email, [Validators.required, Validators.email]),
-      phoneNumber: new FormControl(this.contact?.phoneNumber, [Validators.required, Validators.pattern('^[0-9]{10}$')])
+      email: new FormControl(this.contact?.email, [Validators.email]),
+      phoneNumber: new FormControl(this.contact?.phoneNumber, [Validators.pattern('^[0-9]{10}$')])
     });
   }
 
