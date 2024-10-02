@@ -15,7 +15,9 @@ export class AppartementMetriqueElementComponent {
     'revenus_nets': '(revenus depuis achat)',
     'depenses_nettes': '(depenses depuis achat)',
     'rentabilite_nette': '(revenus - depenses) depuis achat',
-    'taux_vacance_locative': '(jours vacants ÷ jours total) x 100'
+    'taux_vacance_locative': '(jours vacants ÷ jours total) x 100',
+    'total_frais_gestion': 'total frais de type frais de gestion'
+
   };
 
   showInfo(type: string) {
@@ -35,6 +37,10 @@ export class AppartementMetriqueElementComponent {
         Prix d'achat ${this.appartement.prix}€\n
         Bénéfices :  ${this.appartement.rentabiliteNette}€ \n
         Différence : ${this.appartement.rentabiliteNette - this.appartement.prix}€`
+
+        break;
+      case 'total_frais_gestion':
+        formula = `total_frais_gestion`
 
         break;
       case 'taux_vacance_locative':

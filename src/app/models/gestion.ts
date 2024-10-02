@@ -17,6 +17,7 @@ export interface Appartement {
   rentabiliteNette: number;
   tauxVacanceLocative: number;
   moyenneBeneficesNetParMois: number;
+  totalFraisGestion: number;
   fraisFixe: Frais[];
   images: string[];
   periodLocation: PeriodLocation[];

@@ -19,26 +19,30 @@
                   <td class="number">{{appartement.revenusNets  | number:'1.2-2':'fr-FR'  }} €</td>
                   <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
-                <tr *ngIf="appartement.depensesNettes !== 0" (click)="showInfo('depenses_nettes')">
+                <tr (click)="showInfo('depenses_nettes')">
                   <td>Dépenses nettes</td>
                   <td class="number">{{appartement.depensesNettes  | number:'1.2-2':'fr-FR' }} €</td>
                   <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
                 <tr *ngIf="appartement.rentabiliteNette !== 0" (click)="showInfo('rentabilite_nette')">
-                    <td>Rentabilité nette</td>
-                    <td class="number">{{appartement.rentabiliteNette  | number:'1.2-2':'fr-FR' }} €</td>
-                   <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
+                  <td>Rentabilité nette</td>
+                  <td class="number">{{appartement.rentabiliteNette  | number:'1.2-2':'fr-FR' }} €</td>
+                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
                 <tr *ngIf="appartement.moyenneBeneficesNetParMois !== 0" (click)="showInfo('moyenne_benefice')">
                   <td>Moyenne bénéfices par mois</td>
                   <td  class="number">{{appartement.moyenneBeneficesNetParMois | number:'1.2-2':'fr-FR' }} €</td>
                   <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
-                  <td *ngIf="false">(renvenus annuels - dépenses annuels) ÷ 12</td>
                 </tr>
                 <tr (click)="showInfo('taux_vacance_locative')">
                     <td>Taux de vacance locatives</td>
                     <td  class="number">{{appartement.tauxVacanceLocative | number:'1.2-2':'fr-FR' }}%</td>
                     <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
+                </tr>
+                <tr (click)="showInfo('total_frais_gestion')">
+                  <td>Total frais de gestion</td>
+                  <td class="number">{{appartement.totalFraisGestion  | number:'1.2-2':'fr-FR' }} €</td>
+                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
                 </tbody>
             </table>
