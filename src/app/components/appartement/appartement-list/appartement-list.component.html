@@ -1,9 +1,9 @@
 <section class="appartement-list">
   <div class="container">
     <div class="custom-card">
-      <div class="custom-card-header">
+      <!--<div class="custom-card-header">
         <h2>Biens immobiliers</h2>
-      </div>
+      </div>-->
       <ul >
         <li  *ngFor="let appartement of appartementListOverview" class="appartement-item">
           <div  *ngIf="appartement.id !== undefined" (click)="viewAppartement(appartement.id)" class="appartement-info">
@@ -20,6 +20,14 @@
           </div>
         </li>
       </ul>
+    </div>
+    <div class="container">
+      <h2>Métriques</h2>
+      <p>Valeur totale estimée des biens :<strong> {{ totalEstimations  | number:'1.2-2' }} €</strong></p>
+      <p>Bénéfice net des biens :<strong> {{ totalBenefices | number:'1.2-2' }} €</strong></p>
+      <br>
+      <p>Revenus totaux des biens :<strong> {{ totalRevenus | number:'1.2-2' }} €</strong></p>
+      <p>Dépenses totales des biens :<strong> {{ totalDepenses | number:'1.2-2' }} €</strong></p>
     </div>
   </div>
 </section>

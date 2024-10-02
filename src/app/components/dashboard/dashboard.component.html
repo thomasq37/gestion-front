@@ -1,11 +1,16 @@
 
 <app-header [goBackIsHidden]="true"></app-header>
 <div class="container">
-  <h1>Dashboard</h1>
+  <h1>Mon compte immo</h1>
 </div>
 <app-appartement-list></app-appartement-list>
+
 <div *ngIf="isProprietaire()" class="link-container">
+<!--
   <a class="link decomptes" href="https://drive.google.com/drive/folders/1tDhWA98QwR2GQAB9jg4M-zqfBUM3j2aS?usp=sharing">Décomptes de gérance</a>
+-->
+<!--
   <a class="link" routerLink="/appartements/add">Ajouter appartement</a>
+-->
 </div>
 <app-footer></app-footer>
