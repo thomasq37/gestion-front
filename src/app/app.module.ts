@@ -49,7 +49,10 @@ import { RevenusComponent } from './components/finances/impot-calculator/revenus
 import { DepensesComponent } from './components/finances/impot-calculator/depenses/depenses.component';
 import { ImpotsCalculateurComponent } from './components/finances/impots-calculateur/impots-calculateur.component';
 import { ConfigInitialeMouvementsComponent } from './components/finances/config-initiale-mouvements/config-initiale-mouvements.component';
-
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { LOCALE_ID } from '@angular/core';
+registerLocaleData(localeFr, 'fr');
 @NgModule({
     declarations: [
         AppComponent,
@@ -112,7 +115,8 @@ import { ConfigInitialeMouvementsComponent } from './components/finances/config-
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
             multi: true
-        }
+        },
+        { provide: LOCALE_ID, useValue: 'fr' }
     ],
     exports: [
         UtilisateurLoginComponent
