@@ -45,9 +45,16 @@
                 <div *ngIf="isProprietaire()" class="detail-item">
                     <dt><img src="./assets/img/euro-icon.svg" alt="Icône de prix"></dt>
                     <dd>
-                        <strong>Prix d'achat:</strong>
+                        <strong>Prix d'achat net vendeur:</strong>
                         <p>{{ appartement.prix }} €</p>
                     </dd>
+                </div>
+                <div *ngIf="isProprietaire()" class="detail-item">
+                  <dt><img src="./assets/img/euro-icon.svg" alt="Icône de prix"></dt>
+                  <dd>
+                    <strong>Estimation net vendeur:</strong>
+                    <p>{{ appartement.estimation }} €</p>
+                  </dd>
                 </div>
                 <div *ngIf="isProprietaire()" class="detail-item energie">
                   <dt><img src="./assets/img/energie-icon.png" alt="Icône de la classe énergie"></dt>

@@ -32,6 +32,7 @@ export class AppartementDescUpdateComponent implements OnInit {
       nombrePieces: ['', Validators.required],
       surface: ['', Validators.required],
       prix: ['', Validators.required],
+      estimation: [''],
       dpe: ['', Validators.required],
       balcon: [''],
     });
@@ -61,6 +62,7 @@ export class AppartementDescUpdateComponent implements OnInit {
       nombrePieces: appartement.nombrePieces,
       surface: appartement.surface,
       prix: appartement.prix,
+      estimation: appartement.estimation,
       dpe: appartement.dpe,
       balcon: appartement.balcon,
     });
