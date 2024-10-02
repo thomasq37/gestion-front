@@ -46,14 +46,14 @@
                     <dt><img src="./assets/img/euro-icon.svg" alt="Icône de prix"></dt>
                     <dd>
                         <strong>Prix d'achat net vendeur:</strong>
-                        <p>{{ appartement.prix }} €</p>
+                        <p>{{ appartement.prix | number:'1.0-2':'fr-FR' }} €</p>
                     </dd>
                 </div>
                 <div *ngIf="isProprietaire()" class="detail-item">
                   <dt><img src="./assets/img/euro-icon.svg" alt="Icône de prix"></dt>
                   <dd>
                     <strong>Estimation net vendeur:</strong>
-                    <p>{{ appartement.estimation }} €</p>
+                    <p>{{ appartement.estimation === null || appartement.estimation === 0 ? "A réaliser" : (appartement.estimation  | number:'1.0-2':'fr-FR') + " €" }}</p>
                   </dd>
                 </div>
                 <div *ngIf="isProprietaire()" class="detail-item energie">
