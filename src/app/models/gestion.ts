@@ -12,6 +12,8 @@ export interface Appartement {
   prix: number;
   dpe: string;
   pays: Pays;
+  revenusNets: number;
+  depensesNettes: number;
   rentabiliteNette: number;
   tauxVacanceLocative: number;
   moyenneBeneficesNetParMois: number;

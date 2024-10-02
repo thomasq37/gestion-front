@@ -9,8 +9,10 @@ import {Appartement} from "../../../../../models/gestion";
 export class AppartementMetriqueElementComponent {
   @Input() appartement: Appartement | null = null;
   formulas = {
-    'moyenne_benefice': '(renvenus annuels - dépenses annuels) ÷ 12',
-    'rentabilite_nette': '((renvenus annuels - dépenses annuels) ÷ prix) x 100',
+    'moyenne_benefice': '(revenus depuis achat - depenses depuis achat) lissés par mois',
+    'revenus_nets': '(revenus depuis achat)',
+    'depenses_nettes': '(depenses depuis achat)',
+    'rentabilite_nette': '(revenus - depenses) depuis achat',
     'taux_vacance_locative': '(jours vacants ÷ jours total) x 100'
   };
 
@@ -18,7 +20,13 @@ export class AppartementMetriqueElementComponent {
     let formula: string;
     switch (type) {
       case 'moyenne_benefice':
-        formula = 'Moyenne bénéfices : (renvenus annuels - dépenses annuels) ÷ 12';
+        formula = 'Moyenne bénéfices : (revenus depuis achat - depenses depuis achat) lissés par mois';
+        break;
+      case 'revenus_nets':
+        formula = 'Revenus depuis achat';
+        break;
+      case 'depenses_nettes':
+        formula = 'Dépenses depuis achat';
         break;
       case 'rentabilite_nette':
         formula = `

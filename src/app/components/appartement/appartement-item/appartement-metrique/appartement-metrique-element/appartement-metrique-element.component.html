@@ -14,18 +14,28 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngIf="appartement.moyenneBeneficesNetParMois !== 0" (click)="showInfo('moyenne_benefice')">
-                    <td>Moyenne bénéfices</td>
-                    <td>{{appartement.moyenneBeneficesNetParMois}}€ par mois</td>
-                    <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
-                    <td *ngIf="false">(renvenus annuels - dépenses annuels) ÷ 12</td>
+                <tr (click)="showInfo('revenus_nets')">
+                  <td>Revenus brut</td>
+                  <td>{{appartement.revenusNets }}€ depuis l'achat</td>
+                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
+                </tr>
+                <tr *ngIf="appartement.depensesNettes !== 0" (click)="showInfo('depenses_nettes')">
+                  <td>Dépenses nettes</td>
+                  <td>{{appartement.depensesNettes }}€ depuis l'achat</td>
+                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
                 <tr *ngIf="appartement.rentabiliteNette !== 0" (click)="showInfo('rentabilite_nette')">
                     <td>Rentabilité nette</td>
                     <td>{{appartement.rentabiliteNette }}€ depuis l'achat</td>
                    <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
-                <tr *ngIf="appartement.tauxVacanceLocative !== 0" (click)="showInfo('taux_vacance_locative')">
+                <tr *ngIf="appartement.moyenneBeneficesNetParMois !== 0" (click)="showInfo('moyenne_benefice')">
+                  <td>Moyenne bénéfices</td>
+                  <td>{{appartement.moyenneBeneficesNetParMois}}€ par mois</td>
+                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
+                  <td *ngIf="false">(renvenus annuels - dépenses annuels) ÷ 12</td>
+                </tr>
+                <tr (click)="showInfo('taux_vacance_locative')">
                     <td>Taux de vacance locatives</td>
                     <td>{{appartement.tauxVacanceLocative}}%</td>
                     <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
