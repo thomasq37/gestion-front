@@ -56,7 +56,7 @@
                 </tr>
                 <tr (click)="showInfo('taux_vacance_locative')">
                   <td><strong>Taux d'occupation</strong></td>
-                    <td  class="number">{{appartement.tauxVacanceLocative | number:'1.2-2':'fr-FR' }}%</td>
+                    <td  class="number">{{100-appartement.tauxVacanceLocative | number:'1.2-2':'fr-FR' }}%</td>
                     <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
 
