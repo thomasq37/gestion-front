@@ -3,7 +3,10 @@
         <form [formGroup]="periodeForm" (ngSubmit)="ajouterUnePeriodeLocationPourAppartement()" aria-labelledby="formTitle">
 
             <h2 id="formTitle">Ajouter une période</h2>
-
+            <div>
+              <label for="locataire">Locataire <span aria-hidden="true">*</span></label>
+              <input type="text" id="locataire" formControlName="locataire" aria-required="true" placeholder="Nom complet locataire">
+            </div>
             <div>
                 <label for="prix">Prix <span aria-hidden="true">*</span></label>
                 <input type="number" id="prix" formControlName="prix" aria-required="true" [min]="1">

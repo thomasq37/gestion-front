@@ -25,6 +25,7 @@ export class AppartementPeriodeUpdateComponent implements OnInit, OnChanges{
   private initializeForm(): void {
     this.periodeForm = new FormGroup({
       prix: new FormControl(this.periode?.prix, Validators.required),
+      locataire: new FormControl(this.periode?.locataire, Validators.required),
       estEntree: new FormControl(this.periode?.estEntree, Validators.required),
       estSortie: new FormControl(this.periode?.estSortie,),
       locVac: new FormControl(this.periode?.locVac)

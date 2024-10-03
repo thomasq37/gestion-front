@@ -60,6 +60,7 @@ export interface TypeFrais {
 export interface PeriodLocation {
   id:number;
   prix: number;
+  locataire: string;
   estEntree: string;
   estSortie: string | null;
   frais: Frais[];

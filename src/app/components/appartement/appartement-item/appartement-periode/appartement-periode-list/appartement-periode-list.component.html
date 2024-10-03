@@ -9,18 +9,24 @@
             <table class="appartement-list-periode">
               <thead>
               <tr>
+                <th>Locataire</th>
                 <th>Entrée</th>
                 <th>Sortie</th>
+<!--
                 <th>AirBnB</th>
+-->
                 <th>Prix</th>
                 <td *ngIf="isEditable">Actions</td>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let m of appartPeriodLocation">
+                <td>{{m.locataire}}</td>
                 <td>{{ m.estEntree | customDate  }}</td>
                 <td>{{ m.estSortie | customDate }}</td>
+<!--
                 <td>{{ m.locVac ? 'Oui' : 'Non' }}</td>
+-->
                 <td>{{ m.prix}}€ {{ m.locVac ? '/jour' : '/mois'}}</td>
                 <td *ngIf="isEditable"  class="actions-container">
                   <img src="../../../../assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdatePeriode(m)"/>

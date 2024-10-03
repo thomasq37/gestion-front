@@ -19,6 +19,7 @@ export class AppartementPeriodeAddComponent implements OnInit{
 
   ngOnInit(): void {
     this.periodeForm = new FormGroup({
+      locataire:new FormControl(null, Validators.required),
       prix: new FormControl(null, Validators.required),
       estEntree: new FormControl(null,  Validators.required),
       estSortie: new FormControl(null),
