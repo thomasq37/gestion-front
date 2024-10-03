@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 })
 export class AppartementListComponent implements OnInit {
   appartementListOverview: Appartement[];
+  totalALAchat: number = 0;
   totalEstimations: number = 0;
   totalRevenus: number = 0;
   totalDepenses: number = 0;
@@ -27,7 +28,12 @@ export class AppartementListComponent implements OnInit {
       });
   }
   calculerTotaux() {
-    this.totalEstimations = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.estimation, 0);
+    this.totalALAchat =
+      this.appartementListOverview.reduce((acc, appartement) => acc + appartement.prix, 0) +
+      this.appartementListOverview.reduce((acc, appartement) => acc + appartement.fraisNotaireEtNegociation, 0)
+
+
+      this.totalEstimations = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.estimation, 0);
     this.totalRevenus = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.revenusNets, 0);
     this.totalDepenses = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.depensesNettes, 0);
     this.totalBenefices = this.totalRevenus - this.totalDepenses;
