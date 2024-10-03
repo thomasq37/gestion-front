@@ -44,6 +44,11 @@
                   <td class="number">{{appartement.totalFraisGestion  | number:'1.2-2':'fr-FR' }} €</td>
                   <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
+                <tr (click)="showInfo('total_honoraires_de_loc')">
+                  <td>Total des honoraires de location</td>
+                  <td class="number">{{appartement.totalHonorairesDeLoc  | number:'1.2-2':'fr-FR' }} €</td>
+                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
+                </tr>
                 </tbody>
             </table>
         </div>
