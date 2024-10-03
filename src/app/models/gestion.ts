@@ -10,6 +10,7 @@ export interface Appartement {
   surface: number;
   balcon: boolean;
   prix: number;
+  fraisNotaireEtNegociation:number;
   estimation: number;
   dpe: string;
   pays: Pays;

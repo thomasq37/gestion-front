@@ -45,9 +45,16 @@
                 <div *ngIf="isProprietaire()" class="detail-item">
                     <dt><img src="./assets/img/euro-icon.svg" alt="Icône de prix"></dt>
                     <dd>
-                        <strong>Prix d'achat net vendeur:</strong>
+                        <strong>Prix d'achat HT:</strong>
                         <p>{{ appartement.prix | number:'1.0-2':'fr-FR' }} €</p>
                     </dd>
+                </div>
+                <div *ngIf="isProprietaire()" class="detail-item">
+                  <dt><img src="./assets/img/euro-icon.svg" alt="Icône de prix"></dt>
+                  <dd>
+                    <strong>Frais d'acquisition:</strong>
+                    <p>{{ appartement.fraisNotaireEtNegociation | number:'1.0-2':'fr-FR' }} €</p>
+                  </dd>
                 </div>
                 <div *ngIf="isProprietaire()" class="detail-item">
                   <dt><img src="./assets/img/estimate-icon.svg" alt="Icône d'estimation"></dt>

@@ -38,6 +38,7 @@ export class AppartementAddComponent {
       surface: ['', Validators.required],
       balcon: [''],
       prix: ['', Validators.required],
+      fraisNotaireEtNegociation: ['', Validators.required],
       estimation: [''],
       dpe: ['', Validators.required],
     });
