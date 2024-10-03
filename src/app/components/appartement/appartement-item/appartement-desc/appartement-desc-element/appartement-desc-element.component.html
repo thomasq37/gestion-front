@@ -50,7 +50,7 @@
                     </dd>
                 </div>
                 <div *ngIf="isProprietaire()" class="detail-item">
-                  <dt><img src="./assets/img/euro-icon.svg" alt="Icône de prix"></dt>
+                  <dt><img src="./assets/img/estimate-icon.svg" alt="Icône d'estimation"></dt>
                   <dd>
                     <strong>Estimation net vendeur:</strong>
                     <p>{{ appartement.estimation === null || appartement.estimation === 0 ? "A réaliser" : (appartement.estimation  | number:'1.0-2':'fr-FR') + " €" }}</p>

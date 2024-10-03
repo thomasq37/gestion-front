@@ -21,14 +21,14 @@
         </li>
       </ul>
     </div>
-    <div class="container">
+    <div class="custom-card metriques">
       <h2>Métriques</h2>
       <p>Valeur totale estimée des biens :<strong> {{ totalEstimations  | number:'1.2-2' }} €</strong></p>
-      <p>Bénéfice net des biens :<strong> {{ totalBenefices | number:'1.2-2' }} €</strong></p>
       <br>
       <p>Revenus totaux des biens :<strong> {{ totalRevenus | number:'1.2-2' }} €</strong></p>
       <p>Dépenses totales des biens :<strong> {{ totalDepenses | number:'1.2-2' }} €</strong></p>
       <br>
+      <p>Bénéfice net des biens :<strong> {{ totalBenefices | number:'1.2-2' }} €</strong></p>
       <p>Taux de provision: <strong> {{ (totalDepenses/totalRevenus)*100 | number:'1.2-2' }} %</strong></p>
     </div>
   </div>
