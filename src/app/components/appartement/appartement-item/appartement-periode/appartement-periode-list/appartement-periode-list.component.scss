@@ -61,6 +61,11 @@
           }
         }
         td, th{
+          width: max-content;
+          white-space: nowrap;
+          max-width: 7rem;
+          overflow-x: clip;
+          text-overflow: ellipsis;
           border-left: 1px solid #d7d7d7;
         }
       }
