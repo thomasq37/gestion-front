@@ -28,6 +28,8 @@
       <br>
       <p>Revenus totaux des biens :<strong> {{ totalRevenus | number:'1.2-2' }} €</strong></p>
       <p>Dépenses totales des biens :<strong> {{ totalDepenses | number:'1.2-2' }} €</strong></p>
+      <br>
+      <p>Taux de provision: <strong> {{ (totalDepenses/totalRevenus)*100 | number:'1.2-2' }} %</strong></p>
     </div>
   </div>
 </section>
