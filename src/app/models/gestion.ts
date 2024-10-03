@@ -21,6 +21,8 @@ export interface Appartement {
   moyenneBeneficesNetParMois: number;
   totalFraisGestion: number;
   totalHonorairesDeLoc: number;
+  totalTravaux: number;
+  totalChargesFixesHorsFrais:number;
   fraisFixe: Frais[];
   images: string[];
   periodLocation: PeriodLocation[];

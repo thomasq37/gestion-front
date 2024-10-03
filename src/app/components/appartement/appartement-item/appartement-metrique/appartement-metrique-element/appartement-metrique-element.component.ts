@@ -17,7 +17,10 @@ export class AppartementMetriqueElementComponent {
     'rentabilite_nette': '(revenus - depenses) depuis achat',
     'taux_vacance_locative': '(jours vacants ÷ jours total) x 100',
     'total_frais_gestion': 'total frais de type frais de gestion',
-    'total_honoraires_de_loc': 'total frais de type honoraires de remise en location'
+    'total_honoraires_de_loc': 'total frais de type honoraires de remise en location',
+    'total_travaux': 'total frais de type travaux',
+    'total_charges_fixes_hors_frais': 'total charges fixes hors frais de gestion'
+
   };
 
   showInfo(type: string) {
@@ -43,6 +46,12 @@ export class AppartementMetriqueElementComponent {
         break;
       case 'total_honoraires_de_loc':
         formula = `total_honoraires_de_loc`
+        break;
+      case 'total_travaux':
+        formula = `total_travaux`
+        break;
+      case 'total_charges_fixes_hors_frais':
+        formula = `total_charges_fixes_hors_frais`
         break;
       case 'taux_vacance_locative':
         formula = 'Taux de vacance locative : (jours vacants ÷ jours total) x 100';
