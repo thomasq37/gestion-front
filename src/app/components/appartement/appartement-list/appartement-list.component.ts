@@ -15,6 +15,8 @@ export class AppartementListComponent implements OnInit {
   totalRevenus: number = 0;
   totalDepenses: number = 0;
   totalBenefices: number = 0;
+  selectionMode: boolean = false; // Gère si le mode de sélection est actif ou non
+
   constructor(private gestionService: GestionService, private router: Router) {
     this.appartementListOverview = [];
   }
@@ -22,23 +24,57 @@ export class AppartementListComponent implements OnInit {
   ngOnInit() {
     this.gestionService.obtenirAdressesAppartementsParUserId(localStorage.getItem('userId'))
       .subscribe(appartementListOverview => {
-        this.appartementListOverview = appartementListOverview;
+        this.appartementListOverview = appartementListOverview.map(appartement => ({
+          ...appartement,
+          selected: false  // Ajoute la propriété selected à chaque appartement
+        }));
         this.calculerTotaux();
-
       });
   }
-  calculerTotaux() {
-    this.totalALAchat =
-      this.appartementListOverview.reduce((acc, appartement) => acc + appartement.prix, 0) +
-      this.appartementListOverview.reduce((acc, appartement) => acc + appartement.fraisNotaireEtNegociation, 0)
 
-
-      this.totalEstimations = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.estimation, 0);
-    this.totalRevenus = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.revenusNets, 0);
-    this.totalDepenses = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.depensesNettes, 0);
-    this.totalBenefices = this.totalRevenus - this.totalDepenses;
+  // Basculer le mode de sélection
+  toggleSelectionMode() {
+    this.selectionMode = !this.selectionMode;
+    if (!this.selectionMode) {
+      // Si on désactive le mode sélection, tout désélectionner
+      this.appartementListOverview.forEach(appartement => appartement.selected = false);
+      this.calculerTotaux();
+    }
   }
+
+  // Basculer la sélection d'un appartement
+  toggleSelection(appartement: Appartement) {
+    appartement.selected = !appartement.selected;
+    this.calculerTotaux();
+  }
+
+  // Calcul des totaux pour les appartements sélectionnés
+  calculerTotaux() {
+    const appartementsSelectionnes = this.appartementListOverview.filter(appartement => appartement.selected);
+
+    if (appartementsSelectionnes.length > 0) {
+      this.totalALAchat =
+        appartementsSelectionnes.reduce((acc, appartement) => acc + appartement.prix, 0) +
+        appartementsSelectionnes.reduce((acc, appartement) => acc + appartement.fraisNotaireEtNegociation, 0);
+      this.totalEstimations = appartementsSelectionnes.reduce((acc, appartement) => acc + appartement.estimation, 0);
+      this.totalRevenus = appartementsSelectionnes.reduce((acc, appartement) => acc + appartement.revenusNets, 0);
+      this.totalDepenses = appartementsSelectionnes.reduce((acc, appartement) => acc + appartement.depensesNettes, 0);
+      this.totalBenefices = this.totalRevenus - this.totalDepenses;
+    } else {
+      // Si aucun appartement n'est sélectionné, affichez les totaux pour tous les appartements
+      this.totalALAchat =
+        this.appartementListOverview.reduce((acc, appartement) => acc + appartement.prix, 0) +
+        this.appartementListOverview.reduce((acc, appartement) => acc + appartement.fraisNotaireEtNegociation, 0);
+      this.totalEstimations = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.estimation, 0);
+      this.totalRevenus = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.revenusNets, 0);
+      this.totalDepenses = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.depensesNettes, 0);
+      this.totalBenefices = this.totalRevenus - this.totalDepenses;
+    }
+  }
+
   viewAppartement(appartementId: number) {
-    this.router.navigate(['/appartement', appartementId]);
+    if (!this.selectionMode) {
+      this.router.navigate(['/appartement', appartementId]);
+    }
   }
 }

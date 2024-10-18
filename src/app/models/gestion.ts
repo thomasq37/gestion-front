@@ -27,6 +27,7 @@ export interface Appartement {
   images: string[];
   periodLocation: PeriodLocation[];
   appUser: AppUser
+  selected: boolean
 }
 
 export interface AppUser {

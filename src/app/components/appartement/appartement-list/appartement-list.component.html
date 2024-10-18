@@ -1,12 +1,26 @@
 <section class="appartement-list">
   <div class="container">
+    <div class="custom-card metriques">
+      <div class="metriques-header">
+        <h2>Métriques</h2>
+        <button (click)="toggleSelectionMode()">{{ selectionMode ? "Annuler la séléction" : "Sélectionner" }}</button>
+      </div>
+      <p>Valeur totale HT + Frais d'acquisition : <strong>{{ totalALAchat | number:'1.2-2' }} €</strong></p>
+      <p>Valeur totale estimée des biens : <strong>{{ totalEstimations | number:'1.2-2' }} €</strong></p>
+      <br>
+      <p>Revenus totaux des biens : <strong>{{ totalRevenus | number:'1.2-2' }} €</strong></p>
+      <p>Dépenses totales des biens : <strong>{{ totalDepenses | number:'1.2-2' }} €</strong></p>
+      <p>Bénéfice net des biens : <strong>{{ totalBenefices | number:'1.2-2' }} €</strong></p>
+      <br>
+      <p>Taux de provision : <strong>{{ totalDepenses / totalRevenus * 100 | number:'1.2-2' }} %</strong></p>
+    </div>
     <div class="custom-card">
-      <!--<div class="custom-card-header">
-        <h2>Biens immobiliers</h2>
-      </div>-->
-      <ul >
-        <li  *ngFor="let appartement of appartementListOverview" class="appartement-item">
-          <div  *ngIf="appartement.id !== undefined" (click)="viewAppartement(appartement.id)" class="appartement-info">
+      <ul>
+        <li *ngFor="let appartement of appartementListOverview" class="appartement-item"
+            [ngClass]="{'selected': appartement.selected, 'selection-active': selectionMode}">
+          <div *ngIf="appartement.id !== undefined" class="appartement-info"
+
+               (click)="selectionMode ? toggleSelection(appartement) : viewAppartement(appartement.id)">
             <div class="adresse">
               <div>
                 <h3>{{ appartement.numero }} {{ appartement.adresse }}</h3>
@@ -15,24 +29,9 @@
               <img src="./assets/img/view-more-icon.svg" alt="">
             </div>
           </div>
-          <div class="appartement-actions">
-            <!-- Ajoutez ici les actions pour chaque appartement, par exemple, boutons de détails ou de modification -->
-          </div>
         </li>
       </ul>
     </div>
-    <div class="custom-card metriques">
-      <h2>Métriques</h2>
-      <p>Valeur totale HT + Frais d'acquisition :<strong> {{ totalALAchat  | number:'1.2-2' }} €</strong></p>
-      <p>Valeur totale estimée des biens :<strong> {{ totalEstimations  | number:'1.2-2' }} €</strong></p>
-      <br>
-      <p>Revenus totaux des biens :<strong> {{ totalRevenus | number:'1.2-2' }} €</strong></p>
-      <p>Dépenses totales des biens :<strong> {{ totalDepenses | number:'1.2-2' }} €</strong></p>
-      <p>Bénéfice net des biens :<strong> {{ totalBenefices | number:'1.2-2' }} €</strong></p>
 
-      <br>
-      <p>Taux de provision: <strong> {{ (totalDepenses/totalRevenus)*100 | number:'1.2-2' }} %</strong></p>
-    </div>
   </div>
 </section>
-

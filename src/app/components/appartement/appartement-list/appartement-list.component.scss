@@ -26,8 +26,10 @@
           color: black;
           padding-bottom: 0.3rem;
           font-weight: 300;
-        }
+          &.selected {
 
+          }
+        }
         box-shadow: rgba(0, 0, 0, 0) 0 1px 1px;
         background-color: white;
         padding: 1rem;
@@ -57,9 +59,25 @@
           }
         }
       }
+      .appartement-item.selection-active.selected{
+        cursor: pointer;
+        border: 2px solid #143b86 !important;
+      }
     }
     .metriques{
-      margin-top: 1rem;
+      margin-bottom: 1rem;
+      .metriques-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        button{
+          height: max-content;
+          padding: .3rem .6rem;
+          border-radius: 5px;
+          background: white;
+          border-color: #143b86;
+        }
+      }
     }
   }
 }
