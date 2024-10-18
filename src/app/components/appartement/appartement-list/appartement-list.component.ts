@@ -40,6 +40,10 @@ export class AppartementListComponent implements OnInit {
       this.appartementListOverview.forEach(appartement => appartement.selected = false);
       this.calculerTotaux();
     }
+    else{
+      this.appartementListOverview.forEach(appartement => appartement.selected = true);
+
+    }
   }
 
   // Basculer la sélection d'un appartement
