@@ -1,3 +1,4 @@
+
 .appartement-desc-element{
   margin-bottom: 1rem;
   margin-top: 1rem;
@@ -55,5 +56,19 @@
         }
       }
     }
+  }
+}
+@media screen and (min-width: 55rem) {
+  .appartement-desc-element {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+  .custom-card {
+    overflow-y: unset !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: unset !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 }

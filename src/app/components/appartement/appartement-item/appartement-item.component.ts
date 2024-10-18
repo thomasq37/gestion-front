@@ -1,4 +1,11 @@
-import {Component, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit, Pipe, PipeTransform,
+  ViewChild
+} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Appartement, Frais, PeriodLocation} from "../../../models/gestion";
 import {GestionService} from "../../../services/gestion.service";
@@ -8,19 +15,60 @@ import {GestionService} from "../../../services/gestion.service";
   templateUrl: './appartement-item.component.html',
   styleUrls: ['./appartement-item.component.scss']
 })
-export class AppartementItemComponent implements OnInit{
+export class AppartementItemComponent implements OnInit, AfterViewInit{
   images: string[] = [];
   appartement!: Appartement;
   fraisFixe: Frais[] = [];
   periodLocation: PeriodLocation[] = [];
+  @ViewChild('pictureElement') pictureElement!: ElementRef;
+  @ViewChild('descElement') descElement!: ElementRef;
+
   constructor(
     private gestionService: GestionService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private elementRef: ElementRef) {
   }
+
+  ngAfterViewInit() {
+    this.adjustHeight(0);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any): void {
+    this.adjustHeight(0);
+  }
+
+  // Adjust the height of the description element based on the picture element's height
+  adjustHeight(init) {
+    const mediaQuery = window.matchMedia('(min-width: 55rem)');  // 55rem correspond à 880px
+    if (mediaQuery.matches && this.appartement) {
+      // Sélectionnez les éléments uniquement si l'appartement existe
+      const pictureElement = this.elementRef.nativeElement.querySelector('.picture-element');
+      const descElement = this.elementRef.nativeElement.querySelector('.desc-container');
+
+      if (pictureElement && descElement) {
+        const pictureHeight = pictureElement.offsetHeight;
+        if(init === 1){
+          descElement.style.height = `${pictureHeight + 10}px`;
+        }
+        else{
+          descElement.style.height = `${pictureHeight}px`;
+        }
+      }
+    } else {
+      // Réinitialiser la hauteur à "auto" si la largeur est inférieure à 55rem
+      const descElement = this.elementRef.nativeElement.querySelector('.desc-container');
+      if (descElement) {
+        descElement.style.height = 'auto';
+      }
+    }
+  }
+
   isProprietaire(): boolean {
     return localStorage.getItem('userRole') === "PROPRIETAIRE";
   }
+
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const appartementId = Number(params.get('id'));
@@ -28,22 +76,26 @@ export class AppartementItemComponent implements OnInit{
         if (periodes && periodes.content) {
           this.periodLocation = periodes.content;
         } else {
-          // Gérer le cas où content est vide ou non défini
           this.periodLocation = [];
         }
-      })
+      });
+
       this.gestionService.obtenirFraisFixePourAppartement(parseInt(localStorage.getItem('userId')), appartementId, 0).subscribe(fraisFixe => {
         if (fraisFixe && fraisFixe.content) {
           this.fraisFixe = fraisFixe.content;
         } else {
           this.fraisFixe = [];
         }
-      })
+      });
+
       this.gestionService.getAppartmentByUserIdAndApartmentId(localStorage.getItem('userId'), appartementId)
         .subscribe(appartement => {
-          this.appartement = appartement;
-          this.images = this.appartement.images
-        },
+            this.appartement = appartement;
+            this.images = this.appartement.images;
+
+            // Appelez adjustHeight après le chargement de l'appartement
+            setTimeout(() => this.adjustHeight(1), 0);
+          },
           error => {
             this.router.navigate(['/dashboard']);
           });
@@ -69,8 +121,6 @@ export class AppartementItemComponent implements OnInit{
     return estEntree ? "Entrée" : "Sortie";
   }
 }
-
-
 @Pipe({ name: 'customDate' })
 export class CustomDatePipe implements PipeTransform {
   transform(value: string | null): string {

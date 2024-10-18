@@ -9,6 +9,15 @@
 
 .appartement-item{
     .appartement-baniere-info{
+      display: grid;
+      .desc-container{
+        overflow-y: unset;
+        box-shadow: none;
+        border: none;
+        border-radius: unset;
+        padding: 0;
+        margin: 0;
+      }
       .appartement-list-frais{
         margin-bottom: 2rem;
       }
@@ -31,11 +40,9 @@
           text-decoration: none;
         }
       }
-
       table {
         width: 100%;
       }
-
       thead, tbody, tfoot, tr, td, th {
         padding: 1rem;
         border: 1px solid #d7d7d7;
@@ -46,8 +53,6 @@
           font-size: 1rem;
         }
       }
-
-
       .carousel-container{
 
         margin-bottom: 2rem;
@@ -57,6 +62,7 @@
           overflow: hidden;
           img{
             width: 100%;
+            height: 100%;
           }
         }
 
@@ -64,7 +70,6 @@
       .appartement-images{
         margin-top: 2rem
       }
-
       ul{
         li{
           padding-block: .5rem;
@@ -110,6 +115,9 @@
           width: 3rem;
         }
       }
+    }
+    .appartement-contact-list-container{
+      margin-top: 0;
     }
     .actions-container{
       display:flex;
@@ -163,4 +171,28 @@
 
     }
 
+}
+
+@media screen and (min-width: 55rem) {
+  .appartement-item{
+    .appartement-baniere-info{
+      grid-template-columns: repeat(2,1fr);
+      .container-pic-desc{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column: span 2;
+      }
+      .desc-container{
+        overflow-y: scroll;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 1rem;
+        margin: 0 .8rem;
+      }
+      .nom-appartement{
+        grid-column: span 2;
+      }
+    }
+  }
 }
