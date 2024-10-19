@@ -16,6 +16,8 @@ export class AppartementListComponent implements OnInit {
   totalDepenses: number = 0;
   totalBenefices: number = 0;
   selectionMode: boolean = false; // Gère si le mode de sélection est actif ou non
+  filtreActif: string[] = [];
+  filtresIsVisibles = false;
 
   constructor(private gestionService: GestionService, private router: Router) {
     this.appartementListOverview = [];
@@ -73,6 +75,14 @@ export class AppartementListComponent implements OnInit {
       this.totalRevenus = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.revenusNets, 0);
       this.totalDepenses = this.appartementListOverview.reduce((acc, appartement) => acc + appartement.depensesNettes, 0);
       this.totalBenefices = this.totalRevenus - this.totalDepenses;
+    }
+  }
+  toggleFiltre(filtre: string) {
+    const index = this.filtreActif.indexOf(filtre);
+    if (index === -1) {
+      this.filtreActif.push(filtre); // Ajoute le filtre si non sélectionné
+    } else {
+      this.filtreActif.splice(index, 1); // Retire le filtre s'il est déjà sélectionné
     }
   }
 

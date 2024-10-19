@@ -20,6 +20,10 @@
       }
 
       .appartement-item {
+        .metriques-dynamique{
+          margin-top: .5rem;
+          font-size: .8rem;
+        }
         h3 {
           font-size: 1rem;
 
@@ -62,6 +66,36 @@
       .appartement-item.selection-active.selected{
         cursor: pointer;
         border: 2px solid #143b86 !important;
+      }
+
+      .filtres-list{
+        .filtres-btns{
+          display: flex;
+          flex-wrap: wrap;
+          gap: .3rem;
+          margin-top: 1rem;
+
+        }
+        .filtres{
+          width: 100%;
+          &.selected{
+            background-color: #143b86;
+            color: white;
+          }
+        }
+        button{
+          font-size:.9rem;
+          height: max-content;
+          padding: .2rem .4rem;
+          border-radius: 5px;
+          background: white;
+          border-color: #143b86;
+          color: #143b86;
+          &.selected{
+            background-color: #143b86;
+            color: white;
+          }
+        }
       }
     }
     .metriques{

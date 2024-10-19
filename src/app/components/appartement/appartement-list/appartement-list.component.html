@@ -15,6 +15,20 @@
       <p>Taux de provision : <strong>{{ totalDepenses / totalRevenus * 100 | number:'1.2-2' }} %</strong></p>
     </div>
     <div class="custom-card">
+      <ul class="filtres-list">
+        <button (click)="filtresIsVisibles = !filtresIsVisibles" class="filtres {{filtresIsVisibles ? 'selected' : ''}}">Filtres</button>
+        <div *ngIf="filtresIsVisibles" class="filtres-btns">
+          <button class="{{filtreActif.includes('revenus') ? 'selected' : ''}}" (click)="toggleFiltre('revenus')">Revenus</button>
+          <button class="{{filtreActif.includes('charges_fixes') ? 'selected' : ''}}" (click)="toggleFiltre('charges_fixes')">Charges fixes</button>
+          <button class="{{filtreActif.includes('travaux') ? 'selected' : ''}}" (click)="toggleFiltre('travaux')">Travaux</button>
+          <button class="{{filtreActif.includes('frais_gestion') ? 'selected' : ''}}" (click)="toggleFiltre('frais_gestion')">Frais de gestion</button>
+          <button class="{{filtreActif.includes('honoraires') ? 'selected' : ''}}" (click)="toggleFiltre('honoraires')">Honoraires de location</button>
+          <button class="{{filtreActif.includes('depenses') ? 'selected' : ''}}" (click)="toggleFiltre('depenses')">Total des dépenses</button>
+          <button class="{{filtreActif.includes('benefice_net') ? 'selected' : ''}}" (click)="toggleFiltre('benefice_net')">Bénéfice net</button>
+          <button class="{{filtreActif.includes('benefice_mensuel') ? 'selected' : ''}}" (click)="toggleFiltre('benefice_mensuel')">Bénéfice mensuel moyen</button>
+          <button class="{{filtreActif.includes('taux_occupation') ? 'selected' : ''}}" (click)="toggleFiltre('taux_occupation')">Taux d'occupation</button>
+        </div>
+      </ul>
       <ul>
         <li *ngFor="let appartement of appartementListOverview" class="appartement-item"
             [ngClass]="{'selected': appartement.selected, 'selection-active': selectionMode}">
@@ -28,6 +42,37 @@
               </div>
               <img src="./assets/img/view-more-icon.svg" alt="">
             </div>
+            <div class="metriques-dynamique">
+              <!-- Contenu dynamique en fonction du filtre sélectionné -->
+              <div *ngIf="filtreActif.includes('revenus')">
+                <p><strong>Revenus Nets:</strong> {{ appartement.revenusNets | number:'1.2-2':'fr-FR' }} €</p>
+              </div>
+              <div *ngIf="filtreActif.includes('charges_fixes')">
+                <p><strong>Charges Fixes:</strong> {{ appartement.totalChargesFixesHorsFrais | number:'1.2-2':'fr-FR' }} €</p>
+              </div>
+              <div *ngIf="filtreActif.includes('travaux')">
+                <p><strong>Total des Travaux:</strong> {{ appartement.totalTravaux | number:'1.2-2':'fr-FR' }} €</p>
+              </div>
+              <div *ngIf="filtreActif.includes('frais_gestion')">
+                <p><strong>Frais de Gestion:</strong> {{ appartement.totalFraisGestion | number:'1.2-2':'fr-FR' }} €</p>
+              </div>
+              <div *ngIf="filtreActif.includes('honoraires')">
+                <p><strong>Honoraires de Location:</strong> {{ appartement.totalHonorairesDeLoc | number:'1.2-2':'fr-FR' }} €</p>
+              </div>
+              <div *ngIf="filtreActif.includes('depenses')">
+                <p><strong>Total des Dépenses:</strong> {{ appartement.depensesNettes | number:'1.2-2':'fr-FR' }} €</p>
+              </div>
+              <div *ngIf="filtreActif.includes('benefice_net')">
+                <p><strong>Bénéfice Net:</strong> {{ appartement.rentabiliteNette | number:'1.2-2':'fr-FR' }} €</p>
+              </div>
+              <div *ngIf="filtreActif.includes('benefice_mensuel')">
+                <p><strong>Bénéfice Mensuel Moyen:</strong> {{ appartement.moyenneBeneficesNetParMois | number:'1.2-2':'fr-FR' }} €</p>
+              </div>
+              <div *ngIf="filtreActif.includes('taux_occupation')">
+                <p><strong>Taux d'Occupation:</strong> {{ 100 - appartement.tauxVacanceLocative | number:'1.2-2':'fr-FR' }}%</p>
+              </div>
+            </div>
+
           </div>
         </li>
       </ul>
