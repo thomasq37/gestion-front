@@ -91,4 +91,9 @@ export class AppartementListComponent implements OnInit {
       this.router.navigate(['/appartement', appartementId]);
     }
   }
+
+  toggleFiltres() {
+    this.filtresIsVisibles = !this.filtresIsVisibles
+    this.filtreActif = [];
+  }
 }

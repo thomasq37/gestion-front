@@ -16,7 +16,7 @@
     </div>
     <div class="custom-card">
       <ul class="filtres-list">
-        <button (click)="filtresIsVisibles = !filtresIsVisibles" class="filtres {{filtresIsVisibles ? 'selected' : ''}}">Filtres</button>
+        <button (click)="toggleFiltres()" class="filtres {{filtresIsVisibles ? 'selected' : ''}}">Filtres</button>
         <div *ngIf="filtresIsVisibles" class="filtres-btns">
           <button class="{{filtreActif.includes('revenus') ? 'selected' : ''}}" (click)="toggleFiltre('revenus')">Revenus</button>
           <button class="{{filtreActif.includes('charges_fixes') ? 'selected' : ''}}" (click)="toggleFiltre('charges_fixes')">Charges fixes</button>
