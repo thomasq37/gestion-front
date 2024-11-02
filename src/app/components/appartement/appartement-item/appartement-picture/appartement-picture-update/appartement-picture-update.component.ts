@@ -11,69 +11,17 @@ import {S3Service} from "../../../../../services/s3.service";
   templateUrl: './appartement-picture-update.component.html',
   styleUrls: ['./appartement-picture-update.component.scss']
 })
-export class AppartementPictureUpdateComponent implements OnInit{
-  /*appartement: Appartement = <Appartement>{};
-  public pictureUpdateForm: FormGroup;
-
-  constructor(
-    private router: Router,
-    private gestionService : GestionService,
-    private formBuilder: FormBuilder,
-    private navigationService: NavigationService
-  ) {
-    this.appartement = this.navigationService.getData();
-  }
-
-  ngOnInit(): void {
-    this.initForm();
-  }
-
-  private initForm(): void {
-    const imageUrls = this.appartement.images || [];
-    const imagesFormArray = new FormArray(
-      imageUrls.map(url => new FormControl(url))
-    );
-
-    this.pictureUpdateForm = this.formBuilder.group({
-      images: imagesFormArray
-    });
-  }
-
-  get imagesFormArray(): FormArray {
-    return this.pictureUpdateForm.get('images') as FormArray;
-  }
-
-  addImage(): void {
-    this.imagesFormArray.push(new FormControl(''));
-  }
-
-  removeImage(index: number): void {
-    this.imagesFormArray.removeAt(index);
-  }
-  getFormControl(index: number): FormControl {
-    return this.imagesFormArray.at(index) as FormControl;
-  }
-
-  mettreAJourUnAppartementPourUtilisateur() {
-    const userId = parseInt(<string>localStorage.getItem('userId'))
-    this.appartement = { ...this.appartement, ...this.pictureUpdateForm.value };
-    this.gestionService.mettreAJourUnAppartementPourUtilisateur(userId, this.appartement.id, this.appartement).subscribe(appartement =>{
-        console.log('Appartement mis à jour avec succès.');
-        this.router.navigate(['/appartement/' + this.appartement.id]);
-      },
-      (error) => {
-        console.error('Erreur lors de la mise à jour de l\'appartement :', error);
-      });
-  }*/
+export class AppartementPictureUpdateComponent implements OnInit {
   appartement: Appartement = <Appartement>{};
   public pictureUpdateForm: FormGroup;
+  private selectedFile: File | null = null; // Stocke le fichier sélectionné
 
   constructor(
     private router: Router,
     private gestionService: GestionService,
     private formBuilder: FormBuilder,
     private navigationService: NavigationService,
-    private s3Service: S3Service // Injecte le service S3
+    private s3Service: S3Service
   ) {
     this.appartement = this.navigationService.getData();
   }
@@ -109,18 +57,24 @@ export class AppartementPictureUpdateComponent implements OnInit{
     return this.imagesFormArray.at(index) as FormControl;
   }
 
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      this.s3Service.uploadImage(file).subscribe(
+  storeSelectedFile(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
+  uploadSelectedFile(): void {
+    if (this.selectedFile) {
+      this.s3Service.uploadImage(this.selectedFile).subscribe(
         (url: string) => {
-          // Ajoute l'URL de l'image au formulaire
+          console.log('Image téléchargée avec succès :', url);
           this.imagesFormArray.push(new FormControl(url));
+          this.selectedFile = null; // Réinitialise le fichier après téléchargement
         },
         (error) => {
           console.error('Erreur lors du téléchargement de l\'image :', error);
         }
       );
+    } else {
+      console.warn('Aucun fichier sélectionné pour le téléchargement');
     }
   }
 
