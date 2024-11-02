@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment";
   providedIn: 'root'
 })
 export class S3Service {
-  private apiUrl = `${environment.apiUrl}/api/upload`;
+  private apiUrl = `${environment.apiUrl}/upload`;
   constructor(private http: HttpClient) {}
 
   uploadImage(file: File): Observable<Object> {
