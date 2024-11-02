@@ -1,7 +1,7 @@
 <section class="appartement-list">
   <div class="container">
     <div class="custom-card">
-      <ul class="filtres-list">
+      <ul *ngIf="isProprietaire()" class="filtres-list">
         <button (click)="toggleFiltres()" class="filtres {{filtresIsVisibles ? 'selected' : ''}}">Filtres</button>
         <div *ngIf="filtresIsVisibles" class="filtres-btns">
           <button class="{{filtreActif.includes('revenus') ? 'selected' : ''}}" (click)="toggleFiltre('revenus')">Revenus</button>
@@ -63,7 +63,7 @@
         </li>
       </ul>
     </div>
-    <div class="custom-card metriques">
+    <div *ngIf="isProprietaire()" class="custom-card metriques">
       <div class="metriques-header">
         <h2>Statistiques</h2>
         <button (click)="toggleSelectionMode()">{{ selectionMode ? "Annuler la séléction" : "Sélectionner" }}</button>

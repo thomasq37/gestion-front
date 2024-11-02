@@ -22,7 +22,9 @@ export class AppartementListComponent implements OnInit {
   constructor(private gestionService: GestionService, private router: Router) {
     this.appartementListOverview = [];
   }
-
+  isProprietaire(): boolean {
+    return localStorage.getItem('userRole') === "PROPRIETAIRE";
+  }
   ngOnInit() {
     this.gestionService.obtenirAdressesAppartementsParUserId(localStorage.getItem('userId'))
       .subscribe(appartementListOverview => {
