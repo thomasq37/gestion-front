@@ -1,7 +1,8 @@
-import {AfterViewInit, Component, HostListener, Input, ElementRef} from '@angular/core';
-import {NavigationService} from "../../../../../services/navigation.service";
-import {Router} from "@angular/router";
-import {Appartement} from "../../../../../models/gestion";
+import { AfterViewInit, Component, HostListener, Input, ElementRef, TemplateRef } from '@angular/core';
+import { NavigationService } from "../../../../../services/navigation.service";
+import { Router } from "@angular/router";
+import { Appartement } from "../../../../../models/gestion";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-appartement-picture-element',
@@ -10,19 +11,24 @@ import {Appartement} from "../../../../../models/gestion";
 })
 export class AppartementPictureElementComponent implements AfterViewInit {
   @Input() appartement: Appartement | null = null;
-  constructor(private navigationService: NavigationService, private router: Router, private elementRef: ElementRef) { }
+  selectedImage: string | null = null;
+
+  constructor(
+    private navigationService: NavigationService,
+    private router: Router,
+    private elementRef: ElementRef,
+    private modalService: NgbModal // Added NgbModal for modal handling
+  ) { }
 
   ngAfterViewInit(): void {
     this.adjustImageHeight();
   }
 
-  // Adjust image height when window is resized
   @HostListener('window:resize', ['$event'])
   onResize(event: any): void {
     this.adjustImageHeight();
   }
 
-  // Function to adjust the height of the images dynamically
   adjustImageHeight(): void {
     const carouselElement = this.elementRef.nativeElement.querySelector('ngb-carousel');
     const imageWrapperElements = this.elementRef.nativeElement.querySelectorAll('.picsum-img-wrapper');
@@ -34,11 +40,24 @@ export class AppartementPictureElementComponent implements AfterViewInit {
       });
     }
   }
+
   isProprietaire(): boolean {
     return localStorage.getItem('userRole') === "PROPRIETAIRE";
   }
-  onModifyClick() {
-    this.navigationService.setData(this.appartement);
-    this.router.navigate(['/appartement/', this.appartement.id, 'photos']);
+
+  onModifyClick(): void {
+    if (this.appartement) {
+      this.navigationService.setData(this.appartement);
+      this.router.navigate(['/appartement/', this.appartement.id, 'photos']);
+    }
+  }
+
+  onImageClick(image: string, modalTemplate: TemplateRef<any>): void {
+    this.selectedImage = image;
+    this.modalService.open(modalTemplate, {
+      size: 'xl', // Use 'xl' for a larger modal
+      centered: true,
+      windowClass: 'full-screen-modal' // Add a custom class for additional styling
+    });
   }
 }

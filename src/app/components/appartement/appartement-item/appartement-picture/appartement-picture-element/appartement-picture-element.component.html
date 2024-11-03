@@ -1,19 +1,29 @@
 <section class="appartement-picture-element">
-    <div class="container">
-        <div class="custom-card">
-            <div class="custom-card-header">
-              <h2>Photos</h2>
-              <img *ngIf="isProprietaire()" (click)="onModifyClick()" src="./assets/img/edit-icon.svg" alt="icone de modification">
+  <div class="container">
+    <div class="custom-card">
+      <div class="custom-card-header">
+        <h2>Photos</h2>
+        <img *ngIf="isProprietaire()" (click)="onModifyClick()" src="./assets/img/edit-icon.svg" alt="icone de modification">
+      </div>
+      <div class="carousel-container">
+        <ngb-carousel *ngIf="appartement.images && appartement.images.length">
+          <ng-template ngbSlide *ngFor="let image of appartement.images">
+            <div class="picsum-img-wrapper" (click)="onImageClick(image, imageModal)">
+              <img [src]="image" [alt]="'Image appartement'" />
             </div>
-            <div class="carousel-container">
-                <ngb-carousel *ngIf="appartement.images && appartement.images.length">
-                    <ng-template ngbSlide *ngFor="let image of appartement.images" >
-                        <div class="picsum-img-wrapper">
-                            <img [src]="image" [alt]="'Image appartement'" />
-                        </div>
-                    </ng-template>
-                </ngb-carousel>
-            </div>
-        </div>
+          </ng-template>
+        </ngb-carousel>
+      </div>
     </div>
+  </div>
+
+  <!-- Modal template -->
+  <ng-template #imageModal let-modal>
+    <div class="modal-header">
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body text-center">
+      <img [src]="selectedImage" class="img-fluid" [alt]="'Image preview'" />
+    </div>
+  </ng-template>
 </section>
