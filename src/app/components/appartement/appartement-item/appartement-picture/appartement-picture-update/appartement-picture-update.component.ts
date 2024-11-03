@@ -44,7 +44,21 @@ export class AppartementPictureUpdateComponent implements OnInit{
     return this.pictureUpdateForm.get('images') as FormArray;
   }
   removeImage(index: number): void {
-    this.imagesFormArray.removeAt(index);
+    const imageUrl = this.imagesFormArray.at(index).value;
+    const key = imageUrl.split('.amazonaws.com/images/')[1];
+    if (key) {
+      this.s3Service.deleteImage(key).subscribe(
+        () => {
+          this.imagesFormArray.removeAt(index);
+          console.log('Image supprimée avec succès.');
+        },
+        (error) => {
+          console.error('Erreur lors de la suppression de l\'image :', error);
+        }
+      );
+    } else {
+      console.error('Clé de l\'image non valide. Suppression annulée.');
+    }
   }
 
   getFormControl(index: number): FormControl {

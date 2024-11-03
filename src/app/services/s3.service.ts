@@ -17,4 +17,11 @@ export class S3Service {
     // Corrige l'option responseType pour être explicitement de type text
     return this.http.post(this.apiUrl, formData, { responseType: 'text' as 'json' });
   }
+
+  deleteImage(key: string): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/${key}`, { responseType: 'text' as 'json' });
+  }
+
+
 }
+
