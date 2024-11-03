@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import { NavigationService } from "../../../../../services/navigation.service";
 import { FormArray, FormBuilder, FormGroup, FormControl } from "@angular/forms";
 import {Appartement} from "../../../../../models/gestion";
 import {GestionService} from "../../../../../services/gestion.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {S3Service} from "../../../../../services/s3.service";
 
 @Component({
@@ -16,17 +15,31 @@ export class AppartementPictureUpdateComponent implements OnInit{
   public pictureUpdateForm: FormGroup;
   imgIsLoading: boolean = false;
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private gestionService: GestionService,
     private formBuilder: FormBuilder,
-    private navigationService: NavigationService,
     private s3Service: S3Service // Injecte le service S3
   ) {
-    this.appartement = this.navigationService.getData();
+    //this.appartement = this.navigationService.getData();
   }
 
   ngOnInit(): void {
-    this.initForm();
+    const appartementId = this.route.snapshot.paramMap.get('id');
+    if (appartementId) {
+      const userId = parseInt(localStorage.getItem('userId') || '0');
+      this.gestionService.obtenirUnAppartementParId(userId, parseInt(appartementId)).subscribe(
+        (appartement: Appartement) => {
+          this.appartement = appartement;
+          this.initForm();
+        },
+        (error) => {
+          console.error('Erreur lors du chargement de l\'appartement :', error);
+        }
+      );
+    } else {
+      console.error('ID de l\'appartement non trouvé.');
+    }
   }
 
   private initForm(): void {
