@@ -5,8 +5,11 @@
         <h2>Photos</h2>
         <img *ngIf="isProprietaire()" (click)="onModifyClick()" src="./assets/img/edit-icon.svg" alt="icone de modification">
       </div>
-      <div class="carousel-container">
-        <ngb-carousel *ngIf="appartement.images && appartement.images.length">
+      <div class="carousel-container"
+           (touchstart)="onTouchStart($event)"
+           (touchmove)="onTouchMove($event)"
+           (touchend)="onTouchEnd()">
+        <ngb-carousel #carousel *ngIf="appartement.images && appartement.images.length">
           <ng-template ngbSlide *ngFor="let image of appartement.images">
             <div class="picsum-img-wrapper" (click)="onImageClick(image, imageModal)">
               <img [src]="image" [alt]="'Image appartement'" />
