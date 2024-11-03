@@ -28,11 +28,15 @@
         <textarea [formControl]="getFormControl(i)" id="image{{i}}" rows="3" placeholder="URL d'image"></textarea>
         <button class="bg-danger" type="button" (click)="removeImage(i)">Supprimer</button>
       </div>
+      <div class="actions-container">
+        <div *ngIf="imgIsLoading" class="info-img-is-loading">
+          <p>Téléchargement en cours...</p>
+          <img class="loader" src="assets/img/loader.gif" alt="loader">
+        </div>
+        <input *ngIf="!imgIsLoading" type="file" (change)="onFileSelected($event)" accept="image/*">
+        <button class="add-img-btn" type="button" (click)="mettreAJourUnAppartementPourUtilisateur()">Mettre à jour</button>
 
-      <input type="file" (change)="onFileSelected($event)" accept="image/*">
-
-      <button class="add-img-btn" type="button" (click)="mettreAJourUnAppartementPourUtilisateur()">Mettre à jour</button>
-      <button class="add-img-btn" type="button" (click)="addImage()">Ajouter une image</button>
+      </div>
     </form>
   </div>
 </section>
