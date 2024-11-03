@@ -17,6 +17,7 @@ export class AppartementPictureElementComponent implements AfterViewInit {
 
   private touchStartX: number = 0;
   private touchEndX: number = 0;
+  private isClick: boolean = true;
 
   constructor(
     private navigationService: NavigationService,
@@ -58,25 +59,35 @@ export class AppartementPictureElementComponent implements AfterViewInit {
   }
 
   onImageClick(image: string, modalTemplate: TemplateRef<any>): void {
-    this.selectedImage = image;
-    this.modalService.open(modalTemplate, {
-      size: 'xl',
-      centered: true,
-      windowClass: 'full-screen-modal'
-    });
+    if (this.isClick) {
+      // Ouvrir la modale seulement si c'est un clic
+      this.selectedImage = image;
+      this.modalService.open(modalTemplate, {
+        size: 'xl',
+        centered: true,
+        windowClass: 'full-screen-modal'
+      });
+    }
   }
 
   // Methods for handling swipe gestures
   onTouchStart(event: TouchEvent): void {
     this.touchStartX = event.touches[0].clientX;
+    this.isClick = true; // Initialiser comme un clic
   }
 
   onTouchMove(event: TouchEvent): void {
     this.touchEndX = event.touches[0].clientX;
+
+    // Si un mouvement significatif est détecté, ce n'est pas un clic
+    if (Math.abs(this.touchStartX - this.touchEndX) > 10) {
+      this.isClick = false;
+    }
   }
 
   onTouchEnd(): void {
-    if (this.carousel) {
+    if (!this.isClick && this.carousel) {
+      // Déclencher le swipe seulement si ce n'était pas un clic
       if (this.touchStartX - this.touchEndX > 50) {
         // Swipe left
         this.carousel.next();
