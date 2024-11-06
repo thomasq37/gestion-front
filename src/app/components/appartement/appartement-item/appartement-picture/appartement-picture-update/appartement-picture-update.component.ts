@@ -60,7 +60,7 @@ export class AppartementPictureUpdateComponent implements OnInit{
     const imageUrl = this.imagesFormArray.at(index).value;
     const key = imageUrl.split('.amazonaws.com/images/')[1];
     if (key) {
-      this.s3Service.deleteImage(key).subscribe(
+      this.s3Service.deleteFile(key).subscribe(
         () => {
           this.imagesFormArray.removeAt(index);
           console.log('Image supprimée avec succès.');
@@ -82,7 +82,7 @@ export class AppartementPictureUpdateComponent implements OnInit{
     this.imgIsLoading = true;
     const file = event.target.files[0];
     if (file) {
-      this.s3Service.uploadImage(file).subscribe(
+      this.s3Service.uploadFile(file).subscribe(
         (url: string) => {
           this.imgIsLoading = false
           this.imagesFormArray.push(new FormControl(url));

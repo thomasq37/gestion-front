@@ -3,6 +3,7 @@ import { Appartement, Pays } from "../../../../../models/gestion";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { GestionService } from "../../../../../services/gestion.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import {S3Service} from "../../../../../services/s3.service";
 
 @Component({
   selector: 'app-appartement-desc-update',
@@ -14,12 +15,13 @@ export class AppartementDescUpdateComponent implements OnInit {
   appartementForm: FormGroup;
   paysList: Pays[] = [];
   dpeLetterList: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'Non renseigné'];
-
+  dpeFileIsLoading: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private gestionService: GestionService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private s3Service: S3Service
   ) {
     this.appartement = <Appartement>{};
     this.appartementForm = this.formBuilder.group({
@@ -35,6 +37,7 @@ export class AppartementDescUpdateComponent implements OnInit {
       fraisNotaireEtNegociation: ['', Validators.required],
       estimation: [''],
       dpe: ['', Validators.required],
+      lastDPEUrl: [''],
       balcon: [''],
     });
   }
@@ -66,9 +69,50 @@ export class AppartementDescUpdateComponent implements OnInit {
       fraisNotaireEtNegociation:appartement.fraisNotaireEtNegociation,
       estimation: appartement.estimation,
       dpe: appartement.dpe,
+      lastDPEUrl: appartement.lastDPEUrl,
       balcon: appartement.balcon,
     });
   }
+
+  onDpeFileSelected(event: any): void {
+    this.dpeFileIsLoading = true;
+    const file = event.target.files[0];
+    if (file) {
+      this.s3Service.uploadFile(file).subscribe(
+        (url: string) => {
+          this.dpeFileIsLoading = false;
+          this.appartementForm.patchValue({ lastDPEUrl: url });
+          this.appartement.lastDPEUrl = url;
+          console.log('Téléchargement du fichier DPE éffectué avec succés.');
+        },
+        (error) => {
+          this.dpeFileIsLoading = false;
+          console.error('Erreur lors du téléchargement du fichier DPE :', error);
+        }
+      );
+    }
+  }
+
+  onDeleteDpeFile(): void {
+    const dpeUrl = this.appartement.lastDPEUrl;
+    const key = dpeUrl.split('.amazonaws.com/images/')[1]; // Adjust this split point based on your S3 URL structure
+    console.log(key)
+    if (key) {
+      this.s3Service.deleteFile(key).subscribe(
+        () => {
+          this.appartementForm.patchValue({ lastDPEUrl: null });
+          this.appartement.lastDPEUrl = null;
+          console.log('Fichier DPE supprimé avec succès.');
+        },
+        (error) => {
+          console.error('Erreur lors de la suppression du fichier DPE :', error);
+        }
+      );
+    } else {
+      console.error('Clé du fichier DPE non valide. Suppression annulée.');
+    }
+  }
+
 
   mettreAJourUnAppartementPourUtilisateur() {
     const userId = parseInt(localStorage.getItem('userId') || '0');

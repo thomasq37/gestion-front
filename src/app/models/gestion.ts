@@ -13,6 +13,7 @@ export interface Appartement {
   fraisNotaireEtNegociation:number;
   estimation: number;
   dpe: string;
+  lastDPEUrl: string;
   pays: Pays;
   revenusNets: number;
   depensesNettes: number;

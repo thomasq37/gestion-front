@@ -10,7 +10,7 @@ export class S3Service {
   private apiUrl = `${environment.apiUrl}/upload`;
   constructor(private http: HttpClient) {}
 
-  uploadImage(file: File): Observable<Object> {
+  uploadFile(file: File): Observable<Object> {
     const formData = new FormData();
     formData.append('file', file);
 
@@ -18,7 +18,7 @@ export class S3Service {
     return this.http.post(this.apiUrl, formData, { responseType: 'text' as 'json' });
   }
 
-  deleteImage(key: string): Observable<string> {
+  deleteFile(key: string): Observable<string> {
     return this.http.delete<string>(`${this.apiUrl}/${key}`, { responseType: 'text' as 'json' });
   }
 

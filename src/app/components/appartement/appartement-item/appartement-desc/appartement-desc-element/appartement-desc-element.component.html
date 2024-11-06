@@ -71,6 +71,9 @@
                     <p *ngIf="appartement.dpe === 'Non renseigné'">Non renseigné</p>
                   </dd>
                 </div>
+                <div *ngIf="appartement.lastDPEUrl">
+                  <a [href]="appartement.lastDPEUrl" download target="_blank">Télécharger le fichier DPE</a>
+                </div>
             </dl>
         </div>
     </div>
