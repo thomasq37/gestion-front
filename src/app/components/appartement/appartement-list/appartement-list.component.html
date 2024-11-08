@@ -1,7 +1,7 @@
 <section class="appartement-list">
   <div class="container">
     <div class="custom-card">
-      <ul *ngIf="isProprietaire()" class="filtres-list">
+      <ul *ngIf="isProprietaire()" class="filtres-list {{appartementListOverview.length === 0 ? 'onload' : ''}}">
         <button *ngIf="this.appartementListOverview.length > 0" (click)="toggleFiltres()" class="filtres {{filtresIsVisibles ? 'selected' : ''}}">Filtres</button>
         <img class="loader" *ngIf="appartementListOverview.length === 0" src="assets/img/loader.gif" alt="loader">
 
