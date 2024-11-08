@@ -70,7 +70,6 @@ export class AppartementItemComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit() {
-    setTimeout(() =>{
       this.route.paramMap.subscribe(params => {
         const appartementId = Number(params.get('id'));
         this.gestionService.obtenirPeriodeLocationPourAppartement(parseInt(localStorage.getItem('userId')), appartementId, 1).subscribe(periodes => {
@@ -101,8 +100,6 @@ export class AppartementItemComponent implements OnInit, AfterViewInit{
               this.router.navigate(['/dashboard']);
             });
       });
-
-    }, 40000)
   }
 
   supprimerUnAppartement(appartement: Appartement) {
