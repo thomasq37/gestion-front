@@ -84,3 +84,7 @@
         </form>
     </div>
 </section>
+<div *ngIf="showConfirmationDialog">
+  <app-confirmation-dialog (confirmed)="onDialogConfirm($event)"></app-confirmation-dialog>
+</div>
+

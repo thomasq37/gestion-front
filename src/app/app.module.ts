@@ -52,6 +52,7 @@ import { ConfigInitialeMouvementsComponent } from './components/finances/config-
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
+import { ConfirmationDialogComponent } from './components/util/confirmation-dialog/confirmation-dialog.component';
 registerLocaleData(localeFr, 'fr');
 @NgModule({
     declarations: [
@@ -97,7 +98,8 @@ registerLocaleData(localeFr, 'fr');
         RevenusComponent,
         DepensesComponent,
         ImpotsCalculateurComponent,
-        ConfigInitialeMouvementsComponent
+        ConfigInitialeMouvementsComponent,
+        ConfirmationDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -107,7 +109,7 @@ registerLocaleData(localeFr, 'fr');
         FormsModule,
         ReactiveFormsModule,
         NgbCarouselModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule
     ],
     providers: [
         AuthGuard,

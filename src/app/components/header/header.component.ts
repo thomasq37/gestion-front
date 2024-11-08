@@ -1,59 +1,20 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
-import { Location } from '@angular/common';
+import {NavigationService} from "../../services/navigation.service";
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
-  constructor(private authService: AuthService, private location: Location) { }
+  constructor(
+    private authService: AuthService,
+    private navigationService: NavigationService) { }
   menuOpen: boolean = false;
-  isDragging = false;
   @Input() goBackIsHidden: boolean = false
-  onDragStart(event: any): void {
-    this.isDragging = true;
-  }
-
-  onDragEnd(event: any): void {
-    this.isDragging = false;
-  }
-
-  onDragOver(event: any): void {
-    event.preventDefault();
-  }
-
   ngOnInit(): void {
-    // Lors de l'initialisation, vérifiez la position précédemment enregistrée
-    this.setButtonPositionFromLocalStorage();
   }
-
-  setButtonPositionFromLocalStorage(): void {
-    const button = document.querySelector('button');
-    const position = localStorage.getItem('buttonPosition');
-
-    if (button && position === 'right') {
-      button.classList.add('switched');
-    } else if (button) {
-      button.classList.remove('switched');
-    }
-  }
-
-  onDrop(event: any): void {
-    event.preventDefault();
-    const button = document.querySelector('button');
-    if (this.isDragging && button) {
-      if (button.classList.contains('switched')) {
-        button.classList.remove('switched');
-        localStorage.setItem('buttonPosition', 'left');
-      } else {
-        button.classList.add('switched');
-        localStorage.setItem('buttonPosition', 'right');
-      }
-    }
-  }
-
-
   isLoggedIn(): boolean {
     return !!localStorage.getItem('auth_token');
   }
@@ -68,7 +29,19 @@ export class HeaderComponent implements OnInit{
     this.menuOpen = !this.menuOpen;
   }
 
-  goBack(): void {
-    this.location.back();
+  goBack() {
+    const currentUrl = window.location.href;
+    const host = window.location.origin; // Récupère l'hôte actuel (http://localhost:4200 ou autre en prod)
+    if (new RegExp(`${host}/appartement/\\d+/\\w+`).test(currentUrl)) {
+      const lastSegment = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
+      if (lastSegment === 'description') {
+        this.navigationService.sendNavigationConfirmation(); // ou false en fonction de votre logique
+      } else {
+        window.location.href = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
+      }
+    }
+    else if (new RegExp(`${host}/appartement/\\d+`).test(currentUrl)) {
+      window.location.href = host;
+    }
   }
 }

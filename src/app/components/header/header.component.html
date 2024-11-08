@@ -2,12 +2,9 @@
   <div class="actions-container">
     <button
       *ngIf="!goBackIsHidden"
-    draggable="true"
-    (click)="goBack()"
+      (click)="goBack()"
     src="./assets/img/back-icon.svg"
-    class="back-icon" alt="back icon menu"
-    (dragstart)="onDragStart($event)"
-    (dragend)="onDragEnd($event)">
+    class="back-icon" alt="back icon menu">
       <img
 
         src="./assets/img/back-icon.svg"
@@ -17,9 +14,7 @@
     <img
       (click)="toggleMenu()"
       src="./assets/img/burger-icon.svg"
-      class="burger-icon" alt="burger menu"
-      (dragover)="onDragOver($event)"
-      (drop)="onDrop($event)">
+      class="burger-icon" alt="burger menu">
   </div>
   <nav [class.open]="menuOpen">
     <ul>
@@ -27,9 +22,9 @@
         <li>
           <a [routerLink]="'/dashboard'">Appartements</a>
         </li>
-        <li>
+        <!--<li>
           <a href="#">SCPI</a>
-        </li>
+        </li>-->
         <li>
           <a href="/finances">Finances</a>
         </li>

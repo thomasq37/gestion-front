@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, HostListener, Input, ElementRef, TemplateRef, ViewChild } from '@angular/core';
-import { NavigationService } from "../../../../../services/navigation.service";
 import { Router } from "@angular/router";
 import { Appartement } from "../../../../../models/gestion";
 import { NgbModal, NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
@@ -20,7 +19,6 @@ export class AppartementPictureElementComponent implements AfterViewInit {
   private isClick: boolean = true;
 
   constructor(
-    private navigationService: NavigationService,
     private router: Router,
     private elementRef: ElementRef,
     private modalService: NgbModal
@@ -53,7 +51,6 @@ export class AppartementPictureElementComponent implements AfterViewInit {
 
   onModifyClick(): void {
     if (this.appartement) {
-      this.navigationService.setData(this.appartement);
       this.router.navigate(['/appartement/', this.appartement.id, 'photos']);
     }
   }

@@ -1,22 +1,19 @@
+// navigation.service.ts
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavigationService {
-  private data: any;
+  private confirmNavigationSubject = new Subject<void>();
+  confirmNavigation$ = this.confirmNavigationSubject.asObservable();
 
-  setData(data: any) {
-    this.data = data;
+  requestNavigationConfirmation() {
+    this.confirmNavigationSubject.next(null); // Émet une demande de confirmation sans valeur initiale
   }
 
-  getData(): any {
-    const temp = this.data;
-    this.clearData();
-    return temp;
-  }
-
-  clearData() {
-    this.data = undefined;
+  sendNavigationConfirmation() {
+    this.confirmNavigationSubject.next(); // Émet le résultat de confirmation (true ou false)
   }
 }

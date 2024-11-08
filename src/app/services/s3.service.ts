@@ -22,6 +22,8 @@ export class S3Service {
     return this.http.delete<string>(`${this.apiUrl}/${key}`, { responseType: 'text' as 'json' });
   }
 
-
+  getFile(key: string): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/${key}`, { responseType: 'blob' });
+  }
 }
 
