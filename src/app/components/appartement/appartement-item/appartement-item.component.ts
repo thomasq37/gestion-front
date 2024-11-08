@@ -70,36 +70,39 @@ export class AppartementItemComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const appartementId = Number(params.get('id'));
-      this.gestionService.obtenirPeriodeLocationPourAppartement(parseInt(localStorage.getItem('userId')), appartementId, 1).subscribe(periodes => {
-        if (periodes && periodes.content) {
-          this.periodLocation = periodes.content;
-        } else {
-          this.periodLocation = [];
-        }
+    setTimeout(() =>{
+      this.route.paramMap.subscribe(params => {
+        const appartementId = Number(params.get('id'));
+        this.gestionService.obtenirPeriodeLocationPourAppartement(parseInt(localStorage.getItem('userId')), appartementId, 1).subscribe(periodes => {
+          if (periodes && periodes.content) {
+            this.periodLocation = periodes.content;
+          } else {
+            this.periodLocation = [];
+          }
+        });
+
+        this.gestionService.obtenirFraisFixePourAppartement(parseInt(localStorage.getItem('userId')), appartementId, 0).subscribe(fraisFixe => {
+          if (fraisFixe && fraisFixe.content) {
+            this.fraisFixe = fraisFixe.content;
+          } else {
+            this.fraisFixe = [];
+          }
+        });
+
+        this.gestionService.getAppartmentByUserIdAndApartmentId(localStorage.getItem('userId'), appartementId)
+          .subscribe(appartement => {
+              this.appartement = appartement;
+              this.images = this.appartement.images;
+
+              // Appelez adjustHeight après le chargement de l'appartement
+              setTimeout(() => this.adjustHeight(1), 0);
+            },
+            error => {
+              this.router.navigate(['/dashboard']);
+            });
       });
 
-      this.gestionService.obtenirFraisFixePourAppartement(parseInt(localStorage.getItem('userId')), appartementId, 0).subscribe(fraisFixe => {
-        if (fraisFixe && fraisFixe.content) {
-          this.fraisFixe = fraisFixe.content;
-        } else {
-          this.fraisFixe = [];
-        }
-      });
-
-      this.gestionService.getAppartmentByUserIdAndApartmentId(localStorage.getItem('userId'), appartementId)
-        .subscribe(appartement => {
-            this.appartement = appartement;
-            this.images = this.appartement.images;
-
-            // Appelez adjustHeight après le chargement de l'appartement
-            setTimeout(() => this.adjustHeight(1), 0);
-          },
-          error => {
-            this.router.navigate(['/dashboard']);
-          });
-    });
+    }, 40000)
   }
 
   supprimerUnAppartement(appartement: Appartement) {

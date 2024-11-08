@@ -15,7 +15,7 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
   @Input() isEditable: boolean = false
   @Input() isPeriode: boolean = false
   @Input() periode: PeriodLocation | null = null;
-  totalPages: number;
+  totalPages: number = 0;
   currentPage: number = 1;
   userId = parseInt(<string>localStorage.getItem('userId'));
 

@@ -8,6 +8,17 @@
 }
 
 .appartement-item{
+    min-height: 81.5vh;
+
+  .loader{
+    padding: 1rem;
+    display: flex;
+
+  }
+  .loader > img:nth-child(1) {
+    width: 2rem;
+    margin-left: 1rem;
+  }
     .appartement-baniere-info{
       display: grid;
       .desc-container{
@@ -190,6 +201,7 @@
         padding: 1rem;
         margin: 0 .8rem;
       }
+
       .nom-appartement{
         grid-column: span 2;
       }

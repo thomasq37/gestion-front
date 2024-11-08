@@ -1,48 +1,47 @@
 <app-header></app-header>
-<div class="flex">
-  <img class="loader" *ngIf="!appartement" src="assets/img/loader.gif" alt="loader"/>
-</div>
-  <section class="appartement-item" *ngIf="appartement">
+  <section class="appartement-item">
 
     <div class="appartement-baniere-info">
       <!--Titre-->
       <div class="container nom-appartement">
-        <h2>Recherche « {{appartement.numero}} {{appartement.adresse}} »</h2>
+        <h2 *ngIf="appartement">Recherche « {{appartement.numero}} {{appartement.adresse}} »</h2>
+        <p class="loader" *ngIf="!appartement">Chargement...<img src="assets/img/loader.gif"></p>
       </div>
         <!--Caroussel-->
-      <div class="container-pic-desc">
+      <div *ngIf="appartement !== undefined">
+        <div class="container-pic-desc">
+          <app-appartement-picture-element class="picture-element"  [appartement]="appartement"></app-appartement-picture-element>
+          <!--Descriptif-->
+          <div class="desc-container">
+            <app-appartement-desc-element class="desc-element" [appartement]="appartement"></app-appartement-desc-element>
+          </div>
 
-        <app-appartement-picture-element class="picture-element"  [appartement]="appartement"></app-appartement-picture-element>
-        <!--Descriptif-->
-        <div class="desc-container">
-          <app-appartement-desc-element class="desc-element" [appartement]="appartement"></app-appartement-desc-element>
         </div>
+        <!--Frais-->
+        <app-appartement-frais-list  *ngIf="isProprietaire()" [appartementId]="appartement.id" [appartementFrais]="fraisFixe"></app-appartement-frais-list>
+        <!--Entrées/Sorties-->
+        <app-appartement-periode-list [appartementId]="appartement.id" [appartPeriodLocation]="periodLocation"></app-appartement-periode-list>
+        <!--Statistiques-->
+        <app-appartement-metrique-element *ngIf="isProprietaire()" [appartement]="appartement"></app-appartement-metrique-element>
+        <!--Contacts-->
+        <div class="appartement-contact-list-container">
+          <app-appartement-contact-list [appartementId]="appartement.id" [appartementContacts]="appartement.contacts"></app-appartement-contact-list>
+        </div>
+        <div class="container">
+          <div class="actions-container">
+            <div class="appartement-actions" [routerLink]="['/appartement/' +  appartement.id + '/gestionnaires']">
+              <span>Gestionnaires</span>
+              <img src="./assets/img/gest-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
+            </div>
+            <div class="appartement-actions corbeille" *ngIf="appartement.id && isProprietaire()" (click)="supprimerUnAppartement(appartement)">
+              <span>Corbeille</span>
+              <img src="./assets/img/trash-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
+            </div>
 
+          </div>
+        </div>
       </div>
-      <!--Frais-->
-      <app-appartement-frais-list  *ngIf="isProprietaire()" [appartementId]="appartement.id" [appartementFrais]="fraisFixe"></app-appartement-frais-list>
-      <!--Entrées/Sorties-->
-      <app-appartement-periode-list [appartementId]="appartement.id" [appartPeriodLocation]="periodLocation"></app-appartement-periode-list>
-      <!--Statistiques-->
-      <app-appartement-metrique-element *ngIf="isProprietaire()" [appartement]="appartement"></app-appartement-metrique-element>
-      <!--Contacts-->
-      <div class="appartement-contact-list-container">
-        <app-appartement-contact-list [appartementId]="appartement.id" [appartementContacts]="appartement.contacts"></app-appartement-contact-list>
-      </div>
+
     </div>
-    <div class="container">
-      <div class="actions-container">
-        <div class="appartement-actions" [routerLink]="['/appartement/' +  appartement.id + '/gestionnaires']"
-        >
-          <span>Gestionnaires</span>
-          <img src="./assets/img/gest-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
-        </div>
-        <div class="appartement-actions corbeille" *ngIf="appartement.id && isProprietaire()" (click)="supprimerUnAppartement(appartement)">
-          <span>Corbeille</span>
-          <img src="./assets/img/trash-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
-        </div>
-
-      </div>
-      </div>
   </section>
 <app-footer></app-footer>

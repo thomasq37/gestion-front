@@ -5,7 +5,7 @@
                 <h2>Contacts</h2>
                 <a *ngIf="!isEditable && isProprietaire()" [routerLink]="['/appartement/' +  appartementId + '/contacts']"><img src="./assets/img/edit-icon.svg" alt="icone de modification"></a>
             </div>
-            <table>
+            <table *ngIf="appartementContacts">
                 <thead>
                 <tr>
                     <th>Pseudo</th>

@@ -1,34 +1,32 @@
 <section class="appartement-frais-list">
     <div class="container">
-        <div class="custom-card {{totalPages === 0 ? 'no-page' : ''}}">
-            <div class="custom-card-header">
-                <h2>Frais fixes</h2>
-
-              <a *ngIf="!isEditable && !isPeriode" [routerLink]="['/appartement/' +  appartementId + '/frais']"><img src="./assets/img/edit-icon.svg" alt="icone de modification"></a>
-            </div>
-            <table>
-                <thead>
-                <tr>
-                    <th>Type de Frais</th>
-                    <th>Montant (€)</th>
-                    <th>Fréquence</th>
-                    <td *ngIf="isEditable">Actions</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let frais of appartementFrais">
-                    <td>{{ frais.nom !== null ? frais.nom : frais.typeFrais.nom }}</td>
-                    <td>{{ frais.montant }}</td>
-                    <td>{{ frais.datePaiement !== null ? (frais.datePaiement | customDate) : frais.frequence }}</td>
-                    <td *ngIf="isEditable"  class="actions-container">
-                        <img src="../../../../assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdateFrais(frais)"/>
-                        <img src="../../../../assets/img/trash-icon.svg" alt="trash icon" (click)="onDeleteFrais(frais.id)"/>
-                    </td>
-                </tr>
-                </tbody>
+        <div class="custom-card">
+          <div class="custom-card-header">
+            <h2>Frais fixes</h2>
+            <a *ngIf="!isEditable && !isPeriode" [routerLink]="['/appartement/' +  appartementId + '/frais']"><img src="./assets/img/edit-icon.svg" alt="icone de modification"></a>
+          </div>
+            <table *ngIf="appartementFrais">
+              <thead>
+              <tr>
+                <th>Type de Frais</th>
+                <th>Montant (€)</th>
+                <th>Fréquence</th>
+                <td *ngIf="isEditable">Actions</td>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let frais of appartementFrais">
+                <td>{{ frais.nom !== null ? frais.nom : frais.typeFrais.nom }}</td>
+                <td>{{ frais.montant }}</td>
+                <td>{{ frais.datePaiement !== null ? (frais.datePaiement | customDate) : frais.frequence }}</td>
+                <td *ngIf="isEditable"  class="actions-container">
+                  <img src="../../../../assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdateFrais(frais)"/>
+                  <img src="../../../../assets/img/trash-icon.svg" alt="trash icon" (click)="onDeleteFrais(frais.id)"/>
+                </td>
+              </tr>
+              </tbody>
             </table>
-          <app-pagination *ngIf="totalPages > 1" [currentPage]="currentPage" [totalPages]="totalPages" (pageChanged)="onPageChange($event)"></app-pagination>
-
+            <app-pagination *ngIf="totalPages > 1" [currentPage]="currentPage" [totalPages]="totalPages" (pageChanged)="onPageChange($event)"></app-pagination>
+          </div>
         </div>
-    </div>
 </section>

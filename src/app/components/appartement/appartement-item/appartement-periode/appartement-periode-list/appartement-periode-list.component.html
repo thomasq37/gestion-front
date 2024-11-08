@@ -1,6 +1,6 @@
 <section class="appartement-periode-list">
     <div class="container">
-        <div class="custom-card {{totalPages === 0 ? 'no-page' : ''}}">
+        <div class="custom-card">
           <div class="custom-card-header">
               <h2>Entrées / Sorties</h2>
               <a *ngIf="!isEditable" [routerLink]="['/appartement/' +  appartementId + '/periodes']"><img src="./assets/img/edit-icon.svg" alt="icone de modification"></a>
