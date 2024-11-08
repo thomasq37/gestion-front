@@ -34,6 +34,8 @@ export class AppartementListComponent implements OnInit {
         }));
         this.calculerTotaux();
       });
+
+
   }
 
   // Basculer le mode de sélection
