@@ -1,13 +1,11 @@
-
-<app-header [goBackIsHidden]="true"></app-header>
-<div class="container">
-  <h1>Home Manager</h1>
-</div>
-<app-appartement-list></app-appartement-list>
-
-<div *ngIf="isProprietaire()" class="link-container">
+<section class="dashboard">
+  <app-header [goBackIsHidden]="true"></app-header>
+  <div class="container">
+    <h1>Home Manager</h1>
+  </div>
+  <app-appartement-list></app-appartement-list>
 <!--
-  <a class="link" routerLink="/appartements/add">Ajouter appartement</a>
+  <div *ngIf="isProprietaire()" class="link-container"></div>
 -->
-</div>
-<app-footer></app-footer>
+  <app-footer></app-footer>
+</section>

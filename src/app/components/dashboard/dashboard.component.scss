@@ -1,30 +1,27 @@
-h1{
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #f3f3f3;
-  margin-bottom: 2rem;
-  padding-left: 1rem;
-  font-weight: bold;
-  color: #143b86;
-}
-.link-container{
+.dashboard{
   display: flex;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  padding: .8rem;
-  padding-top: 0;
-  .link{
-    margin-right: .5rem;
-    display: block;
-    width: max-content;
-    text-decoration: none;
-    border-radius: .5rem;
-    padding: .5rem;
-    background-color: #143b86;
-    color: white;
+  flex-direction: column;
+  min-height: 90vh;
+  h1{
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f3f3f3;
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+    font-weight: bold;
+    color: #143b86;
   }
-  .decomptes{
-    background-color: black;
+  app-header {
+    margin: 0;
+  }
+
+  app-appartement-list {
+    margin: 0;
+  }
+  .container {
+    margin: 0;
+  }
+  app-footer {
+    margin-bottom: 0;
   }
 }
-

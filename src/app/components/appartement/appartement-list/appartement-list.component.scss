@@ -3,12 +3,30 @@
   font-size: 1rem;
   margin-bottom: 1rem;
   .container {
+    .onload{
+      display: flex;
+      justify-content: center;
+    }
     .custom-card {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 1rem;
       border: 1px solid #ccc;
+      min-height: 9rem;
       border-radius: 4px;
       margin-bottom: 1rem;
+      position: relative;
+
+      .filtres-list{
+        display: flex;
+        justify-content: center;
+      }
+
+      .loader{
+         width: auto;
+         height: 7rem;
+        padding: 1.5rem;
+       }
+
       .custom-card-header {
         display: flex;
         justify-content: space-between;
@@ -98,6 +116,7 @@
         }
       }
     }
+
     .metriques{
       margin-bottom: 1rem;
       .metriques-header{

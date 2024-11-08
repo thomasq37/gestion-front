@@ -49,7 +49,7 @@ import { RevenusComponent } from './components/finances/impot-calculator/revenus
 import { DepensesComponent } from './components/finances/impot-calculator/depenses/depenses.component';
 import { ImpotsCalculateurComponent } from './components/finances/impots-calculateur/impots-calculateur.component';
 import { ConfigInitialeMouvementsComponent } from './components/finances/config-initiale-mouvements/config-initiale-mouvements.component';
-import { registerLocaleData } from '@angular/common';
+import {NgOptimizedImage, registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
 import { ConfirmationDialogComponent } from './components/util/confirmation-dialog/confirmation-dialog.component';
@@ -101,16 +101,17 @@ registerLocaleData(localeFr, 'fr');
         ConfigInitialeMouvementsComponent,
         ConfirmationDialogComponent
     ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        NgbModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NgbCarouselModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbCarouselModule,
+    ReactiveFormsModule,
+    NgOptimizedImage
+  ],
     providers: [
         AuthGuard,
         {
