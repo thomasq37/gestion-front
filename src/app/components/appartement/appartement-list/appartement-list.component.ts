@@ -28,11 +28,11 @@ export class AppartementListComponent implements OnInit {
   ngOnInit() {
     this.gestionService.obtenirAdressesAppartementsParUserId(localStorage.getItem('userId'))
       .subscribe(appartementListOverview => {
-        /*this.appartementListOverview = appartementListOverview.map(appartement => ({
+        this.appartementListOverview = appartementListOverview.map(appartement => ({
           ...appartement,
           selected: false  // Ajoute la propriété selected à chaque appartement
         }));
-        this.calculerTotaux();*/
+        this.calculerTotaux();
       });
   }
 
