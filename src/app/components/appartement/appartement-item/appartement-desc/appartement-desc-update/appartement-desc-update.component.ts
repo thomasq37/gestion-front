@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Appartement, Pays } from "../../../../../models/gestion";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { GestionService } from "../../../../../services/gestion.service";
@@ -11,7 +11,7 @@ import {NavigationService} from "../../../../../services/navigation.service";
   templateUrl: './appartement-desc-update.component.html',
   styleUrls: ['./appartement-desc-update.component.scss']
 })
-export class AppartementDescUpdateComponent implements OnInit {
+export class AppartementDescUpdateComponent implements OnInit, OnDestroy {
   appartement: Appartement;
   appartementForm: FormGroup;
   paysList: Pays[] = [];
@@ -19,6 +19,7 @@ export class AppartementDescUpdateComponent implements OnInit {
   dpeFileIsLoading: boolean = false;
   listFilesToManage: {file: Blob|null, url: string, status: string}[] = []
   navigationSubscription: Subscription;
+  initialFormValues: any;
   constructor(
     private formBuilder: FormBuilder,
     private gestionService: GestionService,
@@ -59,10 +60,24 @@ export class AppartementDescUpdateComponent implements OnInit {
       });
     });
 
-    this.navigationSubscription = this.navigationService.confirmNavigation$.subscribe(() => {
-      this.showConfirmationDialog = true
-
+    this.appartementForm.valueChanges.subscribe(() => {
+      if (!this.initialFormValues) {
+        this.initialFormValues = this.appartementForm.getRawValue();
+      }
     });
+
+    this.navigationSubscription = this.navigationService.confirmNavigation$.subscribe(() => {
+      this.showConfirmationDialog = this.hasFormChanged()
+      if(!this.hasFormChanged()){
+        this.router.navigate(['/appartement/' + this.appartement.id]); // Navigation sans enregistrement
+      }
+    });
+  }
+  ngOnDestroy(): void {
+    // Unsubscribe from navigationSubscription to prevent memory leaks
+    if (this.navigationSubscription) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
   initAppartementForm(appartement: Appartement) {
     this.appartementForm.patchValue({
@@ -81,8 +96,12 @@ export class AppartementDescUpdateComponent implements OnInit {
       lastDPEUrl: appartement.lastDPEUrl,
       balcon: appartement.balcon,
     });
+    this.initialFormValues = this.appartementForm.getRawValue();
   }
-
+  hasFormChanged(): boolean {
+    // Compare current values with initial values
+    return JSON.stringify(this.appartementForm.getRawValue()) !== JSON.stringify(this.initialFormValues);
+  }
   onDpeFileSelected(event: any): void {
     this.dpeFileIsLoading = true;
     const file = event.target.files[0];
