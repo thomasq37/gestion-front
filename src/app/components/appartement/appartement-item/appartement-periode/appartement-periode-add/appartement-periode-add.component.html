@@ -14,12 +14,16 @@
 
           <div>
             <label for="estEntree">Entrée <span aria-hidden="true">*</span></label>
-            <input type="date" id="estEntree" formControlName="estEntree" aria-required="true" placeholder="JJ/MM/AAAA">
+            <input
+              type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
+              id="estEntree" formControlName="estEntree" aria-required="true" placeholder="JJ/MM/AAAA">
           </div>
 
           <div>
             <label for="estSortie">Sortie <span aria-hidden="true">*</span></label>
-            <input type="date" id="estSortie" formControlName="estSortie" aria-required="true" placeholder="JJ/MM/AAAA">
+            <input
+              type="text" onfocus="(this.type='date')" onblur="(this.type='text')"
+              id="estSortie" formControlName="estSortie" aria-required="true" placeholder="JJ/MM/AAAA">
           </div>
 
 
