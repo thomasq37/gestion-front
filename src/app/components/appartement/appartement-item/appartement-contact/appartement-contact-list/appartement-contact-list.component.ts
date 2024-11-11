@@ -41,13 +41,13 @@ export class AppartementContactListComponent {
       }
     });
     if(this.isEditable && this.appartementId !== null){
-      this.gestionService.obtenirContactsPourAppartement(parseInt(<string>localStorage.getItem('userId')), this.appartementId).subscribe(
+      /*this.gestionService.obtenirContactsPourAppartement(parseInt(<string>localStorage.getItem('userId')), this.appartementId).subscribe(
         contacts =>{
           this.appartementContacts = contacts
         },
         error => {
           console.log("Erreur lors de la récupération des contacts.")
-        })
+        })*/
     }
   }
 
