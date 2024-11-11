@@ -104,6 +104,7 @@ export class AppartementDescUpdateComponent implements OnInit {
   }
 
   onDeleteDpeFile(): void {
+    this.dpeFileIsLoading = true
     const dpeUrl = this.appartement.lastDPEUrl;
     const key = dpeUrl.split('.amazonaws.com/images/')[1]; // Adjust this split point based on your S3 URL structure
     if (key) {
@@ -120,15 +121,23 @@ export class AppartementDescUpdateComponent implements OnInit {
               else{
                 this.listFilesToManage.pop()
               }
+              this.dpeFileIsLoading = false;
               console.log('Fichier DPE supprimé avec succès.');
             },
             (error) => {
+              this.dpeFileIsLoading = false;
               console.error('Erreur lors de la suppression du fichier DPE :', error);
             }
           );
-        })
+        },(error) => {
+        this.dpeFileIsLoading = false;
+        this.appartement.lastDPEUrl = null;
+        this.appartementForm.patchValue({lastDPEUrl: null});
+        console.error('Erreur lors de la recuperation du fichier DPE :', error);
+      })
     }
     else {
+      this.dpeFileIsLoading = false;
       console.error('Clé du fichier DPE non valide. Suppression annulée.');
     }
   }

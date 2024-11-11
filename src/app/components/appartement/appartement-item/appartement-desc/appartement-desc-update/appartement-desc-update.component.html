@@ -56,10 +56,11 @@
             <label for="dpeFile">Classe énergie (.pdf)</label>
             <div *ngIf="!appartement.lastDPEUrl">
               <input id="dpeFile" *ngIf="!dpeFileIsLoading" type="file" (change)="onDpeFileSelected($event)" accept="application/pdf">
-              <div *ngIf="dpeFileIsLoading">Téléchargement en cours...</div>
+              <div *ngIf="dpeFileIsLoading">Mise à jour en cours...</div>
             </div>
             <div *ngIf="appartement.lastDPEUrl">
               <p>{{ appartement.lastDPEUrl }}</p>
+              <div *ngIf="dpeFileIsLoading">Mise à jour en cours...</div>
               <button  type="button"  (click)="onDeleteDpeFile()">Supprimer le fichier</button>
             </div>
           </div>
