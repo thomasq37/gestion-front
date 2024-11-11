@@ -12,19 +12,19 @@
                 <input type="number" id="new-montant" formControlName="montant" aria-required="true" placeholder="Montant">
             </div>
 
-            <div>
-                <label for="new-typeFrais">Type de frais <span aria-hidden="true">*</span></label>
-                <select id="new-typeFrais" formControlName="typeFrais" required>
-                    <option disabled selected value="">Type de frais</option>
-                    <option *ngFor="let typeFrais of typesFrais" [value]="typeFrais.id">{{ typeFrais.nom }}</option>
-                </select>
-            </div>
+          <div>
+            <label for="new-typeFrais">Type de frais <span aria-hidden="true">*</span></label>
+            <select id="new-typeFrais" formControlName="typeFrais" required>
+              <option value="" disabled selected hidden>Choisir une option</option> <!-- Placeholder option -->
+              <option *ngFor="let typeFrais of typesFrais" [value]="typeFrais.id">{{ typeFrais.nom }}</option>
+            </select>
+          </div>
 
-            <div>
+          <div>
                 <label for="new-frequence">Fréquence <span aria-hidden="true">*</span></label>
                 <select id="new-frequence" formControlName="frequence" required (change)="onFrequenceChange($event)">
-                    <option disabled selected value="">Fréquence</option>
-                    <option value="MENSUELLE">Mensuelle</option>
+                  <option value="" disabled selected hidden>Choisir une option</option> <!-- Placeholder option -->
+                  <option value="MENSUELLE">Mensuelle</option>
                     <option value="TRIMESTRIELLE">Trimestrielle</option>
                     <option value="ANNUELLE">Annuelle</option>
                     <option value="PONCTUELLE">Ponctuelle</option>

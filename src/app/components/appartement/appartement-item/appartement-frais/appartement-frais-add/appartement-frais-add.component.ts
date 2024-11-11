@@ -22,8 +22,8 @@ export class AppartementFraisAddComponent {
     this.fraisForm = new FormGroup({
       nom: new FormControl(null),
       montant: new FormControl(null, Validators.required),
-      typeFrais: new FormControl(null, Validators.required),
-      frequence: new FormControl(null, Validators.required),
+      typeFrais: new FormControl("", Validators.required),
+      frequence: new FormControl("", Validators.required),
       datePaiement: new FormControl(null),
 
     });
