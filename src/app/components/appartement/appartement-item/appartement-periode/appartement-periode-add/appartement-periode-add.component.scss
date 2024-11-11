@@ -39,10 +39,15 @@
           padding: 10px;
           border: 1px solid #ccc;
           border-radius: 4px;
+          background-color: white;
+          box-sizing: border-box; /* S'assure que le padding n'affecte pas la largeur */
+          -webkit-appearance: none; /* Supprime l'apparence par défaut sur iOS */
+          appearance: none; /* Supprime l'apparence par défaut sur les autres navigateurs */
+        }
 
-          &:focus {
-            outline: 2px solid #143b86; // Couleur de mise au point bleue
-          }
+        input:focus {
+          outline: 2px solid #143b86; /* Couleur de mise au point bleue */
+          outline-offset: 0px; /* Supprime l'espacement de l'outline */
         }
       }
       button.disabled{
