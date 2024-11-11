@@ -188,8 +188,4 @@ export class AppartementDescUpdateComponent implements OnInit {
       }
     })
   }
-
-  formatDate(value: ɵGetProperty<ɵTypedOrUntyped<any, ɵFormGroupRawValue<any>, any>, "dateAchat"> | undefined) {
-    return ''
-  }
 }
