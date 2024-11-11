@@ -33,7 +33,7 @@
             <div *ngIf="isPonctuelle">
               <label for="datePaiement">Date de paiement</label>
               <input
-                type="text" onfocus="(this.type='date')" onmouseover="(this.type='date')"
+                type="text" onblur="(this.type='text')" onfocus="(this.type='date')" onmouseover="(this.type='date')"
                 id="datePaiement" formControlName="datePaiement" >
             </div>
             <button class="{{fraisForm.valid ? '' : 'disabled'}}" type="submit" [disabled]="!fraisForm.valid">Ajouter</button>

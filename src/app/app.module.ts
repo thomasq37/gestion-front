@@ -53,6 +53,7 @@ import {NgOptimizedImage, registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
 import { ConfirmationDialogComponent } from './components/util/confirmation-dialog/confirmation-dialog.component';
+import { DateInputComponent } from './components/util/date-input/date-input.component';
 registerLocaleData(localeFr, 'fr');
 @NgModule({
     declarations: [
@@ -99,7 +100,8 @@ registerLocaleData(localeFr, 'fr');
         DepensesComponent,
         ImpotsCalculateurComponent,
         ConfigInitialeMouvementsComponent,
-        ConfirmationDialogComponent
+        ConfirmationDialogComponent,
+        DateInputComponent
     ],
   imports: [
     BrowserModule,
