@@ -102,7 +102,7 @@
       </ul>
     </div>
     <div *ngIf="isProprietaire()" class="custom-card metriques {{appartementListOverview.length === 0 ? 'onload' : ''}}">
-      <div class="metriques-header">
+      <div *ngIf="this.appartementListOverview.length > 0" class="metriques-header">
         <h2>Chiffres clés</h2>
         <button
           class="cc-btn {{filtresIsVisibles ? 'selected' : ''}}"
