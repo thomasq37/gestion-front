@@ -54,15 +54,15 @@
           </div>
           <div>
             <label for="dpeFile">Classe énergie (.pdf)</label>
+            <div *ngIf="dpeFileIsLoading">Mise à jour en cours...</div>
             <div *ngIf="!appartement.lastDPEUrl">
               <input id="dpeFile" *ngIf="!dpeFileIsLoading" type="file" (change)="onDpeFileSelected($event)" accept="application/pdf">
-              <div *ngIf="dpeFileIsLoading">Mise à jour en cours...</div>
             </div>
-            <div *ngIf="appartement.lastDPEUrl">
+            <div class="dpe-actions" *ngIf="appartement.lastDPEUrl">
               <p>{{ appartement.lastDPEUrl }}</p>
-              <div *ngIf="dpeFileIsLoading">Mise à jour en cours...</div>
-              <button  type="button"  (click)="onDeleteDpeFile()">Supprimer le fichier</button>
+              <button  type="button"  (click)="onDeleteDpeFile()"><img src="assets/img/trash-icon.svg" alt="icone corbeillle"></button>
             </div>
+
           </div>
 
           <div>
@@ -83,7 +83,7 @@
                 <input type="checkbox" id="balcon" formControlName="balcon">
             </div>
 
-            <button class="{{appartementForm.valid ? '' : 'disabled'}}" type="submit" [disabled]="!appartementForm.valid">Mettre à jour</button>
+            <button class="btn-valider {{appartementForm.valid ? '' : 'disabled'}}" type="submit" [disabled]="!appartementForm.valid">Mettre à jour</button>
             <p><span aria-hidden="true">*</span> Veuillez remplir tous les champs obligatoires</p>
         </form>
     </div>
