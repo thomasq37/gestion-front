@@ -2,11 +2,11 @@
   <div class="container">
     <div class="custom-card">
       <button
-        class="filtres-btn"
+        class="filtres-btn {{filtresIsVisibles ? 'selected' : ''}}"
         *ngIf="this.appartementListOverview.length > 0"
         (click)="toggleFiltres()">
         <span>{{filtresIsVisibles ? 'Fermer' : 'Statistiques'}} </span>
-        <img src="assets/img/filtre-icon-selected.svg">
+        <img src="assets/img/{{filtresIsVisibles ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
       </button>
       <ul *ngIf="isProprietaire()" class="filtres-list {{appartementListOverview.length === 0 ? 'onload' : ''}}">
         <img class="loader" *ngIf="appartementListOverview.length === 0" src="assets/img/loader.gif" alt="loader">

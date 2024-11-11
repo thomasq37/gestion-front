@@ -39,6 +39,9 @@
         background: none;
         border: 1px solid;
         color: #143b86;
+        &.selected{
+          color: #d40000ff;
+        }
         img{
           width: 1rem;
         }
