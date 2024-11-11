@@ -32,7 +32,9 @@
             </div>
             <div *ngIf="isPonctuelle">
               <label for="datePaiement">Date de paiement</label>
-              <input type="date" id="datePaiement" formControlName="datePaiement" >
+              <input
+                type="text" onfocus="(this.type='date')" onmouseover="(this.type='date')"
+                id="datePaiement" formControlName="datePaiement" >
             </div>
             <button class="{{fraisForm.valid ? '' : 'disabled'}}" type="submit" [disabled]="!fraisForm.valid">Ajouter</button>
             <p><span aria-hidden="true">*</span> Veuillez remplir tous les champs</p>

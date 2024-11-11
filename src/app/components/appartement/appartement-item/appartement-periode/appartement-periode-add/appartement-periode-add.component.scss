@@ -41,9 +41,9 @@
           border-radius: 4px;
           background-color: white;
           color: black;
-          box-sizing: border-box; /* S'assure que le padding n'affecte pas la largeur */
-          -webkit-appearance: none; /* Supprime l'apparence par défaut sur iOS */
-          appearance: none; /* Supprime l'apparence par défaut sur les autres navigateurs */
+          box-sizing: border-box;
+          -webkit-appearance: none;
+          appearance: none;
         }
 
         input:focus {

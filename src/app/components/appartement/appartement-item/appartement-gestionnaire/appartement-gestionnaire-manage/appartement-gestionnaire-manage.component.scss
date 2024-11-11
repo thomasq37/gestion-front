@@ -34,7 +34,11 @@
           padding: 10px;
           border: 1px solid #ccc;
           border-radius: 4px;
-
+          background-color: white;
+          color: black;
+          box-sizing: border-box;
+          -webkit-appearance: none;
+          appearance: none;
           &:focus {
             outline: 2px solid #143b86; // Couleur de mise au point bleue
           }

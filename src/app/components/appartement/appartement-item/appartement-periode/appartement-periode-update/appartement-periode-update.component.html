@@ -14,12 +14,16 @@
 
             <div>
                 <label for="estEntree">Entrée <span aria-hidden="true">*</span></label>
-                <input type="date" id="estEntree" formControlName="estEntree" aria-required="true">
+                <input
+                  type="text" onfocus="(this.type='date')" onmouseover="(this.type='date')"
+                  id="estEntree" formControlName="estEntree" aria-required="true">
             </div>
 
             <div>
                 <label for="estSortie">Sortie <span aria-hidden="true">*</span></label>
-                <input type="date" id="estSortie" formControlName="estSortie" aria-required="true">
+                <input
+                  type="text" onfocus="(this.type='date')" onmouseover="(this.type='date')"
+                  id="estSortie" formControlName="estSortie" aria-required="true">
             </div>
 
             <div class="container-checkbox">
