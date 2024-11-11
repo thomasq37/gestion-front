@@ -2,6 +2,7 @@
 .appartement-list {
   font-size: 1rem;
   margin-bottom: 1rem;
+  margin-top: 1rem;
   .container {
     .onload{
       display: flex;
@@ -31,19 +32,31 @@
           flex-direction: column;
         }
       }
-      .filtres-btn{
+      .appartement-list-header{
         display: flex;
-        gap: .5rem;
-        padding: .3rem;
-        border-radius: 0.3rem;
-        background: none;
-        border: 1px solid;
-        color: #143b86;
-        &.selected{
-          color: #d40000ff;
+        justify-content: space-between;
+        width: 100%;
+        h1{
+          margin-bottom: 0;
+          margin-left: .5rem;
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #143b86;
         }
-        img{
-          width: 1rem;
+        .filtres-btn{
+          display: flex;
+          gap: .5rem;
+          padding: .3rem;
+          border-radius: 0.3rem;
+          background: none;
+          border: 1px solid;
+          color: #143b86;
+          &.selected{
+            color: #d40000ff;
+          }
+          img{
+            width: 1rem;
+          }
         }
       }
 
