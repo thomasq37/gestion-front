@@ -9,55 +9,44 @@
                 <tr>
                     <th>Métrique</th>
                     <th>Valeur</th>
-                    <th *ngIf="false">Formule</th>
-                    <th>Formule</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr (click)="showInfo('revenus_nets')">
+                <tr>
                   <td><strong>Total des revenus</strong></td>
                   <td class="number">{{appartement.revenusNets  | number:'1.2-2':'fr-FR'  }} €</td>
-                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
-                <tr (click)="showInfo('total_charges_fixes_hors_frais')">
+                <tr>
                   <td>Total des charges fixes</td>
                   <td class="number-light">{{appartement.totalChargesFixesHorsFrais  | number:'1.2-2':'fr-FR' }} €</td>
-                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
-                <tr (click)="showInfo('total_travaux')">
+                <tr>
                   <td>Total des travaux</td>
                   <td class="number-light">{{appartement.totalTravaux  | number:'1.2-2':'fr-FR' }} €</td>
-                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
-                <tr (click)="showInfo('total_frais_gestion')">
+                <tr>
                   <td>Total des frais de gestion</td>
                   <td class="number-light">{{appartement.totalFraisGestion  | number:'1.2-2':'fr-FR' }} €</td>
-                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
-                <tr (click)="showInfo('total_honoraires_de_loc')">
+                <tr>
                   <td>Total des honoraires de location</td>
                   <td class="number-light">{{appartement.totalHonorairesDeLoc  | number:'1.2-2':'fr-FR' }} €</td>
-                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
-                <tr (click)="showInfo('depenses_nettes')">
+                <tr>
                   <td><strong>Total des dépenses</strong></td>
                   <td class="number">{{appartement.depensesNettes  | number:'1.2-2':'fr-FR' }} €</td>
-                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
-                <tr *ngIf="appartement.rentabiliteNette !== 0" (click)="showInfo('rentabilite_nette')">
+                <tr *ngIf="appartement.rentabiliteNette !== 0">
                   <td><strong>Bénéfice net</strong></td>
                   <td class="number">{{appartement.rentabiliteNette  | number:'1.2-2':'fr-FR' }} €</td>
-                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
-                <tr *ngIf="appartement.moyenneBeneficesNetParMois !== 0" (click)="showInfo('moyenne_benefice')">
+                <tr *ngIf="appartement.moyenneBeneficesNetParMois !== 0">
                   <td><strong>Bénéfice mensuel moyen</strong></td>
                   <td  class="number">{{appartement.moyenneBeneficesNetParMois | number:'1.2-2':'fr-FR' }} €</td>
-                  <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
-                <tr (click)="showInfo('taux_vacance_locative')">
+                <tr>
                   <td><strong>Taux d'occupation</strong></td>
                     <td  class="number">{{100-appartement.tauxVacanceLocative | number:'1.2-2':'fr-FR' }}%</td>
-                    <td class="help-container"><img src="assets/img/help.svg" alt=""></td>
                 </tr>
 
                 </tbody>
