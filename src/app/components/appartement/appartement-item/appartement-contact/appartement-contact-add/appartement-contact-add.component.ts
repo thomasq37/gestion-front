@@ -9,8 +9,8 @@ import {Contact} from "../../../../../models/gestion";
   templateUrl: './appartement-contact-add.component.html',
   styleUrls: ['./appartement-contact-add.component.scss']
 })
-export class AppartementContactAddComponent implements OnInit{
-  @Input() appartementId: number | null = null
+export class AppartementContactAddComponent implements OnInit {
+  @Input() appartementId: number | null = null;
   contactForm!: FormGroup;
 
   constructor(
@@ -20,19 +20,24 @@ export class AppartementContactAddComponent implements OnInit{
   ngOnInit() {
     this.contactForm = new FormGroup({
       pseudo: new FormControl(null, Validators.required),
-      email: new FormControl(null,  [Validators.email]),
-      phoneNumber: new FormControl(null, [Validators.pattern('^[0-9]{10}$')])
+      email: new FormControl(null, [Validators.email]),
+      phoneNumber: new FormControl(null, [
+        Validators.pattern('^\\+?[0-9 ]{7,15}$') // Adapté pour les numéros internationaux
+      ])
     });
   }
+
   ajouterUnContactPourAppartement() {
-    const userId = parseInt(<string>localStorage.getItem('userId'))
+    const userId = parseInt(<string>localStorage.getItem('userId'));
     const contact: Contact = this.contactForm.value;
-    this.gestionService.ajouterUnContactPourAppartement(userId, this.appartementId, contact).subscribe(contact => {
+    this.gestionService.ajouterUnContactPourAppartement(userId, this.appartementId, contact).subscribe(
+      contact => {
         this.gestionService.contactAddedSubject.next(contact);
-        this.contactForm.reset()
+        this.contactForm.reset();
       },
       (error) => {
         console.error('Erreur lors de l\'ajout du contact :', error);
-      })
+      }
+    );
   }
 }

@@ -19,9 +19,7 @@ export class AppartementContactUpdateComponent implements OnInit, OnChanges {
   constructor(
     private gestionService: GestionService,
     private route: ActivatedRoute
-
   ) {}
-
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes["contact"] && changes["contact"].currentValue) {
@@ -33,34 +31,36 @@ export class AppartementContactUpdateComponent implements OnInit, OnChanges {
     this.initializeForm();
     this.route.params.subscribe(params => {
       this.appartementId = +params['id']
-    })
+    });
   }
 
   private initializeForm(): void {
     this.contactForm = new FormGroup({
       pseudo: new FormControl(this.contact?.pseudo, Validators.required),
       email: new FormControl(this.contact?.email, [Validators.email]),
-      phoneNumber: new FormControl(this.contact?.phoneNumber, [Validators.pattern('^[0-9]{10}$')])
+      phoneNumber: new FormControl(this.contact?.phoneNumber, [
+        Validators.pattern('^\\+?[0-9 ]{7,15}$') // Accepts international format
+      ])
     });
   }
 
   mettreAJourUnContactPourAppartement() {
     const contact: Contact = this.contactForm.value;
     if (this.contact) {
-      const userId = parseInt(<string>localStorage.getItem('userId'))
-      contact.id = this.contact.id
-      this.gestionService.mettreAJourUnContactPourAppartement(userId, this.appartementId, contact.id, contact).subscribe(contact => {
+      const userId = parseInt(<string>localStorage.getItem('userId'));
+      contact.id = this.contact.id;
+      this.gestionService.mettreAJourUnContactPourAppartement(userId, this.appartementId, contact.id, contact).subscribe(
+        contact => {
           console.log('Contact mis à jour avec succès.');
-          this.contactForm.reset()
+          this.contactForm.reset();
           this.gestionService.contactUpdatedSubject.next(contact);
           this.cancelUpdateEvent.emit();
-
         },
         (error) => {
           console.error('Erreur lors de la mise à jour du contact :', error);
-        })
-    }
-    else{
+        }
+      );
+    } else {
       console.error('Erreur lors de la mise à jour du contact, contact introuvable.');
     }
   }
@@ -69,5 +69,4 @@ export class AppartementContactUpdateComponent implements OnInit, OnChanges {
     this.contactForm.reset();
     this.cancelUpdateEvent.emit();
   }
-
 }
