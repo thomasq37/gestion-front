@@ -1,23 +1,56 @@
 <section class="appartement-list">
   <div class="container">
     <div class="custom-card">
+      <button
+        class="filtres-btn"
+        *ngIf="this.appartementListOverview.length > 0"
+        (click)="toggleFiltres()">
+        <span>{{filtresIsVisibles ? 'Fermer' : 'Statistiques'}} </span>
+        <img src="assets/img/filtre-icon-selected.svg">
+      </button>
       <ul *ngIf="isProprietaire()" class="filtres-list {{appartementListOverview.length === 0 ? 'onload' : ''}}">
-        <button *ngIf="this.appartementListOverview.length > 0" (click)="toggleFiltres()" class="filtres {{filtresIsVisibles ? 'selected' : ''}}">{{filtresIsVisibles ? 'Fermer' : 'Métriques'}}</button>
         <img class="loader" *ngIf="appartementListOverview.length === 0" src="assets/img/loader.gif" alt="loader">
-
-        <div *ngIf="filtresIsVisibles" class="filtres-btns">
-          <button class="{{filtreActif.includes('revenus') ? 'selected' : ''}}" (click)="toggleFiltre('revenus')">Revenus</button>
-          <button class="{{filtreActif.includes('charges_fixes') ? 'selected' : ''}}" (click)="toggleFiltre('charges_fixes')">Charges fixes</button>
-          <button class="{{filtreActif.includes('travaux') ? 'selected' : ''}}" (click)="toggleFiltre('travaux')">Travaux</button>
-          <button class="{{filtreActif.includes('frais_gestion') ? 'selected' : ''}}" (click)="toggleFiltre('frais_gestion')">Frais de gestion</button>
-          <button class="{{filtreActif.includes('honoraires') ? 'selected' : ''}}" (click)="toggleFiltre('honoraires')">Honoraires de location</button>
-          <button class="{{filtreActif.includes('depenses') ? 'selected' : ''}}" (click)="toggleFiltre('depenses')">Total des dépenses</button>
-          <button class="{{filtreActif.includes('benefice_net') ? 'selected' : ''}}" (click)="toggleFiltre('benefice_net')">Bénéfice net</button>
-          <button class="{{filtreActif.includes('benefice_mensuel') ? 'selected' : ''}}" (click)="toggleFiltre('benefice_mensuel')">Bénéfice mensuel moyen</button>
-          <button class="{{filtreActif.includes('taux_occupation') ? 'selected' : ''}}" (click)="toggleFiltre('taux_occupation')">Taux d'occupation</button>
+        <div *ngIf="filtresIsVisibles" class="filtres-checkboxes">
+          <label>
+            <input type="checkbox" [(ngModel)]="filtreActif['revenus']" (change)="toggleFiltre('revenus')" />
+            Revenus
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="filtreActif['charges_fixes']" (change)="toggleFiltre('charges_fixes')" />
+            Charges fixes
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="filtreActif['travaux']" (change)="toggleFiltre('travaux')" />
+            Travaux
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="filtreActif['frais_gestion']" (change)="toggleFiltre('frais_gestion')" />
+            Frais de gestion
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="filtreActif['honoraires']" (change)="toggleFiltre('honoraires')" />
+            Honoraires de location
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="filtreActif['depenses']" (change)="toggleFiltre('depenses')" />
+            Total des dépenses
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="filtreActif['benefice_net']" (change)="toggleFiltre('benefice_net')" />
+            Bénéfice net
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="filtreActif['benefice_mensuel']" (change)="toggleFiltre('benefice_mensuel')" />
+            Bénéfice mensuel moyen
+          </label>
+          <label>
+            <input type="checkbox" [(ngModel)]="filtreActif['taux_occupation']" (change)="toggleFiltre('taux_occupation')" />
+            Taux d'occupation
+          </label>
         </div>
       </ul>
-      <ul>
+
+      <ul class="appartement-list-items">
         <li *ngFor="let appartement of appartementListOverview" class="appartement-item"
             [ngClass]="{'selected': appartement.selected, 'selection-active': selectionMode}">
           <div *ngIf="appartement.id !== undefined" class="appartement-info"
