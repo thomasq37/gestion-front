@@ -17,7 +17,17 @@
           <p>Téléchargement en cours...</p>
           <img class="loader" src="assets/img/loader.gif" alt="loader">
         </div>
-        <input *ngIf="!imgIsLoading" type="file" (change)="onFileSelected($event)" accept="image/*">
+        <div class="file-upload">
+          <label for="file-upload" class="custom-file-upload">
+            Ajouter une image
+          </label>
+          <input *ngIf="!imgIsLoading" id="file-upload" type="file" (change)="onFileSelected($event)" accept="image/*">
+          <span class="file-name">Aucun fichier sélectionné</span>
+        </div>
+
+        <!--
+                <input *ngIf="!imgIsLoading" type="file" (change)="onFileSelected($event)" accept="image/*">
+        -->
         <button class="add-img-btn" type="button" (click)="mettreAJourUnAppartementPourUtilisateur()">Mettre à jour</button>
       </div>
     </form>
