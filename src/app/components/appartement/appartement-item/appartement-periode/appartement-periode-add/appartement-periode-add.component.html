@@ -12,17 +12,18 @@
                 <input type="number" id="prix" formControlName="prix" aria-required="true" [min]="1">
             </div>
 
-            <div>
-                <label for="estEntree">Entrée <span aria-hidden="true">*</span></label>
-                <input type="date" id="estEntree" formControlName="estEntree" aria-required="true">
-            </div>
+          <div>
+            <label for="estEntree">Entrée <span aria-hidden="true">*</span></label>
+            <input type="date" id="estEntree" formControlName="estEntree" aria-required="true" placeholder="JJ/MM/AAAA">
+          </div>
 
-            <div>
-                <label for="estSortie">Sortie <span aria-hidden="true">*</span></label>
-                <input type="date" id="estSortie" formControlName="estSortie" aria-required="true">
-            </div>
+          <div>
+            <label for="estSortie">Sortie <span aria-hidden="true">*</span></label>
+            <input type="date" id="estSortie" formControlName="estSortie" aria-required="true" placeholder="JJ/MM/AAAA">
+          </div>
 
-            <div class="container-checkbox">
+
+          <div class="container-checkbox">
                 <label for="locVac">Location vacances :</label>
                 <input type="checkbox" id="locVac" formControlName="locVac">
             </div>
