@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Appartement, Pays } from "../../../../../models/gestion";
-import {FormBuilder, FormGroup, Validators, ɵFormGroupRawValue, ɵGetProperty, ɵTypedOrUntyped} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { GestionService } from "../../../../../services/gestion.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import {S3Service} from "../../../../../services/s3.service";
