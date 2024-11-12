@@ -105,10 +105,10 @@
       <div *ngIf="this.appartementListOverview.length > 0" class="metriques-header">
         <h2>Chiffres clés</h2>
         <button
-          class="cc-btn {{filtresIsVisibles ? 'selected' : ''}}"
+          class="cc-btn {{selectionMode ? 'selected' : ''}}"
           (click)="toggleSelectionMode()">
           <span>{{selectionMode ? 'Annuler' : 'Sélectionner'}} </span>
-          <img src="assets/img/{{filtresIsVisibles ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
+          <img src="assets/img/{{selectionMode ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
         </button>
       </div>
       <div class="metriques-container" *ngIf="appartementListOverview.length > 0">
