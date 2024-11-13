@@ -26,7 +26,7 @@ export class GestionService {
   // ---------------------- UTILISATEURS ---------------------- //
 
   obtenirAdressesAppartementsParUserId(userId: string | null): Observable<Appartement[]> {
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements`;
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/adresses`;
     return this.http.get<Appartement[]>(url)
   }
 

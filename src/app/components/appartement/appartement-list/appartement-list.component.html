@@ -1,107 +1,57 @@
 <section class="appartement-list">
   <div class="container">
-    <div class="custom-card">
+    <div class="appartement-list-container">
       <div class="appartement-list-header">
-        <h2 *ngIf="this.appartementListOverview.length > 0">Liste des biens</h2>
+        <h2>Liste des biens</h2>
         <button
-          class="filtres-btn {{filtresIsVisibles ? 'selected' : ''}}"
-          *ngIf="this.appartementListOverview.length > 0"
+          class="{{filtresIsVisibles ? 'selected' : ''}}"
           (click)="toggleFiltres()">
           <span>{{filtresIsVisibles ? 'Fermer' : 'Statistiques'}} </span>
           <img src="assets/img/{{filtresIsVisibles ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
         </button>
       </div>
-      <ul *ngIf="isProprietaire()" class="filtres-list {{appartementListOverview.length === 0 ? 'onload' : ''}}">
-        <img class="loader" *ngIf="appartementListOverview.length === 0" src="assets/img/loader.gif" alt="loader">
-        <div *ngIf="filtresIsVisibles" class="filtres-checkboxes">
+
+      <ul class="appartement-list-filtres-list"
+      *ngIf="filtresIsVisibles">
+        <li class="appartement-list-filtres-item" *ngFor="let filtre of filtresList">
           <label>
-            <input type="checkbox" [(ngModel)]="filtreActif['revenus']" (change)="toggleFiltre('revenus')" />
-            Revenus
+            <input type="checkbox" [(ngModel)]="filtreActif[filtre.id]" (change)="toggleFiltre(filtre.id)" />
+            {{ filtre.nom }}
           </label>
-          <label>
-            <input type="checkbox" [(ngModel)]="filtreActif['charges_fixes']" (change)="toggleFiltre('charges_fixes')" />
-            Charges fixes
-          </label>
-          <label>
-            <input type="checkbox" [(ngModel)]="filtreActif['travaux']" (change)="toggleFiltre('travaux')" />
-            Travaux
-          </label>
-          <label>
-            <input type="checkbox" [(ngModel)]="filtreActif['frais_gestion']" (change)="toggleFiltre('frais_gestion')" />
-            Frais de gestion
-          </label>
-          <label>
-            <input type="checkbox" [(ngModel)]="filtreActif['honoraires']" (change)="toggleFiltre('honoraires')" />
-            Honoraires de location
-          </label>
-          <label>
-            <input type="checkbox" [(ngModel)]="filtreActif['depenses']" (change)="toggleFiltre('depenses')" />
-            Total des dépenses
-          </label>
-          <label>
-            <input type="checkbox" [(ngModel)]="filtreActif['benefice_net']" (change)="toggleFiltre('benefice_net')" />
-            Bénéfice net
-          </label>
-          <label>
-            <input type="checkbox" [(ngModel)]="filtreActif['benefice_mensuel']" (change)="toggleFiltre('benefice_mensuel')" />
-            Bénéfice mensuel moyen
-          </label>
-          <label>
-            <input type="checkbox" [(ngModel)]="filtreActif['taux_occupation']" (change)="toggleFiltre('taux_occupation')" />
-            Taux d'occupation
-          </label>
-        </div>
+        </li>
       </ul>
-
-      <ul class="appartement-list-items">
-        <li *ngFor="let appartement of appartementListOverview" class="appartement-item"
-            [ngClass]="{'selected': appartement.selected, 'selection-active': selectionMode}">
-          <div *ngIf="appartement.id !== undefined" class="appartement-info"
-
-               (click)="selectionMode ? toggleSelection(appartement) : viewAppartement(appartement.id)">
-            <div class="adresse">
+      <ul class="appartement-list-list">
+        <li
+          class="appartement-list-item"
+          *ngFor="let appartement of appartementListOverview"
+          [ngClass]="{'selected': appartement.selected, 'selection-active': selectionMode}">
+          <div
+            class="appartement-list-item-container"
+            *ngIf="appartement.id !== undefined"
+            (click)="selectionMode ? toggleSelection(appartement) : viewAppartement(appartement.id)">
+            <div class="appartement-list-item-contenu">
               <div>
                 <h3>{{ appartement.numero }} {{ appartement.adresse }}</h3>
-                <p>{{ appartement.codePostal }} {{ appartement.ville }}</p>
+                <p>{{ appartement.codePostal }} {{ appartement.ville }}, {{appartement.pays.name}}</p>
               </div>
               <img src="./assets/img/view-more-icon.svg" alt="">
             </div>
-            <div class="metriques-dynamique">
-              <!-- Contenu dynamique en fonction du filtre sélectionné -->
-              <div *ngIf="filtreActif.includes('revenus')">
-                <p><strong>Revenus Nets:</strong> {{ appartement.revenusNets | number:'1.2-2':'fr-FR' }} €</p>
-              </div>
-              <div *ngIf="filtreActif.includes('charges_fixes')">
-                <p><strong>Charges Fixes:</strong> {{ appartement.totalChargesFixesHorsFrais | number:'1.2-2':'fr-FR' }} €</p>
-              </div>
-              <div *ngIf="filtreActif.includes('travaux')">
-                <p><strong>Total des Travaux:</strong> {{ appartement.totalTravaux | number:'1.2-2':'fr-FR' }} €</p>
-              </div>
-              <div *ngIf="filtreActif.includes('frais_gestion')">
-                <p><strong>Frais de Gestion:</strong> {{ appartement.totalFraisGestion | number:'1.2-2':'fr-FR' }} €</p>
-              </div>
-              <div *ngIf="filtreActif.includes('honoraires')">
-                <p><strong>Honoraires de Location:</strong> {{ appartement.totalHonorairesDeLoc | number:'1.2-2':'fr-FR' }} €</p>
-              </div>
-              <div *ngIf="filtreActif.includes('depenses')">
-                <p><strong>Total des Dépenses:</strong> {{ appartement.depensesNettes | number:'1.2-2':'fr-FR' }} €</p>
-              </div>
-              <div *ngIf="filtreActif.includes('benefice_net')">
-                <p><strong>Bénéfice Net:</strong> {{ appartement.rentabiliteNette | number:'1.2-2':'fr-FR' }} €</p>
-              </div>
-              <div *ngIf="filtreActif.includes('benefice_mensuel')">
-                <p><strong>Bénéfice Mensuel Moyen:</strong> {{ appartement.moyenneBeneficesNetParMois | number:'1.2-2':'fr-FR' }} €</p>
-              </div>
-              <div *ngIf="filtreActif.includes('taux_occupation')">
-                <p><strong>Taux d'Occupation:</strong> {{ 100 - appartement.tauxVacanceLocative | number:'1.2-2':'fr-FR' }}%</p>
-              </div>
-            </div>
-
+            <ul class="appartement-list-filtres-selected-list">
+              <li class="appartement-list-filtres-selected-item" *ngFor="let filtre of filtresList">
+                <div *ngIf="filtreActif.includes(filtre.id) && filtre.id !== 'taux_occupation'">
+                  <p><strong>{{ filtre.nom }}:</strong> {{ appartement[filtre.prop] | number:'1.2-2':'fr-FR' }} €</p>
+                </div>
+                <div *ngIf="filtreActif.includes(filtre.id) && filtre.id === 'taux_occupation'">
+                  <p><strong>{{ filtre.nom }}:</strong> {{ 100 - appartement[filtre.prop] | number:'1.2-2':'fr-FR' }} %</p>
+                </div>
+              </li>
+            </ul>
           </div>
         </li>
       </ul>
     </div>
-    <div *ngIf="isProprietaire()" class="custom-card metriques {{appartementListOverview.length === 0 ? 'onload' : ''}}">
+  </div>
+    <!--<div *ngIf="isProprietaire()" class="custom-card metriques {{appartementListOverview.length === 0 ? 'onload' : ''}}">
       <div *ngIf="this.appartementListOverview.length > 0" class="metriques-header">
         <h2>Chiffres clés</h2>
         <button
@@ -141,7 +91,5 @@
       </div>
       <img class="loader" *ngIf="appartementListOverview.length === 0" ngSrc="assets/img/loader.gif" alt="loader"
            height="331" width="336">
-    </div>
-
-  </div>
+    </div>-->
 </section>

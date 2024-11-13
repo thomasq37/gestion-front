@@ -1,3 +1,4 @@
+/*
 .dashboard{
   display: flex;
   flex-direction: column;
@@ -11,14 +12,19 @@
     font-weight: bold;
     color: #143b86;
   }
+
+}
+*/
+.dashboard{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
   app-header {
     margin: 0;
   }
 
   app-appartement-list {
-    margin: 0;
-  }
-  .container {
     margin: 0;
   }
   app-footer {

@@ -17,6 +17,17 @@ export class AppartementListComponent implements OnInit {
   totalBenefices: number = 0;
   selectionMode: boolean = false; // Gère si le mode de sélection est actif ou non
   filtreActif: string[] = [];
+  filtresList =  [
+    { id : 'revenus', nom : 'Revenus', prop: 'revenusNets'},
+    { id : 'charges_fixes', nom : 'Charges fixes', prop: 'totalChargesFixesHorsFrais'},
+    { id : 'travaux', nom : 'Travaux', prop: 'totalTravaux'},
+    { id : 'frais_gestion', nom : 'Frais de gestion', prop: 'totalFraisGestion'},
+    { id : 'honoraires', nom : 'Honoraires de location', prop: 'totalHonorairesDeLoc'},
+    { id : 'depenses', nom : 'Dépenses', prop: 'depensesNettes'},
+    { id : 'benefice_net', nom : 'Bénéfice net', prop: 'rentabiliteNette'},
+    { id : 'benefice_mensuel', nom : 'Bénéfice mensuel moyen', prop: 'moyenneBeneficesNetParMois'},
+    { id : 'taux_occupation', nom : 'Taux d\'occupation', prop: 'tauxVacanceLocative'}
+  ]
   filtresIsVisibles = false;
 
   constructor(private gestionService: GestionService, private router: Router) {

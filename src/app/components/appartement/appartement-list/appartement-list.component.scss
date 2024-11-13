@@ -1,15 +1,76 @@
 
 .appartement-list {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
   .container {
-    .onload{
-      display: flex;
-      justify-content: center;
-      flex-direction: row !important;
+    .appartement-list-container{
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      border: 1px solid #ccc;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      .appartement-list-header{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        h2{
+          margin-bottom: 0;
+          margin-left: .5rem;
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #143b86;
+        }
+        button{
+          display: flex;
+          gap: .5rem;
+          padding: .3rem;
+          border-radius: 0.3rem;
+          background: none;
+          border: 1px solid;
+          color: #143b86;
+          &.selected{
+            color: #d40000ff;
+          }
+          img{
+            width: 1rem;
+          }
+        }
+      }
+      .appartement-list-filtres-list{
+        margin-left: .5rem;
+      }
+      .appartement-list-list{
+        margin-top: 1rem;
+        .appartement-list-item{
+          box-shadow: rgba(0, 0, 0, 0) 0 1px 1px;
+          background-color: white;
+          padding: 1rem;
+          display: flex;
+          align-items: center;
+          border: 1px solid #e7e7e7;
+          border-radius: 10px;
+          margin-bottom: 10px;
+          .appartement-list-item-container{
+            width: 100%;
+            .appartement-list-item-contenu{
+              display: flex;
+              justify-content: space-between;
+              h3 {
+                font-size: 1.2rem;
+              }
+              img{
+                width: 3rem;
+              }
+              p:last-child {
+                color: #C5C5C5;
+              }
+            }
+          }
+
+        }
+      }
     }
-    .custom-card {
+    /*.custom-card {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       padding: 1rem;
       border: 1px solid #ccc;
@@ -133,9 +194,9 @@
         }
       }
 
-    }
+    }*/
 
-    .metriques{
+    /*.metriques{
       margin-bottom: 1rem;
       .metriques-header{
         display: flex;
@@ -195,9 +256,10 @@
         }
       }
 
-    }
+    }*/
   }
 }
+/*
 @media screen and (min-width: 55rem) {
   .appartement-list{
     .container{
@@ -236,3 +298,4 @@
     }
   }
 }
+*/
