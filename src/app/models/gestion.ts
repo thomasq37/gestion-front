@@ -30,7 +30,20 @@ export interface Appartement {
   appUser: AppUser
   selected: boolean
 }
-
+export interface AppartementCCDTO {
+  appartementId: number;
+  prixAchat: number;
+  estimation: number;
+  revenusNets: number;
+  depensesNettes: number;
+  rentabiliteNette: number;
+  tauxVacanceLocative: number;
+  moyenneBeneficesNetParMois: number;
+  totalTravaux: number;
+  totalFraisGestion: number;
+  totalHonorairesDeLoc: number;
+  totalChargesFixesHorsFrais: number;
+}
 export interface AppUser {
   id: number;
   pseudo: string;

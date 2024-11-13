@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GestionService} from "../../../services/gestion.service";
-import {Appartement} from "../../../models/gestion";
+import {Appartement, AppartementCCDTO} from "../../../models/gestion";
 import {Router} from "@angular/router";
 
 @Component({
@@ -29,7 +29,8 @@ export class AppartementListComponent implements OnInit {
     { id : 'taux_occupation', nom : 'Taux d\'occupation', prop: 'tauxVacanceLocative'}
   ]
   filtresIsVisibles = false;
-
+  CCAppartements : AppartementCCDTO[]
+  totalCC: AppartementCCDTO;
   constructor(private gestionService: GestionService, private router: Router) {
     this.appartementListOverview = [];
   }
@@ -46,7 +47,47 @@ export class AppartementListComponent implements OnInit {
         this.calculerTotaux();
       });
 
+    this.gestionService.obtenirCCAppartementsParUserId(localStorage.getItem('userId'))
+      .subscribe(CCAppartements => {
+        this.CCAppartements = CCAppartements
+        // Initialiser totalCC avec des valeurs à 0
+        this.totalCC = {
+          appartementId: -1,
+          prixAchat: 0,
+          estimation: 0,
+          revenusNets: 0,
+          depensesNettes: 0,
+          rentabiliteNette: 0,
+          tauxVacanceLocative: 0,
+          moyenneBeneficesNetParMois: 0,
+          totalTravaux: 0,
+          totalFraisGestion: 0,
+          totalHonorairesDeLoc: 0,
+          totalChargesFixesHorsFrais: 0
+        };
 
+        // Agréger chaque propriété
+        this.CCAppartements.forEach(appartement => {
+          this.totalCC.prixAchat += appartement.prixAchat;
+          this.totalCC.estimation += appartement.estimation;
+          this.totalCC.revenusNets += appartement.revenusNets;
+          this.totalCC.depensesNettes += appartement.depensesNettes;
+          this.totalCC.rentabiliteNette += appartement.rentabiliteNette;
+          this.totalCC.tauxVacanceLocative += appartement.tauxVacanceLocative;
+          this.totalCC.moyenneBeneficesNetParMois += appartement.moyenneBeneficesNetParMois;
+          this.totalCC.totalTravaux += appartement.totalTravaux;
+          this.totalCC.totalFraisGestion += appartement.totalFraisGestion;
+          this.totalCC.totalHonorairesDeLoc += appartement.totalHonorairesDeLoc;
+          this.totalCC.totalChargesFixesHorsFrais += appartement.totalChargesFixesHorsFrais;
+        });
+
+        // Optionnel : Calculer la moyenne du taux de vacance locative et du bénéfice net par mois
+        const totalAppartements = this.CCAppartements.length;
+        if (totalAppartements > 0) {
+          this.totalCC.tauxVacanceLocative /= totalAppartements;
+          this.totalCC.moyenneBeneficesNetParMois /= totalAppartements;
+        }
+      });
   }
 
   // Basculer le mode de sélection
@@ -55,7 +96,6 @@ export class AppartementListComponent implements OnInit {
     if (!this.selectionMode) {
       // Si on désactive le mode sélection, tout désélectionner
       this.appartementListOverview.forEach(appartement => appartement.selected = false);
-      this.calculerTotaux();
     }
     else{
       this.appartementListOverview.forEach(appartement => appartement.selected = true);
@@ -92,6 +132,7 @@ export class AppartementListComponent implements OnInit {
       this.totalBenefices = this.totalRevenus - this.totalDepenses;
     }
   }
+
   toggleFiltre(filtre: string) {
     const index = this.filtreActif.indexOf(filtre);
     if (index === -1) {

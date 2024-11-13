@@ -1,5 +1,14 @@
 import { Injectable } from '@angular/core';
-import {Frais, TypeFrais, Appartement, PeriodLocation, Contact, AppUserDTO, Pays} from "../models/gestion";
+import {
+  Frais,
+  TypeFrais,
+  Appartement,
+  PeriodLocation,
+  Contact,
+  AppUserDTO,
+  Pays,
+  AppartementCCDTO
+} from "../models/gestion";
 import {PageableResponse} from "../models/pageable";
 
 import { Observable, Subject} from "rxjs";
@@ -28,6 +37,11 @@ export class GestionService {
   obtenirAdressesAppartementsParUserId(userId: string | null): Observable<Appartement[]> {
     const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/adresses`;
     return this.http.get<Appartement[]>(url)
+  }
+
+  obtenirCCAppartementsParUserId(userId: string | null): Observable<AppartementCCDTO[]> {
+    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/chiffres-cles`;
+    return this.http.get<AppartementCCDTO[]>(url)
   }
 
   // ---------------------- APPARTEMENTS ---------------------- //

@@ -50,8 +50,7 @@
         </li>
       </ul>
     </div>
-  </div>
-    <!--<div *ngIf="isProprietaire()" class="custom-card metriques {{appartementListOverview.length === 0 ? 'onload' : ''}}">
+    <div *ngIf="isProprietaire()" class="custom-card metriques {{appartementListOverview.length === 0 ? 'onload' : ''}}">
       <div *ngIf="this.appartementListOverview.length > 0" class="metriques-header">
         <h2>Chiffres clés</h2>
         <button
@@ -65,31 +64,32 @@
         <ul class="metriques-global-list">
           <li>
             <span>Valeur totale</span>
-            <span class="chiffre">{{ totalALAchat | number:'1.2-2' }} €</span>
+            <span class="chiffre">{{ totalCC.prixAchat | number:'1.2-2' }} €</span>
           </li>
           <li>
             <span>Estimation totale</span>
-            <span class="chiffre">{{ totalEstimations | number:'1.2-2' }} €</span>
+            <span class="chiffre">{{ totalCC.estimation | number:'1.2-2' }} €</span>
           </li>
           <li>
             <span>Revenus totaux</span>
-            <span class="chiffre">{{ totalRevenus | number:'1.2-2' }} €</span>
+            <span class="chiffre">{{ totalCC.revenusNets | number:'1.2-2' }} €</span>
           </li>
           <li>
             <span>Dépenses totales</span>
-            <span class="chiffre">{{ totalDepenses | number:'1.2-2' }} €</span>
+            <span class="chiffre">{{ totalCC.depensesNettes | number:'1.2-2' }} €</span>
           </li>
           <li>
             <span>Bénéfice net</span>
-            <span class="chiffre">{{ totalBenefices | number:'1.2-2' }} €</span>
+            <span class="chiffre">{{ totalCC.revenusNets - totalCC.depensesNettes | number:'1.2-2' }} €</span>
           </li>
           <li>
             <span>Taux de provision</span>
-            <span class="chiffre">{{ totalDepenses / totalRevenus * 100 | number:'1.2-2' }} %</span>
+            <span class="chiffre">{{ totalCC.depensesNettes / totalCC.revenusNets * 100 | number:'1.2-2' }} %</span>
           </li>
         </ul>
       </div>
       <img class="loader" *ngIf="appartementListOverview.length === 0" ngSrc="assets/img/loader.gif" alt="loader"
            height="331" width="336">
-    </div>-->
+    </div>
+  </div>
 </section>
