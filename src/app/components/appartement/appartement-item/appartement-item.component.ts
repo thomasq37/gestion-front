@@ -88,8 +88,8 @@ export class AppartementItemComponent implements OnInit, AfterViewInit{
           }
         });
 
-        this.gestionService.getAppartmentByUserIdAndApartmentId(localStorage.getItem('userId'), appartementId)
-          .subscribe(appartement => {
+        this.gestionService.getAppartmentByUserIdAndApartmentId(appartementId)
+          .then(appartement => {
               this.appartement = appartement;
               this.images = this.appartement.images;
 

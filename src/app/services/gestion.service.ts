@@ -14,6 +14,7 @@ import {PageableResponse} from "../models/pageable";
 import { Observable, Subject} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {authFetch} from "./http-helpers";
 
 @Injectable({
   providedIn: 'root'
@@ -34,21 +35,21 @@ export class GestionService {
 
   // ---------------------- UTILISATEURS ---------------------- //
 
-  obtenirAdressesAppartementsParUserId(userId: string | null): Observable<Appartement[]> {
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/adresses`;
-    return this.http.get<Appartement[]>(url)
+  async obtenirAdressesAppartementsParUserId(): Promise<Appartement[]> {
+    const response = await authFetch(`${this.apiUrl}/appartements/adresses`);
+    return await response.json();
   }
 
-  obtenirCCAppartementsParUserId(userId: string | null): Observable<AppartementCCDTO[]> {
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/chiffres-cles`;
-    return this.http.get<AppartementCCDTO[]>(url)
+  async obtenirCCAppartementsParUserId(): Promise<AppartementCCDTO[]> {
+    const response = await authFetch(`${this.apiUrl}/appartements/chiffres-cles`);
+    return await response.json();
   }
 
   // ---------------------- APPARTEMENTS ---------------------- //
 
-  getAppartmentByUserIdAndApartmentId(userId: string | null, apartmentId: number): Observable<Appartement> {
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${apartmentId}`;
-    return this.http.get<Appartement>(url);
+  async getAppartmentByUserIdAndApartmentId(apartmentId: number): Promise<Appartement> {
+    const response = await authFetch(`${this.apiUrl}/appartements/${apartmentId}`);
+    return await response.json();
   }
 
 

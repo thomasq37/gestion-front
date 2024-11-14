@@ -24,10 +24,10 @@ export class UtilisateurAddComponent {
     if (this.userForm.valid) {
       const { username, password, token } = this.userForm.value;
       if(username && password && token) {
-        this.authService.createUser(username, password, token).subscribe(
+        this.authService.inscription({pseudo: username, email: username, mdp: password}).then(
           (response) => {
             this.accountIsCreated = true
-            this.message = response.message
+            this.message = response
           },
 
           (response) =>

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {GestionService} from "../../../services/gestion.service";
 import {Appartement, AppartementCCDTO} from "../../../models/gestion";
 import {Router} from "@angular/router";
+import {hasProprietaireRole} from "../../../services/http-helpers";
 
 @Component({
   selector: 'app-appartement-list',
@@ -22,12 +23,9 @@ export class AppartementListComponent implements OnInit {
   constructor(private gestionService: GestionService, private router: Router) {
     this.appartementAddresses = [];
   }
-  isUserOwner(): boolean {
-    return localStorage.getItem('userRole') === "PROPRIETAIRE";
-  }
   ngOnInit() {
-    this.gestionService.obtenirAdressesAppartementsParUserId(localStorage.getItem('userId'))
-      .subscribe(appartementAddresses => {
+    this.gestionService.obtenirAdressesAppartementsParUserId()
+      .then(appartementAddresses => {
         this.appartementAddresses = appartementAddresses.map(appartement => ({
           ...appartement,
           selected: false
@@ -35,8 +33,8 @@ export class AppartementListComponent implements OnInit {
         this.areAddressesLoaded = true;
         this.checkLoadingStatus();
       });
-    this.gestionService.obtenirCCAppartementsParUserId(localStorage.getItem('userId'))
-      .subscribe(appartementMetrics => {
+    this.gestionService.obtenirCCAppartementsParUserId()
+      .then(appartementMetrics => {
         this.appartementMetrics= appartementMetrics
         this.calculateTotalMetrics(true)
         if (this.appartementMetrics.length > 0) {
@@ -114,4 +112,6 @@ export class AppartementListComponent implements OnInit {
       this.totalMetrics.moyenneBeneficesNetParMois /= totalSelected;
     }
   }
+
+  protected readonly hasProprietaireRole = hasProprietaireRole;
 }

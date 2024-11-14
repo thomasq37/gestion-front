@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-utilisateur-login',
@@ -10,7 +11,7 @@ import {AuthService} from "../../../services/auth.service";
 export class UtilisateurLoginComponent {
   loginForm: FormGroup;
   message: ''
-  constructor(private formBuilder: FormBuilder, private authenticationService: AuthService) {
+  constructor(private router: Router, private formBuilder: FormBuilder, private authenticationService: AuthService) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -22,9 +23,11 @@ export class UtilisateurLoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-      this.authenticationService.login(username, password).subscribe(
-        () => {
+      this.authenticationService.connexion({email: username, mdp: password}).then(
+        (response) => {
           console.log('Connexion effectué avec succès.');
+          localStorage.setItem('auth_token', response);
+          this.router.navigate(['/dashboard']);
         },
         (error) => {
           this.message = error.error
