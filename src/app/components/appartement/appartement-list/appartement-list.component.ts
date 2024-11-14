@@ -9,47 +9,57 @@ import {Router} from "@angular/router";
   styleUrls: ['./appartement-list.component.scss']
 })
 export class AppartementListComponent implements OnInit {
-  adressesAppartement: Appartement[];
-  selectionMode: boolean = false;
-  filtreActif: string[] = [];
-  filtresList: any[] = [];
-  filtresIsVisibles = false;
-  CCAppartements : AppartementCCDTO[]
-  totalCC: any = {};
+  appartementAddresses: Appartement[];
+  appartementMetrics : AppartementCCDTO[]
+  totalMetrics: any = {};
+  isBulkSelectionMode: boolean = false;
+  isLoading: boolean = true;
+  areAddressesLoaded: boolean = false;
+  areMetricsLoaded: boolean = false;
+  activeFilters: string[] = [];
+  filterOptions: any[] = [];
+  isFilterPanelVisible = false;
   constructor(private gestionService: GestionService, private router: Router) {
-    this.adressesAppartement = [];
+    this.appartementAddresses = [];
   }
   isUserOwner(): boolean {
     return localStorage.getItem('userRole') === "PROPRIETAIRE";
   }
   ngOnInit() {
     this.gestionService.obtenirAdressesAppartementsParUserId(localStorage.getItem('userId'))
-      .subscribe(adressesAppartement => {
-        this.adressesAppartement = adressesAppartement.map(appartement => ({
+      .subscribe(appartementAddresses => {
+        this.appartementAddresses = appartementAddresses.map(appartement => ({
           ...appartement,
           selected: false
         }));
+        this.areAddressesLoaded = true;
+        this.checkLoadingStatus();
       });
     this.gestionService.obtenirCCAppartementsParUserId(localStorage.getItem('userId'))
-      .subscribe(CCAppartements => {
-        this.CCAppartements= CCAppartements
+      .subscribe(appartementMetrics => {
+        this.appartementMetrics= appartementMetrics
         this.calculateTotalMetrics(true)
-        if (this.CCAppartements.length > 0) {
-          this.filtresList = Object.keys(this.CCAppartements[0]).map(key => ({
+        if (this.appartementMetrics.length > 0) {
+          this.filterOptions = Object.keys(this.appartementMetrics[0]).map(key => ({
             id: key,
             nom: this.formatMetricName(key),
             prop: key
           }));
-          this.filtresList.shift()
+          this.filterOptions.shift()
         }
+        this.areMetricsLoaded = true;
+        this.checkLoadingStatus();
       });
+  }
+  checkLoadingStatus() {
+    this.isLoading = !(this.areAddressesLoaded && this.areMetricsLoaded);
   }
   formatMetricName(key: string): string {
     return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
   }
   toggleBulkSelectionMode() {
-    this.selectionMode = !this.selectionMode;
-    this.adressesAppartement.forEach(appartement => appartement.selected = this.selectionMode);
+    this.isBulkSelectionMode = !this.isBulkSelectionMode;
+    this.appartementAddresses.forEach(appartement => appartement.selected = this.isBulkSelectionMode);
     this.calculateTotalMetrics(true);
   }
   toggleAppartementSelection(appartement: Appartement) {
@@ -57,27 +67,27 @@ export class AppartementListComponent implements OnInit {
     this.calculateTotalMetrics(false)
   }
   toggleFilter(filtre: string) {
-    this.filtreActif.includes(filtre) ? this.filtreActif.splice(this.filtreActif.indexOf(filtre), 1) : this.filtreActif.push(filtre);
+    this.activeFilters.includes(filtre) ? this.activeFilters.splice(this.activeFilters.indexOf(filtre), 1) : this.activeFilters.push(filtre);
   }
   getAppartementMetricValue(appartementId: number, prop: string): number {
-    const appartement = this.CCAppartements.find(a => a.appartementId === appartementId);
+    const appartement = this.appartementMetrics.find(a => a.appartementId === appartementId);
     return appartement ? appartement[prop] || 0 : 0;
   }
   navigateToAppartementDetails(appartementId: number) {
-    if (!this.selectionMode) {
+    if (!this.isBulkSelectionMode) {
       this.router.navigate(['/appartement', appartementId]);
     }
   }
   toggleFilterPanel() {
-    this.filtresIsVisibles = !this.filtresIsVisibles
-    this.filtreActif = [];
+    this.isFilterPanelVisible = !this.isFilterPanelVisible
+    this.activeFilters = [];
   }
   calculateTotalMetrics(init: boolean) {
     const selectedAppartementIds = init ?
-      this.adressesAppartement.map(a => a.id) :
-      this.adressesAppartement.filter(a => a.selected).map(a => a.id);
-    const appartementsSelectionnes = this.CCAppartements.filter(a => selectedAppartementIds.includes(a.appartementId));
-    this.totalCC = appartementsSelectionnes.reduce((acc, appartement) => {
+      this.appartementAddresses.map(a => a.id) :
+      this.appartementAddresses.filter(a => a.selected).map(a => a.id);
+    const appartementsSelectionnes = this.appartementMetrics.filter(a => selectedAppartementIds.includes(a.appartementId));
+    this.totalMetrics = appartementsSelectionnes.reduce((acc, appartement) => {
       Object.keys(acc).forEach(key => {
         acc[key] += appartement[key] || 0;
       });
@@ -99,8 +109,8 @@ export class AppartementListComponent implements OnInit {
 
     const totalSelected = appartementsSelectionnes.length;
     if (totalSelected > 0) {
-      this.totalCC.tauxVacanceLocative /= totalSelected;
-      this.totalCC.moyenneBeneficesNetParMois /= totalSelected;
+      this.totalMetrics.tauxVacanceLocative /= totalSelected;
+      this.totalMetrics.moyenneBeneficesNetParMois /= totalSelected;
     }
   }
 }

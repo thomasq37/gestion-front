@@ -1,94 +1,97 @@
 <section class="appartement-list">
   <div class="container">
-    <div class="appartement-list-container content-container">
-      <div class="appartement-list-header content-header">
-        <h2>Liste des biens</h2>
-        <button
-          class="{{filtresIsVisibles ? 'selected' : ''}}"
-          (click)="toggleFilterPanel()">
-          <span>{{filtresIsVisibles ? 'Fermer' : 'Statistiques'}} </span>
-          <img src="assets/img/{{filtresIsVisibles ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
-        </button>
-      </div>
-      <ul class="appartement-list-filtres-list"
-      *ngIf="filtresIsVisibles">
-        <li class="appartement-list-filtres-item" *ngFor="let filtre of filtresList">
-          <label>
-            <input type="checkbox" [(ngModel)]="filtreActif[filtre.id]" (change)="toggleFilter(filtre.id)" />
-            {{ filtre.nom }}
-          </label>
-        </li>
-      </ul>
-      <ul class="appartement-list-list">
-        <li
-          class="appartement-list-item"
-          *ngFor="let adresseAppartement of adressesAppartement"
-          [ngClass]="{'selected': adresseAppartement.selected, 'selection-active': selectionMode}">
-          <div
-            class="appartement-list-item-container"
-            *ngIf="adresseAppartement.id !== undefined"
-            (click)="selectionMode ? toggleAppartementSelection(adresseAppartement) : navigateToAppartementDetails(adresseAppartement.id)">
-            <div class="appartement-list-item-contenu">
-              <div>
-                <h3>{{ adresseAppartement.numero }} {{ adresseAppartement.adresse }}</h3>
-                <p>{{ adresseAppartement.codePostal }} {{ adresseAppartement.ville }}, {{adresseAppartement.pays.name}}</p>
+    <div *ngIf="isLoading" class="loader"></div>
+    <div  *ngIf="!isLoading">
+      <div class="appartement-list-container content-container">
+        <div class="appartement-list-header content-header">
+          <h2>Liste des biens</h2>
+          <button
+            class="{{isFilterPanelVisible ? 'selected' : ''}}"
+            (click)="toggleFilterPanel()">
+            <span>{{isFilterPanelVisible ? 'Fermer' : 'Statistiques'}} </span>
+            <img src="assets/img/{{isFilterPanelVisible ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
+          </button>
+        </div>
+        <ul class="appartement-list-filtres-list"
+            *ngIf="isFilterPanelVisible">
+          <li class="appartement-list-filtres-item" *ngFor="let filter of filterOptions">
+            <label>
+              <input type="checkbox" [(ngModel)]="activeFilters[filter.id]" (change)="toggleFilter(filter.id)" />
+              {{ filter.nom }}
+            </label>
+          </li>
+        </ul>
+        <ul class="appartement-list-list">
+          <li
+            class="appartement-list-item"
+            *ngFor="let appartementAddress of appartementAddresses"
+            [ngClass]="{'selected': appartementAddress.selected, 'selection-active': isBulkSelectionMode}">
+            <div
+              class="appartement-list-item-container"
+              *ngIf="appartementAddress.id !== undefined"
+              (click)="isBulkSelectionMode ? toggleAppartementSelection(appartementAddress) : navigateToAppartementDetails(appartementAddress.id)">
+              <div class="appartement-list-item-contenu">
+                <div>
+                  <h3>{{ appartementAddress.numero }} {{ appartementAddress.adresse }}</h3>
+                  <p>{{ appartementAddress.codePostal }} {{ appartementAddress.ville }}, {{appartementAddress.pays.name}}</p>
+                </div>
+                <img src="./assets/img/view-more-icon.svg" alt="">
               </div>
-              <img src="./assets/img/view-more-icon.svg" alt="">
+              <ul class="appartement-list-filtres-selected-list">
+                <li class="appartement-list-filtres-selected-item" [ngClass]="{'selected': appartementAddress.selected}" *ngFor="let filter of filterOptions">
+                  <div *ngIf="activeFilters.includes(filter.id) && filter.id !== 'taux_occupation'">
+                    <p><strong>{{ filter.nom }}:</strong>
+                      {{ getAppartementMetricValue(appartementAddress.id, filter.prop) | number:'1.2-2':'fr-FR' }} €
+                    </p>
+                  </div>
+                  <div *ngIf="activeFilters.includes(filter.id) && filter.id === 'taux_occupation'">
+                    <p><strong>{{ filter.nom }}:</strong>
+                      {{ (100 - getAppartementMetricValue(appartementAddress.id, filter.prop)) | number:'1.2-2':'fr-FR' }} %
+                    </p>
+                  </div>
+                </li>
+              </ul>
             </div>
-            <ul class="appartement-list-filtres-selected-list">
-              <li class="appartement-list-filtres-selected-item" [ngClass]="{'selected': adresseAppartement.selected}" *ngFor="let filtre of filtresList">
-                <div *ngIf="filtreActif.includes(filtre.id) && filtre.id !== 'taux_occupation'">
-                  <p><strong>{{ filtre.nom }}:</strong>
-                    {{ getAppartementMetricValue(adresseAppartement.id, filtre.prop) | number:'1.2-2':'fr-FR' }} €
-                  </p>
-                </div>
-                <div *ngIf="filtreActif.includes(filtre.id) && filtre.id === 'taux_occupation'">
-                  <p><strong>{{ filtre.nom }}:</strong>
-                    {{ (100 - getAppartementMetricValue(adresseAppartement.id, filtre.prop)) | number:'1.2-2':'fr-FR' }} %
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="appartement-metriques-container content-container" *ngIf="isUserOwner()">
-      <div class="appartement-metriques-header content-header">
-        <h2>Chiffres clés</h2>
-        <button
-          class="cc-btn {{selectionMode ? 'selected' : ''}}"
-          (click)="toggleBulkSelectionMode()">
-          <span>{{selectionMode ? 'Annuler' : 'Sélectionner'}} </span>
-          <img src="assets/img/{{selectionMode ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
-        </button>
+          </li>
+        </ul>
       </div>
-      <ul class="appartement-metriques-list">
-        <li>
-          <span>Valeur totale</span>
-          <span class="chiffre">{{ totalCC.prixAchat | number:'1.2-2' }} €</span>
-        </li>
-        <li>
-          <span>Estimation totale</span>
-          <span class="chiffre">{{ totalCC.estimation | number:'1.2-2' }} €</span>
-        </li>
-        <li>
-          <span>Revenus totaux</span>
-          <span class="chiffre">{{ totalCC.revenusNets | number:'1.2-2' }} €</span>
-        </li>
-        <li>
-          <span>Dépenses totales</span>
-          <span class="chiffre">{{ totalCC.depensesNettes | number:'1.2-2' }} €</span>
-        </li>
-        <li>
-          <span>Bénéfice net</span>
-          <span class="chiffre">{{ totalCC.revenusNets - totalCC.depensesNettes | number:'1.2-2' }} €</span>
-        </li>
-        <li>
-          <span>Taux de provision</span>
-          <span class="chiffre">{{ totalCC.depensesNettes / totalCC.revenusNets * 100 | number:'1.2-2' }} %</span>
-        </li>
-      </ul>
+      <div class="appartement-metriques-container content-container" *ngIf="isUserOwner()">
+        <div class="appartement-metriques-header content-header">
+          <h2>Chiffres clés</h2>
+          <button
+            class="cc-btn {{isBulkSelectionMode ? 'selected' : ''}}"
+            (click)="toggleBulkSelectionMode()">
+            <span>{{isBulkSelectionMode ? 'Annuler' : 'Sélectionner'}} </span>
+            <img src="assets/img/{{isBulkSelectionMode ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
+          </button>
+        </div>
+        <ul class="appartement-metriques-list">
+          <li>
+            <span>Valeur totale</span>
+            <span class="chiffre">{{ totalMetrics.prixAchat | number:'1.2-2' }} €</span>
+          </li>
+          <li>
+            <span>Estimation totale</span>
+            <span class="chiffre">{{ totalMetrics.estimation | number:'1.2-2' }} €</span>
+          </li>
+          <li>
+            <span>Revenus totaux</span>
+            <span class="chiffre">{{ totalMetrics.revenusNets | number:'1.2-2' }} €</span>
+          </li>
+          <li>
+            <span>Dépenses totales</span>
+            <span class="chiffre">{{ totalMetrics.depensesNettes | number:'1.2-2' }} €</span>
+          </li>
+          <li>
+            <span>Bénéfice net</span>
+            <span class="chiffre">{{ totalMetrics.revenusNets - totalMetrics.depensesNettes | number:'1.2-2' }} €</span>
+          </li>
+          <li>
+            <span>Taux de provision</span>
+            <span class="chiffre">{{ totalMetrics.depensesNettes / totalMetrics.revenusNets * 100 | number:'1.2-2' }} %</span>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
