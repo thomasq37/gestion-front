@@ -68,7 +68,7 @@
         <ul class="appartement-metriques-list">
           <li>
             <span>Valeur totale</span>
-            <span class="chiffre">{{ totalMetrics.prixAchat | number:'1.2-2' }} €</span>
+            <span class="chiffre">{{ (totalMetrics.prixAchat + totalMetrics.fraisNotaireEtNegociation) | number:'1.2-2' }} €</span>
           </li>
           <li>
             <span>Estimation totale</span>

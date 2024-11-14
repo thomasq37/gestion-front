@@ -96,6 +96,7 @@ export class AppartementListComponent implements OnInit {
       appartementId: -1,
       prixAchat: 0,
       estimation: 0,
+      fraisNotaireEtNegociation:0,
       revenusNets: 0,
       depensesNettes: 0,
       rentabiliteNette: 0,

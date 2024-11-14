@@ -34,6 +34,7 @@ export interface AppartementCCDTO {
   appartementId: number;
   prixAchat: number;
   estimation: number;
+  fraisNotaireEtNegociation: number;
   revenusNets: number;
   depensesNettes: number;
   rentabiliteNette: number;
