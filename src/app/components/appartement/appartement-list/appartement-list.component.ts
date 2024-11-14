@@ -19,7 +19,7 @@ export class AppartementListComponent implements OnInit {
   constructor(private gestionService: GestionService, private router: Router) {
     this.adressesAppartement = [];
   }
-  isProprietaire(): boolean {
+  isUserOwner(): boolean {
     return localStorage.getItem('userRole') === "PROPRIETAIRE";
   }
   ngOnInit() {
@@ -33,51 +33,46 @@ export class AppartementListComponent implements OnInit {
     this.gestionService.obtenirCCAppartementsParUserId(localStorage.getItem('userId'))
       .subscribe(CCAppartements => {
         this.CCAppartements= CCAppartements
-        this.calculerCC(true)
+        this.calculateTotalMetrics(true)
         if (this.CCAppartements.length > 0) {
           this.filtresList = Object.keys(this.CCAppartements[0]).map(key => ({
             id: key,
-            nom: this.formatNom(key),
+            nom: this.formatMetricName(key),
             prop: key
           }));
-
+          this.filtresList.shift()
         }
       });
-
   }
-  formatNom(key: string): string {
+  formatMetricName(key: string): string {
     return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
   }
-  toggleSelectionMode() {
+  toggleBulkSelectionMode() {
     this.selectionMode = !this.selectionMode;
     this.adressesAppartement.forEach(appartement => appartement.selected = this.selectionMode);
-    this.calculerCC(true);
+    this.calculateTotalMetrics(true);
   }
-
-
-  toggleSelection(appartement: Appartement) {
+  toggleAppartementSelection(appartement: Appartement) {
     appartement.selected = !appartement.selected;
-    this.calculerCC(false)
+    this.calculateTotalMetrics(false)
   }
-
-  toggleFiltre(filtre: string) {
+  toggleFilter(filtre: string) {
     this.filtreActif.includes(filtre) ? this.filtreActif.splice(this.filtreActif.indexOf(filtre), 1) : this.filtreActif.push(filtre);
   }
-
-  getAppartementProperty(appartementId: number, prop: string): number {
+  getAppartementMetricValue(appartementId: number, prop: string): number {
     const appartement = this.CCAppartements.find(a => a.appartementId === appartementId);
     return appartement ? appartement[prop] || 0 : 0;
   }
-  viewAppartement(appartementId: number) {
+  navigateToAppartementDetails(appartementId: number) {
     if (!this.selectionMode) {
       this.router.navigate(['/appartement', appartementId]);
     }
   }
-  toggleFiltres() {
+  toggleFilterPanel() {
     this.filtresIsVisibles = !this.filtresIsVisibles
     this.filtreActif = [];
   }
-  calculerCC(init: boolean) {
+  calculateTotalMetrics(init: boolean) {
     const selectedAppartementIds = init ?
       this.adressesAppartement.map(a => a.id) :
       this.adressesAppartement.filter(a => a.selected).map(a => a.id);

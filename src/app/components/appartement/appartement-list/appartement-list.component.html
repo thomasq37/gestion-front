@@ -5,7 +5,7 @@
         <h2>Liste des biens</h2>
         <button
           class="{{filtresIsVisibles ? 'selected' : ''}}"
-          (click)="toggleFiltres()">
+          (click)="toggleFilterPanel()">
           <span>{{filtresIsVisibles ? 'Fermer' : 'Statistiques'}} </span>
           <img src="assets/img/{{filtresIsVisibles ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
         </button>
@@ -14,7 +14,7 @@
       *ngIf="filtresIsVisibles">
         <li class="appartement-list-filtres-item" *ngFor="let filtre of filtresList">
           <label>
-            <input type="checkbox" [(ngModel)]="filtreActif[filtre.id]" (change)="toggleFiltre(filtre.id)" />
+            <input type="checkbox" [(ngModel)]="filtreActif[filtre.id]" (change)="toggleFilter(filtre.id)" />
             {{ filtre.nom }}
           </label>
         </li>
@@ -27,7 +27,7 @@
           <div
             class="appartement-list-item-container"
             *ngIf="adresseAppartement.id !== undefined"
-            (click)="selectionMode ? toggleSelection(adresseAppartement) : viewAppartement(adresseAppartement.id)">
+            (click)="selectionMode ? toggleAppartementSelection(adresseAppartement) : navigateToAppartementDetails(adresseAppartement.id)">
             <div class="appartement-list-item-contenu">
               <div>
                 <h3>{{ adresseAppartement.numero }} {{ adresseAppartement.adresse }}</h3>
@@ -39,12 +39,12 @@
               <li class="appartement-list-filtres-selected-item" [ngClass]="{'selected': adresseAppartement.selected}" *ngFor="let filtre of filtresList">
                 <div *ngIf="filtreActif.includes(filtre.id) && filtre.id !== 'taux_occupation'">
                   <p><strong>{{ filtre.nom }}:</strong>
-                    {{ getAppartementProperty(adresseAppartement.id, filtre.prop) | number:'1.2-2':'fr-FR' }} €
+                    {{ getAppartementMetricValue(adresseAppartement.id, filtre.prop) | number:'1.2-2':'fr-FR' }} €
                   </p>
                 </div>
                 <div *ngIf="filtreActif.includes(filtre.id) && filtre.id === 'taux_occupation'">
                   <p><strong>{{ filtre.nom }}:</strong>
-                    {{ (100 - getAppartementProperty(adresseAppartement.id, filtre.prop)) | number:'1.2-2':'fr-FR' }} %
+                    {{ (100 - getAppartementMetricValue(adresseAppartement.id, filtre.prop)) | number:'1.2-2':'fr-FR' }} %
                   </p>
                 </div>
               </li>
@@ -53,12 +53,12 @@
         </li>
       </ul>
     </div>
-    <div class="appartement-metriques-container content-container" *ngIf="isProprietaire()">
+    <div class="appartement-metriques-container content-container" *ngIf="isUserOwner()">
       <div class="appartement-metriques-header content-header">
         <h2>Chiffres clés</h2>
         <button
           class="cc-btn {{selectionMode ? 'selected' : ''}}"
-          (click)="toggleSelectionMode()">
+          (click)="toggleBulkSelectionMode()">
           <span>{{selectionMode ? 'Annuler' : 'Sélectionner'}} </span>
           <img src="assets/img/{{selectionMode ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
         </button>
