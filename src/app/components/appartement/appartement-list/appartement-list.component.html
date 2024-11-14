@@ -8,8 +8,7 @@
           <button
             class="{{isFilterPanelVisible ? 'selected' : ''}}"
             (click)="toggleFilterPanel()">
-            <span>{{isFilterPanelVisible ? 'Fermer' : 'Statistiques'}} </span>
-            <img src="assets/img/{{isFilterPanelVisible ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
+            <img src="assets/img/settings-icon{{isFilterPanelVisible ? '-selected' : ''}}.svg" alt="settings icon">
           </button>
         </div>
         <ul class="appartement-list-filtres-list"
@@ -61,8 +60,7 @@
           <button
             class="cc-btn {{isBulkSelectionMode ? 'selected' : ''}}"
             (click)="toggleBulkSelectionMode()">
-            <span>{{isBulkSelectionMode ? 'Annuler' : 'Sélectionner'}} </span>
-            <img src="assets/img/{{isBulkSelectionMode ? 'close' : 'filtre'}}-icon.svg" alt="statistique icon">
+            <img src="assets/img/settings-icon{{isBulkSelectionMode ? '-selected' : ''}}.svg" alt="settings icon">
           </button>
         </div>
         <ul class="appartement-metriques-list">

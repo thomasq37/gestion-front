@@ -37,18 +37,10 @@
           color: #143b86;
         }
         button{
-          display: flex;
-          gap: .5rem;
-          padding: .3rem;
-          border-radius: 0.3rem;
           background: none;
-          border: 1px solid;
-          color: #143b86;
-          &.selected{
-            color: #d40000ff;
-          }
+          border: none;
           img{
-            width: 1rem;
+            width: 1.6rem;
           }
         }
       }
