@@ -17,11 +17,11 @@
 
         </div>
         <!--Frais-->
-        <app-appartement-frais-list  *ngIf="isProprietaire()" [appartementId]="appartement.id" [appartementFrais]="fraisFixe"></app-appartement-frais-list>
+        <app-appartement-frais-list  *ngIf="hasProprietaireRole()" [appartementId]="appartement.id" [appartementFrais]="fraisFixe"></app-appartement-frais-list>
         <!--Entrées/Sorties-->
         <app-appartement-periode-list [appartementId]="appartement.id" [appartPeriodLocation]="periodLocation"></app-appartement-periode-list>
         <!--Statistiques-->
-        <app-appartement-metrique-element *ngIf="isProprietaire()" [appartement]="appartement"></app-appartement-metrique-element>
+        <app-appartement-metrique-element *ngIf="hasProprietaireRole()" [appartement]="appartement"></app-appartement-metrique-element>
         <!--Contacts-->
         <div class="appartement-contact-list-container">
           <app-appartement-contact-list [appartementId]="appartement.id" [appartementContacts]="appartement.contacts"></app-appartement-contact-list>

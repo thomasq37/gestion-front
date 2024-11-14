@@ -33,24 +33,6 @@ export class GestionService {
 
   constructor(private http: HttpClient) { }
 
-  // ---------------------- UTILISATEURS ---------------------- //
-
-  async obtenirAdressesAppartementsParUserId(): Promise<Appartement[]> {
-    const response = await authFetch(`${this.apiUrl}/appartements/adresses`);
-    return await response.json();
-  }
-
-  async obtenirCCAppartementsParUserId(): Promise<AppartementCCDTO[]> {
-    const response = await authFetch(`${this.apiUrl}/appartements/chiffres-cles`);
-    return await response.json();
-  }
-
-  // ---------------------- APPARTEMENTS ---------------------- //
-
-  async getAppartmentByUserIdAndApartmentId(apartmentId: number): Promise<Appartement> {
-    const response = await authFetch(`${this.apiUrl}/appartements/${apartmentId}`);
-    return await response.json();
-  }
 
 
   // ---------------------- CONTACTS ---------------------- //
@@ -78,13 +60,7 @@ export class GestionService {
 
   // ---------------------- FRAIS ---------------------- //
 
-  obtenirFraisFixePourAppartement(userId: number | null, appartementId: number, currentPage: number): Observable<PageableResponse<Frais>> {
-    const params = new HttpParams()
-      .set('page', currentPage.toString())
-      .set('size', '5');
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/frais`;
-    return this.http.get<PageableResponse<Frais>>(url, {params})
-  }
+
 
   ajouterUnFraisFixePourAppartement(userId: number | null, appartementId: number | null, nouveauFrais: Frais) :Observable<Frais>{
     const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/frais`;
@@ -103,13 +79,7 @@ export class GestionService {
 
   // ---------------------- PERIODES ---------------------- //
 
-  obtenirPeriodeLocationPourAppartement(userId: number | null, appartementId: number, currentPage: number) : Observable<PageableResponse<PeriodLocation>> {
-    const params = new HttpParams()
-      .set('page', currentPage.toString())
-      .set('size', '5');
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/periodes`;
-    return this.http.get<PageableResponse<PeriodLocation>>(url, {params})
-  }
+
 
   ajouterUnePeriodeLocationPourAppartement(userId: number | null, appartementId: number | null, newPeriode: PeriodLocation) : Observable<PeriodLocation> {
     const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/periodes`;
@@ -210,5 +180,54 @@ export class GestionService {
   supprimerUnFraisPourPeriode(periodeId: number, fraisId: number): Observable<any> {
     return this.http.delete(this.urlAppartements  +"periodes/" + periodeId + "/frais/" + fraisId);
   }
+
+  // utilise v2
+  async obtenirAdressesAppartementsParUserId(): Promise<Appartement[]> {
+    const response = await authFetch(`${this.apiUrl}/appartements/adresses`);
+    return await response.json();
+  }
+
+  async obtenirCCAppartementsParUserId(): Promise<AppartementCCDTO[]> {
+    const response = await authFetch(`${this.apiUrl}/appartements/chiffres-cles`);
+    return await response.json();
+  }
+
+  async getAppartmentByUserIdAndApartmentId(apartmentId: number): Promise<Appartement> {
+    const response = await authFetch(`${this.apiUrl}/appartements/${apartmentId}`);
+    return await response.json();
+  }
+
+  async obtenirFraisFixePourAppartement(appartementId: number, currentPage: number): Promise<PageableResponse<Frais>> {
+    const params = new HttpParams()
+      .set('page', currentPage.toString())
+      .set('size', '5');
+
+    const response = await authFetch(`${this.apiUrl}/${appartementId}/frais?${params.toString()}`);
+    return await response.json();
+  }
+
+  async obtenirPeriodeLocationPourAppartement(appartementId: number, currentPage: number): Promise<PageableResponse<PeriodLocation>> {
+    const params = new HttpParams()
+      .set('page', currentPage.toString())
+      .set('size', '5');
+
+    const response = await authFetch(`${this.apiUrl}/${appartementId}/periodes?${params.toString()}`);
+
+    // Vérifiez si la réponse est correcte et contient du JSON
+    if (response.ok) {
+      const text = await response.text();
+      try {
+        return JSON.parse(text);
+      } catch (error) {
+        console.error("Erreur de parsing JSON :", error);
+        console.error("Réponse brute :", text);
+        throw new Error("La réponse n'est pas au format JSON attendu.");
+      }
+    } else {
+      console.error("Erreur dans la réponse de l'API :", response.status, response.statusText);
+      throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+    }
+  }
+
 
 }

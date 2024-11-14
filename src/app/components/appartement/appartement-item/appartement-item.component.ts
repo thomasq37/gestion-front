@@ -9,6 +9,7 @@ import {
 import {ActivatedRoute, Router} from "@angular/router";
 import {Appartement, Frais, PeriodLocation} from "../../../models/gestion";
 import {GestionService} from "../../../services/gestion.service";
+import {hasProprietaireRole} from "../../../services/http-helpers";
 
 @Component({
   selector: 'app-appartement-item',
@@ -72,21 +73,23 @@ export class AppartementItemComponent implements OnInit, AfterViewInit{
   ngOnInit() {
       this.route.paramMap.subscribe(params => {
         const appartementId = Number(params.get('id'));
-        this.gestionService.obtenirPeriodeLocationPourAppartement(parseInt(localStorage.getItem('userId')), appartementId, 1).subscribe(periodes => {
+        /*this.gestionService.obtenirPeriodeLocationPourAppartement(appartementId, 0).then(periodes => {
           if (periodes && periodes.content) {
             this.periodLocation = periodes.content;
           } else {
             this.periodLocation = [];
           }
-        });
+        }, error => {
+          console.log(error)
+        });*/
 
-        this.gestionService.obtenirFraisFixePourAppartement(parseInt(localStorage.getItem('userId')), appartementId, 0).subscribe(fraisFixe => {
+        /*this.gestionService.obtenirFraisFixePourAppartement(appartementId, 1).then(fraisFixe => {
           if (fraisFixe && fraisFixe.content) {
             this.fraisFixe = fraisFixe.content;
           } else {
             this.fraisFixe = [];
           }
-        });
+        });*/
 
         this.gestionService.getAppartmentByUserIdAndApartmentId(appartementId)
           .then(appartement => {
@@ -120,6 +123,8 @@ export class AppartementItemComponent implements OnInit, AfterViewInit{
   determineEntreeOrSortie(estEntree?: boolean): string {
     return estEntree ? "Entrée" : "Sortie";
   }
+
+  protected readonly hasProprietaireRole = hasProprietaireRole;
 }
 @Pipe({ name: 'customDate' })
 export class CustomDatePipe implements PipeTransform {

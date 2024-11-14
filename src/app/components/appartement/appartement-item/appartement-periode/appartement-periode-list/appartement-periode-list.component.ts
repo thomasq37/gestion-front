@@ -60,8 +60,8 @@ export class AppartementPeriodeListComponent implements OnInit{
 
     });
     if(this.appartementId !== null){
-      this.gestionService.obtenirPeriodeLocationPourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
-        periodes =>{
+      this.gestionService.obtenirPeriodeLocationPourAppartement(this.appartementId, this.currentPage -1).then(
+        periodes => {
           if (periodes && periodes.content) {
             this.appartPeriodLocation = periodes.content
             this.totalPages = periodes.totalPages
@@ -73,6 +73,7 @@ export class AppartementPeriodeListComponent implements OnInit{
 
         },
         error => {
+          console.log("passe ici")
           console.log("Erreur lors de la récupération des périodes de locations : ", error)
         })
     }
@@ -89,7 +90,7 @@ export class AppartementPeriodeListComponent implements OnInit{
       this.gestionService.supprimerUnePeriodePourAppartement(userId, this.appartementId, periodeId).subscribe(response => {
         if(this.appartPeriodLocation.length === 1){
           this.currentPage = 1
-          this.gestionService.obtenirPeriodeLocationPourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
+          this.gestionService.obtenirPeriodeLocationPourAppartement(this.appartementId, this.currentPage -1).then(
             periodes =>{
               if (periodes && periodes.content) {
                 this.appartPeriodLocation = periodes.content
@@ -113,7 +114,7 @@ export class AppartementPeriodeListComponent implements OnInit{
 
   onPageChange($event: any) {
     this.currentPage = $event
-    this.gestionService.obtenirPeriodeLocationPourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
+    this.gestionService.obtenirPeriodeLocationPourAppartement(this.appartementId, this.currentPage -1).then(
       periodes =>{
         this.appartPeriodLocation = periodes.content
         this.totalPages = periodes.totalPages

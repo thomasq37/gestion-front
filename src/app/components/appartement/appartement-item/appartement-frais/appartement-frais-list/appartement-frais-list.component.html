@@ -5,7 +5,7 @@
             <h2>Frais fixes</h2>
             <a *ngIf="!isEditable && !isPeriode" [routerLink]="['/appartement/' +  appartementId + '/frais']"><img src="./assets/img/edit-icon.svg" alt="icone de modification"></a>
           </div>
-            <table *ngIf="appartementFrais">
+            <table>
               <thead>
               <tr>
                 <th>Type de Frais</th>

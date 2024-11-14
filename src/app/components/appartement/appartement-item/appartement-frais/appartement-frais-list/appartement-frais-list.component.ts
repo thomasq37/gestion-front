@@ -71,12 +71,12 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
         }
       }
     });
-
     if(!this.isPeriode && this.appartementId !== null){
-      this.gestionService.obtenirFraisFixePourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
+      this.gestionService.obtenirFraisFixePourAppartement(this.appartementId, this.currentPage -1).then(
         frais =>{
           if (frais && frais.content) {
             this.appartementFrais = frais.content
+
             this.totalPages = frais.totalPages
           } else {
             // Gérer le cas où content est vide ou non défini
@@ -118,7 +118,7 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
           this.currentPage = 1
 
           if(!this.isPeriode){
-            this.gestionService.obtenirFraisFixePourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
+            this.gestionService.obtenirFraisFixePourAppartement(this.appartementId, this.currentPage -1).then(
               frais =>{
                 if (frais && frais.content) {
                   this.appartementFrais = frais.content
@@ -163,7 +163,7 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
   onPageChange($event: number) {
     this.currentPage = $event
     if(!this.isPeriode && this.appartementId !== null){
-      this.gestionService.obtenirFraisFixePourAppartement(this.userId, this.appartementId, this.currentPage -1).subscribe(
+      this.gestionService.obtenirFraisFixePourAppartement(this.appartementId, this.currentPage -1).then(
         frais =>{
           if (frais && frais.content) {
             this.appartementFrais = frais.content
