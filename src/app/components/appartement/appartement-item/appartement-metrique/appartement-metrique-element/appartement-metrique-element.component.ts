@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Appartement} from "../../../../../models/gestion";
 import {DecimalPipe} from "@angular/common";
+import {Appartement} from "../../../../../models/gestion";
 
 @Component({
   selector: 'app-appartement-metrique-element',
@@ -9,5 +9,6 @@ import {DecimalPipe} from "@angular/common";
   providers: [DecimalPipe]
 })
 export class AppartementMetriqueElementComponent {
-  @Input() appartement: Appartement | null = null;
+  @Input() appartementId!: number;
+  appartement!: Appartement;
 }
