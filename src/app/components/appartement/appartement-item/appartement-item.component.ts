@@ -83,9 +83,9 @@ export class AppartementItemComponent implements OnInit, AfterViewInit{
       });
   }
 
-  supprimerUnAppartement(appartement: Appartement) {
+  supprimerUnAppartement(appartementId: number) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cet appartement ?")) {
-      this.gestionService.supprimerUnAppartement(appartement).subscribe(
+      this.gestionService.supprimerUnAppartementPourUtilisateur(appartementId).then(
         () => {
           console.log('Appartement supprimé avec succès.');
           this.router.navigate(['/dashboard']);

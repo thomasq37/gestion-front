@@ -30,11 +30,10 @@ export class AppartementFraisAddComponent {
   }
 
   ajouterUnFraisFixe() {
-    const userId = parseInt(<string>localStorage.getItem('userId'))
     const frais: any = this.fraisForm.value;
     frais.typeFrais = this.typesFrais.find(typeFrais => frais.typeFrais == typeFrais.id)
     if(this.isPeriode){
-      this.gestionService.ajouterUnFraisFixePourPeriode(userId, this.appartementId, this.periode.id, frais).subscribe(frais => {
+      this.gestionService.ajouterUnFraisFixePourPeriode(this.appartementId, this.periode.id, frais).then(frais => {
           console.log('Frais ajouté avec succès.');
           this.gestionService.fraisAddedSubject.next(frais);
           this.fraisForm.reset();
@@ -44,7 +43,7 @@ export class AppartementFraisAddComponent {
         })
     }
     else{
-      this.gestionService.ajouterUnFraisFixePourAppartement(userId, this.appartementId, frais).subscribe(frais => {
+      this.gestionService.ajouterUnFraisFixePourAppartement(this.appartementId, frais).then(frais => {
           console.log('Frais ajouté avec succès.');
           this.gestionService.fraisAddedSubject.next(frais);
           this.fraisForm.reset();

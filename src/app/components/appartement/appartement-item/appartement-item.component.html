@@ -32,7 +32,7 @@
               <span>Gestionnaires</span>
               <img src="./assets/img/gest-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
             </div>
-            <div class="appartement-actions corbeille" *ngIf="appartement.id && hasProprietaireRole()" (click)="supprimerUnAppartement(appartement)">
+            <div class="appartement-actions corbeille" *ngIf="appartement.id && hasProprietaireRole()" (click)="supprimerUnAppartement(appartement.id)">
               <span>Corbeille</span>
               <img src="./assets/img/trash-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
             </div>

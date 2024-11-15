@@ -54,12 +54,10 @@ export class AppartementFraisUpdateComponent implements OnInit, OnChanges{
   }
 
   mettreAJourUnFraisPourAppartement() {
-    const userId = parseInt(<string>localStorage.getItem('userId'))
     const frais: any = this.fraisForm.value;
-    console.log(frais)
     frais.typeFrais = this.typesFrais.find(typeFrais => frais.typeFrais == typeFrais.id)
     if(this.periode){
-      this.gestionService.mettreAJourUnFraisPourPeriode(userId, this.appartementId, this.periode.id, this.frais?.id, frais).subscribe(frais => {
+      this.gestionService.mettreAJourUnFraisPourPeriode(this.appartementId, this.periode.id, this.frais?.id, frais).then(frais => {
           console.log('Frais mis à jour avec sucès.');
           this.fraisForm.reset()
           this.gestionService.fraisUpdatedSubject.next(frais);
@@ -70,7 +68,7 @@ export class AppartementFraisUpdateComponent implements OnInit, OnChanges{
         })
     }
     else{
-      this.gestionService.mettreAJourUnFraisPourAppartement(userId, this.appartementId, this.frais?.id, frais).subscribe(frais => {
+      this.gestionService.mettreAJourUnFraisPourAppartement(this.appartementId, this.frais?.id, frais).then(frais => {
           console.log('Frais mis à jour avec succès.');
           this.fraisForm.reset()
           this.gestionService.fraisUpdatedSubject.next(frais);

@@ -19,7 +19,6 @@ export class AppartementGestionnaireListComponent implements OnInit{
   @Output() gestionnaireToUpdate = new EventEmitter<AppUserDTO>();
 
   ngOnInit(): void {
-    const userId = parseInt(<string>localStorage.getItem('userId'))
     this.subscription = this.gestionService.gestionnaireAddedSubject.subscribe(userDto => {
       if (userDto) {
         if (!this.gestionnaires) {
@@ -36,7 +35,7 @@ export class AppartementGestionnaireListComponent implements OnInit{
         }
       }
     );
-    this.gestionService.obtenirGestionnairesPourAppartement(userId, this.appartementId).subscribe(
+    this.gestionService.obtenirGestionnairesPourAppartement(this.appartementId).then(
       gestionnaires =>{
         this.gestionnaires = gestionnaires
       },

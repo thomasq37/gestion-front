@@ -48,9 +48,8 @@ export class AppartementPeriodeUpdateComponent implements OnInit, OnChanges{
   mettreAJourUnePeriodePourAppartement() {
     const periode: PeriodLocation = this.periodeForm.value;
     if (this.periode) {
-      const userId = parseInt(<string>localStorage.getItem('userId'))
       periode.id = this.periode.id
-      this.gestionService.mettreAJourUnePeriodePourAppartement(userId, this.appartementId, periode.id, periode).subscribe(contact => {
+      this.gestionService.mettreAJourUnePeriodePourAppartement(this.appartementId, periode.id, periode).then(contact => {
           console.log('Péiode de location mise à jour avec succès.');
           this.periodeForm.reset()
           this.gestionService.periodeUpdatedSubject.next(contact);

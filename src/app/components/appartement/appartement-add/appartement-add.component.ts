@@ -53,7 +53,7 @@ export class AppartementAddComponent {
       appartementData.appUser = <AppUser>{
         id:  parseInt(<string>localStorage.getItem("userId"))
       }
-      this.gestionService.ajouterAppartement(appartementData).subscribe(
+      this.gestionService.ajouterUnAppartementPourUtilisateur(appartementData).then(
         () => {
           console.log('Appartement ajouté avec succès.');
           this.router.navigate(['/dashboard']);

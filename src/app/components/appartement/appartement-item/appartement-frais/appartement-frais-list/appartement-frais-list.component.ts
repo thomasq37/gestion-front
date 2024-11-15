@@ -112,7 +112,7 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
 
   onDeleteFrais(fraisId: number | undefined) {
     if (confirm("Êtes-vous sûr de vouloir supprimer ce frais ?")) {
-      this.gestionService.supprimerUnFraisPourAppartement(this.userId, this.appartementId, fraisId).subscribe(response => {
+      this.gestionService.supprimerUnFraisPourAppartement(this.appartementId, fraisId).then(response => {
         if (this.appartementFrais.length === 1) {
           this.totalPages = 1;
           this.currentPage = 1

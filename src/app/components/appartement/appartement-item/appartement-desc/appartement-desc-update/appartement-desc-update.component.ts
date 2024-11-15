@@ -161,13 +161,12 @@ export class AppartementDescUpdateComponent implements OnInit, OnDestroy {
   }
 
   mettreAJourUnAppartementPourUtilisateur() {
-    const userId = parseInt(localStorage.getItem('userId') || '0');
     const updatedAppartementData = this.appartementForm.value;
     const selectedPays = this.paysList.find(p => p.name === updatedAppartementData.pays);
     updatedAppartementData.pays = selectedPays;
     this.appartement = { ...this.appartement, ...updatedAppartementData };
-    this.gestionService.mettreAJourUnAppartementPourUtilisateur(userId, this.appartement.id, this.appartement)
-      .subscribe(
+    this.gestionService.mettreAJourUnAppartementPourUtilisateur(this.appartement.id, this.appartement)
+      .then(
         appartement => {
           console.log('Appartement mis à jour avec succès.');
           this.router.navigate(['/appartement/' + this.appartement.id]);

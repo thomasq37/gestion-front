@@ -95,9 +95,8 @@ export class AppartementPictureUpdateComponent implements OnInit{
   }
 
   mettreAJourUnAppartementPourUtilisateur() {
-    const userId = parseInt(<string>localStorage.getItem('userId'));
     this.appartement = { ...this.appartement, ...this.pictureUpdateForm.value };
-    this.gestionService.mettreAJourUnAppartementPourUtilisateur(userId, this.appartement.id, this.appartement).subscribe(
+    this.gestionService.mettreAJourUnAppartementPourUtilisateur(this.appartement.id, this.appartement).then(
       appartement => {
         console.log('Appartement mis à jour avec succès.');
         this.router.navigate(['/appartement/' + this.appartement.id]);

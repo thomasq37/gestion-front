@@ -28,9 +28,8 @@ export class AppartementPeriodeAddComponent implements OnInit{
   }
 
   ajouterUnePeriodeLocationPourAppartement() {
-    const userId = parseInt(<string>localStorage.getItem('userId'))
     const periode: PeriodLocation = this.periodeForm.value;
-    this.gestionService.ajouterUnePeriodeLocationPourAppartement(userId, this.appartementId, periode).subscribe(periode => {
+    this.gestionService.ajouterUnePeriodeLocationPourAppartement(this.appartementId, periode).then(periode => {
         console.log('Periode de location ajoutée avec succès.');
         this.gestionService.periodeAddedSubject.next(periode);
         this.periodeForm.reset()
