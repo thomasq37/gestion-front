@@ -30,8 +30,8 @@
 -->
                 <td>{{ m.prix}}€ {{ m.locVac ? '/jour' : '/mois'}}</td>
                 <td *ngIf="isEditable"  class="actions-container">
-                  <img ngSrc="assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdatePeriode(m)" height="93" width="95"/>
-                  <img ngSrc="assets/img/trash-icon.svg" alt="trash icon" (click)="onDeletePeriode(m.id)" height="93" width="95"/>
+                  <img ngSrc="assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdatePeriode(m)" height="40" width="40"/>
+                  <img ngSrc="assets/img/trash-icon.svg" alt="trash icon" (click)="onDeletePeriode(m.id)" height="40" width="40"/>
                 </td>
               </tr>
 
