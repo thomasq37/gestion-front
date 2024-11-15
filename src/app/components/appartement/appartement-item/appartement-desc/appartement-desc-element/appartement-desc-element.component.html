@@ -3,11 +3,11 @@
         <div class="custom-card">
             <div class="custom-card-header">
               <h2>Description</h2>
-              <img *ngIf="isProprietaire()" (click)="onModifyClick()" src="./assets/img/edit-icon.svg" alt="icone de modification">
+              <img *ngIf="hasProprietaireRole()" (click)="onModifyClick()" src="./assets/img/edit-icon.svg" alt="icone de modification">
             </div>
             <dl class="appartement-details">
               <div *ngIf="appartement">
-                <div *ngIf="isProprietaire()" class="detail-item">
+                <div *ngIf="hasProprietaireRole()" class="detail-item">
                   <dt><img src="./assets/img/calendar.svg" alt="Icône calendrier"></dt>
                   <dd>
                     <strong>Date d'achat:</strong>
@@ -42,28 +42,28 @@
                     <p>{{ appartement.balcon ? 'Oui' : 'Non' }}</p>
                   </dd>
                 </div>
-                <div *ngIf="isProprietaire()" class="detail-item">
+                <div *ngIf="hasProprietaireRole()" class="detail-item">
                   <dt><img src="./assets/img/euro-icon.svg" alt="Icône de prix"></dt>
                   <dd>
                     <strong>Prix d'achat HT:</strong>
                     <p>{{ appartement.prix | number:'1.0-2':'fr-FR' }} €</p>
                   </dd>
                 </div>
-                <div *ngIf="isProprietaire()" class="detail-item">
+                <div *ngIf="hasProprietaireRole()" class="detail-item">
                   <dt><img src="./assets/img/notary-icon.svg" alt="Icône de prix"></dt>
                   <dd>
                     <strong>Frais d'acquisition:</strong>
                     <p>{{ appartement.fraisNotaireEtNegociation | number:'1.0-2':'fr-FR' }} €</p>
                   </dd>
                 </div>
-                <div *ngIf="isProprietaire()" class="detail-item">
+                <div *ngIf="hasProprietaireRole()" class="detail-item">
                   <dt><img src="./assets/img/estimate-icon.svg" alt="Icône d'estimation"></dt>
                   <dd>
                     <strong>Estimation net vendeur:</strong>
                     <p>{{ appartement.estimation === null || appartement.estimation === 0 ? "A réaliser" : (appartement.estimation  | number:'1.0-2':'fr-FR') + " €" }}</p>
                   </dd>
                 </div>
-                <div *ngIf="isProprietaire()" class="detail-item energie">
+                <div *ngIf="hasProprietaireRole()" class="detail-item energie">
                   <dt><img src="./assets/img/energie-icon.png" alt="Icône de la classe énergie"></dt>
                   <dd>
                     <strong>Classe énergie:</strong>

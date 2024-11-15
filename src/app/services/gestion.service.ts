@@ -37,27 +37,6 @@ export class GestionService {
 
   // ---------------------- CONTACTS ---------------------- //
 
-
-  obtenirContactsPourAppartement(userId: number | null, appartementId: number): Observable<Contact[]>{
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/contacts`;
-    return this.http.get<Contact[]>(url)
-  }
-
-  ajouterUnContactPourAppartement(userId: number | null, appartementId: number | null, nouveauContact: Contact): Observable<Contact>{
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/contacts`;
-    return this.http.post<Contact>(url, nouveauContact)
-  }
-
-  mettreAJourUnContactPourAppartement(userId: number | null, appartementId: number | null, contactId: number | undefined, modifieContact: Contact): Observable<Contact> {
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/contacts/${contactId}`;
-    return this.http.put<Contact>(url, modifieContact)
-  }
-
-  supprimerUnContactPourAppartement(userId: number | null, appartementId: number | null, contactId: number | undefined): Observable<Object> {
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/contacts/${contactId}`;
-    return this.http.delete(url);
-  }
-
   // ---------------------- FRAIS ---------------------- //
 
 
@@ -97,16 +76,6 @@ export class GestionService {
   }
 
   // ---------------------- PERIODES-FRAIS ---------------------- //
-
-
-  obtenirFraisFixePourPeriode(userId: number | null, appartementId: number, periodeId, currentPage: number): Observable<PageableResponse<Frais>> {
-    const params = new HttpParams()
-      .set('page', currentPage.toString())
-      .set('size', '5');
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/periodes/${periodeId}/frais`;
-    return this.http.get<PageableResponse<Frais>>(url, {params})
-  }
-
   ajouterUnFraisFixePourPeriode(userId: number | null, appartementId: number | null, periodeId,  nouveauFrais: Frais) :Observable<Frais>{
     const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/periodes/${periodeId}/frais`;
     return this.http.post<Frais>(url, nouveauFrais)
@@ -118,11 +87,6 @@ export class GestionService {
   }
 
   // ---------------------- TYPE FRAIS ---------------------- //
-
-  obtenirTousLesTypesDeFrais(): Observable<TypeFrais[]>{
-    const url = `${this.apiUrl}/type-frais/liste`;
-    return this.http.get<TypeFrais[]>(url);
-  }
 
   mettreAJourUnAppartementPourUtilisateur(userId: number | null, appartementId: number | null, appartModifie: Appartement): Observable<Appartement> {
     const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}`;
@@ -147,16 +111,7 @@ export class GestionService {
   }
   // ---------------------- PAYS ---------------------- //
 
-  obtenirListePays(): Observable<Pays[]> {
-    const url = `${this.apiUrl}/pays`;
-    return this.http.get<Pays[]>(url);
-  }
   // PAS A JOUR
-
-  obtenirUnAppartementParId(userId: number | null, appartementId: number): Observable<Appartement>{
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}`
-    return this.http.get<Appartement>(url);
-  }
   supprimerUnAppartement(appartement: Appartement): Observable<any> {
     const url = `${this.apiUrl}/utilisateurs/${appartement.appUser.id}/appartements/${appartement.id}`;
     return this.http.delete(url, { responseType: 'text' });
@@ -181,53 +136,85 @@ export class GestionService {
     return this.http.delete(this.urlAppartements  +"periodes/" + periodeId + "/frais/" + fraisId);
   }
 
-  // utilise v2
+  // utilise v2 GET
   async obtenirAdressesAppartementsParUserId(): Promise<Appartement[]> {
     const response = await authFetch(`${this.apiUrl}/appartements/adresses`);
     return await response.json();
   }
-
   async obtenirCCAppartementsParUserId(): Promise<AppartementCCDTO[]> {
     const response = await authFetch(`${this.apiUrl}/appartements/chiffres-cles`);
     return await response.json();
   }
-
-  async getAppartmentByUserIdAndApartmentId(apartmentId: number): Promise<Appartement> {
+  async obtenirAppartmentParUtilisateurIdEtAppartementId(apartmentId: number): Promise<Appartement> {
     const response = await authFetch(`${this.apiUrl}/appartements/${apartmentId}`);
     return await response.json();
   }
-
   async obtenirFraisFixePourAppartement(appartementId: number, currentPage: number): Promise<PageableResponse<Frais>> {
     const params = new HttpParams()
       .set('page', currentPage.toString())
       .set('size', '5');
 
-    const response = await authFetch(`${this.apiUrl}/${appartementId}/frais?${params.toString()}`);
+    const response = await authFetch(`${this.apiUrl}/appartements/${appartementId}/frais?${params.toString()}`);
     return await response.json();
   }
-
   async obtenirPeriodeLocationPourAppartement(appartementId: number, currentPage: number): Promise<PageableResponse<PeriodLocation>> {
     const params = new HttpParams()
       .set('page', currentPage.toString())
       .set('size', '5');
 
-    const response = await authFetch(`${this.apiUrl}/${appartementId}/periodes?${params.toString()}`);
+    const response = await authFetch(`${this.apiUrl}/appartements/${appartementId}/periodes?${params.toString()}`);
+    return await response.json();
+  }
+  async obtenirTousLesTypesDeFrais(): Promise<TypeFrais[]>{
+    const response = await authFetch(`${this.apiUrl}/type-frais/liste`);
+    return await response.json();
+  }
+  async obtenirListePays(): Promise<Pays[]> {
+    const response = await authFetch(`${this.apiUrl}/pays`);
+    return await response.json();
+  }
+  async obtenirFraisFixePourPeriode(appartementId: number, periodeId, currentPage: number): Promise<PageableResponse<Frais>> {
+    const params = new HttpParams()
+      .set('page', currentPage.toString())
+      .set('size', '5');
 
-    // Vérifiez si la réponse est correcte et contient du JSON
-    if (response.ok) {
-      const text = await response.text();
-      try {
-        return JSON.parse(text);
-      } catch (error) {
-        console.error("Erreur de parsing JSON :", error);
-        console.error("Réponse brute :", text);
-        throw new Error("La réponse n'est pas au format JSON attendu.");
-      }
-    } else {
-      console.error("Erreur dans la réponse de l'API :", response.status, response.statusText);
-      throw new Error(`Erreur ${response.status}: ${response.statusText}`);
-    }
+    const response = await authFetch(`${this.apiUrl}/appartements/${appartementId}/periodes/${periodeId}/frais?${params.toString()}`);
+    return await response.json();
+  }
+  async obtenirContactsPourAppartement(appartementId: number): Promise<Contact[]>{
+    const response = await authFetch(`${this.apiUrl}/appartements/${appartementId}/contacts`);
+    return await response.json()
   }
 
+  // utilise v2 POST
+  async ajouterUnContactPourAppartement(appartementId: number, nouveauContact: Contact): Promise<Contact>{
+    const response = await authFetch(`${this.apiUrl}/appartements/${appartementId}/contacts`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(nouveauContact),
+    });
+    return await response.json();
+  }
 
+  // utilise v2 PUT //
+  async mettreAJourUnContactPourAppartement(appartementId: number, contactId: number, modifieContact: Contact): Promise<Contact> {
+    const response = await authFetch(`${this.apiUrl}/appartements/${appartementId}/contacts/${contactId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(modifieContact),
+    });
+    return await response.json();
+  }
+
+  // utilise v2 DELETE //
+  async supprimerUnContactPourAppartement(appartementId: number, contactId: number): Promise<string> {
+    const response = await authFetch(`${this.apiUrl}/appartements/${appartementId}/contacts/${contactId}`, {
+      method: 'DELETE',
+    });
+    return await response.text();
+  }
 }

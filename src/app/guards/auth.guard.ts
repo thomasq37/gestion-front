@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
         localStorage.removeItem('auth_token');
       }
       // Redirection vers l'accueil
-      this.router.navigate(['/inscription']);
+      this.router.navigate(['/login']);
       return false;
     }
   }

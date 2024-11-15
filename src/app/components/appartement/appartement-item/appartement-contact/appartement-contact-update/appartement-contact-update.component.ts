@@ -47,9 +47,8 @@ export class AppartementContactUpdateComponent implements OnInit, OnChanges {
   mettreAJourUnContactPourAppartement() {
     const contact: Contact = this.contactForm.value;
     if (this.contact) {
-      const userId = parseInt(<string>localStorage.getItem('userId'));
       contact.id = this.contact.id;
-      this.gestionService.mettreAJourUnContactPourAppartement(userId, this.appartementId, contact.id, contact).subscribe(
+      this.gestionService.mettreAJourUnContactPourAppartement(this.appartementId, contact.id, contact).then(
         contact => {
           console.log('Contact mis à jour avec succès.');
           this.contactForm.reset();

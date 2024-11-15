@@ -7,7 +7,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Appartement, Frais, PeriodLocation} from "../../../models/gestion";
+import {Appartement, Contact, Frais, PeriodLocation} from "../../../models/gestion";
 import {GestionService} from "../../../services/gestion.service";
 import {hasProprietaireRole} from "../../../services/http-helpers";
 
@@ -21,6 +21,7 @@ export class AppartementItemComponent implements OnInit, AfterViewInit{
   appartement!: Appartement;
   fraisFixe: Frais[] = [];
   periodLocation: PeriodLocation[] = [];
+  contacts: Contact[] = [];
   @ViewChild('pictureElement') pictureElement!: ElementRef;
   @ViewChild('descElement') descElement!: ElementRef;
 
@@ -65,33 +66,10 @@ export class AppartementItemComponent implements OnInit, AfterViewInit{
       }
     }
   }
-
-  isProprietaire(): boolean {
-    return localStorage.getItem('userRole') === "PROPRIETAIRE";
-  }
-
   ngOnInit() {
       this.route.paramMap.subscribe(params => {
         const appartementId = Number(params.get('id'));
-        /*this.gestionService.obtenirPeriodeLocationPourAppartement(appartementId, 0).then(periodes => {
-          if (periodes && periodes.content) {
-            this.periodLocation = periodes.content;
-          } else {
-            this.periodLocation = [];
-          }
-        }, error => {
-          console.log(error)
-        });*/
-
-        /*this.gestionService.obtenirFraisFixePourAppartement(appartementId, 1).then(fraisFixe => {
-          if (fraisFixe && fraisFixe.content) {
-            this.fraisFixe = fraisFixe.content;
-          } else {
-            this.fraisFixe = [];
-          }
-        });*/
-
-        this.gestionService.getAppartmentByUserIdAndApartmentId(appartementId)
+        this.gestionService.obtenirAppartmentParUtilisateurIdEtAppartementId(appartementId)
           .then(appartement => {
               this.appartement = appartement;
               this.images = this.appartement.images;

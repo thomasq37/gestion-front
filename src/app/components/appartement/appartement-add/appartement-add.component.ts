@@ -19,7 +19,7 @@ export class AppartementAddComponent {
     private gestionService: GestionService,
     private router: Router
   ) {
-    this.gestionService.obtenirListePays().subscribe(data => {
+    this.gestionService.obtenirListePays().then(data => {
       this.paysList = data;
     });
     this.createForm();

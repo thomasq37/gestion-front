@@ -22,7 +22,7 @@ export class AppartementFraisManageComponent {
   ) {}
 
   ngOnInit() {
-    this.gestionService.obtenirTousLesTypesDeFrais().subscribe(
+    this.gestionService.obtenirTousLesTypesDeFrais().then(
       (typesFrais: TypeFrais[]) => {
         this.typesFrais = typesFrais;
       },

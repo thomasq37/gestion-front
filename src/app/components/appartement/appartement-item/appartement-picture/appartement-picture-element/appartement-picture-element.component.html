@@ -3,7 +3,7 @@
     <div class="custom-card">
       <div class="custom-card-header">
         <h2>Photos</h2>
-        <img *ngIf="isProprietaire()" (click)="onModifyClick()" src="./assets/img/edit-icon.svg" alt="icone de modification">
+        <img *ngIf="hasProprietaireRole()" (click)="onModifyClick()" src="./assets/img/edit-icon.svg" alt="icone de modification">
       </div>
       <div class="carousel-container"
            (touchstart)="onTouchStart($event)"

@@ -30,7 +30,7 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['periode'] && changes['periode'].currentValue) {
-      this.gestionService.obtenirFraisFixePourPeriode(this.userId, this.appartementId, this.periode.id,this.currentPage -1).subscribe(
+      this.gestionService.obtenirFraisFixePourPeriode(this.appartementId, this.periode.id,this.currentPage -1).then(
         frais =>{
           if (frais && frais.content) {
             this.appartementFrais = frais.content
@@ -89,7 +89,7 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
         })
     }
     if(this.isPeriode && this.isEditable && this.appartementId !== null && this.periode){
-      this.gestionService.obtenirFraisFixePourPeriode(this.userId, this.appartementId, this.periode.id,this.currentPage -1).subscribe(
+      this.gestionService.obtenirFraisFixePourPeriode(this.appartementId, this.periode.id,this.currentPage -1).then(
         frais =>{
           if (frais && frais.content) {
             this.appartementFrais = frais.content
@@ -134,7 +134,7 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
               })
           }
           else{
-            this.gestionService.obtenirFraisFixePourPeriode(this.userId, this.appartementId, this.periode.id,this.currentPage -1).subscribe(
+            this.gestionService.obtenirFraisFixePourPeriode(this.appartementId, this.periode.id,this.currentPage -1).then(
               frais =>{
                 if (frais && frais.content) {
                   this.appartementFrais = frais.content
@@ -179,7 +179,7 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
         })
     }
     if(this.isPeriode && this.isEditable && this.appartementId !== null && this.periode){
-      this.gestionService.obtenirFraisFixePourPeriode(this.userId, this.appartementId, this.periode.id,this.currentPage -1).subscribe(
+      this.gestionService.obtenirFraisFixePourPeriode(this.appartementId, this.periode.id,this.currentPage -1).then(
         frais =>{
           if (frais && frais.content) {
             this.appartementFrais = frais.content

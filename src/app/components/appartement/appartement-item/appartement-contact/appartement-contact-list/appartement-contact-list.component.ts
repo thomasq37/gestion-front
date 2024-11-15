@@ -2,6 +2,7 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {Contact} from "../../../../../models/gestion";
 import {Subscription} from "rxjs";
 import {GestionService} from "../../../../../services/gestion.service";
+import {hasProprietaireRole} from "../../../../../services/http-helpers";
 
 @Component({
   selector: 'app-appartement-contact-list',
@@ -14,16 +15,19 @@ export class AppartementContactListComponent {
   @Input() isEditable: boolean = false
   @Output() contactToUpdate = new EventEmitter<Contact>();
 
-  isProprietaire(): boolean {
-    return localStorage.getItem('userRole') === "PROPRIETAIRE";
-  }
-
   private subscription!: Subscription;
   private updateSubscription!: Subscription;
 
   constructor(private gestionService: GestionService) {}
 
   ngOnInit() {
+    this.gestionService.obtenirContactsPourAppartement(this.appartementId).then(
+      contacts =>{
+        this.appartementContacts = contacts
+      },
+      error => {
+        console.log("Erreur lors de la récupération des contacts.")
+      })
     this.updateSubscription = this.gestionService.contactUpdatedSubject.subscribe(
       (updatedContact: Contact) => {
         const index = this.appartementContacts.findIndex(c => c.id === updatedContact.id);
@@ -40,15 +44,6 @@ export class AppartementContactListComponent {
         this.appartementContacts.push(contact);
       }
     });
-    if(this.isEditable && this.appartementId !== null){
-      /*this.gestionService.obtenirContactsPourAppartement(parseInt(<string>localStorage.getItem('userId')), this.appartementId).subscribe(
-        contacts =>{
-          this.appartementContacts = contacts
-        },
-        error => {
-          console.log("Erreur lors de la récupération des contacts.")
-        })*/
-    }
   }
 
   ngOnDestroy() {
@@ -61,12 +56,13 @@ export class AppartementContactListComponent {
   }
   onDeleteContact(contactId: number | undefined) {
     if (confirm("Êtes-vous sûr de vouloir supprimer ce contact ?")) {
-      const userId = parseInt(<string>localStorage.getItem('userId'));
-      this.gestionService.supprimerUnContactPourAppartement(userId, this.appartementId, contactId).subscribe(response => {
+      this.gestionService.supprimerUnContactPourAppartement(this.appartementId, contactId).then(response => {
         this.appartementContacts = this.appartementContacts.filter(f => f.id !== contactId);
         this.contactToUpdate.emit(undefined);
       })
     }
 
   }
+
+  protected readonly hasProprietaireRole = hasProprietaireRole;
 }

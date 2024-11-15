@@ -22,7 +22,7 @@ export class AppartementPeriodeManageComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.gestionService.obtenirTousLesTypesDeFrais().subscribe(
+    this.gestionService.obtenirTousLesTypesDeFrais().then(
       (typesFrais: TypeFrais[]) => {
         this.typesFrais = typesFrais;
       },

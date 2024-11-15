@@ -3,7 +3,7 @@
     <div class="custom-card">
       <div class="custom-card-header">
         <h2>Gestionnaires</h2>
-        <a *ngIf="!isEditable && isProprietaire()" [routerLink]="['/appartement/' +  appartementId + '/gestionnaires']">Modifier</a>
+        <a *ngIf="!isEditable && hasProprietaireRole()" [routerLink]="['/appartement/' +  appartementId + '/gestionnaires']">Modifier</a>
       </div>
       <table>
         <thead>

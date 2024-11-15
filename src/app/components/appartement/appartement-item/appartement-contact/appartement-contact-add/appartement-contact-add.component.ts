@@ -28,9 +28,8 @@ export class AppartementContactAddComponent implements OnInit {
   }
 
   ajouterUnContactPourAppartement() {
-    const userId = parseInt(<string>localStorage.getItem('userId'));
     const contact: Contact = this.contactForm.value;
-    this.gestionService.ajouterUnContactPourAppartement(userId, this.appartementId, contact).subscribe(
+    this.gestionService.ajouterUnContactPourAppartement(this.appartementId, contact).then(
       contact => {
         this.gestionService.contactAddedSubject.next(contact);
         this.contactForm.reset();

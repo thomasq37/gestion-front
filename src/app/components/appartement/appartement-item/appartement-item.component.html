@@ -24,7 +24,7 @@
         <app-appartement-metrique-element *ngIf="hasProprietaireRole()" [appartement]="appartement"></app-appartement-metrique-element>
         <!--Contacts-->
         <div class="appartement-contact-list-container">
-          <app-appartement-contact-list [appartementId]="appartement.id" [appartementContacts]="appartement.contacts"></app-appartement-contact-list>
+          <app-appartement-contact-list [appartementId]="appartement.id" [appartementContacts]="contacts"></app-appartement-contact-list>
         </div>
         <div class="container">
           <div class="actions-container">
@@ -32,7 +32,7 @@
               <span>Gestionnaires</span>
               <img src="./assets/img/gest-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
             </div>
-            <div class="appartement-actions corbeille" *ngIf="appartement.id && isProprietaire()" (click)="supprimerUnAppartement(appartement)">
+            <div class="appartement-actions corbeille" *ngIf="appartement.id && hasProprietaireRole()" (click)="supprimerUnAppartement(appartement)">
               <span>Corbeille</span>
               <img src="./assets/img/trash-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
             </div>

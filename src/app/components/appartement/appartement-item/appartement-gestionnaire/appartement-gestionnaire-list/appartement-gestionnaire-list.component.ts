@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GestionService} from "../../../../../services/gestion.service";
 import {AppUserDTO} from "../../../../../models/gestion";
 import {Subscription} from "rxjs";
+import {hasProprietaireRole} from "../../../../../services/http-helpers";
 
 @Component({
   selector: 'app-appartement-gestionnaire-list',
@@ -44,11 +45,6 @@ export class AppartementGestionnaireListComponent implements OnInit{
       })
   }
 
-
-  isProprietaire() {
-    return false;
-  }
-
   onDeleteGestionnaire(gestionnaireId) {
     if (confirm("Êtes-vous sûr de vouloir supprimer ce gestionnaire ?")) {
       const userId = parseInt(<string>localStorage.getItem('userId'));
@@ -68,4 +64,6 @@ export class AppartementGestionnaireListComponent implements OnInit{
     this.updateSubscription.unsubscribe()
 
   }
+
+    protected readonly hasProprietaireRole = hasProprietaireRole;
 }

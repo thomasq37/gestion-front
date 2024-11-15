@@ -27,8 +27,7 @@ export class AppartementPictureUpdateComponent implements OnInit{
   ngOnInit(): void {
     const appartementId = this.route.snapshot.paramMap.get('id');
     if (appartementId) {
-      const userId = parseInt(localStorage.getItem('userId') || '0');
-      this.gestionService.obtenirUnAppartementParId(userId, parseInt(appartementId)).subscribe(
+      this.gestionService.obtenirAppartmentParUtilisateurIdEtAppartementId(parseInt(appartementId)).then(
         (appartement: Appartement) => {
           this.appartement = appartement;
           this.initForm();

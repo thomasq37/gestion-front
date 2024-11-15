@@ -49,12 +49,11 @@ export class AppartementDescUpdateComponent implements OnInit, OnDestroy {
   // efectuer action ici
   showConfirmationDialog = false;
   ngOnInit(): void {
-    const userId = parseInt(localStorage.getItem('userId') || '0');
     this.route.params.subscribe(params => {
-      this.gestionService.obtenirUnAppartementParId(userId, +params['id']).subscribe(appartement => {
+      this.gestionService.obtenirAppartmentParUtilisateurIdEtAppartementId(+params['id']).then(appartement => {
         this.appartement = appartement;
         this.initAppartementForm(appartement);
-        this.gestionService.obtenirListePays().subscribe(data => {
+        this.gestionService.obtenirListePays().then(data => {
           this.paysList = data;
         });
       });

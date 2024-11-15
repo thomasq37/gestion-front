@@ -2,6 +2,7 @@ import { AfterViewInit, Component, HostListener, Input, ElementRef, TemplateRef,
 import { Router } from "@angular/router";
 import { Appartement } from "../../../../../models/gestion";
 import { NgbModal, NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import {hasProprietaireRole} from "../../../../../services/http-helpers";
 
 @Component({
   selector: 'app-appartement-picture-element',
@@ -44,11 +45,6 @@ export class AppartementPictureElementComponent implements AfterViewInit {
       });
     }
   }
-
-  isProprietaire(): boolean {
-    return localStorage.getItem('userRole') === "PROPRIETAIRE";
-  }
-
   onModifyClick(): void {
     if (this.appartement) {
       this.router.navigate(['/appartement/', this.appartement.id, 'photos']);
@@ -95,4 +91,6 @@ export class AppartementPictureElementComponent implements AfterViewInit {
       }
     }
   }
+
+    protected readonly hasProprietaireRole = hasProprietaireRole;
 }
