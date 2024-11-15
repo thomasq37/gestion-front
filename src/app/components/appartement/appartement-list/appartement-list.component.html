@@ -8,7 +8,7 @@
           <button
             class="{{isFilterPanelVisible ? 'selected' : ''}}"
             (click)="toggleFilterPanel()">
-            <img src="assets/img/settings-icon{{isFilterPanelVisible ? '-selected' : ''}}.svg" alt="settings icon">
+            <img ngSrc="assets/img/settings-icon{{isFilterPanelVisible ? '-selected' : ''}}.svg" alt="settings icon" height="40" width="40">
           </button>
         </div>
         <ul class="appartement-list-filtres-list"
@@ -34,7 +34,7 @@
                   <h3>{{ appartementAddress.numero }} {{ appartementAddress.adresse }}</h3>
                   <p>{{ appartementAddress.codePostal }} {{ appartementAddress.ville }}, {{appartementAddress.pays.name}}</p>
                 </div>
-                <img src="./assets/img/view-more-icon.svg" alt="">
+                <img ngSrc="./assets/img/view-more-icon.svg" alt="" height="80" width="80">
               </div>
               <ul class="appartement-list-filtres-selected-list">
                 <li class="appartement-list-filtres-selected-item" [ngClass]="{'selected': appartementAddress.selected}" *ngFor="let filter of filterOptions">
@@ -60,7 +60,7 @@
           <button
             class="cc-btn {{isBulkSelectionMode ? 'selected' : ''}}"
             (click)="toggleBulkSelectionMode()">
-            <img src="assets/img/settings-icon{{isBulkSelectionMode ? '-selected' : ''}}.svg" alt="settings icon">
+            <img ngSrc="assets/img/settings-icon{{isBulkSelectionMode ? '-selected' : ''}}.svg" alt="settings icon" height="40" width="40">
           </button>
         </div>
         <ul class="appartement-metriques-list">

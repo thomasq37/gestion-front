@@ -15,8 +15,8 @@ export class AppartementContactListComponent {
   @Input() isEditable: boolean = false
   @Output() contactToUpdate = new EventEmitter<Contact>();
 
-  private subscription!: Subscription;
-  private updateSubscription!: Subscription;
+  subscription!: Subscription;
+  updateSubscription!: Subscription;
 
   constructor(private gestionService: GestionService) {}
 
@@ -44,11 +44,6 @@ export class AppartementContactListComponent {
         this.appartementContacts.push(contact);
       }
     });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-    this.updateSubscription.unsubscribe()
   }
 
   onUpdateContact(contact: Contact) {

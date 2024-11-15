@@ -3,7 +3,8 @@
         <div class="custom-card">
             <div class="custom-card-header">
                 <h2>Contacts</h2>
-                <a *ngIf="!isEditable && hasProprietaireRole()" [routerLink]="['/appartement/' +  appartementId + '/contacts']"><img src="./assets/img/edit-icon.svg" alt="icone de modification"></a>
+                <a *ngIf="!isEditable && hasProprietaireRole()" [routerLink]="['/appartement/' +  appartementId + '/contacts']"><img
+                  ngSrc="./assets/img/edit-icon.svg" alt="icone de modification" height="40" width="40"></a>
             </div>
             <table *ngIf="appartementContacts">
                 <thead>
@@ -20,8 +21,8 @@
                     <td class="email"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
                     <td class="phone"><a href="tel:{{ contact.phoneNumber }}">{{ contact.phoneNumber }}</a></td>
                     <td *ngIf="isEditable"  class="actions-container">
-                        <img src="../../../../assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdateContact(contact)"/>
-                        <img src="../../../../assets/img/trash-icon.svg" alt="trash icon" (click)="onDeleteContact(contact.id)"/>
+                        <img ngSrc="assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdateContact(contact)" height="40" width="40"/>
+                        <img ngSrc="assets/img/trash-icon.svg" alt="trash icon" (click)="onDeleteContact(contact.id)" height="40" width="40"/>
                     </td>
                 </tr>
                 </tbody>

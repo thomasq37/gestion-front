@@ -8,14 +8,14 @@
           Photo {{i + 1}}
         </label>
         <div class="thumbnail-container">
-          <img [src]="getFormControl(i).value" alt="Image {{i + 1}}" class="thumbnail" />
+          <img [ngSrc]="getFormControl(i).value" alt="Image {{i + 1}}" class="thumbnail" />
         </div>
         <button class="bg-danger" type="button" (click)="removeImage(i)">Supprimer</button>
       </div>
       <div class="actions-container">
         <div *ngIf="imgIsLoading" class="info-img-is-loading">
           <p>Téléchargement en cours...</p>
-          <img class="loader" src="assets/img/loader.gif" alt="loader">
+          <img class="loader" ngSrc="assets/img/loader.gif" alt="loader" height="512" width="512">
         </div>
         <div class="file-upload">
           <label for="file-upload" class="custom-file-upload">

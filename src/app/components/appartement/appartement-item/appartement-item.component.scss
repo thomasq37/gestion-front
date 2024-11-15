@@ -33,6 +33,7 @@
       .appartement-list-frais{
         margin-bottom: 2rem;
       }
+
       .container-title{
 
         display: flex;
@@ -79,6 +80,8 @@
         }
 
       }
+
+      //noinspection ALL
       .appartement-images{
         margin-top: 2rem
       }
@@ -90,6 +93,8 @@
               pointer-events: none;
               display: none;
             }
+
+            //noinspection ALL
             span.visible{
               display: block;
             }
@@ -108,11 +113,15 @@
         }
       }
     }
-    .appartement-list-stats{
+
+  //noinspection ALL
+  .appartement-list-stats{
       padding-bottom: 1rem;
 
     }
-    .appartement-details{
+
+  //noinspection ALL
+  .appartement-details{
       padding-bottom: 1rem;
       li{
         display: grid;

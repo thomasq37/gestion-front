@@ -98,10 +98,6 @@ export class AppartementItemComponent implements OnInit, AfterViewInit{
     }
   }
 
-  determineEntreeOrSortie(estEntree?: boolean): string {
-    return estEntree ? "Entrée" : "Sortie";
-  }
-
   protected readonly hasProprietaireRole = hasProprietaireRole;
 }
 @Pipe({ name: 'customDate' })

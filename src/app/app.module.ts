@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {AppartementListComponent} from "./components/appartement/appartement-list/appartement-list.component";
 import {AppartementItemComponent, CustomDatePipe} from "./components/appartement/appartement-item/appartement-item.component";
@@ -11,7 +11,6 @@ import {NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {AuthGuard} from "./guards/auth.guard";
 import {AppartementContactListComponent} from "./components/appartement/appartement-item/appartement-contact/appartement-contact-list/appartement-contact-list.component";
 import {AppartementContactManageComponent} from "./components/appartement/appartement-item/appartement-contact/appartement-contact-manage/appartement-contact-manage.component";
@@ -35,25 +34,11 @@ import {AppartementPictureManageComponent} from "./components/appartement/appart
 import { AppartementAddComponent } from './components/appartement/appartement-add/appartement-add.component';
 import { UtilisateurAddComponent } from './components/utilisateur/utilisateur-add/utilisateur-add.component';
 import { UtilisateurLoginComponent } from './components/utilisateur/utilisateur-login/utilisateur-login.component';
-import { AppartementGestionnaireManageComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-manage/appartement-gestionnaire-manage.component';
-import { AppartementGestionnaireAddComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-add/appartement-gestionnaire-add.component';
-import { AppartementGestionnaireListComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-list/appartement-gestionnaire-list.component';
-import { AppartementGestionnaireUpdateComponent } from './components/appartement/appartement-item/appartement-gestionnaire/appartement-gestionnaire-update/appartement-gestionnaire-update.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
-import { DashboardFinancesComponent } from './components/finances/dashboard-finances/dashboard-finances.component';
-import { MouvementAddComponent } from './components/finances/mouvement-add/mouvement-add.component';
-import { MouvementListComponent } from './components/finances/mouvement-list/mouvement-list.component';
-import { MouvementUpdateComponent } from './components/finances/mouvement-update/mouvement-update.component';
-import { ImpotCalculatorComponent } from './components/finances/impot-calculator/impot-calculator.component';
-import { RevenusComponent } from './components/finances/impot-calculator/revenus/revenus.component';
-import { DepensesComponent } from './components/finances/impot-calculator/depenses/depenses.component';
-import { ImpotsCalculateurComponent } from './components/finances/impots-calculateur/impots-calculateur.component';
-import { ConfigInitialeMouvementsComponent } from './components/finances/config-initiale-mouvements/config-initiale-mouvements.component';
 import {NgOptimizedImage, registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
 import { ConfirmationDialogComponent } from './components/util/confirmation-dialog/confirmation-dialog.component';
-import { DateInputComponent } from './components/util/date-input/date-input.component';
 registerLocaleData(localeFr, 'fr');
 @NgModule({
     declarations: [
@@ -86,22 +71,8 @@ registerLocaleData(localeFr, 'fr');
         AppartementAddComponent,
         UtilisateurAddComponent,
         UtilisateurLoginComponent,
-        AppartementGestionnaireManageComponent,
-        AppartementGestionnaireAddComponent,
-        AppartementGestionnaireListComponent,
-        AppartementGestionnaireUpdateComponent,
         PaginationComponent,
-        DashboardFinancesComponent,
-        MouvementAddComponent,
-        MouvementListComponent,
-        MouvementUpdateComponent,
-        ImpotCalculatorComponent,
-        RevenusComponent,
-        DepensesComponent,
-        ImpotsCalculateurComponent,
-        ConfigInitialeMouvementsComponent,
         ConfirmationDialogComponent,
-        DateInputComponent
     ],
   imports: [
     BrowserModule,
@@ -116,11 +87,6 @@ registerLocaleData(localeFr, 'fr');
   ],
     providers: [
         AuthGuard,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: TokenInterceptor,
-            multi: true
-        },
         { provide: LOCALE_ID, useValue: 'fr' }
     ],
     exports: [

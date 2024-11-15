@@ -12,7 +12,7 @@ export class AppartementFraisManageComponent {
   appartementId: number | null = null;
   isUpdateMode: boolean = false;
   fraisToUpdate: Frais | null = null;
-  fraisToDelete: Frais | null = null;
+
   typesFrais: TypeFrais[] = []
 
 

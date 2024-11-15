@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GestionService} from "../../../services/gestion.service";
 import {Router} from "@angular/router";
-import {AppUser, Pays} from "../../../models/gestion";
+import {Pays} from "../../../models/gestion";
 
 @Component({
   selector: 'app-appartement-add',
@@ -50,9 +50,7 @@ export class AppartementAddComponent {
       // Find the Pays object corresponding to the selected value
       appartementData.pays = this.paysList.find(p => p.name === appartementData.pays); // Assign the found Pays object
 
-      appartementData.appUser = <AppUser>{
-        id:  parseInt(<string>localStorage.getItem("userId"))
-      }
+
       this.gestionService.ajouterUnAppartementPourUtilisateur(appartementData).then(
         () => {
           console.log('Appartement ajouté avec succès.');

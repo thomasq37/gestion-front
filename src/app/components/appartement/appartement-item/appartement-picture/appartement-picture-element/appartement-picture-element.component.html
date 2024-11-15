@@ -3,7 +3,8 @@
     <div class="custom-card">
       <div class="custom-card-header">
         <h2>Photos</h2>
-        <img *ngIf="hasProprietaireRole()" (click)="onModifyClick()" src="./assets/img/edit-icon.svg" alt="icone de modification">
+        <img *ngIf="hasProprietaireRole()" (click)="onModifyClick()" ngSrc="./assets/img/edit-icon.svg" alt="icone de modification"
+             height="40" width="40">
       </div>
       <div class="carousel-container"
            (touchstart)="onTouchStart($event)"
@@ -12,7 +13,7 @@
         <ngb-carousel #carousel *ngIf="appartement.images && appartement.images.length">
           <ng-template ngbSlide *ngFor="let image of appartement.images">
             <div class="picsum-img-wrapper" (click)="onImageClick(image, imageModal)">
-              <img [src]="image" [alt]="'Image appartement'" />
+              <img [ngSrc]="image" [alt]="'Image appartement'" fill/>
             </div>
           </ng-template>
         </ngb-carousel>
@@ -26,7 +27,7 @@
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body text-center">
-      <img [src]="selectedImage" class="img-fluid" [alt]="'Image preview'" />
+      <img [ngSrc]="selectedImage" class="img-fluid" [alt]="'Image preview'" />
     </div>
   </ng-template>
 </section>

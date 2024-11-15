@@ -63,13 +63,6 @@ export interface Contact{
   phoneNumber: string;
   appartement: Appartement;
 }
-export interface AdresseDTO {
-  id: number;
-  numero: number;
-  adresse: string;
-  codePostal: string;
-  ville: string;
-}
 
 export interface TypeFrais {
   id: number;
@@ -100,17 +93,4 @@ export interface Pays{
   id: number;
   name: string;
 }
-export enum Frequence {
-  MENSUELLE = 'Mensuelle',
-  TRIMESTRIELLE = 'Trimestrielle',
-  ANNUELLE = 'Annuelle',
-  PONCTUELLE = 'Ponctuelle'
-}
 
-export interface UserRequest {
-  user: {
-    username: string;
-    password: string;
-  };
-  token: string;
-}

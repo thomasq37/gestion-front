@@ -1,11 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Appartement, Pays } from "../../../../../models/gestion";
+import {Appartement, Pays} from "../../../../../models/gestion";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { GestionService } from "../../../../../services/gestion.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import {GestionService} from "../../../../../services/gestion.service";
+import {ActivatedRoute, Router} from "@angular/router";
 import {S3Service} from "../../../../../services/s3.service";
 import {Subscription} from "rxjs";
 import {NavigationService} from "../../../../../services/navigation.service";
+
 @Component({
   selector: 'app-appartement-desc-update',
   templateUrl: './appartement-desc-update.component.html',
@@ -162,8 +163,7 @@ export class AppartementDescUpdateComponent implements OnInit, OnDestroy {
 
   mettreAJourUnAppartementPourUtilisateur() {
     const updatedAppartementData = this.appartementForm.value;
-    const selectedPays = this.paysList.find(p => p.name === updatedAppartementData.pays);
-    updatedAppartementData.pays = selectedPays;
+    updatedAppartementData.pays = this.paysList.find(p => p.name === updatedAppartementData.pays);
     this.appartement = { ...this.appartement, ...updatedAppartementData };
     this.gestionService.mettreAJourUnAppartementPourUtilisateur(this.appartement.id, this.appartement)
       .then(

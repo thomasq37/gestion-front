@@ -48,7 +48,7 @@
 
         input:focus {
           outline: 2px solid #143b86; /* Couleur de mise au point bleue */
-          outline-offset: 0px; /* Supprime l'espacement de l'outline */
+          outline-offset: 0; /* Supprime l'espacement de l'outline */
         }
       }
       button.disabled{

@@ -4,7 +4,7 @@
     <div class="appartement-baniere-info">
       <!--Titre-->
       <div class="container nom-appartement">
-        <p class="loader" *ngIf="!appartement">Chargement...<img src="assets/img/loader.gif"></p>
+        <p class="loader" *ngIf="!appartement">Chargement...<img ngSrc="assets/img/loader.gif" height="512" width="512" alt="loader"></p>
       </div>
         <!--Caroussel-->
       <div *ngIf="appartement !== undefined">
@@ -28,19 +28,14 @@
         </div>
         <div class="container">
           <div class="actions-container">
-            <div class="appartement-actions" [routerLink]="['/appartement/' +  appartement.id + '/gestionnaires']">
-              <span>Gestionnaires</span>
-              <img src="./assets/img/gest-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
-            </div>
             <div class="appartement-actions corbeille" *ngIf="appartement.id && hasProprietaireRole()" (click)="supprimerUnAppartement(appartement.id)">
               <span>Corbeille</span>
-              <img src="./assets/img/trash-icon.svg" alt="Icone pour la navigation vers les gestionnaire">
+              <img ngSrc="./assets/img/trash-icon.svg" alt="Icone pour la navigation vers les gestionnaire" height="40"
+                   width="40">
             </div>
-
           </div>
         </div>
       </div>
-
     </div>
   </section>
 <app-footer></app-footer>

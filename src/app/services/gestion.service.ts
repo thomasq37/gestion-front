@@ -5,16 +5,14 @@ import {
   Appartement,
   PeriodLocation,
   Contact,
-  AppUserDTO,
   Pays,
   AppartementCCDTO
 } from "../models/gestion";
 import {PageableResponse} from "../models/pageable";
-
-import { Observable, Subject} from "rxjs";
-import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {authFetch} from "./http-helpers";
+import {Subject} from "rxjs";
+import {HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -23,30 +21,14 @@ export class GestionService {
   private apiUrl = `${environment.apiUrl}`;
   contactAddedSubject = new Subject<Contact>();
   contactUpdatedSubject = new Subject<Contact>();
-  gestionnaireAddedSubject = new Subject<AppUserDTO>()
-  gestionnaireUpdatedSubject = new Subject<AppUserDTO>()
+
+
   fraisAddedSubject = new Subject<Frais>();
   fraisUpdatedSubject = new Subject<Frais>();
   periodeAddedSubject = new Subject<PeriodLocation>();
   periodeUpdatedSubject = new Subject<PeriodLocation>();
 
-  constructor(private http: HttpClient) { }
-
-  // ---------------------- GESTIONNAIRES ---------------------- //
-
-
-  mettreAJourUnGestionnairePourAppartement(userId: number | null, appartementId: number | null, gestionnaireId: number | undefined, modifieGestionnaire: AppUserDTO): Observable<AppUserDTO> {
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/gestionnaires/${gestionnaireId}`;
-    return this.http.put<AppUserDTO>(url, modifieGestionnaire)
-  }
-
-  supprimerUnGestionnairePourAppartement(userId: number, appartementId: number, gestionnaireId) {
-    const url = `${this.apiUrl}/utilisateurs/${userId}/appartements/${appartementId}/gestionnaires/${gestionnaireId}`;
-    return this.http.delete(url);
-  }
-  // ---------------------- PAYS ---------------------- //
-
-  // PAS A JOUR
+  constructor() { }
 
   // utilise v2 GET
   async obtenirAdressesAppartementsParUserId(): Promise<Appartement[]> {
@@ -94,10 +76,6 @@ export class GestionService {
   }
   async obtenirContactsPourAppartement(appartementId: number): Promise<Contact[]>{
     const response = await authFetch(`${this.apiUrl}/appartements/${appartementId}/contacts`);
-    return await response.json()
-  }
-  async obtenirGestionnairesPourAppartement(appartementId: number) : Promise<AppUserDTO[]> {
-    const response = await authFetch(`${this.apiUrl}/appartements/${appartementId}/gestionnaires`);
     return await response.json()
   }
 
@@ -231,5 +209,4 @@ export class GestionService {
     });
     return await response.text();
   }
-
 }

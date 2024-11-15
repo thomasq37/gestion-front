@@ -51,7 +51,4 @@ export class AuthGuard implements CanActivate {
     return false; // Pas de token ou pas au format JWT
   }
 
-  isProprietaire(): boolean {
-    return localStorage.getItem('userRole') === "PROPRIETAIRE";
-  }
 }

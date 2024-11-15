@@ -3,7 +3,8 @@
         <div class="custom-card">
           <div class="custom-card-header">
             <h2>Frais fixes</h2>
-            <a *ngIf="!isEditable && !isPeriode" [routerLink]="['/appartement/' +  appartementId + '/frais']"><img src="./assets/img/edit-icon.svg" alt="icone de modification"></a>
+            <a *ngIf="!isEditable && !isPeriode" [routerLink]="['/appartement/' +  appartementId + '/frais']"><img
+              ngSrc="./assets/img/edit-icon.svg" alt="icone de modification" height="40" width="40"></a>
           </div>
             <table>
               <thead>
@@ -20,8 +21,10 @@
                 <td>{{ frais.montant }}</td>
                 <td>{{ frais.datePaiement !== null ? (frais.datePaiement | customDate) : frais.frequence }}</td>
                 <td *ngIf="isEditable"  class="actions-container">
-                  <img src="../../../../assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdateFrais(frais)"/>
-                  <img src="../../../../assets/img/trash-icon.svg" alt="trash icon" (click)="onDeleteFrais(frais.id)"/>
+                  <img ngSrc="assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdateFrais(frais)"
+                       height="40" width="40"/>
+                  <img ngSrc="assets/img/trash-icon.svg" alt="trash icon" (click)="onDeleteFrais(frais.id)" height="40"
+                       width="40"/>
                 </td>
               </tr>
               </tbody>
