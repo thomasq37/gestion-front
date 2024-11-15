@@ -22,6 +22,8 @@ export class AppartementItemComponent implements OnInit, AfterViewInit{
   fraisFixe: Frais[] = [];
   periodLocation: PeriodLocation[] = [];
   contacts: Contact[] = [];
+  isLoading: boolean = true;
+
   @ViewChild('pictureElement') pictureElement!: ElementRef;
   @ViewChild('descElement') descElement!: ElementRef;
 

@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {Contact} from "../../../../../models/gestion";
 import {Subscription} from "rxjs";
 import {GestionService} from "../../../../../services/gestion.service";
@@ -9,7 +9,7 @@ import {hasProprietaireRole} from "../../../../../services/http-helpers";
   templateUrl: './appartement-contact-list.component.html',
   styleUrls: ['./appartement-contact-list.component.scss']
 })
-export class AppartementContactListComponent {
+export class AppartementContactListComponent implements OnInit{
   @Input() appartementId: number | null = null;
   @Input() appartementContacts: Contact[] = [];
   @Input() isEditable: boolean = false

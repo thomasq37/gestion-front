@@ -8,20 +8,35 @@
 }
 
 .appartement-item{
-  min-height: 81.5vh;
-  padding-top: 1rem;
-
-  .loader{
-    padding: 1rem;
-    display: flex;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  app-header {
+    margin: 0;
   }
-  .loader > img:nth-child(1) {
-    width: 2rem;
-    margin-left: 1rem;
+
+  app-footer {
+    margin-bottom: 0;
+    margin-top: 0;
   }
-    .appartement-baniere-info{
+  .loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #CA2E55;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin: auto;
+    display: block;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .appartement-baniere-info{
       display: grid;
+    margin-top: 1rem;
       .desc-container{
         overflow-y: unset;
         box-shadow: none;
@@ -113,14 +128,10 @@
         }
       }
     }
-
-  //noinspection ALL
   .appartement-list-stats{
       padding-bottom: 1rem;
 
     }
-
-  //noinspection ALL
   .appartement-details{
       padding-bottom: 1rem;
       li{
@@ -137,10 +148,10 @@
         }
       }
     }
-    .appartement-contact-list-container{
-      margin-top: 0;
-    }
-    .actions-container{
+  .appartement-contact-list-container{
+    margin-top: 0;
+  }
+  .actions-container{
       display:flex;
       flex-direction:column;
       gap:.5rem;
@@ -191,30 +202,4 @@
       }
 
     }
-
-}
-
-@media screen and (min-width: 55rem) {
-  .appartement-item{
-    .appartement-baniere-info{
-      grid-template-columns: repeat(2,1fr);
-      .container-pic-desc{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-column: span 2;
-      }
-      .desc-container{
-        overflow-y: scroll;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 1rem;
-        margin: 0 .8rem;
-      }
-
-      .nom-appartement{
-        grid-column: span 2;
-      }
-    }
-  }
 }

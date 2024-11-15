@@ -4,7 +4,7 @@
           <div class="custom-card-header">
               <h2>Entrées / Sorties</h2>
               <a *ngIf="!isEditable" [routerLink]="['/appartement/' +  appartementId + '/periodes']"><img
-                ngSrc="./assets/img/edit-icon.svg" alt="icone de modification" height="40" width="40"></a>
+                src="./assets/img/edit-icon.svg" alt="icone de modification" ></a>
           </div>
           <div *ngIf="totalPages > 0">
             <table class="appartement-list-periode">
@@ -30,8 +30,8 @@
 -->
                 <td>{{ m.prix}}€ {{ m.locVac ? '/jour' : '/mois'}}</td>
                 <td *ngIf="isEditable"  class="actions-container">
-                  <img ngSrc="assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdatePeriode(m)" height="40" width="40"/>
-                  <img ngSrc="assets/img/trash-icon.svg" alt="trash icon" (click)="onDeletePeriode(m.id)" height="40" width="40"/>
+                  <img src="assets/img/modify-icon.svg" alt="to change icon" (click)="onUpdatePeriode(m)" />
+                  <img src="assets/img/trash-icon.svg" alt="trash icon" (click)="onDeletePeriode(m.id)" />
                 </td>
               </tr>
 
