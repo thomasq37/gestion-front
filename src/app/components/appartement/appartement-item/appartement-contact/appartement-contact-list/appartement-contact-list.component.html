@@ -1,6 +1,6 @@
 <section class="appartement-contact-list">
     <div class="container">
-        <div class="custom-card">
+        <div *ngIf="isLoad" class="custom-card">
             <div class="custom-card-header">
                 <h2>Contacts</h2>
                 <a *ngIf="!isEditable && hasProprietaireRole()" [routerLink]="['/appartement/' +  appartementId + '/contacts']"><img

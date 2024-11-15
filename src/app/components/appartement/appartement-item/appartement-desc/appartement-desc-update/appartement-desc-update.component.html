@@ -1,6 +1,7 @@
 <section class="appartement-desc-update">
     <div class="container">
-        <form [formGroup]="appartementForm" (ngSubmit)="mettreAJourUnAppartementPourUtilisateur()" aria-labelledby="appartementFormTitle">
+      <div *ngIf="isLoading" class="loader"></div>
+      <form *ngIf="!isLoading" [formGroup]="appartementForm" (ngSubmit)="mettreAJourUnAppartementPourUtilisateur()" aria-labelledby="appartementFormTitle">
 
             <h2 id="appartementFormTitle">Mise à jour de la description de l'appartement</h2>
             <div>

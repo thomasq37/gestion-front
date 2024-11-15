@@ -12,6 +12,7 @@ export class AppartementContactManageComponent {
   appartementId!: number
   contactToUpdate: Contact | null = null;
   isUpdateMode: boolean = false;
+  isLoad: boolean = false
   setContactToUpdate(contact: Contact) {
     this.contactToUpdate = contact;
     this.isUpdateMode = !!contact;
@@ -28,5 +29,9 @@ export class AppartementContactManageComponent {
   }
   handleCancelUpdate() {
     this.isUpdateMode = false;
+  }
+
+  handleContactIsLoad(isLoad) {
+    this.isLoad = isLoad
   }
 }

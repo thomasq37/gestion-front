@@ -14,6 +14,8 @@ export class AppartementContactListComponent implements OnInit{
   @Input() appartementContacts: Contact[] = [];
   @Input() isEditable: boolean = false
   @Output() contactToUpdate = new EventEmitter<Contact>();
+  @Output() contactIsLoad = new EventEmitter<boolean>();
+  isLoad: boolean = false;
 
   subscription!: Subscription;
   updateSubscription!: Subscription;
@@ -24,6 +26,8 @@ export class AppartementContactListComponent implements OnInit{
     this.gestionService.obtenirContactsPourAppartement(this.appartementId).then(
       contacts =>{
         this.appartementContacts = contacts
+        this.contactIsLoad.emit(true)
+        this.isLoad = true
       },
       error => {
         console.log("Erreur lors de la récupération des contacts.")

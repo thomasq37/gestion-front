@@ -21,6 +21,7 @@ export class AppartementDescUpdateComponent implements OnInit, OnDestroy {
   listFilesToManage: {file: Blob|null, url: string, status: string}[] = []
   navigationSubscription: Subscription;
   initialFormValues: any;
+  isLoading: boolean = true
   constructor(
     private formBuilder: FormBuilder,
     private gestionService: GestionService,
@@ -56,6 +57,7 @@ export class AppartementDescUpdateComponent implements OnInit, OnDestroy {
         this.initAppartementForm(appartement);
         this.gestionService.obtenirListePays().then(data => {
           this.paysList = data;
+          this.isLoading = false
         });
       });
     });
@@ -121,7 +123,6 @@ export class AppartementDescUpdateComponent implements OnInit, OnDestroy {
       );
     }
   }
-
   onDeleteDpeFile(): void {
     this.dpeFileIsLoading = true
     const dpeUrl = this.appartement.lastDPEUrl;
@@ -160,7 +161,6 @@ export class AppartementDescUpdateComponent implements OnInit, OnDestroy {
       console.error('Clé du fichier DPE non valide. Suppression annulée.');
     }
   }
-
   mettreAJourUnAppartementPourUtilisateur() {
     const updatedAppartementData = this.appartementForm.value;
     updatedAppartementData.pays = this.paysList.find(p => p.name === updatedAppartementData.pays);
@@ -176,7 +176,6 @@ export class AppartementDescUpdateComponent implements OnInit, OnDestroy {
         }
       );
   }
-
   onDialogConfirm($event: boolean) {
     if ($event) {
       console.log("mettre a jour et naviguer")
@@ -186,7 +185,6 @@ export class AppartementDescUpdateComponent implements OnInit, OnDestroy {
       this.router.navigate(['/appartement/' + this.appartement.id]); // Navigation sans enregistrement
     }
   }
-
   revertFilesOnCancel(){
     this.listFilesToManage.forEach(file => {
       const key = file.url.split('.amazonaws.com/images/')[1];

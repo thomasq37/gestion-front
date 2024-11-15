@@ -15,6 +15,7 @@ export class AppartementContactUpdateComponent implements OnInit, OnChanges {
   @Output() cancelUpdateEvent: EventEmitter<void> = new EventEmitter<void>();
   contactForm!: FormGroup;
   appartementId!: number;
+  @Output() contactIsLoad = new EventEmitter<boolean>();
 
   constructor(
     private gestionService: GestionService,
