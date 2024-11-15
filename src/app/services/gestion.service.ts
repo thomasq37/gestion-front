@@ -39,6 +39,11 @@ export class GestionService {
     const response = await authFetch(`${this.apiUrl}/appartements/chiffres-cles`);
     return await response.json();
   }
+  async obtenirCCAppartementParId(apartmentId: number): Promise<AppartementCCDTO> {
+    const response = await authFetch(`${this.apiUrl}/appartements/${apartmentId}/chiffres-cles`);
+    return await response.json();
+  }
+
   async obtenirAppartmentParUtilisateurIdEtAppartementId(apartmentId: number): Promise<Appartement> {
     const response = await authFetch(`${this.apiUrl}/appartements/${apartmentId}`);
     return await response.json();

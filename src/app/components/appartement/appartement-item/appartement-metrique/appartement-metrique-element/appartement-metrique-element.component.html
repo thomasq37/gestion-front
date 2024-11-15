@@ -1,5 +1,5 @@
-<section class="appartement-stats-list">
-    <!--<div class="container">
+<section class="appartement-stats-list" *ngIf="appartementMetrics">
+    <div class="container">
         <div class="custom-card">
             <div class="custom-card-header">
                 <h2>Statistiques de l'appartement</h2>
@@ -14,43 +14,43 @@
                 <tbody>
                 <tr>
                   <td><strong>Total des revenus</strong></td>
-                  <td class="number">{{appartement.revenusNets  | number:'1.2-2':'fr-FR'  }} €</td>
+                  <td class="number">{{appartementMetrics.revenusNets  | number:'1.2-2':'fr-FR'  }} €</td>
                 </tr>
                 <tr>
                   <td>Total des charges fixes</td>
-                  <td class="number-light">{{appartement.totalChargesFixesHorsFrais  | number:'1.2-2':'fr-FR' }} €</td>
+                  <td class="number-light">{{appartementMetrics.totalChargesFixesHorsFrais  | number:'1.2-2':'fr-FR' }} €</td>
                 </tr>
                 <tr>
                   <td>Total des travaux</td>
-                  <td class="number-light">{{appartement.totalTravaux  | number:'1.2-2':'fr-FR' }} €</td>
+                  <td class="number-light">{{appartementMetrics.totalTravaux  | number:'1.2-2':'fr-FR' }} €</td>
                 </tr>
                 <tr>
                   <td>Total des frais de gestion</td>
-                  <td class="number-light">{{appartement.totalFraisGestion  | number:'1.2-2':'fr-FR' }} €</td>
+                  <td class="number-light">{{appartementMetrics.totalFraisGestion  | number:'1.2-2':'fr-FR' }} €</td>
                 </tr>
                 <tr>
                   <td>Total des honoraires de location</td>
-                  <td class="number-light">{{appartement.totalHonorairesDeLoc  | number:'1.2-2':'fr-FR' }} €</td>
+                  <td class="number-light">{{appartementMetrics.totalHonorairesDeLoc  | number:'1.2-2':'fr-FR' }} €</td>
                 </tr>
                 <tr>
                   <td><strong>Total des dépenses</strong></td>
-                  <td class="number">{{appartement.depensesNettes  | number:'1.2-2':'fr-FR' }} €</td>
+                  <td class="number">{{appartementMetrics.depensesNettes  | number:'1.2-2':'fr-FR' }} €</td>
                 </tr>
-                <tr *ngIf="appartement.rentabiliteNette !== 0">
+                <tr *ngIf="appartementMetrics.rentabiliteNette !== 0">
                   <td><strong>Bénéfice net</strong></td>
-                  <td class="number">{{appartement.rentabiliteNette  | number:'1.2-2':'fr-FR' }} €</td>
+                  <td class="number">{{appartementMetrics.rentabiliteNette  | number:'1.2-2':'fr-FR' }} €</td>
                 </tr>
-                <tr *ngIf="appartement.moyenneBeneficesNetParMois !== 0">
+                <tr *ngIf="appartementMetrics.moyenneBeneficesNetParMois !== 0">
                   <td><strong>Bénéfice mensuel moyen</strong></td>
-                  <td  class="number">{{appartement.moyenneBeneficesNetParMois | number:'1.2-2':'fr-FR' }} €</td>
+                  <td  class="number">{{appartementMetrics.moyenneBeneficesNetParMois | number:'1.2-2':'fr-FR' }} €</td>
                 </tr>
                 <tr>
                   <td><strong>Taux d'occupation</strong></td>
-                    <td  class="number">{{100-appartement.tauxVacanceLocative | number:'1.2-2':'fr-FR' }}%</td>
+                    <td  class="number">{{100-appartementMetrics.tauxVacanceLocative | number:'1.2-2':'fr-FR' }}%</td>
                 </tr>
 
                 </tbody>
             </table>
         </div>
-    </div>-->
+    </div>
 </section>
