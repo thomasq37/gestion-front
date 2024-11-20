@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./appartement-picture-manage.component.scss']
 })
 export class AppartementPictureManageComponent {
+  isLoad: boolean;
 
+  handlePicturesIsLoad(isLoad: boolean) {
+    this.isLoad = isLoad
+    console.log(this.isLoad)
+  }
 }

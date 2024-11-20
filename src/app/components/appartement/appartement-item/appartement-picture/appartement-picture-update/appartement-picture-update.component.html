@@ -1,4 +1,4 @@
-<section class="appartement-picture-update">
+<section class="appartement-picture-update" *ngIf="isLoad">
   <div class="container">
     <form *ngIf="pictureUpdateForm" [formGroup]="pictureUpdateForm" aria-labelledby="pictureUpdateFormTitle">
       <h2 id="pictureUpdateFormTitle">Mise à jour des images de l'appartement</h2>

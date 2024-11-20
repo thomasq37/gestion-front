@@ -17,8 +17,8 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
   @Input() periode: PeriodLocation | null = null;
   totalPages: number = 0;
   currentPage: number = 1;
-  userId = parseInt(<string>localStorage.getItem('userId'));
-
+  @Output() fraisIsLoad = new EventEmitter<boolean>();
+  isLoad: boolean = false;
 
   protected addedFraisSubscription!: Subscription;
   protected updateFraisSubscription!: Subscription;
@@ -76,8 +76,9 @@ export class AppartementFraisListComponent implements OnInit, OnChanges{
         frais =>{
           if (frais && frais.content) {
             this.appartementFrais = frais.content
-
             this.totalPages = frais.totalPages
+            this.fraisIsLoad.emit(true)
+            this.isLoad = true
           } else {
             // Gérer le cas où content est vide ou non défini
             this.appartementFrais = [];

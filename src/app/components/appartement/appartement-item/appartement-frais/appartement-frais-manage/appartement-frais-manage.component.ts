@@ -12,8 +12,8 @@ export class AppartementFraisManageComponent {
   appartementId: number | null = null;
   isUpdateMode: boolean = false;
   fraisToUpdate: Frais | null = null;
-
   typesFrais: TypeFrais[] = []
+  isLoad: boolean = false
 
 
   constructor(
@@ -41,5 +41,9 @@ export class AppartementFraisManageComponent {
   setFraisToUpdate(frais: Frais) {
     this.fraisToUpdate = frais;
     this.isUpdateMode = !!frais;
+  }
+
+  handleFraisIsLoad(isLoad: boolean) {
+    this.isLoad = isLoad
   }
 }

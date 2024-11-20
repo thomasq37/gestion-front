@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormControl } from "@angular/forms";
 import {Appartement} from "../../../../../models/gestion";
 import {GestionService} from "../../../../../services/gestion.service";
@@ -14,14 +14,15 @@ export class AppartementPictureUpdateComponent implements OnInit{
   appartement: Appartement = <Appartement>{};
   public pictureUpdateForm: FormGroup;
   imgIsLoading: boolean = false;
+  @Output() picturesIsLoad = new EventEmitter<boolean>();
+  isLoad: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private gestionService: GestionService,
     private formBuilder: FormBuilder,
-    private s3Service: S3Service // Injecte le service S3
+    private s3Service: S3Service
   ) {
-    //this.appartement = this.navigationService.getData();
   }
 
   ngOnInit(): void {
@@ -31,6 +32,8 @@ export class AppartementPictureUpdateComponent implements OnInit{
         (appartement: Appartement) => {
           this.appartement = appartement;
           this.initForm();
+          //this.isLoad = true
+          //this.picturesIsLoad.emit(true)
         },
         (error) => {
           console.error('Erreur lors du chargement de l\'appartement :', error);
