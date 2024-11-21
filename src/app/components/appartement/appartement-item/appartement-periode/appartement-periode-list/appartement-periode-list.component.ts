@@ -17,8 +17,8 @@ export class AppartementPeriodeListComponent implements OnInit{
   currentPage: number = 1;
   protected periodeAddedSubject!: Subscription
   protected periodeUpdatedSubject!: Subscription
-  userId = parseInt(<string>localStorage.getItem('userId'))
-
+  @Output() periodeIsLoad = new EventEmitter<boolean>();
+  isLoad: boolean = false;
   constructor(private gestionService: GestionService) {}
 
 
@@ -65,6 +65,8 @@ export class AppartementPeriodeListComponent implements OnInit{
           if (periodes && periodes.content) {
             this.appartPeriodLocation = periodes.content
             this.totalPages = periodes.totalPages
+            this.periodeIsLoad.emit(true)
+            this.isLoad = true
           } else {
             // Gérer le cas où content est vide ou non défini
             this.appartPeriodLocation = [];

@@ -15,6 +15,8 @@ export class AppartementPeriodeManageComponent implements OnInit{
   periodeToUpdate: PeriodLocation | null = null;
   fraisToUpdate: Frais | null = null;
   typesFrais: TypeFrais[] = []
+  isLoad: boolean = false
+
 
   constructor(
     private route: ActivatedRoute,
@@ -56,5 +58,9 @@ export class AppartementPeriodeManageComponent implements OnInit{
     this.fraisToUpdate = frais;
     this.isFraisAddingMode = false; // Désactivez le mode d'ajout de frais
     this.isUpdateMode = !!frais;
+  }
+
+  handlePeriodeIsLoad(isLoad: boolean) {
+    this.isLoad  = isLoad
   }
 }
