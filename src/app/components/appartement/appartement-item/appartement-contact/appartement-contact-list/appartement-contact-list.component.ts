@@ -31,6 +31,8 @@ export class AppartementContactListComponent implements OnInit{
       },
       error => {
         console.log("Erreur lors de la récupération des contacts.")
+        this.contactIsLoad.emit(true)
+        this.isLoad = true
       })
     this.updateSubscription = this.gestionService.contactUpdatedSubject.subscribe(
       (updatedContact: Contact) => {
