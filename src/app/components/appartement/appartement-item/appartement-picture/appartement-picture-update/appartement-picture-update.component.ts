@@ -32,8 +32,8 @@ export class AppartementPictureUpdateComponent implements OnInit{
         (appartement: Appartement) => {
           this.appartement = appartement;
           this.initForm();
-          //this.isLoad = true
-          //this.picturesIsLoad.emit(true)
+          this.isLoad = true
+          this.picturesIsLoad.emit(true)
         },
         (error) => {
           console.error('Erreur lors du chargement de l\'appartement :', error);
