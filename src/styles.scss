@@ -22,6 +22,27 @@ body{
   margin: auto;
 }
 
+.appartement-item-container,
+.appartement-picture-update,
+.appartement-desc-update,
+.appartement-frais-list,
+.appartement-periode-list,
+.appartement-contact-list,
+.appartement-list-container{
+  margin-top: 7rem !important;
+}
+
+.appartement-item{
+  .appartement-picture-update,
+  .appartement-desc-update,
+  .appartement-frais-list,
+  .appartement-periode-list,
+  .appartement-contact-list,
+  .appartement-list-container{
+    margin-top: 0rem !important;
+  }
+}
+
 ul{
   list-style: none !important;
   padding-left: 0 !important;

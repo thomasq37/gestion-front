@@ -2,6 +2,16 @@ header {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  background-color: #143b86;
+
+  &.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // Facultatif, pour un effet de profondeur
+    height: 7rem;
+  }
   .actions-container{
     width: 100%;
     display: flex;
@@ -14,11 +24,11 @@ header {
     img {
       cursor: pointer;
       width: 1.5rem;
+      height: 1.5rem;
       margin: 2.1rem;
     }
   }
 
-  background-color: #143b86;
   nav{
     display: none;
 

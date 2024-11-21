@@ -1,20 +1,19 @@
-<header>
+<header class="fixed" >
   <div class="actions-container">
     <button
       *ngIf="!goBackIsHidden"
       (click)="goBack()"
-    src="./assets/img/back-icon.svg"
     class="back-icon" alt="back icon menu">
       <img
 
         src="./assets/img/back-icon.svg"
-        class="back-icon" alt="back icon menu"
+        class="back-icon" alt=""
       >
     </button>
     <img
       (click)="toggleMenu()"
       src="./assets/img/burger-icon.svg"
-      class="burger-icon" alt="burger menu">
+      class="burger-icon" alt="">
   </div>
   <nav [class.open]="menuOpen">
     <ul>
