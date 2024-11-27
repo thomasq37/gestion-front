@@ -9,15 +9,29 @@ export async function authFetch(url: RequestInfo, options: RequestInit = {}): Pr
   if (token) {
     (options.headers as Headers).set('Authorization', `Bearer ${token}`);
   }
+  (options.headers as Headers).set('Content-Type', 'application/json');
 
-  const response = await fetch(url, options);
+  return await fetch(url, options);
+}
 
+import { CustomError } from '../models/v2/exception/CustomError';
+
+export async function handleHttpError(response: Response): Promise<void> {
   if (!response.ok) {
-    // Vous pourriez vouloir gérer certaines erreurs globalement ici
-    throw new Error(await response.text());
+    const error = await response.json();
+    throw new CustomError(error.error || 'Une erreur est survenue.');
   }
+}
+export async function fetchWithHandling<T>(url: string, options: RequestInit, responseType: 'json' | 'text' = 'json'): Promise<T> {
+  const response = await authFetch(url, options); // Effectue la requête
+  await handleHttpError(response); // Vérifie et gère les erreurs
 
-  return response;
+  // Retourne la réponse au format attendu
+  if (responseType === 'json') {
+    return response.json(); // Retourne JSON
+  } else {
+    return response.text() as unknown as T; // Retourne texte brut
+  }
 }
 
 export function hasProprietaireRole(): boolean {

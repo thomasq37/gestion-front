@@ -1,26 +1,50 @@
-<app-header [goBackIsHidden]="true"></app-header>
 <section class="utilisateur-login">
   <div class="container">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" aria-labelledby="formTitle">
 
-      <h2 id="formTitle">Se connecter</h2>
+      <h2 id="formTitle">Connectez-vous</h2>
 
       <div>
-        <label for="username">Nom d'utilisateur <span aria-hidden="true">*</span></label>
-        <input type="text" id="username" formControlName="username" class="form-control" aria-required="true">
+        <label for="email">Adresse e-mail <span aria-hidden="true">*</span></label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Entrez votre adresse e-mail"
+          aria-required="true">
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.dirty" class="error">
+          <span *ngIf="loginForm.get('email')?.errors?.['required']">L'adresse e-mail est obligatoire.</span>
+          <span *ngIf="loginForm.get('email')?.errors?.['email']">Veuillez entrer une adresse e-mail valide.</span>
+        </div>
       </div>
 
       <div>
-        <label for="password">Mot de passe <span aria-hidden="true">*</span></label>
-        <input type="password" id="password" formControlName="password" class="form-control" aria-required="true">
+        <label for="mdp">Mot de passe <span aria-hidden="true">*</span></label>
+        <input
+          type="password"
+          id="mdp"
+          formControlName="mdp"
+          class="form-control"
+          placeholder="Entrez votre mot de passe"
+          aria-required="true">
+        <div *ngIf="loginForm.get('mdp')?.invalid && (loginForm.get('mdp')?.dirty)" class="error">
+          <span *ngIf="loginForm.get('mdp')?.errors?.['required']">Le mot de passe est obligatoire.</span>
+          <span *ngIf="loginForm.get('mdp')?.errors?.['minlength']">Le mot de passe doit contenir au moins 8 caractères.</span>
+          <span *ngIf="loginForm.get('mdp')?.errors?.['pattern']">
+            Le mot de passe doit contenir au moins un chiffre et un caractère spécial.
+          </span>
+        </div>
+
       </div>
-      <div>
-        {{message}}
+
+      <div class="message">
+        {{ message }}
       </div>
+
       <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">
         Se connecter
       </button>
     </form>
   </div>
 </section>
-<app-footer></app-footer>

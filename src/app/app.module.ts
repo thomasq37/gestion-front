@@ -39,6 +39,9 @@ import {NgOptimizedImage, registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
 import { ConfirmationDialogComponent } from './components/util/confirmation-dialog/confirmation-dialog.component';
+import { AuthComponent } from './components/auth/auth/auth.component';
+import { GeneriqueListeComponent } from './components/v2/generique/generique-liste/generique-liste.component';
+import { LogementListeComponent } from './components/v2/logement/logement-liste/logement-liste.component';
 registerLocaleData(localeFr, 'fr');
 @NgModule({
     declarations: [
@@ -73,6 +76,9 @@ registerLocaleData(localeFr, 'fr');
         UtilisateurLoginComponent,
         PaginationComponent,
         ConfirmationDialogComponent,
+        AuthComponent,
+        GeneriqueListeComponent,
+        LogementListeComponent,
     ],
   imports: [
     BrowserModule,

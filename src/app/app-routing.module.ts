@@ -11,6 +11,7 @@ import {AppartementPictureManageComponent} from "./components/appartement/appart
 import {AppartementAddComponent} from "./components/appartement/appartement-add/appartement-add.component";
 import {UtilisateurAddComponent} from "./components/utilisateur/utilisateur-add/utilisateur-add.component";
 import {UtilisateurLoginComponent} from "./components/utilisateur/utilisateur-login/utilisateur-login.component";
+import {LogementListeComponent} from "./components/v2/logement/logement-liste/logement-liste.component";
 
 const routes: Routes = [
 
@@ -23,6 +24,7 @@ const routes: Routes = [
 
   { path: 'login', component: UtilisateurLoginComponent },
   { path: 'create', component: UtilisateurAddComponent, pathMatch: 'full'  },
+  { path: 'generique-test', component: LogementListeComponent },
 
 
   { path: 'appartement/:id', component: AppartementItemComponent, canActivate: [AuthGuard] },

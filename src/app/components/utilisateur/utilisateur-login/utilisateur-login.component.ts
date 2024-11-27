@@ -1,39 +1,42 @@
-import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../services/auth.service";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthentService } from '../../../services/auth/authent.service';
+import {AuthenticateUserRequestDTO} from "../../../models/v2/auth/AuthenticateUserRequestDTO.model";
 
 @Component({
   selector: 'app-utilisateur-login',
   templateUrl: './utilisateur-login.component.html',
   styleUrls: ['./utilisateur-login.component.scss']
 })
-export class UtilisateurLoginComponent {
+export class UtilisateurLoginComponent implements OnInit {
   loginForm: FormGroup;
-  message: ''
-  constructor(private router: Router, private formBuilder: FormBuilder, private authenticationService: AuthService) {
+  message: string | null = null;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private authenticationService: AuthentService
+  ) {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      mdp: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/)
+      ]],
     });
   }
 
   ngOnInit(): void {}
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      const { username, password } = this.loginForm.value;
-      this.authenticationService.connexion({email: username, mdp: password}).then(
-        (response) => {
-          console.log('Connexion effectué avec succès.');
-          localStorage.setItem('auth_token', response);
-          this.router.navigate(['/dashboard']);
-        },
-        (error) => {
-          this.message = error.error
-          console.error('Erreur lors de la connexion : ', error);
-        }
-      );
+  async onSubmit(): Promise<void> {
+    const { email, mdp } = this.loginForm.value as AuthenticateUserRequestDTO;
+    try {
+      const response = await this.authenticationService.authenticateUser({ email, mdp });
+      localStorage.setItem('auth_token', response);
+      this.message = 'Connexion réussie';
+    } catch (error: any) {
+      console.warn(error);
+      this.message = 'Erreur : ' + (error?.message || 'Une erreur inconnue est survenue.');
     }
   }
 }
