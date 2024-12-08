@@ -1,26 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'node_modules/bootstrap/scss/bootstrap';
 
-*{
-  margin: auto 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-h2{
-  font-weight: 400;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-}
-
-body{
-  font-family: Arial, sans-serif;
-  font-size: 1.2rem;
-  background-color: #FCFCFC;
-}
-.container {
-  max-width: 120rem;
-  margin: auto;
-}
 
 .appartement-item-container,
 .appartement-picture-update,
@@ -49,4 +28,112 @@ ul{
 }
 p{
   margin: 0 !important;
+}
+#telephone {
+  height: 3.5rem;
+  border-radius: .5rem;
+  background-color: #f5f5f5;
+  border: 1px solid grey;
+}
+.country-dropdown {
+  width: 25rem !important;
+}
+.iti__country-list{
+  height: 8rem;
+}
+/* --------------- V2 -------------- */
+
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+*{
+  margin: auto 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html{
+  font-size: 62.5%;
+}
+h2{
+  font-weight: 400;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+body{
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  background-color: #FCFCFC;
+  min-height: 100vh;
+}
+a{
+  color: #143b86;
+}
+.container {
+  max-width: 120rem;
+  margin: auto;
+  padding: 2rem;
+}
+
+/* carroussel custom style */
+
+.carousel-inner {
+  height: 100%;
+}
+.carousel-item {
+  height: 100%;
+}
+.carousel-container ngb-carousel img{
+  max-height: 100%;
+}
+.carousel-item div {
+  height: 100%;
+}
+
+.custom-card {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  .custom-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      font-size: 1.6rem;
+      padding: 0;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    img {
+      width: 3rem;
+      border-radius: 50%;
+      padding: .3rem;
+      border: 1px solid #d8d8d8;
+      box-shadow: rgba(188, 189, 191, 0.2) 0 2px 11px
+    }
+  }
+}
+table{
+  width: 100%;
+  margin-top: 1.5rem;
+  table-layout: fixed;
+}
+thead, tbody, tfoot, tr, td, th {
+  font-size: 1.2rem;
+  padding: .5rem;
+  border: 1px solid lightgray;
+}
+td, th, .locataire{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media screen and (max-width: 28rem) {
+  thead, tbody, tfoot, tr, td, th {
+    font-size: 3.2vw;
+  }
 }

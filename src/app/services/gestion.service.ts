@@ -10,7 +10,7 @@ import {
 } from "../models/gestion";
 import {PageableResponse} from "../models/pageable";
 import {environment} from "../../environments/environment";
-import {authFetch} from "./http-helpers";
+import {authFetch} from "./v2/http-helpers";
 import {Subject} from "rxjs";
 import {HttpParams} from "@angular/common/http";
 

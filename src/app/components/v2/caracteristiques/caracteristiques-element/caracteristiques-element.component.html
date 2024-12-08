@@ -1,0 +1,110 @@
+<section class="caracteristiques-element">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h2>{{caracteristiques === null ? 'Caractéristiques à renseigner' : 'Caractéristiques'}}</h2>
+      <img (click)="modifierCaracteristiques()" src="../../../../../assets/img/v2/edit-icon.svg" alt="icone de modification">
+    </div>
+    <div class="caracteristiques-contenu" *ngIf="caracteristiques">
+      <!-- Type de logement -->
+      <div class="detail-item">
+        <dt><img src="./assets/img/v2/adresse-icon.png" alt="Icône de balcon"></dt>
+        <dd>
+          <strong>Type de logement:</strong>
+          <p>{{ caracteristiques.typeDeLogement }}</p>
+        </dd>
+      </div>
+
+      <!-- Date d'achat -->
+      <div class="detail-item">
+        <dt><img src="./assets/img/calendar.svg" alt="Icône calendrier"></dt>
+        <dd>
+          <strong>Date d'achat:</strong>
+          <p>{{caracteristiques.dateAchat | customDate}}</p>
+        </dd>
+      </div>
+
+      <!-- Nombre de pièces -->
+      <div class="detail-item">
+        <dt><img src="./assets/img/nb-pieces-icon.png" alt="Icône de pièces"></dt>
+        <dd>
+          <strong>Nombre de pièces:</strong>
+          <p>{{ caracteristiques.nombreDePieces }}</p>
+        </dd>
+      </div>
+
+      <!-- Surface intérieure -->
+      <div class="detail-item">
+        <dt><img src="./assets/img/surface-icon.png" alt="Icône de surface"></dt>
+        <dd>
+          <strong>Surface:</strong>
+          <p>{{ caracteristiques.surfaceLogement }} m²</p>
+        </dd>
+      </div>
+
+      <!-- Extérieur -->
+      <div class="detail-item">
+        <dt><img src="./assets/img/balcon-icon.png" alt="Icône de balcon"></dt>
+        <dd>
+          <strong>Extérieur:</strong>
+          <p>{{ caracteristiques.balconOuTerrasse ? 'Oui' : 'Non' }}</p>
+        </dd>
+      </div>
+
+      <!-- Surface extérieure -->
+      <div class="detail-item">
+        <dt><img src="./assets/img/surface-icon.png" alt="Icône de surface"></dt>
+        <dd>
+          <strong>Surface extérieur:</strong>
+          <p>{{ caracteristiques.surfaceBalconOuTerrasse ? caracteristiques.surfaceBalconOuTerrasse + ' m²' : 'Non' }}</p>
+        </dd>
+      </div>
+
+      <!-- Prix d'achat -->
+      <div class="detail-item">
+        <dt><img src="./assets/img/euro-icon.svg" alt="Icône de prix"></dt>
+        <dd>
+          <strong>Prix d'achat:</strong>
+          <p>{{ caracteristiques.montantAchat | number:'1.0-2':'fr-FR' }} €</p>
+        </dd>
+      </div>
+
+      <!-- Frais d'acquisition -->
+      <div class="detail-item">
+        <dt><img src="../../../../../assets/img/v2/notary-icon.svg" alt="Icône de frais"></dt>
+        <dd>
+          <strong>Frais d'acquisition:</strong>
+          <p>{{ caracteristiques.montantFraisDeNotaireEtNegociation | number:'1.0-2':'fr-FR' }} €</p>
+        </dd>
+      </div>
+
+      <!-- Estimation net vendeur -->
+      <div class="detail-item">
+        <dt><img src="../../../../../assets/img/v2/estimate-icon.svg" alt="Icône d'estimation"></dt>
+        <dd>
+          <strong>Estimation net vendeur:</strong>
+          <p>{{ caracteristiques.montantEstimation === null || caracteristiques.montantEstimation === 0 ? "A réaliser" : (caracteristiques.montantEstimation | number:'1.0-2':'fr-FR') + " €" }}</p>
+        </dd>
+      </div>
+
+      <!-- Classe énergie -->
+      <div class="detail-item energie">
+        <dt><img src="./assets/img/energie-icon.png" alt="Icône de la classe énergie"></dt>
+        <dd>
+          <strong>Classe énergie:</strong>
+          <img *ngIf="caracteristiques.dpeLettre !== null"
+               src="./assets/img/energie-{{caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
+          <p *ngIf="caracteristiques.dpeLettre === null">Non renseigné</p>
+        </dd>
+      </div>
+      <!-- Fichier classe énergie -->
+      <div *ngIf="caracteristiques.dpeFichier">
+        <a [href]="'data:application/pdf;base64,' + caracteristiques.dpeFichier" download="DPE_Fichier.pdf" target="_blank">
+          Télécharger le DPE
+        </a>
+      </div>
+      <div *ngIf="!caracteristiques.dpeFichier">
+        <p>Aucun fichier DPE</p>
+      </div>
+    </div>
+  </div>
+</section>

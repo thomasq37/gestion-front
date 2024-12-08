@@ -1,0 +1,44 @@
+.contenu-logement {
+  min-height: 90vh;
+  &.on-load {
+    display: flex;
+  }
+  .container{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    app-periode-location-table {
+      margin: 0;
+    }
+    @media screen and (min-width: 60rem) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+
+
+      app-photo-caroussel {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        height: 100%;
+
+      }
+
+      app-adresse-element {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        height: 100%;
+
+      }
+
+      app-caracteristiques-element {
+        grid-column: 2 / 3;
+        grid-row: 1 / 3;
+        height: 100%;
+      }
+      app-loader {
+        grid-column: 1 / 3;
+        grid-row: 1 / 3;
+      }
+    }
+  }
+}

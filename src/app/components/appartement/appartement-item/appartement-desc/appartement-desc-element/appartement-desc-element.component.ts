@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Appartement} from "../../../../../models/gestion";
 import {Router} from "@angular/router";
-import {hasProprietaireRole} from "../../../../../services/http-helpers";
+import {hasProprietaireRole} from "../../../../../services/v2/http-helpers";
 @Component({
   selector: 'app-appartement-desc-element',
   templateUrl: './appartement-desc-element.component.html',

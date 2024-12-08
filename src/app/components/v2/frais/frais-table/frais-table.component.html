@@ -1,0 +1,34 @@
+<section class="frais-element">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h2>{{ frais.length === 0 ? 'Aucun frais trouvé' : 'Frais fixes' }}</h2>
+      <img (click)="modifierFrais()" src="./assets/img/v2/edit-icon.svg" alt="icone de modification">
+    </div>
+    <div class="frais-contenu" *ngIf="frais.length > 0">
+      <table>
+        <thead>
+        <tr>
+          <th>Type de frais</th>
+          <th>Montant</th>
+          <th>Fréquence</th>
+          <th>Paiements</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let fraisItem of pagedFrais">
+          <td>{{ fraisItem.nom !== null ? fraisItem.nom : fraisItem.categorieFrais }}</td>
+          <td>{{ fraisItem.montant | currency: 'EUR' }}</td>
+          <td>{{ fraisItem.frequence === 'PONCTUELLE' ? (fraisItem.dateDeDebut | customDate) : fraisItem.frequence }}</td>
+          <td>{{ getNombreOccurrences(fraisItem.dateDeDebut, fraisItem.dateDeFin, fraisItem.frequence) }}</td>
+        </tr>
+        </tbody>
+      </table>
+      <app-pagination
+        *ngIf="frais.length > itemsPerPage"
+        [currentPage]="currentPage"
+        [totalPages]="totalPages"
+        (pageChanged)="onPageChange($event)"
+      ></app-pagination>
+    </div>
+  </div>
+</section>

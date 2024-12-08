@@ -1,0 +1,14 @@
+<section class="logement">
+  <app-header [h1]="'Synthèse logement'"></app-header>
+  <div class="contenu-logement {{loading ? 'on-load' : ''}}">
+    <div class="container">
+      <app-loader *ngIf="loading"></app-loader>
+      <app-photo-caroussel *ngIf="logement" [photos]="logement.photos"></app-photo-caroussel>
+      <app-adresse-element *ngIf="logement" [adresse]="logement.adresse"></app-adresse-element>
+      <app-caracteristiques-element *ngIf="logement" [caracteristiques]="logement.caracteristiques"></app-caracteristiques-element>
+      <app-frais-table *ngIf="logement" [frais]="logement.frais"></app-frais-table>
+      <app-periode-location-table *ngIf="logement" [periodesDeLocation]="logement.periodesDeLocation"></app-periode-location-table>
+      <app-contact-table *ngIf="logement" [contacts]="logement.contacts"></app-contact-table>
+    </div>
+  </div>
+</section>

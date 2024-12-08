@@ -1,0 +1,28 @@
+<section class="contact-element">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h2>{{ contacts.length === 0 ? 'Aucun contact trouvé' : 'Contacts' }}</h2>
+      <img (click)="modifierContacts()" src="./assets/img/v2/edit-icon.svg" alt="icone de modification">
+    </div>
+    <div class="contact-contenu" *ngIf="contacts.length > 0">
+      <table>
+        <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let contact of contacts">
+          <td>{{ contact.nom }}</td>
+          <td>{{ contact.prenom }}</td>
+          <td class="email"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
+          <td class="phone"><a href="tel:{{ contact.telephone }}">{{ contact.telephone }}</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

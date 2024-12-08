@@ -1,0 +1,23 @@
+<section class="photo-caroussel">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h2>{{photos.length === 0 ? 'Photos à renseigner' : 'Photos'}}</h2>
+      <img (click)="modifierPhotos()" src="../../../../../assets/img/v2/edit-icon.svg" alt="icone de modification"
+      >
+    </div>
+    <div class="carousel-container"
+         *ngIf="photos.length > 0"
+         (touchstart)="onTouchStart($event)"
+         (touchmove)="onTouchMove($event)"
+         (touchend)="onTouchEnd()">
+      <ngb-carousel #carousel>
+        <ng-template ngbSlide *ngFor="let photo of photos">
+          <div>
+            <img class="picsum-img-wrapper" [src]="'data:image/jpeg;base64,'+ photo.image" [alt]="'Image appartement'" />
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </div>
+</section>
+

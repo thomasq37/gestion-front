@@ -47,8 +47,7 @@ export class AppartementAddComponent {
   ajouterAppartement() {
     if (this.appartementForm.valid) {
       const appartementData = this.appartementForm.value;
-      // Find the Pays object corresponding to the selected value
-      appartementData.pays = this.paysList.find(p => p.name === appartementData.pays); // Assign the found Pays object
+      appartementData.pays = this.paysList.find(p => p.name === appartementData.pays);
 
 
       this.gestionService.ajouterUnAppartementPourUtilisateur(appartementData).then(

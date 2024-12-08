@@ -1,0 +1,96 @@
+<section class="inscription">
+  <form [formGroup]="registerForm" (ngSubmit)="inscription()">
+    <h1>Inscription</h1>
+    <div>
+      <div>
+        <label for="email">Adresse e-mail <span aria-hidden="true">*</span></label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Entrez votre adresse e-mail"
+          aria-required="true">
+        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.dirty" class="error">
+          <span *ngIf="registerForm.get('email')?.errors?.['required']">L'adresse e-mail est obligatoire.</span>
+          <span *ngIf="registerForm.get('email')?.errors?.['email']">Veuillez entrer une adresse e-mail valide.</span>
+        </div>
+      </div>
+      <div>
+        <label for="mdp">Mot de passe <span aria-hidden="true">*</span></label>
+        <input
+          type="password"
+          id="mdp"
+          formControlName="mdp"
+          placeholder="Entrez votre mot de passe"
+          aria-required="true">
+        <div *ngIf="registerForm.get('mdp')?.invalid && (registerForm.get('mdp')?.dirty)" class="error">
+          <span *ngIf="registerForm.get('mdp')?.errors?.['required']">Le mot de passe est obligatoire.</span>
+          <span *ngIf="registerForm.get('mdp')?.errors?.['minlength']">Le mot de passe doit contenir au moins 8 caractères.</span>
+          <span *ngIf="registerForm.get('mdp')?.errors?.['pattern']">Le mot de passe doit contenir au moins un chiffre et un caractère spécial.</span>
+        </div>
+      </div>
+      <div>
+        <label for="confirmMdp">Confirmez le mot de passe <span aria-hidden="true">*</span></label>
+        <input
+          type="password"
+          id="confirmMdp"
+          formControlName="confirmMdp"
+          placeholder="Confirmez votre mot de passe"
+          aria-required="true">
+        <div *ngIf="registerForm.get('confirmMdp')?.dirty && registerForm.hasError('notMatching')" class="error">
+          <span>Les mots de passe ne correspondent pas.</span>
+        </div>
+      </div>
+      <div>
+        <label for="nom">Nom</label>
+        <input
+          type="text"
+          id="nom"
+          formControlName="nom"
+          placeholder="Entrez votre nom (optionnel)">
+      </div>
+      <div>
+        <label for="prenom">Prénom</label>
+        <input
+          type="text"
+          id="prenom"
+          formControlName="prenom"
+          placeholder="Entrez votre prénom (optionnel)">
+      </div>
+      <!--<div>
+        <label for="telephone">Téléphone</label>
+        <input
+          type="text"
+          id="telephone"
+          formControlName="telephone"
+          placeholder="Entrez votre numéro de téléphone (optionnel)">
+        <div *ngIf="registerForm.get('telephone')?.invalid && registerForm.get('telephone')?.dirty" class="error">
+          <span *ngIf="registerForm.get('telephone')?.errors?.['pattern']">Numéro de téléphone invalide.</span>
+        </div>
+      </div>-->
+      <div>
+        <ngx-intl-tel-input
+          inputId="telephone"
+          formControlName="telephone"
+          [preferredCountries]="[CountryISO.France, CountryISO.Spain]"
+          [enableAutoCountrySelect]="false"
+          [enablePlaceholder]="true"
+          [searchCountryFlag]="true"
+          [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+          [selectFirstCountry]="false"
+          [selectedCountryISO]="CountryISO.France"
+          [maxLength]="15"
+          [phoneValidation]="true"
+        ></ngx-intl-tel-input>
+      </div>
+
+      <div class="error">
+        {{ error }}
+      </div>
+      <button type="submit" [disabled]="!registerForm.valid">
+        S'inscrire
+      </button>
+      <div class="mode-connexion"><p>Vous avez déjà un compte ?</p><a href="/connexion">Connectez-vous</a></div>
+    </div>
+  </form>
+</section>

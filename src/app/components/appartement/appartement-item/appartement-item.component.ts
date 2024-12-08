@@ -7,7 +7,7 @@ import {
 import {ActivatedRoute, Router} from "@angular/router";
 import {Appartement} from "../../../models/gestion";
 import {GestionService} from "../../../services/gestion.service";
-import {hasProprietaireRole} from "../../../services/http-helpers";
+import {hasProprietaireRole} from "../../../services/v2/http-helpers";
 
 @Component({
   selector: 'app-appartement-item',

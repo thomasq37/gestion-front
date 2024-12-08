@@ -1,0 +1,29 @@
+<section class="logements">
+  <app-header [h1]="'Liste des logements'"></app-header>
+  <div class="contenu-logements {{loading ? 'on-load' : ''}}">
+    <div class="container">
+      <app-loader *ngIf="loading"></app-loader>
+      <div *ngIf="error" class="error">{{ error }}</div>
+      <ul *ngIf="logements.length > 0">
+        <li *ngFor="let logement of logements">
+          <a href="/logements/{{logement.masqueId}}">
+            <div *ngIf="logement.adresse; else adresseManquante">
+              <p class="adresse">
+                <span>{{ logement.adresse.numero }} {{ logement.adresse.voie }} {{ logement.adresse.complementAdresse }}</span>
+                <span>{{ logement.adresse.codePostal }}, {{ logement.adresse.pays }}</span>
+              </p>
+            </div>
+            <img
+              *ngIf="getPhotoPrincipale(logement);"
+              [src]="getPhotoPrincipale(logement)"
+              alt="Photo principale"/>
+            <ng-template #adresseManquante>
+              <span class="adresse-manquante">Adresse à renseigner</span>
+            </ng-template>
+          </a>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>

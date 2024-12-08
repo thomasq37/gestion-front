@@ -1,0 +1,19 @@
+header{
+  background-color: #143b86;
+  min-height: 10vh;
+  display: flex;
+  .container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+    font-weight: bold;
+    h1{
+      color: white;
+      height: max-content;
+      font-weight: bold;
+    }
+  }
+}

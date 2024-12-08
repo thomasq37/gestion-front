@@ -1,0 +1,31 @@
+<section class="adresse-element">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h2>{{adresse === null ? 'Adresse à renseigner' : 'Adresse'}}</h2>
+      <img (click)="modifierAdresse()" src="../../../../../assets/img/v2/edit-icon.svg" alt="icone de modification"
+      >
+    </div>
+    <div class="adresse-contenu" *ngIf="adresse">
+      <div>
+        <strong>Numéro:</strong>
+        <p>{{ adresse.numero }}</p>
+      </div>
+      <div>
+        <strong>Voie:</strong>
+        <p>{{ adresse.voie }}</p>
+      </div>
+      <div>
+        <strong>Complément adresse:</strong>
+        <p>{{ adresse.complementAdresse }}</p>
+      </div>
+      <div>
+        <strong>Code postal:</strong>
+        <p>{{ adresse.codePostal }}</p>
+      </div>
+      <div>
+        <strong>Pays:</strong>
+        <p>{{ adresse.pays }}</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -3,7 +3,7 @@
         <div class="custom-card">
             <div class="custom-card-header">
               <h2>Description</h2>
-              <img *ngIf="hasProprietaireRole()" (click)="onModifyClick()" src="./assets/img/edit-icon.svg" alt="icone de modification"
+              <img *ngIf="hasProprietaireRole()" (click)="onModifyClick()" src="../../../../../../assets/img/v2/edit-icon.svg" alt="icone de modification"
                    >
             </div>
             <dl class="appartement-details">
@@ -16,7 +16,7 @@
                   </dd>
                 </div>
                 <div class="detail-item">
-                  <dt><img src="./assets/img/adresse-icon.png" alt="Icône d'adresse" ></dt>
+                  <dt><img src="../../../../../../assets/img/v2/adresse-icon.png" alt="Icône d'adresse" ></dt>
                   <dd>
                     <strong>Adresse:</strong>
                     <p>{{appartement.numero}} {{ appartement.adresse }}, {{ appartement.codePostal }} {{ appartement.ville }}, {{appartement.pays.name}}</p>
@@ -51,14 +51,14 @@
                   </dd>
                 </div>
                 <div *ngIf="hasProprietaireRole()" class="detail-item">
-                  <dt><img src="./assets/img/notary-icon.svg" alt="Icône de prix" ></dt>
+                  <dt><img src="../../../../../../assets/img/v2/notary-icon.svg" alt="Icône de prix" ></dt>
                   <dd>
                     <strong>Frais d'acquisition:</strong>
                     <p>{{ appartement.fraisNotaireEtNegociation | number:'1.0-2':'fr-FR' }} €</p>
                   </dd>
                 </div>
                 <div *ngIf="hasProprietaireRole()" class="detail-item">
-                  <dt><img src="./assets/img/estimate-icon.svg" alt="Icône d'estimation" ></dt>
+                  <dt><img src="../../../../../../assets/img/v2/estimate-icon.svg" alt="Icône d'estimation" ></dt>
                   <dd>
                     <strong>Estimation net vendeur:</strong>
                     <p>{{ appartement.estimation === null || appartement.estimation === 0 ? "A réaliser" : (appartement.estimation  | number:'1.0-2':'fr-FR') + " €" }}</p>

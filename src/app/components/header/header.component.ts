@@ -1,64 +1,39 @@
-import { Component, Input, OnInit, HostListener } from '@angular/core';
-import { AuthService } from "../../services/auth.service";
-import { NavigationService } from "../../services/navigation.service";
-
+import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  menuOpen: boolean = false;
-  isFixed: boolean = false; // Propriété pour le header fixe
-  lastScrollPosition: number = 0; // Garde en mémoire la dernière position de scroll
+  isLoggedIn: boolean = false;
 
-  @Input() goBackIsHidden: boolean = false;
-
-  constructor(
-    private authService: AuthService,
-    private navigationService: NavigationService
-  ) { }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
+    this.checkLoginStatus();
   }
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('auth_token');
+  checkLoginStatus(): void {
+    const token = localStorage.getItem('auth_token');
+    if (token) {
+      try {
+        const payload = JSON.parse(window.atob(token.split('.')[1]));
+        const now = Date.now().valueOf() / 1000;
+        this.isLoggedIn = payload.exp > now;
+      } catch (error) {
+        console.error('Erreur lors de la vérification du token :', error);
+        this.isLoggedIn = false;
+      }
+    } else {
+      this.isLoggedIn = false;
+    }
   }
 
   onLogout(): void {
-    this.authService.logout();
+    localStorage.removeItem('auth_token');
+    this.isLoggedIn = false;
+    this.router.navigate(['/login']);
   }
 
-  onLogin() {
-    this.authService.loginRedirection();
-  }
-
-  toggleMenu(): void {
-    this.menuOpen = !this.menuOpen;
-  }
-
-  goBack() {
-    const currentUrl = window.location.href;
-    const host = window.location.origin;
-    if (new RegExp(`${host}/appartement/\\d+/\\w+`).test(currentUrl)) {
-      const lastSegment = currentUrl.substring(currentUrl.lastIndexOf('/') + 1);
-      if (lastSegment === 'description') {
-        this.navigationService.sendNavigationConfirmation();
-      } else {
-        window.location.href = currentUrl.substring(0, currentUrl.lastIndexOf('/'));
-      }
-    }
-    else if (new RegExp(`${host}/appartement/\\d+`).test(currentUrl)) {
-      window.location.href = host;
-    }
-  }
-
-  @HostListener('window:scroll', [])
-  onScroll(): void {
-    const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
-    this.isFixed = currentScrollPosition > this.lastScrollPosition;
-    this.lastScrollPosition = currentScrollPosition;
-  }
 }

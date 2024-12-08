@@ -1,38 +1,15 @@
-<header class="fixed" >
-  <div class="actions-container">
-    <button
-      *ngIf="!goBackIsHidden"
-      (click)="goBack()"
-    class="back-icon" alt="back icon menu">
-      <img
-
-        src="./assets/img/back-icon.svg"
-        class="back-icon" alt=""
-      >
-    </button>
-    <img
-      (click)="toggleMenu()"
-      src="./assets/img/burger-icon.svg"
-      class="burger-icon" alt="">
-  </div>
-  <nav [class.open]="menuOpen">
+<header>
+  <nav>
     <ul>
-      <div *ngIf="isLoggedIn()">
-        <li>
-          <a [routerLink]="'/dashboard'">Appartements</a>
-        </li>
-        <li>
-          <button (click)="onLogout()">Déconnexion</button>
-        </li>
-      </div>
-      <div *ngIf="!isLoggedIn()">
-        <li>
-          <button [routerLink]="'/create'">Créer un compte</button>
-        </li>
-        <li>
-          <button (click)="onLogin()">Connexion</button>
-        </li>
-      </div>
+      <li *ngIf="!isLoggedIn">
+        <a routerLink="/login">Connexion</a>
+      </li>
+      <li *ngIf="!isLoggedIn">
+        <a routerLink="/register">Créer un compte</a>
+      </li>
+      <li *ngIf="isLoggedIn">
+        <button (click)="onLogout()">Déconnexion</button>
+      </li>
     </ul>
   </nav>
 </header>

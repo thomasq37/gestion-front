@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {AppartementListComponent} from "./components/appartement/appartement-list/appartement-list.component";
 import {AppartementItemComponent, CustomDatePipe} from "./components/appartement/appartement-item/appartement-item.component";
 import {NgbCarouselModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthGuard} from "./guards/auth.guard";
@@ -37,49 +34,80 @@ import { UtilisateurLoginComponent } from './components/utilisateur/utilisateur-
 import { PaginationComponent } from './components/pagination/pagination.component';
 import {NgOptimizedImage, registerLocaleData} from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+
 import { LOCALE_ID } from '@angular/core';
 import { ConfirmationDialogComponent } from './components/util/confirmation-dialog/confirmation-dialog.component';
 import { AuthComponent } from './components/auth/auth/auth.component';
-import { GeneriqueListeComponent } from './components/v2/generique/generique-liste/generique-liste.component';
-import { LogementListeComponent } from './components/v2/logement/logement-liste/logement-liste.component';
+import {AppRoutingModule} from "./app-routing.module";
+import { LogementsComponent } from './components/v2/logements/logements.component';
+import { ConnexionComponent } from './components/v2/connexion/connexion.component';
+import { InscriptionComponent } from './components/v2/inscription/inscription.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgxIntlTelInputModule} from "ngx-intl-tel-input-gg";
+import {BsDropdownModule} from "ngx-bootstrap/dropdown";
+import { LogementComponent } from './components/v2/logement/logement.component';
+import { DeconnexionComponent } from './components/v2/commun/deconnexion/deconnexion.component';
+import {HeaderComponent} from "./components/v2/commun/header/header.component";
+import { LoaderComponent } from './components/v2/commun/loader/loader.component';
+import { PhotoCarousselComponent } from './components/v2/photo/photo-caroussel/photo-caroussel.component';
+import { AdresseElementComponent } from './components/v2/adresse/adresse-element/adresse-element.component';
+import { CaracteristiquesElementComponent } from './components/v2/caracteristiques/caracteristiques-element/caracteristiques-element.component';
+import { PropTableComponent } from './components/v2/commun/prop-table/prop-table.component';
+import { FraisTableComponent } from './components/v2/frais/frais-table/frais-table.component';
+import { PeriodeLocationTableComponent } from './components/v2/periode-location/periode-location-table/periode-location-table.component';
+import {ContactTableComponent} from "./components/v2/contact/contact-table/contact-table.component";
+
 registerLocaleData(localeFr, 'fr');
+
 @NgModule({
-    declarations: [
-        AppComponent,
-        DashboardComponent,
-        AppartementListComponent,
-        AppartementItemComponent,
-        HeaderComponent,
-        FooterComponent,
-        CustomDatePipe,
-        AppartementContactListComponent,
-        AppartementContactManageComponent,
-        AppartementContactAddComponent,
-        AppartementContactUpdateComponent,
-        AppartementFraisListComponent,
-        AppartementFraisManageComponent,
-        AppartementFraisAddComponent,
-        AppartementFraisUpdateComponent,
-        AppartementPeriodeListComponent,
-        AppartementPeriodeManageComponent,
-        AppartementPeriodeAddComponent,
-        AppartementPeriodeUpdateComponent,
-        AppartementDescElementComponent,
-        AppartementPictureElementComponent,
-        AppartementMetriqueElementComponent,
-        AppartementPictureManageComponent,
-        AppartementDescManageComponent,
-        AppartementDescUpdateComponent,
-        AppartementPictureUpdateComponent,
-        AppartementAddComponent,
-        UtilisateurAddComponent,
-        UtilisateurLoginComponent,
-        PaginationComponent,
-        ConfirmationDialogComponent,
-        AuthComponent,
-        GeneriqueListeComponent,
-        LogementListeComponent,
-    ],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    AppartementListComponent,
+    AppartementItemComponent,
+    HeaderComponent,
+    FooterComponent,
+    CustomDatePipe,
+    AppartementContactListComponent,
+    AppartementContactManageComponent,
+    AppartementContactAddComponent,
+    AppartementContactUpdateComponent,
+    AppartementFraisListComponent,
+    AppartementFraisManageComponent,
+    AppartementFraisAddComponent,
+    AppartementFraisUpdateComponent,
+    AppartementPeriodeListComponent,
+    AppartementPeriodeManageComponent,
+    AppartementPeriodeAddComponent,
+    AppartementPeriodeUpdateComponent,
+    AppartementDescElementComponent,
+    AppartementPictureElementComponent,
+    AppartementMetriqueElementComponent,
+    AppartementPictureManageComponent,
+    AppartementDescManageComponent,
+    AppartementDescUpdateComponent,
+    AppartementPictureUpdateComponent,
+    AppartementAddComponent,
+    UtilisateurAddComponent,
+    UtilisateurLoginComponent,
+    PaginationComponent,
+    ConfirmationDialogComponent,
+    AuthComponent,
+    LogementsComponent,
+    ConnexionComponent,
+    InscriptionComponent,
+    LogementComponent,
+    DeconnexionComponent,
+    HeaderComponent,
+    LoaderComponent,
+    PhotoCarousselComponent,
+    AdresseElementComponent,
+    CaracteristiquesElementComponent,
+    PropTableComponent,
+    FraisTableComponent,
+    PeriodeLocationTableComponent,
+    ContactTableComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -89,7 +117,10 @@ registerLocaleData(localeFr, 'fr');
     ReactiveFormsModule,
     NgbCarouselModule,
     ReactiveFormsModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    BrowserAnimationsModule,
+    NgxIntlTelInputModule,
+    BsDropdownModule.forRoot() // Import de BsDropdownModule
   ],
     providers: [
         AuthGuard,

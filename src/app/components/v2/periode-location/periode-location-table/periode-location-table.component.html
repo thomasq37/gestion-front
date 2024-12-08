@@ -1,0 +1,32 @@
+<section class="periode-de-location-element">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h2>{{ periodesDeLocation.length === 0 ? 'Aucune période de location trouvé' : 'Périodes de location' }}</h2>
+      <img (click)="modifierPeriodesDeLocation()" src="./assets/img/v2/edit-icon.svg" alt="icone de modification">
+    </div>
+    <div class="periode-de-location-contenu" *ngIf="periodesDeLocation.length > 0">
+      <table>
+        <thead>
+        <tr>
+          <th>Locataire</th>
+          <th>Entrée</th>
+          <th>Sortie</th>
+          <th>Prix par mois</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let periodeDeLocation of periodesDeLocation">
+            <td>
+              <div class="locataire" *ngFor="let locataire of periodeDeLocation.locataires">
+                {{ locataire.nom }} {{ locataire.prenom }}
+              </div>
+            </td>
+            <td>{{ periodeDeLocation.dateDeDebut | customDate  }}</td>
+            <td>{{ periodeDeLocation.dateDeFin === null ? 'Pas de sortie' : periodeDeLocation.dateDeFin | customDate }}</td>
+            <td>{{ periodeDeLocation.tarif | currency: 'EUR'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

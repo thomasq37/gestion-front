@@ -10,8 +10,12 @@ import {AppartementDescManageComponent} from "./components/appartement/apparteme
 import {AppartementPictureManageComponent} from "./components/appartement/appartement-item/appartement-picture/appartement-picture-manage/appartement-picture-manage.component";
 import {AppartementAddComponent} from "./components/appartement/appartement-add/appartement-add.component";
 import {UtilisateurAddComponent} from "./components/utilisateur/utilisateur-add/utilisateur-add.component";
-import {UtilisateurLoginComponent} from "./components/utilisateur/utilisateur-login/utilisateur-login.component";
-import {LogementListeComponent} from "./components/v2/logement/logement-liste/logement-liste.component";
+import {LogementsComponent} from "./components/v2/logements/logements.component";
+import {ConnexionComponent} from "./components/v2/connexion/connexion.component";
+import {AlreadyAuthGuard} from "./guards/already-auth.guard";
+import {InscriptionComponent} from "./components/v2/inscription/inscription.component";
+import {LogementComponent} from "./components/v2/logement/logement.component";
+
 
 const routes: Routes = [
 
@@ -22,10 +26,7 @@ const routes: Routes = [
 
   // Registration
 
-  { path: 'login', component: UtilisateurLoginComponent },
   { path: 'create', component: UtilisateurAddComponent, pathMatch: 'full'  },
-  { path: 'generique-test', component: LogementListeComponent },
-
 
   { path: 'appartement/:id', component: AppartementItemComponent, canActivate: [AuthGuard] },
   { path: 'appartements/add', component: AppartementAddComponent, canActivate: [AuthGuard]},
@@ -37,6 +38,12 @@ const routes: Routes = [
   { path: 'appartement/:id/frais', component: AppartementFraisManageComponent, canActivate: [AuthGuard] },
   { path: 'appartement/:id/description', component: AppartementDescManageComponent, canActivate: [AuthGuard] },
   { path: 'appartement/:id/photos', component: AppartementPictureManageComponent, canActivate: [AuthGuard] },
+  // v2 //
+  { path: 'logements', component: LogementsComponent, canActivate: [AuthGuard] },
+  { path: 'connexion', component: ConnexionComponent, canActivate: [AlreadyAuthGuard] },
+  { path: 'inscription', component: InscriptionComponent, canActivate: [AlreadyAuthGuard] },
+  { path: 'logements/:masqueId', component: LogementComponent, canActivate: [AuthGuard] },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

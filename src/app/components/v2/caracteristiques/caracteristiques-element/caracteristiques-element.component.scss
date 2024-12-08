@@ -1,0 +1,30 @@
+.caracteristiques-element{
+  .caracteristiques-contenu{
+    margin-top: 1.5rem;
+    .detail-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      gap: 1rem;
+      font-size: 1.3rem;
+      dd{
+        display: flex;
+        flex-direction: column;
+        gap: .2rem;
+      }
+      img {
+        width: 3.5rem;
+      }
+    }
+    .detail-item.energie {
+      dd{
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        img{
+          width: 7rem;
+        }
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {GestionService} from "../../../services/gestion.service";
 import {Appartement, AppartementCCDTO} from "../../../models/gestion";
 import {Router} from "@angular/router";
-import {hasProprietaireRole} from "../../../services/http-helpers";
+import {hasProprietaireRole} from "../../../services/v2/http-helpers";
 
 @Component({
   selector: 'app-appartement-list',

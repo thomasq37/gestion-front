@@ -1,0 +1,22 @@
+
+.adresse-element{
+  height: 100%;
+  .custom-card{
+    height: 100%;
+    .adresse-contenu{
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      div{
+        display: flex;
+        gap: .5rem;
+
+        p, strong{
+          font-size: 1.3rem;
+        }
+      }
+
+    }
+  }
+}

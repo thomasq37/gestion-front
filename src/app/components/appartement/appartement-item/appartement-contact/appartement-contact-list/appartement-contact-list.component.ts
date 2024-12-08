@@ -2,7 +2,7 @@ import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {Contact} from "../../../../../models/gestion";
 import {Subscription} from "rxjs";
 import {GestionService} from "../../../../../services/gestion.service";
-import {hasProprietaireRole} from "../../../../../services/http-helpers";
+import {hasProprietaireRole} from "../../../../../services/v2/http-helpers";
 
 @Component({
   selector: 'app-appartement-contact-list',

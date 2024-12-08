@@ -1,117 +1,33 @@
 header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  background-color: #143b86;
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-bottom: 1px solid #e7e7e7;
 
-  &.fixed {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // Facultatif, pour un effet de profondeur
-    height: 7rem;
-  }
-  .actions-container{
-    width: 100%;
+  nav ul {
+    list-style: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
 
-    button{
-      background-color: #143b86;
-      border:none;
-    }
-    img {
-      cursor: pointer;
-      width: 1.5rem;
-      height: 1.5rem;
-      margin: 2.1rem;
-    }
-  }
-
-  nav{
-    display: none;
-
-    &.open {
-      transition: all 1s ease-in-out;
-      display: block;
-    }
-    left: 1rem;
-    top:6.7rem;
-    position: absolute;
-    ul:last-child li >*{
-      border-bottom-left-radius: 1rem;
-      border-bottom-right-radius: 1rem;
-    }
-    ul:first-child li> *{
-      border-top-left-radius: 1rem;
-      border-top-right-radius: 1rem;
-    }
-    ul {
-      border: 1px solid #143b86;
-      border-radius: 1rem;
-      background-color: #143b86;
-      li{
-        a:hover, button:hover{
-          background-color: white ;
-          color:#143b86;
-        }
-        a, button {
-          font-style: italic;
-          text-align: left;
-          width: 100%;
-          display: block;
-          padding:1rem;
-          background: none;
-          border: none;
-          text-decoration: none;
-          color: white;
-        }
-      }
-    }
-  }
-
-  // Pour les écrans supérieurs à 720px
-  @media (min-width: 720px) {
-    .burger-icon{
-      display: none;
-    }
-    nav {
-      padding: 1rem;
-      display: block;  // montrer le nav par défaut
-      position: static;  // désactive la position absolue
-      &.open {
-        display: block;  // le menu est toujours ouvert
-      }
-
-      ul {
-        margin-bottom: 0;
+    li {
+      a, button {
+        text-decoration: none;
+        color: #007bff;
+        font-size: 1rem;
         border: none;
-        border-radius: 0;  // désactiver le border-radius
-        background-color: transparent;
+        background: none;
+        cursor: pointer;
 
-        li {
-          border: none;
-          a, button {
-            width: max-content;
-            border-radius: 0;
-          }
-        }
-
-      }
-      ul > div {
-        display: flex;
-        width: 100%;
-
-        > *:nth-child(n+3) {
-          margin-left: auto;
+        &:hover {
+          text-decoration: underline;
         }
       }
-      // Suppression des bordures arrondies spécifiques pour le premier et le dernier élément
-      ul:last-child li >*, ul:first-child li >* {
-        border-radius: 0;
+
+      button {
+        font: inherit;
       }
     }
   }
-
 }

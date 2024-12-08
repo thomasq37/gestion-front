@@ -22,7 +22,7 @@ export class AppartementContactAddComponent implements OnInit {
       pseudo: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.email]),
       phoneNumber: new FormControl(null, [
-        Validators.pattern('^\\+?[0-9 ]{7,15}$') // Adapté pour les numéros internationaux
+        Validators.pattern('^\\+?[0-9 ]{7,15}$')
       ])
     });
   }
