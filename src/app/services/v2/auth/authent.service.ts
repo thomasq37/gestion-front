@@ -14,10 +14,15 @@ export class AuthentService {
   private apiUrl = `${environment.apiUrl}/auth`;
 
   async registerUser(registerUserRequestDTO: RegisterUserRequestDTO): Promise<SuccessResponse | ErrorResponse> {
-    return fetchWithHandling<SuccessResponse | ErrorResponse>(`${this.apiUrl}/inscription`, {
-      method: 'POST',
-      body: JSON.stringify(registerUserRequestDTO),
-    });
+    return fetchWithHandling<SuccessResponse | ErrorResponse>(
+      `${this.apiUrl}/inscription`,
+      {
+        method: 'POST',
+        body: JSON.stringify(registerUserRequestDTO),
+      },
+      'json',
+      false // Désactive `authFetch`
+    );
   }
 
   async authenticateUser(authenticateUserRequestDTO: AuthenticateUserRequestDTO): Promise<SuccessResponse> {

@@ -22,16 +22,23 @@ export async function handleHttpError(response: Response): Promise<void> {
     throw new CustomError(error.error || 'Une erreur est survenue.');
   }
 }
-export async function fetchWithHandling<T>(url: string, options: RequestInit, responseType: 'json' | 'text' = 'json'): Promise<T> {
-  const response = await authFetch(url, options); // Effectue la requête
+export async function fetchWithHandling<T>(
+  url: string,
+  options: RequestInit,
+  responseType: 'json' | 'text' = 'json',
+  useAuthFetch: boolean = true // Définit si `authFetch` doit être utilisé
+): Promise<T> {
+  const fetchFunction = useAuthFetch ? authFetch : basicFetch; // Choisir la méthode
+  const response = await fetchFunction(url, options); // Effectue la requête
   await handleHttpError(response); // Vérifie et gère les erreurs
-  // Retourne la réponse au format attendu
+
   if (responseType === 'json') {
     return response.json(); // Retourne JSON
   } else {
     return response.text() as unknown as T; // Retourne texte brut
   }
 }
+
 
 export function hasProprietaireRole(): boolean {
 
@@ -52,4 +59,10 @@ export function hasProprietaireRole(): boolean {
     return false;
   }
 
+}
+export async function basicFetch(url: RequestInfo, options: RequestInit = {}): Promise<Response> {
+  options.headers = new Headers(options.headers || {});
+  (options.headers as Headers).set('Content-Type', 'application/json');
+
+  return await fetch(url, options);
 }
