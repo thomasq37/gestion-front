@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://gestion-quin-06f134c36699.herokuapp.com/api'
+  apiUrl: 'https://gestion-v2-back-aecc6391967f.herokuapp.com/api'
 };
