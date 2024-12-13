@@ -1,27 +1,30 @@
 <section class="connexion">
   <form [formGroup]="loginForm" (ngSubmit)="connexion()">
-    <h1>Connectez-vous</h1>
-    <div>
-      <div>
-        <label for="email">Adresse e-mail <span aria-hidden="true">*</span></label>
+    <div class="header">
+<!--
+      <img src="/assets/img/v2/logo.png" alt="logo">
+-->
+      <h1>Se connecter à Optimmo</h1>
+    </div>
+    <div class="champs">
+      <div class="champ">
+        <label for="email">E-mail</label>
         <input
           type="email"
           id="email"
           formControlName="email"
-          placeholder="Entrez votre adresse e-mail"
           aria-required="true">
         <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.dirty" class="error">
           <span *ngIf="loginForm.get('email')?.errors?.['required']">L'adresse e-mail est obligatoire.</span>
           <span *ngIf="loginForm.get('email')?.errors?.['email']">Veuillez entrer une adresse e-mail valide.</span>
         </div>
       </div>
-      <div>
-        <label for="mdp">Mot de passe <span aria-hidden="true">*</span></label>
+      <div class="champ">
+        <label for="mdp">Mot de passe</label>
         <input
           type="password"
           id="mdp"
           formControlName="mdp"
-          placeholder="Entrez votre mot de passe"
           aria-required="true">
         <div *ngIf="loginForm.get('mdp')?.invalid && (loginForm.get('mdp')?.dirty)" class="error">
           <span *ngIf="loginForm.get('mdp')?.errors?.['required']">Le mot de passe est obligatoire.</span>
@@ -34,9 +37,9 @@
         {{ error }}
       </div>
       <button type="submit" [disabled]="!loginForm.valid">
-        Connexion
-      </button>
-      <div class="mode-connexion"><p>Vous n'avez pas de compte ?</p><a href="/inscription">Créer un compte</a></div>
+        Se connecter
+      </button><br>
+      <a class="mode-connexion" href="/inscription">Pas de compte ? Inscrivez-vous</a>
     </div>
   </form>
 </section>

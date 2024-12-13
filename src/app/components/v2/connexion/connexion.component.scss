@@ -2,12 +2,77 @@
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  *{
-    border-radius: .5rem;
+  background-color: #f7f7f8;
+  .header{
+    display: flex;
+    align-items: end;
+    width: max-content;
+    max-width: 100%;
+    margin: 2rem auto;
+    gap: 1rem;
+    h1{
+      margin-bottom: .1rem;;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #143b86;
+    }
+    img{
+      max-width: 4rem;
+    }
   }
   form{
+    background-color: white;
+    margin-top: 0;
+    padding: 2rem;
+    max-width: 100%;
+    .champs{
+      display: flex;
+      flex-direction: column;
+      .champ{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        margin-bottom: 1rem;
+        label{
+          font-weight: bold;
+        }
+        input{
+          width: 44rem;
+          max-width: 100%;
+          border-radius: .5rem;
+          border: 1px solid #989797;
+          padding: .4rem;
+        }
+        div{
+          color: red;
+          font-size: 1.2rem;
+          margin-top: .5rem;
+        }
+      }
+    }
+    button{
+      margin: 1rem auto 2rem;
+      width: 44rem;
+      max-width: 100%;
+      border-radius: .5rem;
+      border: none;
+      font-size: 1.3rem;
+      padding: .7rem;
+      font-weight: bold;
+      background-color: #143b86;
+      color: white;
+    }
+    button[disabled]{
+      background-color: gainsboro;
+      color: darkgray;
+    }
+    .mode-connexion{
+      margin: auto;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+/*  form{
     font-size: 1rem;
     padding: 1rem 2rem;
     width: 30rem;
@@ -60,5 +125,5 @@
         color: #143b86;
       }
     }
-  }
+  }*/
 }
