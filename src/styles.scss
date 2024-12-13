@@ -29,11 +29,12 @@ ul{
 p{
   margin: 0 !important;
 }
+.iti.iti--allow-dropdown {
+  width: 100%;
+}
 #telephone {
-  height: 3.5rem;
-  border-radius: .5rem;
-  background-color: #f5f5f5;
-  border: 1px solid grey;
+  width: 100%;
+  border: none;
 }
 .country-dropdown {
   width: 25rem !important;
