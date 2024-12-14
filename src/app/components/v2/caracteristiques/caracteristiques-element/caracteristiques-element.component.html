@@ -31,6 +31,14 @@
           <p>{{ caracteristiques.nombreDePieces }}</p>
         </dd>
       </div>
+      <!-- Meublée ou non -->
+      <div class="detail-item">
+        <dt><img src="./assets/img/balcon-icon.png" alt="Icône de balcon"></dt>
+        <dd>
+          <strong>Meublé:</strong>
+          <p>{{ caracteristiques.meubleeOuNon ? 'Oui' : 'Non' }}</p>
+        </dd>
+      </div>
 
       <!-- Surface intérieure -->
       <div class="detail-item">

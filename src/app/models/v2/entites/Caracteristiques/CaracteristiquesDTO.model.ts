@@ -10,6 +10,7 @@ export interface CaracteristiquesDTO {
   nombreDePieces: number;
   surfaceLogement: number;
   typeDeLogement: TypeDeLogement;
+  meubleeOuNon: boolean;
   balconOuTerrasse?: boolean;
   surfaceBalconOuTerrasse?: number;
   dpeLettre: DpeLettre;

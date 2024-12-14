@@ -15,6 +15,7 @@ export class PhotoCarousselComponent implements OnInit {
   private touchStartX: number = 0;
   private touchEndX: number = 0;
   private isClick: boolean = true;
+  @Input() onItem!: boolean;
 
   constructor(
     private modalService: NgbModal

@@ -1,26 +1,44 @@
 <section class="logements">
-  <app-header [h1]="'Liste des logements'"></app-header>
+  <app-header [h1]="'Vue d\'ensemble'"></app-header>
+
   <div class="contenu-logements {{loading ? 'on-load' : ''}}">
     <div class="container">
+      <div class="logements-title" *ngIf="!loading">
+<!--
+        <h1>Liste des logements</h1>
+-->
+        <p>Retrouvez ici l'ensemble de vos logements et les informations principales</p>
+      </div>
       <app-loader *ngIf="loading"></app-loader>
       <div *ngIf="error" class="error">{{ error }}</div>
       <ul *ngIf="logements.length > 0">
         <li *ngFor="let logement of logements">
+          <app-photo-caroussel [photos]="logement.photos" [onItem]="false"></app-photo-caroussel>
           <a href="/logements/{{logement.masqueId}}">
-            <div *ngIf="logement.adresse; else adresseManquante">
-              <p class="adresse">
-                <span>{{ logement.adresse.numero }} {{ logement.adresse.voie }} {{ logement.adresse.complementAdresse }}</span>
-                <span>{{ logement.adresse.codePostal }}, {{ logement.adresse.pays }}</span>
-              </p>
+          <div class="logement-infos">
+            <div class="header-logement-infos">
+              <p class="type-logement">{{ logement.caracteristiques.typeDeLogement | titlecase }}</p>
+              <p class="prix-loyer-actuelle">{{logement.periodesDeLocation[0].tarif | currency: 'EUR':'symbol':'1.0-0'}} /mois</p>
             </div>
-            <img
-              *ngIf="getPhotoPrincipale(logement);"
-              [src]="getPhotoPrincipale(logement)"
-              alt="Photo principale"/>
-            <ng-template #adresseManquante>
-              <span class="adresse-manquante">Adresse à renseigner</span>
-            </ng-template>
+            <p class="ville-logement">{{logement.adresse.ville}}</p>
+            <p class="details-logement">{{logement.caracteristiques.nombreDePieces}} pièces • {{logement.caracteristiques.surfaceLogement }} m² {{logement.caracteristiques.meubleeOuNon ? '•  Meublé' : ''}} • {{getBalconOuTerrasse(logement.caracteristiques)}}</p>
+            <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
+          </div>
           </a>
+
+          <!--<div *ngIf="logement.adresse; else adresseManquante">
+            <p class="adresse">
+              <span>{{ logement.adresse.numero }} {{ logement.adresse.voie }} {{ logement.adresse.complementAdresse }}</span>
+              <span>{{ logement.adresse.codePostal }}, {{ logement.adresse.pays }}</span>
+            </p>
+          </div>
+          <img
+            *ngIf="getPhotoPrincipale(logement);"
+            [src]="getPhotoPrincipale(logement)"
+            alt="Photo principale"/>
+          <ng-template #adresseManquante>
+            <span class="adresse-manquante">Adresse à renseigner</span>
+          </ng-template>-->
 
         </li>
       </ul>

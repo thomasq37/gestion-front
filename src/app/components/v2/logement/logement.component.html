@@ -3,7 +3,7 @@
   <div class="contenu-logement {{loading ? 'on-load' : ''}}">
     <div class="container">
       <app-loader *ngIf="loading"></app-loader>
-      <app-photo-caroussel *ngIf="logement" [photos]="logement.photos"></app-photo-caroussel>
+      <app-photo-caroussel [onItem]="true" *ngIf="logement" [photos]="logement.photos"></app-photo-caroussel>
       <app-adresse-element *ngIf="logement" [adresse]="logement.adresse"></app-adresse-element>
       <app-caracteristiques-element *ngIf="logement" [caracteristiques]="logement.caracteristiques"></app-caracteristiques-element>
       <app-frais-table *ngIf="logement" [frais]="logement.frais"></app-frais-table>

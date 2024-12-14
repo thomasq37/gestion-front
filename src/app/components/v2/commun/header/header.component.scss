@@ -8,12 +8,13 @@ header{
     flex-wrap: wrap;
     gap: 1rem;
     width: 100%;
-    align-items: center;
+    align-items: end;
     font-weight: bold;
     h1{
       color: white;
       height: max-content;
       font-weight: bold;
+      margin-bottom: 0;
     }
   }
 }

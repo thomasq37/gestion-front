@@ -4,11 +4,71 @@
     display: flex;
   }
   .container{
+    .logements-title{
+      margin-bottom: 2rem;
+      h1{
+        font-weight: bold;
+        color: #143b86;
+        font-size: 1.9rem;
+      }
+      p{
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: grey;
+      }
+    }
     ul{
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-      li {
+
+      li{
+        border-radius: .5rem;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.22);
+        a{
+          text-decoration: none;
+          .logement-infos{
+            padding: 2rem;
+
+            .header-logement-infos{
+              display: flex;
+              justify-content: space-between;
+              align-items: end;
+              .type-logement{
+                font-weight: bold;
+                letter-spacing: .5px;
+                font-size: 1.7rem;
+              }
+              .prix-loyer-actuelle{
+                color: #0eb7fc;
+                font-weight: bold;
+                font-size: 1.9rem;
+              }
+            }
+            .ville-logement{
+              color: #676767;
+              text-transform: uppercase;
+              margin: .5rem 0 !important;
+              letter-spacing: .5px;
+            }
+            .details-logement{
+              font-weight: bold;
+              color: grey;
+              font-size: 1.4rem;
+              font-family: Lexend,sans-serif;
+            }
+            .dpe-logement{
+              width: 9rem;
+              margin-top: 1rem;
+            }
+
+          }
+        }
+
+
+      }
+      /*li {
         a{
           overflow-y: scroll;
           box-shadow: rgba(188, 189, 191, 0.2) 0 2px 11px;
@@ -38,7 +98,7 @@
           }
         }
 
-      }
+      }*/
     }
   }
 }
