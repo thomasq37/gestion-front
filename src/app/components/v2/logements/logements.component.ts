@@ -42,7 +42,7 @@ export class LogementsComponent implements OnInit {
   }
   getBalconOuTerrasse(caracteristiques: CaracteristiquesDTO): string {
     if (caracteristiques?.balconOuTerrasse) {
-      return caracteristiques.typeDeLogement === 'APPARTEMENT' ? 'Balcon(s)' : 'Terrasse(s)';
+      return caracteristiques.typeDeLogement === 'APPARTEMENT' ? '• Balcon(s)' : '• Terrasse(s)';
     }
     return ''; // Si aucun balcon ou terrasse n'est disponible
   }
