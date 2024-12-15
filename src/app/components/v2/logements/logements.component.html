@@ -18,7 +18,7 @@
           <div class="logement-infos">
             <div class="header-logement-infos">
               <p class="type-logement">{{ logement.caracteristiques.typeDeLogement | titlecase }}</p>
-              <p class="prix-loyer-actuelle">{{logement.periodesDeLocation[0].tarif | currency: 'EUR':'symbol':'1.0-0'}} /mois</p>
+              <p class="prix-loyer-actuelle">{{logement.periodesDeLocation[0] ? (logement.periodesDeLocation[0].tarif | currency: 'EUR':'symbol':'1.0-0') +  ' /mois': '--'}}</p>
             </div>
             <p class="ville-logement">{{logement.adresse.ville}}</p>
             <p class="details-logement">{{logement.caracteristiques.nombreDePieces}} pièces • {{logement.caracteristiques.surfaceLogement }} m² {{logement.caracteristiques.meubleeOuNon ? '•  Meublé' : ''}}  {{getBalconOuTerrasse(logement.caracteristiques)}}</p>
