@@ -27,10 +27,11 @@ export class LogementsComponent implements OnInit {
       this.error = 'Erreur lors du chargement des logements.';
     } finally {
       this.logements.sort((a, b) => {
-        const dateAchatA = new Date(a.caracteristiques.dateAchat).getTime();
-        const dateAchatB = new Date(b.caracteristiques.dateAchat).getTime();
+        const dateAchatA = a.caracteristiques?.dateAchat ? new Date(a.caracteristiques.dateAchat).getTime() : 0;
+        const dateAchatB = b.caracteristiques?.dateAchat ? new Date(b.caracteristiques.dateAchat).getTime() : 0;
         return dateAchatB - dateAchatA;
       });
+
       this.logements.forEach(logement => {
         logement.periodesDeLocation.sort((a, b) => {
           const dateA = new Date(a.dateDeDebut).getTime();
@@ -39,7 +40,6 @@ export class LogementsComponent implements OnInit {
         });
       });
       this.loading = false;
-
     }
   }
   getBalconOuTerrasse(caracteristiques: CaracteristiquesDTO): string {

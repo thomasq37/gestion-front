@@ -12,7 +12,7 @@
         <li *ngFor="let logement of logements">
           <app-photo-caroussel [photos]="logement.photos" [onItem]="false"></app-photo-caroussel>
           <a href="/logements/{{logement.masqueId}}">
-          <div class="logement-infos">
+          <div class="logement-infos" *ngIf="logement.adresse && logement.caracteristiques">
             <div class="header-logement-infos">
               <p class="type-logement">{{ logement.caracteristiques.typeDeLogement | titlecase }}</p>
               <p class="prix-loyer-actuelle">{{logement.periodesDeLocation[0] ? (logement.periodesDeLocation[0].tarif | currency: 'EUR':'symbol':'1.0-0') +  ' /mois': 'Non loué'}}</p>
