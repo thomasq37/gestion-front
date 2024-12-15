@@ -23,6 +23,16 @@ export class LogementsComponent implements OnInit {
     this.error = null;
     try {
       this.logements = await this.logementService.listerLogements();
+      this.logements.sort((a, b) => {
+        const dateAchatA = new Date(a.caracteristiques.dateAchat).getTime();
+        const dateAchatB = new Date(b.caracteristiques.dateAchat).getTime();
+        return dateAchatB - dateAchatA; // Date décroissante
+      });
+      this.logements.forEach(logement => {
+        logement.periodesDeLocation = [logement.periodesDeLocation.reduce((max, current) => {
+          return new Date(current.dateDeDebut) > new Date(max.dateDeDebut) ? current : max;
+        })];
+      });
     } catch (err) {
       this.error = 'Erreur lors du chargement des logements.';
     } finally {
