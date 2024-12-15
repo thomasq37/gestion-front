@@ -26,7 +26,7 @@ export class LogementsComponent implements OnInit {
       this.logements.sort((a, b) => {
         const dateAchatA = new Date(a.caracteristiques.dateAchat).getTime();
         const dateAchatB = new Date(b.caracteristiques.dateAchat).getTime();
-        return dateAchatB - dateAchatA; // Date décroissante
+        return dateAchatB - dateAchatA;
       });
       this.logements.forEach(logement => {
         logement.periodesDeLocation = [logement.periodesDeLocation.reduce((max, current) => {
@@ -39,21 +39,10 @@ export class LogementsComponent implements OnInit {
       this.loading = false;
     }
   }
-  getPhotoPrincipale(logement: LogementDTO): string | null {
-    const photoPrincipale = logement.photos.find(photo => photo.isPrincipal);
-    if (photoPrincipale && photoPrincipale.image) {
-      return `data:image/jpeg;base64,${photoPrincipale.image}`;
-    }
-    return 'assets/img/v2/no-image.jpg';
-  }
-  titleCaseWord(word: string) {
-    if (!word) return word;
-    return word[0].toUpperCase() + word.substr(1).toLowerCase();
-  }
   getBalconOuTerrasse(caracteristiques: CaracteristiquesDTO): string {
     if (caracteristiques?.balconOuTerrasse) {
       return caracteristiques.typeDeLogement === 'APPARTEMENT' ? '• Balcon(s)' : '• Terrasse(s)';
     }
-    return ''; // Si aucun balcon ou terrasse n'est disponible
+    return '';
   }
 }

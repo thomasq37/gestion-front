@@ -20,8 +20,7 @@
     ul{
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-
+      gap: 2rem;
       li{
         border-radius: .5rem;
         overflow: hidden;
@@ -65,40 +64,7 @@
 
           }
         }
-
-
       }
-      /*li {
-        a{
-          overflow-y: scroll;
-          box-shadow: rgba(188, 189, 191, 0.2) 0 2px 11px;
-          height: 9rem;
-          border: 1px solid lightgrey;
-          padding: 1.5rem 1rem;
-          display: flex;
-          justify-content: space-between;
-          text-decoration: none;
-          color: black;
-          .adresse{
-            display: flex;
-            flex-direction: column;
-          }
-          .adresse span:last-child{
-            color: grey;
-          }
-          .adresse span:first-child{
-            font-weight: bold;
-          }
-          img{
-            height: 100%;
-            width: 7rem;
-          }
-          .adresse-manquante{
-            font-weight: bold;
-          }
-        }
-
-      }*/
     }
   }
 }

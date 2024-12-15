@@ -4,9 +4,6 @@
   <div class="contenu-logements {{loading ? 'on-load' : ''}}">
     <div class="container">
       <div class="logements-title" *ngIf="!loading">
-<!--
-        <h1>Liste des logements</h1>
--->
         <p>Retrouvez ici l'ensemble de vos logements et les informations principales</p>
       </div>
       <app-loader *ngIf="loading"></app-loader>
@@ -25,21 +22,6 @@
             <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
           </div>
           </a>
-
-          <!--<div *ngIf="logement.adresse; else adresseManquante">
-            <p class="adresse">
-              <span>{{ logement.adresse.numero }} {{ logement.adresse.voie }} {{ logement.adresse.complementAdresse }}</span>
-              <span>{{ logement.adresse.codePostal }}, {{ logement.adresse.pays }}</span>
-            </p>
-          </div>
-          <img
-            *ngIf="getPhotoPrincipale(logement);"
-            [src]="getPhotoPrincipale(logement)"
-            alt="Photo principale"/>
-          <ng-template #adresseManquante>
-            <span class="adresse-manquante">Adresse à renseigner</span>
-          </ng-template>-->
-
         </li>
       </ul>
     </div>
