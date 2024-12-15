@@ -93,8 +93,9 @@ a{
 
 .custom-card {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ccc;
+  border: 1px solid #143b86;
   border-radius: 4px;
+  overflow: hidden;
 
   .custom-card-header {
     display: flex;
