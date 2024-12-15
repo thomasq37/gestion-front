@@ -64,7 +64,6 @@ h2{
 body{
   font-family: Arial, sans-serif;
   font-size: 1.5rem;
-  background-color: #FCFCFC;
   min-height: 100vh;
 }
 a{
@@ -93,17 +92,17 @@ a{
 
 .custom-card {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid #143b86;
+  border: 1px solid #d1d1d1;
   border-radius: 4px;
   overflow: hidden;
-
+  background-color: white;
   .custom-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: white;
     padding: 1rem;
-    border-bottom: 1px solid #143b86;
+    border-bottom: 1px solid #d1d1d1;
     h2 {
       font-size: 1.6rem;
       padding: 0;
