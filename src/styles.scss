@@ -102,7 +102,7 @@ a{
     align-items: center;
     background-color: white;
     padding: 1rem;
-    border-bottom: 1px solid #d1d1d1;
+    border-bottom: 1px solid #cecece;
     h2 {
       font-size: 1.6rem;
       padding: 0;
@@ -140,4 +140,7 @@ td, th, .locataire{
   thead, tbody, tfoot, tr, td, th {
     font-size: 3.2vw;
   }
+}
+strong{
+  color: #143b86;
 }
