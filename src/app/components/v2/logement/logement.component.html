@@ -1,7 +1,13 @@
 <section class="logement">
   <app-header [h1]="'Synthèse logement'"></app-header>
   <div class="contenu-logement {{loading ? 'on-load' : ''}}">
-    <app-photo-caroussel [onItem]="false" *ngIf="logement" [photos]="logement.photos"></app-photo-caroussel>
+    <app-loader *ngIf="loading"></app-loader>
+    <div class="fil-ariane">
+      <a href="/logements">Vue d'ensemble</a>
+      <span class="arrow-next">></span>
+      <span class="onglet-actuel">Synthèse logement</span>
+    </div>
+    <app-photo-caroussel [onItem]="true" *ngIf="logement" [photos]="logement.photos"></app-photo-caroussel>
     <div class="container" *ngIf="logement">
       <h2>{{logement.caracteristiques.typeDeLogement | titlecase}} {{logement.adresse.numero}} {{logement.adresse.voie}}</h2>
       <!--
@@ -16,7 +22,6 @@
         <div>{{getBalconOuTerrasse(logement.caracteristiques)}}</div>
       </div>
       <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/v2/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
-      <app-loader *ngIf="loading"></app-loader>
       <nav class="nav-logement">
         <ul>
           <li

@@ -1,10 +1,10 @@
 <section class="photo-caroussel">
-  <div class="{{onItem ? 'custom-card' : ''}}">
-    <div *ngIf="onItem" class="custom-card-header">
-      <h2>{{photos.length === 0 ? 'Photos à renseigner' : 'Photos'}}</h2>
-      <img (click)="modifierPhotos()" src="./assets/img/v2/edit-icon.svg" alt="icone de modification"
-      >
-    </div>
+  <img class="btn-modifier-photo" *ngIf="onItem" (click)="modifierPhotos()" src="assets/img/v2/edit-icon.svg" alt="icone de modification">
+
+<!--
+  <button *ngIf="onItem" class="btn-modifier-photo" (click)="modifierPhotos()">Mettre à jour</button>
+-->
+  <div>
     <div class="carousel-container {{onItem ? 'on-item' : ''}}"
          *ngIf="photos.length > 0"
          (touchstart)="onTouchStart($event)"

@@ -1,6 +1,22 @@
 .contenu-logement {
   background-color: #f7f7f8;
   min-height: 90vh;
+  .fil-ariane{
+    color: #143b86;
+    display: flex;
+    a{
+      padding: 1rem;
+      display: block;
+    }
+    .arrow-next{
+      color: grey;
+      font-weight: bold;
+      padding-right: 1rem;
+    }
+    .onglet-actuel{
+      text-decoration: underline;
+    }
+  }
   &.on-load {
     display: flex;
     justify-content: center;

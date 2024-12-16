@@ -1,5 +1,22 @@
 .photo-caroussel {
   height: 100%;
+  position: relative;
+  .btn-modifier-photo{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    width: 3rem;
+    border-radius: 50%;
+    padding: .3rem;
+    border: 1px solid #d8d8d8;
+    box-shadow: rgba(188, 189, 191, 0.2) 0 2px 11px;
+    background-color: white;
+    opacity: .8;
+    &:hover{
+      opacity: 1;
+    }
+  }
   .custom-card {
   }
   .carousel-container.on-item{
