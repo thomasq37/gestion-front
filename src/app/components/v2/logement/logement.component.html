@@ -32,7 +32,7 @@
           </li>
         </ul>
       </nav>
-      <app-adresse-element *ngIf="activeIndex === 0" [adresse]="logement.adresse"></app-adresse-element>
+      <app-adresse-element *ngIf="activeIndex === 0" [logementMasqueId]="logement.masqueId" [adresse]="logement.adresse"></app-adresse-element>
       <app-caracteristiques-element *ngIf="activeIndex === 1" [caracteristiques]="logement.caracteristiques"></app-caracteristiques-element>
       <app-frais-table *ngIf="activeIndex === 2" [frais]="logement.frais"></app-frais-table>
       <app-periode-location-table *ngIf="activeIndex === 3" [periodesDeLocation]="logement.periodesDeLocation"></app-periode-location-table>

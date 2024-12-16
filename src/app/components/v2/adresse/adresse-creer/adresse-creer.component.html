@@ -1,0 +1,85 @@
+<section class="adresse-creer">
+
+  <form [formGroup]="adresseForm" (ngSubmit)="creerAdresse()">
+    <div class="header">
+      <h1>Créer une adresse</h1>
+    </div>
+    <div class="champs">
+      <div class="champ">
+        <label for="numero">Numéro</label>
+        <input
+          type="text"
+          id="numero"
+          formControlName="numero"
+          aria-required="true">
+        <div *ngIf="adresseForm.get('numero')?.invalid && adresseForm.get('numero')?.dirty" class="error">
+          <span *ngIf="adresseForm.get('numero')?.errors?.['required']">Le numéro est obligatoire.</span>
+          <span *ngIf="adresseForm.get('numero')?.errors?.['pattern']">Le numéro doit être un entier.</span>
+        </div>
+      </div>
+      <div class="champ">
+        <label for="voie">Voie</label>
+        <input
+          type="text"
+          id="voie"
+          formControlName="voie"
+          aria-required="true">
+        <div *ngIf="adresseForm.get('voie')?.invalid && adresseForm.get('voie')?.dirty" class="error">
+          <span *ngIf="adresseForm.get('voie')?.errors?.['required']">La voie est obligatoire.</span>
+        </div>
+      </div>
+      <div class="champ">
+        <label for="complementAdresse">Complément d'adresse</label>
+        <input
+          type="text"
+          id="complementAdresse"
+          formControlName="complementAdresse">
+      </div>
+      <div class="champ">
+        <label for="codePostal">Code postal</label>
+        <input
+          type="text"
+          id="codePostal"
+          formControlName="codePostal"
+          aria-required="true">
+        <div *ngIf="adresseForm.get('codePostal')?.invalid && adresseForm.get('codePostal')?.dirty" class="error">
+          <span *ngIf="adresseForm.get('codePostal')?.errors?.['required']">Le code postal est obligatoire.</span>
+          <span *ngIf="adresseForm.get('codePostal')?.errors?.['pattern']">Le code postal doit contenir exactement 5 chiffres.</span>
+        </div>
+      </div>
+      <div class="champ">
+        <label for="ville">Ville</label>
+        <input
+          type="text"
+          id="ville"
+          formControlName="ville"
+          aria-required="true">
+        <div *ngIf="adresseForm.get('ville')?.invalid && adresseForm.get('ville')?.dirty" class="error">
+          <span *ngIf="adresseForm.get('ville')?.errors?.['required']">La ville est obligatoire.</span>
+        </div>
+      </div>
+      <div class="champ">
+        <label for="pays">Pays</label>
+        <select id="pays" formControlName="pays" aria-required="true">
+          <option value="" disabled>Sélectionner un pays</option>
+          <option *ngFor="let pays of paysList" [value]="pays">{{ pays }}</option>
+        </select>
+        <div *ngIf="adresseForm.get('pays')?.invalid && adresseForm.get('pays')?.dirty" class="error">
+          <span *ngIf="adresseForm.get('pays')?.errors?.['required']">Le pays est obligatoire.</span>
+        </div>
+      </div>
+      <div class="error">
+        {{ error }}
+      </div>
+      <button type="submit" [disabled]="!adresseForm.valid">
+        Créer l'adresse
+      </button>
+    </div>
+    <div class="fil-ariane">
+      <a href="/logements/{{logementMasqueId}}">Sythèse logement</a>
+      <span class="arrow-next">></span>
+      <span class="onglet-actuel">Créer adresse</span>
+    </div>
+  </form>
+
+</section>

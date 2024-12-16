@@ -2,7 +2,7 @@
   <div class="custom-card">
     <div class="custom-card-header">
       <h2>{{adresse === null ? 'Adresse à renseigner' : 'Adresse'}}</h2>
-      <img (click)="modifierAdresse()" src="../../../../../assets/img/v2/edit-icon.svg" alt="icone de modification"
+      <img (click)="modifierOuCreerAdresse(adresse, logementMasqueId)" src="assets/img/v2/edit-icon.svg" alt="icone de modification"
       >
     </div>
     <div class="adresse-contenu" *ngIf="adresse">

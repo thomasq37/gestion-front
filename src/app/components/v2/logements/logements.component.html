@@ -3,7 +3,7 @@
 
   <div class="contenu-logements {{loading ? 'on-load' : ''}}">
     <div class="container">
-      <div class="logements-title" *ngIf="!loading">
+      <div class="logements-title" *ngIf="!loading && !error">
         <p>Retrouvez ici l'ensemble de vos logements et les informations principales</p>
       </div>
       <app-loader *ngIf="loading"></app-loader>
@@ -29,7 +29,7 @@
           </a>
         </li>
       </ul>
-      <button (click)="creerLogement()" class="btn-ajout-logement" *ngIf="!loading">Ajouter un logement</button>
+      <button (click)="creerLogement()" class="btn-ajout-logement" *ngIf="!error && !loading">Ajouter un logement</button>
     </div>
   </div>
 </section>
