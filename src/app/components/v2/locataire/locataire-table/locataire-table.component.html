@@ -1,0 +1,28 @@
+<section class="locataire-element">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h2>{{ locataires.length === 0 ? 'Aucun locataire trouvé' : 'Locataires' }}</h2>
+      <img (click)="modifierLocataires()" src="./assets/img/v2/edit-icon.svg" alt="icone de modification">
+    </div>
+    <div class="locataire-contenu" *ngIf="locataires.length > 0">
+      <table>
+        <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let locataire of locataires">
+          <td>{{ locataire.nom }}</td>
+          <td>{{ locataire.prenom }}</td>
+          <td class="email"><a href="mailto:{{ locataire.email }}">{{ locataire.email }}</a></td>
+          <td class="phone"><a href="tel:{{ locataire.telephone }}">{{ locataire.telephone }}</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

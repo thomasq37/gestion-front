@@ -56,6 +56,7 @@ import { PropTableComponent } from './components/v2/commun/prop-table/prop-table
 import { FraisTableComponent } from './components/v2/frais/frais-table/frais-table.component';
 import { PeriodeLocationTableComponent } from './components/v2/periode-location/periode-location-table/periode-location-table.component';
 import {ContactTableComponent} from "./components/v2/contact/contact-table/contact-table.component";
+import { LocataireTableComponent } from './components/v2/locataire/locataire-table/locataire-table.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -107,6 +108,7 @@ registerLocaleData(localeFr, 'fr');
     FraisTableComponent,
     PeriodeLocationTableComponent,
     ContactTableComponent,
+    LocataireTableComponent,
   ],
   imports: [
     BrowserModule,

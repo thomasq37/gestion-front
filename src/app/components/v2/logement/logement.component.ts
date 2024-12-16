@@ -3,6 +3,7 @@ import {LogementDTO} from "../../../models/v2/entites/Logement/LogementDTO.model
 import {LogementService} from "../../../services/v2/logement/logement.service";
 import {ActivatedRoute} from "@angular/router";
 import {CaracteristiquesDTO} from "../../../models/v2/entites/Caracteristiques/CaracteristiquesDTO.model";
+import {LocataireDTO} from "../../../models/v2/entites/Locataire/LocataireDTO.model";
 
 @Component({
   selector: 'app-logement',
@@ -13,7 +14,7 @@ export class LogementComponent {
   logement!: LogementDTO;
   loading = false;
   error: string | null = null;
-  menuItems = ['Adresse', 'Caractéristiques', 'Frais fixes', 'Périodes de locations', 'Contacts'];
+  menuItems = ['Adresse', 'Caractéristiques', 'Frais fixes', 'Périodes de locations', 'Locataires', 'Contacts'];
   activeIndex = 0;
 
   constructor(
@@ -59,5 +60,16 @@ export class LogementComponent {
     return periodeEnCours
       ? `${periodeEnCours.tarif.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })} /mois`
       : 'Non loué';
+  }
+  getLocataires(): LocataireDTO[] {
+    const locatairesSet = new Set<LocataireDTO>(); // To avoid duplicates
+
+    this.logement.periodesDeLocation.forEach(periode => {
+      if (periode.locataires) {
+        periode.locataires.forEach(locataire => locatairesSet.add(locataire)); // Add each locataire to the set
+      }
+    });
+
+    return Array.from(locatairesSet); // Convert the set back to an array
   }
 }
