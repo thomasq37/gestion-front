@@ -19,7 +19,7 @@
         <div>{{logement.caracteristiques.nombreDePieces}} pièces</div>
         <div>{{logement.caracteristiques.surfaceLogement }} m²</div>
         <div>{{logement.caracteristiques.meubleeOuNon ? 'Meublé' : 'Non meublé'}}</div>
-        <div>{{getBalconOuTerrasse(logement.caracteristiques)}}</div>
+        <div *ngIf="logement.caracteristiques.balconOuTerrasse">{{getBalconOuTerrasse(logement.caracteristiques)}}</div>
       </div>
       <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/v2/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
       <nav class="nav-logement">
