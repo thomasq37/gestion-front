@@ -16,6 +16,7 @@ import {AlreadyAuthGuard} from "./guards/already-auth.guard";
 import {InscriptionComponent} from "./components/v2/inscription/inscription.component";
 import {LogementComponent} from "./components/v2/logement/logement.component";
 import {AdresseCreerComponent} from "./components/v2/adresse/adresse-creer/adresse-creer.component";
+import {AdresseModifierComponent} from "./components/v2/adresse/adresse-modifier/adresse-modifier.component";
 
 
 const routes: Routes = [
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'inscription', component: InscriptionComponent, canActivate: [AlreadyAuthGuard] },
   { path: 'logements/:masqueId', component: LogementComponent, canActivate: [AuthGuard] },
   { path: 'logements/:masqueId/adresse/creer', component: AdresseCreerComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:masqueId/adresse/modifier', component: AdresseModifierComponent, canActivate: [AuthGuard] },
 
 ];
 @NgModule({

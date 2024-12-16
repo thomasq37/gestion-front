@@ -58,6 +58,7 @@ import { PeriodeLocationTableComponent } from './components/v2/periode-location/
 import {ContactTableComponent} from "./components/v2/contact/contact-table/contact-table.component";
 import { LocataireTableComponent } from './components/v2/locataire/locataire-table/locataire-table.component';
 import { AdresseCreerComponent } from './components/v2/adresse/adresse-creer/adresse-creer.component';
+import { AdresseModifierComponent } from './components/v2/adresse/adresse-modifier/adresse-modifier.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -111,6 +112,7 @@ registerLocaleData(localeFr, 'fr');
     ContactTableComponent,
     LocataireTableComponent,
     AdresseCreerComponent,
+    AdresseModifierComponent,
   ],
   imports: [
     BrowserModule,

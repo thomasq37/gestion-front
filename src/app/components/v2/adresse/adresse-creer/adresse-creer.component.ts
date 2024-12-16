@@ -34,7 +34,7 @@ export class AdresseCreerComponent {
     });
   }
 
-  async creerAdresse(): Promise<void> {
+  async creerAdressePourLogement(): Promise<void> {
     const adresse: AdresseDTO = this.adresseForm.value as AdresseDTO;
     try {
       await this.adresseService.creerAdressePourLogement(this.logementMasqueId, adresse);
