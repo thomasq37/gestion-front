@@ -2,12 +2,12 @@
   <div class="custom-card">
     <div class="custom-card-header">
       <h2>{{caracteristiques === null ? 'Caractéristiques à renseigner' : 'Caractéristiques'}}</h2>
-      <img (click)="modifierCaracteristiques()" src="../../../../../assets/img/v2/edit-icon.svg" alt="icone de modification">
+      <img (click)="modifierCaracteristiques()" src="assets/img/v2/edit-icon.svg" alt="icone de modification">
     </div>
     <div class="caracteristiques-contenu" *ngIf="caracteristiques">
       <!-- Type de logement -->
       <div class="detail-item">
-        <dt><img src="./assets/img/v2/adresse-icon.jpg" alt="Icône d'adresse"></dt>
+        <dt><img class="icone-catgeorie" src="assets/img/v2/adresse-icon.jpg" alt="Icône d'adresse"></dt>
         <dd>
           <strong>Type de logement:</strong>
           <p>{{ caracteristiques.typeDeLogement }}</p>
@@ -16,7 +16,7 @@
 
       <!-- Date d'achat -->
       <div class="detail-item">
-        <dt><img src="./assets/img/calendar.svg" alt="Icône calendrier"></dt>
+        <dt><img class="icone-catgeorie" src="assets/img/calendar.svg" alt="Icône calendrier"></dt>
         <dd>
           <strong>Date d'achat:</strong>
           <p>{{caracteristiques.dateAchat | customDate}}</p>
@@ -25,7 +25,7 @@
 
       <!-- Nombre de pièces -->
       <div class="detail-item">
-        <dt><img src="./assets/img/nb-pieces-icon.png" alt="Icône de pièces"></dt>
+        <dt><img class="icone-catgeorie" src="assets/img/nb-pieces-icon.png" alt="Icône de pièces"></dt>
         <dd>
           <strong>Nombre de pièces:</strong>
           <p>{{ caracteristiques.nombreDePieces }}</p>
@@ -33,7 +33,7 @@
       </div>
       <!-- Meublée ou non -->
       <div class="detail-item">
-        <dt><img src="./assets/img/balcon-icon.png" alt="Icône de balcon"></dt>
+        <dt><img class="icone-catgeorie" src="assets/img/balcon-icon.png" alt="Icône de balcon"></dt>
         <dd>
           <strong>Meublé:</strong>
           <p>{{ caracteristiques.meubleeOuNon ? 'Oui' : 'Non' }}</p>
@@ -42,7 +42,7 @@
 
       <!-- Surface intérieure -->
       <div class="detail-item">
-        <dt><img src="./assets/img/surface-icon.png" alt="Icône de surface"></dt>
+        <dt><img class="icone-catgeorie" src="assets/img/surface-icon.png" alt="Icône de surface"></dt>
         <dd>
           <strong>Surface:</strong>
           <p>{{ caracteristiques.surfaceLogement }} m²</p>
@@ -51,7 +51,7 @@
 
       <!-- Extérieur -->
       <div class="detail-item">
-        <dt><img src="./assets/img/balcon-icon.png" alt="Icône de balcon"></dt>
+        <dt><img class="icone-catgeorie" src="assets/img/balcon-icon.png" alt="Icône de balcon"></dt>
         <dd>
           <strong>Extérieur:</strong>
           <p>{{ caracteristiques.balconOuTerrasse ? 'Oui' : 'Non' }}</p>
@@ -60,7 +60,7 @@
 
       <!-- Surface extérieure -->
       <div class="detail-item">
-        <dt><img src="./assets/img/surface-icon.png" alt="Icône de surface"></dt>
+        <dt><img class="icone-catgeorie" src="assets/img/surface-icon.png" alt="Icône de surface"></dt>
         <dd>
           <strong>Surface extérieur:</strong>
           <p>{{ caracteristiques.surfaceBalconOuTerrasse ? caracteristiques.surfaceBalconOuTerrasse + ' m²' : 'Non' }}</p>
@@ -69,7 +69,7 @@
 
       <!-- Prix d'achat -->
       <div class="detail-item">
-        <dt><img src="./assets/img/euro-icon.svg" alt="Icône de prix"></dt>
+        <dt><img class="icone-catgeorie" src="assets/img/euro-icon.svg" alt="Icône de prix"></dt>
         <dd>
           <strong>Prix d'achat:</strong>
           <p>{{ caracteristiques.montantAchat | number:'1.0-2':'fr-FR' }} €</p>
@@ -78,7 +78,7 @@
 
       <!-- Frais d'acquisition -->
       <div class="detail-item">
-        <dt><img src="../../../../../assets/img/v2/notary-icon.svg" alt="Icône de frais"></dt>
+        <dt><img class="icone-catgeorie" src="assets/img/v2/notary-icon.svg" alt="Icône de frais"></dt>
         <dd>
           <strong>Frais d'acquisition:</strong>
           <p>{{ caracteristiques.montantFraisDeNotaireEtNegociation | number:'1.0-2':'fr-FR' }} €</p>
@@ -87,7 +87,7 @@
 
       <!-- Estimation net vendeur -->
       <div class="detail-item">
-        <dt><img src="../../../../../assets/img/v2/estimate-icon.svg" alt="Icône d'estimation"></dt>
+        <dt><img class="icone-catgeorie" src="assets/img/v2/estimate-icon.svg" alt="Icône d'estimation"></dt>
         <dd>
           <strong>Estimation net vendeur:</strong>
           <p>{{ caracteristiques.montantEstimation === null || caracteristiques.montantEstimation === 0 ? "A réaliser" : (caracteristiques.montantEstimation | number:'1.0-2':'fr-FR') + " €" }}</p>
@@ -96,11 +96,11 @@
 
       <!-- Classe énergie -->
       <div class="detail-item energie">
-        <dt><img src="./assets/img/energie-icon.png" alt="Icône de la classe énergie"></dt>
+        <dt><img class="icone-catgeorie" src="assets/img/energie-icon.png" alt="Icône de la classe énergie"></dt>
         <dd>
           <strong>Classe énergie:</strong>
           <img *ngIf="caracteristiques.dpeLettre !== null"
-               src="./assets/img/energie-{{caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
+               src="assets/img/v2/energie-{{caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
           <p *ngIf="caracteristiques.dpeLettre === null">Non renseigné</p>
         </dd>
       </div>

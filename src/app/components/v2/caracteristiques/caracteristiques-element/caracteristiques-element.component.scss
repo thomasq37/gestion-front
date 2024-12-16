@@ -12,9 +12,11 @@
         flex-direction: column;
         gap: .2rem;
       }
-      img {
+      .icone-catgeorie {
         width: 3.5rem;
         border-radius: 50%;
+        background-color: #f0f1f5;
+        height: 3.5rem;
       }
     }
     .detail-item.energie {
