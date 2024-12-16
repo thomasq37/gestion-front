@@ -1,47 +1,78 @@
 .photo-caroussel {
   height: 100%;
   position: relative;
-  .btn-modifier-photo{
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    z-index: 1000;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    padding: .3rem;
-    border: 1px solid #d8d8d8;
-    box-shadow: rgba(188, 189, 191, 0.2) 0 2px 11px;
-    background-color: white;
-    opacity: .8;
-    &:hover{
-      opacity: 1;
-    }
-  }
-  .custom-card {
-  }
-  .carousel-container.on-item{
-    ngb-carousel {
-      background-color: #143b86;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-    }
-  }
-  .carousel-container {
-    ngb-carousel {
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      background-color: #f7f7f8;
+  .carousel-and-photos {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
 
-      img {
-        width: 100%;
+    .side-photos{
+      display: none
+    }
+
+    .carousel-container {
+      position: relative;
+      flex: 2;
+      margin: 0;
+
+      .btn-modifier-photo {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1000;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        padding: 0.3rem;
+        border: 1px solid #d8d8d8;
+        box-shadow: rgba(188, 189, 191, 0.2) 0 2px 11px;
+        background-color: white;
+        opacity: 0.8;
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      ngb-carousel {
+        aspect-ratio: 16/9;
         height: 100%;
-        object-fit: cover;
+        overflow: hidden;
+        background-color: #f7f7f8;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
     }
+
+    @media (min-width: 50rem) {
+
+      .carousel-container {
+        ngb-carousel {
+          aspect-ratio: unset;
+        }
+      }
+      padding: 0rem 16rem 2rem 2rem;
+      flex-direction: row;
+      gap: 1rem;
+      .side-photos {
+        flex: 1; // Side photos take less space
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        gap: 1rem;
+
+        .side-photo {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
   }
+
 
 }

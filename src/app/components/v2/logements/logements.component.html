@@ -12,19 +12,24 @@
         <li *ngFor="let logement of logements">
           <app-photo-caroussel [photos]="logement.photos" [onItem]="false"></app-photo-caroussel>
           <a href="/logements/{{logement.masqueId}}">
-          <div class="logement-infos" *ngIf="logement.adresse && logement.caracteristiques">
-            <div class="header-logement-infos">
-              <p class="type-logement">{{ logement.caracteristiques.typeDeLogement | titlecase }}</p>
-              <p class="prix-loyer-actuelle">{{getTarifActuel(logement.periodesDeLocation)}}</p>
+            <div class="logement-infos" *ngIf="logement.adresse && logement.caracteristiques">
+              <div class="header-logement-infos">
+                <p class="type-logement">{{ logement.caracteristiques.typeDeLogement | titlecase }}</p>
+                <p class="prix-loyer-actuelle">{{getTarifActuel(logement.periodesDeLocation)}}</p>
+              </div>
+              <p class="ville-logement">{{logement.adresse.ville}}</p>
+              <p class="details-logement">{{logement.caracteristiques.nombreDePieces}} pièces • {{logement.caracteristiques.surfaceLogement }} m² {{logement.caracteristiques.meubleeOuNon ? '•  Meublé' : ''}}  {{getBalconOuTerrasse(logement.caracteristiques)}}</p>
+              <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/v2/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
             </div>
-            <p class="ville-logement">{{logement.adresse.ville}}</p>
-            <p class="details-logement">{{logement.caracteristiques.nombreDePieces}} pièces • {{logement.caracteristiques.surfaceLogement }} m² {{logement.caracteristiques.meubleeOuNon ? '•  Meublé' : ''}}  {{getBalconOuTerrasse(logement.caracteristiques)}}</p>
-            <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/v2/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
-          </div>
+            <div class="logement-infos" *ngIf="!logement.adresse || !logement.caracteristiques">
+              <div class="header-logement-infos">
+                <p class="type-logement">Nouveau logement</p>
+              </div>
+            </div>
           </a>
         </li>
       </ul>
-      <button class="btn-ajout-logement" *ngIf="!loading">Ajouter un logement</button>
+      <button (click)="creerLogement()" class="btn-ajout-logement" *ngIf="!loading">Ajouter un logement</button>
     </div>
   </div>
 </section>

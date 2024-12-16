@@ -6,12 +6,7 @@
   .container{
     .logements-title{
       margin-bottom: 2rem;
-      h1{
-        font-weight: bold;
-        color: #143b86;
-        font-size: 1.9rem;
-      }
-      .ville-pays{
+      p{
         font-size: 1.2rem;
         font-weight: bold;
         color: grey;
@@ -68,7 +63,7 @@
     }
     .btn-ajout-logement{
       width: 100%;
-      padding: 1.5rem;
+      padding: 1rem;
       border: 1px solid #1c5eeb;
       background-color: #1c5eeb;;
       color: white;

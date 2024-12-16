@@ -9,19 +9,18 @@
     </div>
     <app-photo-caroussel [onItem]="true" *ngIf="logement" [photos]="logement.photos"></app-photo-caroussel>
     <div class="container" *ngIf="logement">
-      <h2>{{logement.caracteristiques.typeDeLogement | titlecase}} {{logement.adresse.numero}} {{logement.adresse.voie}}</h2>
-      <!--
-            <p class="ville-pays">{{logement.adresse.ville | uppercase}} - {{logement.adresse.pays}}</p>
-      -->
+      <div class="logement-infos" *ngIf="logement.adresse && logement.caracteristiques">
+        <h2>{{logement.caracteristiques.typeDeLogement | titlecase}} {{logement.adresse.numero}} {{logement.adresse.voie}}</h2>
+        <p class="prix-loyer-actuelle">{{getTarifActuel()}}</p>
+        <div class="details-logement">
+          <div>{{logement.caracteristiques.nombreDePieces}} pièces</div>
+          <div>{{logement.caracteristiques.surfaceLogement }} m²</div>
+          <div>{{logement.caracteristiques.meubleeOuNon ? 'Meublé' : 'Non meublé'}}</div>
+          <div *ngIf="logement.caracteristiques.balconOuTerrasse">{{getBalconOuTerrasse(logement.caracteristiques)}}</div>
+        </div>
+        <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/v2/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
 
-      <p class="prix-loyer-actuelle">{{getTarifActuel()}}</p>
-      <div class="details-logement">
-        <div>{{logement.caracteristiques.nombreDePieces}} pièces</div>
-        <div>{{logement.caracteristiques.surfaceLogement }} m²</div>
-        <div>{{logement.caracteristiques.meubleeOuNon ? 'Meublé' : 'Non meublé'}}</div>
-        <div *ngIf="logement.caracteristiques.balconOuTerrasse">{{getBalconOuTerrasse(logement.caracteristiques)}}</div>
       </div>
-      <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/v2/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
       <nav class="nav-logement">
         <ul>
           <li
@@ -39,10 +38,7 @@
       <app-periode-location-table *ngIf="activeIndex === 3" [periodesDeLocation]="logement.periodesDeLocation"></app-periode-location-table>
       <app-locataire-table *ngIf="activeIndex === 4" [locataires]="getLocataires()"></app-locataire-table>
       <app-contact-table *ngIf="activeIndex === 5" [contacts]="logement.contacts"></app-contact-table>
-      <!--<div class="logements-title" *ngIf="!loading">
-        <p>Retrouvez ici toutes les informations de votre logment.
-          C'est ici que vous pouvez voir, modifier et supprimer les photos, les frais, les périodes de locations et les contacts de votre logement.</p>
-      </div>-->
+      <button *ngIf="activeIndex === 6" class="btn-supprimer-logement" (click)="supprimerLogement(logement.masqueId)">Supprimer le logement</button>
     </div>
   </div>
 </section>

@@ -8,22 +8,27 @@ import {NgbCarousel, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 })
 export class PhotoCarousselComponent implements OnInit {
   @Input() photos!: PhotoDTO[];
-  selectedImage: string | null = null;
-
+  @Input() onItem!: boolean;
   @ViewChild('carousel', { static: false }) carousel: NgbCarousel | undefined;
-
+  selectedImage: string | null = null;
+  rightSidePhotos: PhotoDTO[] = [];
   private touchStartX: number = 0;
   private touchEndX: number = 0;
   private isClick: boolean = true;
-  @Input() onItem!: boolean;
 
   constructor(
     private modalService: NgbModal
   ) { }
   ngOnInit(): void {
     this.sortPhotosByIsPrincipal();
+    this.setRightSidePhotos();
   }
 
+  setRightSidePhotos(): void {
+    if (this.photos.length > 2) {
+      this.rightSidePhotos = [this.photos[1], this.photos[2]];
+    }
+  }
   sortPhotosByIsPrincipal(): void {
     if (this.photos) {
       this.photos.sort((a, b) => {

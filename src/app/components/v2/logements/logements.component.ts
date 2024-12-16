@@ -3,6 +3,7 @@ import {LogementDTO} from "../../../models/v2/entites/Logement/LogementDTO.model
 import {LogementService} from "../../../services/v2/logement/logement.service";
 import {CaracteristiquesDTO} from "../../../models/v2/entites/Caracteristiques/CaracteristiquesDTO.model";
 import {PeriodeDeLocationDTO} from "../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-logements',
   templateUrl: './logements.component.html',
@@ -13,7 +14,9 @@ export class LogementsComponent implements OnInit {
   loading = false;
   error: string | null = null;
 
-  constructor(private logementService: LogementService) {}
+  constructor(
+    private logementService: LogementService
+  , private router: Router) {}
 
   ngOnInit(): void {
     this.listerLogements();
@@ -59,5 +62,10 @@ export class LogementsComponent implements OnInit {
     return periodeEnCours
       ? `${periodeEnCours.tarif.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })} /mois`
       : 'Non loué';
+  }
+
+  creerLogement() {
+    this.logementService.creerLogement().then(r =>
+    this.router.navigate(['/logements', r.masqueId]));
   }
 }
