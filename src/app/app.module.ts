@@ -106,7 +106,7 @@ registerLocaleData(localeFr, 'fr');
     PropTableComponent,
     FraisTableComponent,
     PeriodeLocationTableComponent,
-    ContactTableComponent
+    ContactTableComponent,
   ],
   imports: [
     BrowserModule,
