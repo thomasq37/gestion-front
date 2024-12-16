@@ -2,6 +2,7 @@ import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {PhotoDTO} from "../../../../models/v2/entites/Photo/PhotoDTO.model";
 import {NgbCarousel, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
 @Component({
   selector: 'app-photo-caroussel',
   templateUrl: './photo-caroussel.component.html',
@@ -20,9 +21,22 @@ export class PhotoCarousselComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) { }
   ngOnInit(): void {
+    if(this.photos.length === 0){
+      this.http
+        .get('assets/ressources/no-image.txt', { responseType: 'text' })
+        .subscribe((data: string) => {
+          for(let i = 0; i < 3; i++){
+            this.photos.push({
+              isPrincipal:false,
+              image: data
+            });
+          }
+        });
+    }
     this.sortPhotosByIsPrincipal();
     this.setRightSidePhotos();
   }

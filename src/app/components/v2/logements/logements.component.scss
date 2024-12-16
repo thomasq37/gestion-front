@@ -29,10 +29,13 @@
               display: flex;
               justify-content: space-between;
               align-items: end;
-              .type-logement{
+              .type-logement, .type-logement-nouveau{
                 font-weight: bold;
                 letter-spacing: .5px;
                 font-size: 1.7rem;
+              }
+              .type-logement-nouveau{
+                color: grey;
               }
               .prix-loyer-actuelle{
                 color: #0eb7fc;

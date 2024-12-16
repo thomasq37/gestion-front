@@ -67,7 +67,7 @@ export class LogementComponent {
 
     this.logement.periodesDeLocation.forEach(periode => {
       if (periode.locataires) {
-        periode.locataires.forEach(locataire => locatairesSet.add(locataire)); // Add each locataire to the set
+        periode.locataires.forEach(locataire => locatairesSet.add(locataire));
       }
     });
 

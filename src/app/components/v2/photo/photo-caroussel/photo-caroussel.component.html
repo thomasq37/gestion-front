@@ -1,10 +1,9 @@
-<section class="photo-caroussel">
-
-  <div class="carousel-and-photos">
-    <div class="carousel-container {{ onItem ? 'on-item' : '' }}"
-         (touchstart)="onTouchStart($event)"
-         (touchmove)="onTouchMove($event)"
-         (touchend)="onTouchEnd()">
+<section class="photo-caroussel {{ onItem ? 'on-item' : '' }}">
+  <div class="carousel-container"
+       (touchstart)="onTouchStart($event)"
+       (touchmove)="onTouchMove($event)"
+       (touchend)="onTouchEnd()">
+    <div class="slide-container">
       <img
         class="btn-modifier-photo"
         *ngIf="onItem"
@@ -12,7 +11,7 @@
         src="assets/img/v2/edit-icon.svg"
         alt="icone de modification"
       />
-      <ngb-carousel *ngIf="photos.length > 0" [interval]="onItem ? 5000 : 0" #carousel>
+      <ngb-carousel class="{{ onItem ? 'on-item' : '' }}" [interval]="onItem ? 5000 : 0" #carousel>
 
         <ng-template ngbSlide *ngFor="let photo of photos">
           <div>
@@ -25,21 +24,9 @@
           </div>
         </ng-template>
       </ngb-carousel>
-      <ngb-carousel *ngIf="photos.length === 0" [interval]="onItem ? 5000 : 0" #carousel>
-        <ng-template ngbSlide>
-          <div>
-            <img
-              class="picsum-img-wrapper"
-              src="/assets/img/v2/no-image.jpg"
-              [alt]="'Image appartement'"
-            />
-          </div>
-        </ng-template>
-      </ngb-carousel>
     </div>
 
-    <!-- Two photos on the right -->
-    <div class="side-photos" *ngIf="photos.length > 0">
+    <div class="side-photos" *ngIf="onItem">
       <div *ngFor="let photo of rightSidePhotos">
         <img
           [src]="'data:image/jpeg;base64,' + photo.image"
@@ -47,18 +34,6 @@
           class="side-photo"
         />
       </div>
-    </div>
-    <div class="side-photos" *ngIf="photos.length === 0">
-      <img
-        src="/assets/img/v2/no-image.jpg"
-        alt="Additional image"
-        class="side-photo"
-      />
-      <img
-        src="/assets/img/v2/no-image.jpg"
-        alt="Additional image"
-        class="side-photo"
-      />
     </div>
   </div>
 </section>
