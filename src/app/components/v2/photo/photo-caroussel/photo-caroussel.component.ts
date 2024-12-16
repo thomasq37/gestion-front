@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {PhotoDTO} from "../../../../models/v2/entites/Photo/PhotoDTO.model";
 import {NgbCarousel, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-photo-caroussel',
   templateUrl: './photo-caroussel.component.html',
@@ -15,9 +16,11 @@ export class PhotoCarousselComponent implements OnInit {
   private touchStartX: number = 0;
   private touchEndX: number = 0;
   private isClick: boolean = true;
+  @Input() logementId!: string;
 
   constructor(
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router
   ) { }
   ngOnInit(): void {
     this.sortPhotosByIsPrincipal();
@@ -70,5 +73,9 @@ export class PhotoCarousselComponent implements OnInit {
   }
   modifierPhotos() {
 
+  }
+
+  naviguerALogement() {
+    this.router.navigate(['/logements', this.logementId]);
   }
 }

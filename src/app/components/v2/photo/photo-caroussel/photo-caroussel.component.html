@@ -17,6 +17,7 @@
         <ng-template ngbSlide *ngFor="let photo of photos">
           <div>
             <img
+              (click)="naviguerALogement()"
               class="picsum-img-wrapper"
               [src]="'data:image/jpeg;base64,' + photo.image"
               [alt]="'Image appartement'"
