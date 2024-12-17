@@ -1,4 +1,4 @@
-<section class="adresse-modifier">
+<section class="formulaire-basique">
 
   <form [formGroup]="adresseForm" (ngSubmit)="modifierAdressePourLogement()">
     <div class="header">
@@ -8,7 +8,7 @@
       <div class="champ">
         <label for="numero">Numéro</label>
         <input
-          type="text"
+          type="number"
           id="numero"
           formControlName="numero"
           aria-required="true">
@@ -75,7 +75,7 @@
         Enregistrer les modifications
       </button>
     </div>
-    <button type="button" class="btn-supprimer-adresse" (click)="supprimerAdressePourLogement(logementMasqueId)">Supprimer l'adresse</button>
+    <button type="button" class="btn-supprimer-formulaire-basique" (click)="supprimerAdressePourLogement(logementMasqueId)">Supprimer l'adresse</button>
     <div class="fil-ariane">
       <a href="/logements/{{logementMasqueId}}">Sythèse logement</a>
       <span class="arrow-next">></span>

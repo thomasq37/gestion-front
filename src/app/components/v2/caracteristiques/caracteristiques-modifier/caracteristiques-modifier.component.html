@@ -1,4 +1,4 @@
-<section class="caracteristiques-modifier">
+<section class="formulaire-basique">
 
   <form [formGroup]="caracteristiquesForm" (ngSubmit)="modifierCaracteristiquesPourLogement()">
     <div class="header">
@@ -102,7 +102,7 @@
       <button type="submit" [disabled]="!caracteristiquesForm.valid">
         Enregistrer les modifications
       </button>
-      <button type="button" class="btn-supprimer-caracteristiques" (click)="supprimerCaracteristiquesPourLogement(logementMasqueId)">Supprimer les caractéristiques</button>
+      <button type="button" class="btn-supprimer-formulaire-basique" (click)="supprimerCaracteristiquesPourLogement(logementMasqueId)">Supprimer les caractéristiques</button>
     </div>
     <div class="fil-ariane">
       <a href="/logements/{{logementMasqueId}}">Sythèse logement</a>

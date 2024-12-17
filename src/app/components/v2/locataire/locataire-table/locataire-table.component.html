@@ -2,7 +2,7 @@
   <div class="custom-card">
     <div class="custom-card-header">
       <h2>{{ locataires.length === 0 ? 'Aucun locataire trouvé' : 'Locataires' }}</h2>
-      <img (click)="modifierLocataires()" src="./assets/img/v2/edit-icon.svg" alt="icone de modification">
+      <img (click)="ajouterUnLocataire(logementMasqueId)" src="./assets/img/v2/plus-icon.svg" alt="icone de modification">
     </div>
     <div class="locataire-contenu" *ngIf="locataires.length > 0">
       <table>

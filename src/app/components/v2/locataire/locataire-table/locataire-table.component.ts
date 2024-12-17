@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {LocataireDTO} from "../../../../models/v2/entites/Locataire/LocataireDTO.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-locataire-table',
@@ -8,8 +9,11 @@ import {LocataireDTO} from "../../../../models/v2/entites/Locataire/LocataireDTO
 })
 export class LocataireTableComponent {
   @Input() locataires!: LocataireDTO[];
+  @Input() logementMasqueId!: string;
+  constructor(private router: Router) {
+  }
 
-  modifierLocataires() {
-
+  ajouterUnLocataire(logementMasqueId: string) {
+    this.router.navigate([`/logements/${logementMasqueId}/locataire/creer`]);
   }
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { fetchWithHandling } from '../http-helpers';
-import { PeriodeDeLocationDTO } from '../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model';
-import { SuccessResponse } from '../../models/v2/exception/SuccessResponse.model';
+import {environment} from "../../../../environments/environment";
+import {PeriodeDeLocationDTO} from "../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
+import {SuccessResponse} from "../../../models/v2/exception/SuccessResponse.model";
 
 @Injectable({
   providedIn: 'root',

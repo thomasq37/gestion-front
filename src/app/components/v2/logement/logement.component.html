@@ -45,7 +45,11 @@
       </app-caracteristiques-element>
       <app-frais-table *ngIf="activeIndex === 2" [frais]="logement.frais"></app-frais-table>
       <app-periode-location-table *ngIf="activeIndex === 3" [periodesDeLocation]="logement.periodesDeLocation"></app-periode-location-table>
-      <app-locataire-table *ngIf="activeIndex === 4" [locataires]="getLocataires()"></app-locataire-table>
+      <app-locataire-table
+        *ngIf="activeIndex === 4"
+        [logementMasqueId]="logement.masqueId"
+        [locataires]="getLocataires()">
+      </app-locataire-table>
       <app-contact-table *ngIf="activeIndex === 5" [contacts]="logement.contacts"></app-contact-table>
       <button *ngIf="activeIndex === 6" class="btn-supprimer-logement" (click)="supprimerLogement(logement.masqueId)">Supprimer le logement</button>
     </div>

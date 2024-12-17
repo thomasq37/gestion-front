@@ -23,6 +23,7 @@ import {
 import {
   CaracteristiquesModifierComponent
 } from "./components/v2/caracteristiques/caracteristiques-modifier/caracteristiques-modifier.component";
+import {LocataireCreerComponent} from "./components/v2/locataire/locataire-creer/locataire-creer.component";
 
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: 'logements/:masqueId/adresse/modifier', component: AdresseModifierComponent, canActivate: [AuthGuard] },
   { path: 'logements/:masqueId/caracteristiques/creer', component: CaracteristiquesCreerComponent, canActivate: [AuthGuard] },
   { path: 'logements/:masqueId/caracteristiques/modifier', component: CaracteristiquesModifierComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:masqueId/locataire/creer', component: LocataireCreerComponent, canActivate: [AuthGuard] },
 
 ];
 @NgModule({

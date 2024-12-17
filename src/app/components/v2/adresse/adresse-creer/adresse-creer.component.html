@@ -1,4 +1,4 @@
-<section class="adresse-creer">
+<section class="formulaire-basique">
 
   <form [formGroup]="adresseForm" (ngSubmit)="creerAdressePourLogement()">
     <div class="header">
@@ -8,7 +8,7 @@
       <div class="champ">
         <label for="numero">Numéro</label>
         <input
-          type="text"
+          type="number"
           id="numero"
           formControlName="numero"
           aria-required="true">
