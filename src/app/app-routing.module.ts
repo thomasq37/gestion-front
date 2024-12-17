@@ -17,6 +17,12 @@ import {InscriptionComponent} from "./components/v2/inscription/inscription.comp
 import {LogementComponent} from "./components/v2/logement/logement.component";
 import {AdresseCreerComponent} from "./components/v2/adresse/adresse-creer/adresse-creer.component";
 import {AdresseModifierComponent} from "./components/v2/adresse/adresse-modifier/adresse-modifier.component";
+import {
+  CaracteristiquesCreerComponent
+} from "./components/v2/caracteristiques/caracteristiques-creer/caracteristiques-creer.component";
+import {
+  CaracteristiquesModifierComponent
+} from "./components/v2/caracteristiques/caracteristiques-modifier/caracteristiques-modifier.component";
 
 
 const routes: Routes = [
@@ -47,6 +53,8 @@ const routes: Routes = [
   { path: 'logements/:masqueId', component: LogementComponent, canActivate: [AuthGuard] },
   { path: 'logements/:masqueId/adresse/creer', component: AdresseCreerComponent, canActivate: [AuthGuard] },
   { path: 'logements/:masqueId/adresse/modifier', component: AdresseModifierComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:masqueId/caracteristiques/creer', component: CaracteristiquesCreerComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:masqueId/caracteristiques/modifier', component: CaracteristiquesModifierComponent, canActivate: [AuthGuard] },
 
 ];
 @NgModule({

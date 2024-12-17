@@ -8,10 +8,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./adresse-element.component.scss']
 })
 export class AdresseElementComponent {
-
-  constructor(private router: Router) {}
   @Input() adresse!: AdresseDTO;
   @Input() logementMasqueId!: string;
+  constructor(private router: Router) {}
   modifierOuCreerAdresse(adresse: AdresseDTO, logementMasqueId: string) {
     if(adresse === null){
       this.router.navigate([`/logements/${logementMasqueId}/adresse/creer`]);

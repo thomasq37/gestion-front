@@ -1,4 +1,4 @@
-.adresse-modifier{
+.caracteristiques-modifier{
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -30,6 +30,7 @@
     .champs{
       display: flex;
       flex-direction: column;
+
       .champ{
         display: flex;
         flex-direction: column;
@@ -53,6 +54,14 @@
           color: red;
           font-size: 1.2rem;
           margin-top: .5rem;
+        }
+      }
+      .checkbox{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        input[type="checkbox"]{
+          width: 1.5rem;
         }
       }
     }
@@ -95,7 +104,7 @@
         text-decoration: underline;
       }
     }
-    .btn-supprimer-adresse{
+    .btn-supprimer-caracteristiques{
       width: 100%;
       padding: 1rem;
       border: 1px solid red;

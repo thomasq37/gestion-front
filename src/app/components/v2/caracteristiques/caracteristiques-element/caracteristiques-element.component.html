@@ -2,7 +2,7 @@
   <div class="custom-card">
     <div class="custom-card-header">
       <h2>{{caracteristiques === null ? 'Caractéristiques à renseigner' : 'Caractéristiques'}}</h2>
-      <img (click)="modifierCaracteristiques()" src="assets/img/v2/edit-icon.svg" alt="icone de modification">
+      <img (click)="modifierOuCreerCaracteristiques(caracteristiques, logementMasqueId)" src="assets/img/v2/edit-icon.svg" alt="icone de modification">
     </div>
     <div class="caracteristiques-contenu" *ngIf="caracteristiques">
       <!-- Type de logement -->
@@ -71,7 +71,7 @@
       <div class="detail-item">
         <dt><img class="icone-catgeorie" src="assets/img/euro-icon.svg" alt="Icône de prix"></dt>
         <dd>
-          <strong>Prix d'achat:</strong>
+          <strong>Prix net vendeur:</strong>
           <p>{{ caracteristiques.montantAchat | number:'1.0-2':'fr-FR' }} €</p>
         </dd>
       </div>

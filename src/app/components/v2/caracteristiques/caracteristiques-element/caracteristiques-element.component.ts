@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {CaracteristiquesDTO} from "../../../../models/v2/entites/Caracteristiques/CaracteristiquesDTO.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-caracteristiques-element',
@@ -8,6 +9,14 @@ import {CaracteristiquesDTO} from "../../../../models/v2/entites/Caracteristique
 })
 export class CaracteristiquesElementComponent {
   @Input() caracteristiques!: CaracteristiquesDTO;
-  modifierCaracteristiques() {
+  @Input() logementMasqueId!: string;
+  constructor(private router: Router) {}
+  modifierOuCreerCaracteristiques(caracteristiques: CaracteristiquesDTO, logementMasqueId: string) {
+    if(caracteristiques === null){
+      this.router.navigate([`/logements/${logementMasqueId}/caracteristiques/creer`]);
+    }
+    else{
+      this.router.navigate([`/logements/${logementMasqueId}/caracteristiques/modifier`]);
+    }
   }
 }

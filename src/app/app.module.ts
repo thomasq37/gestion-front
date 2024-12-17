@@ -59,6 +59,8 @@ import {ContactTableComponent} from "./components/v2/contact/contact-table/conta
 import { LocataireTableComponent } from './components/v2/locataire/locataire-table/locataire-table.component';
 import { AdresseCreerComponent } from './components/v2/adresse/adresse-creer/adresse-creer.component';
 import { AdresseModifierComponent } from './components/v2/adresse/adresse-modifier/adresse-modifier.component';
+import { CaracteristiquesCreerComponent } from './components/v2/caracteristiques/caracteristiques-creer/caracteristiques-creer.component';
+import { CaracteristiquesModifierComponent } from './components/v2/caracteristiques/caracteristiques-modifier/caracteristiques-modifier.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -113,6 +115,8 @@ registerLocaleData(localeFr, 'fr');
     LocataireTableComponent,
     AdresseCreerComponent,
     AdresseModifierComponent,
+    CaracteristiquesCreerComponent,
+    CaracteristiquesModifierComponent,
   ],
   imports: [
     BrowserModule,

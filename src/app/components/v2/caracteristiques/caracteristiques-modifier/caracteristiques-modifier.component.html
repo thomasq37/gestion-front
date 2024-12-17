@@ -1,0 +1,113 @@
+<section class="caracteristiques-modifier">
+
+  <form [formGroup]="caracteristiquesForm" (ngSubmit)="modifierCaracteristiquesPourLogement()">
+    <div class="header">
+      <h1>Modifier les caracteristiques</h1>
+    </div>
+    <div class="champs">
+      <div class="champ">
+        <label for="dateAchat">Date d'achat</label>
+        <input
+          type="date"
+          id="dateAchat"
+          formControlName="dateAchat"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="montantAchat">Prix net vendeur</label>
+        <input
+          type="number"
+          id="montantAchat"
+          formControlName="montantAchat"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="montantEstimation">Estimation net vendeur</label>
+        <input
+          type="number"
+          id="montantEstimation"
+          formControlName="montantEstimation"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="montantFraisDeNotaireEtNegociation">Frais d'acquisition</label>
+        <input
+          type="number"
+          id="montantFraisDeNotaireEtNegociation"
+          formControlName="montantFraisDeNotaireEtNegociation"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="nombreDePieces">Nombre de pièces</label>
+        <input
+          type="number"
+          id="nombreDePieces"
+          formControlName="nombreDePieces"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="surfaceLogement">Surface</label>
+        <input
+          type="number"
+          id="surfaceLogement"
+          formControlName="surfaceLogement"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="typeDeLogement">Type de logement</label>
+        <select id="typeDeLogement" formControlName="typeDeLogement" aria-required="true">
+          <option value="" disabled>Sélectionner un type de logement</option>
+          <option *ngFor="let typeDeLogement of typeDeLogements" [value]="typeDeLogement">{{ typeDeLogement }}</option>
+        </select>
+      </div>
+      <div class="champ checkbox">
+        <label for="meubleeOuNon">Meublé ou non</label>
+        <input
+          type="checkbox"
+          id="meubleeOuNon"
+          formControlName="meubleeOuNon"
+          aria-required="true">
+      </div>
+      <div class="champ checkbox">
+        <label for="balconOuTerrasse">Balcon ou terrasse</label>
+        <input
+          type="checkbox"
+          id="balconOuTerrasse"
+          formControlName="balconOuTerrasse"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="surfaceBalconOuTerrasse">Surface extérieur</label>
+        <input
+          type="number"
+          id="surfaceBalconOuTerrasse"
+          formControlName="surfaceBalconOuTerrasse"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="dpeLettre">Type de logement</label>
+        <select id="dpeLettre" formControlName="dpeLettre" aria-required="true">
+          <option value="" disabled>Sélectionner la classe énérgie</option>
+          <option *ngFor="let dpeLettre of dpeLettres" [value]="dpeLettre">{{ dpeLettre }}</option>
+        </select>
+      </div>
+
+      <div class="champ">
+        <label for="dpeFichier">Fichier DPE</label>
+        <input id="dpeFichier" type="file" accept="application/pdf">
+      </div>
+      <div class="error">
+        {{ error }}
+      </div>
+      <button type="submit" [disabled]="!caracteristiquesForm.valid">
+        Enregistrer les modifications
+      </button>
+      <button type="button" class="btn-supprimer-caracteristiques" (click)="supprimerCaracteristiquesPourLogement(logementMasqueId)">Supprimer les caractéristiques</button>
+    </div>
+    <div class="fil-ariane">
+      <a href="/logements/{{logementMasqueId}}">Sythèse logement</a>
+      <span class="arrow-next">></span>
+      <span class="onglet-actuel">Modifier les caracteristiques</span>
+    </div>
+  </form>
+</section>
