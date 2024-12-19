@@ -12,6 +12,7 @@
           <th>Prénom</th>
           <th>Email</th>
           <th>Téléphone</th>
+          <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,8 @@
           <td>{{ contact.prenom }}</td>
           <td class="email"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
           <td class="phone"><a href="tel:{{ contact.telephone }}">{{ contact.telephone }}</a></td>
+          <td><a class="btn-editer-basique" (click)="modifierContact(logementMasqueId, contact.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>
+
         </tr>
         </tbody>
       </table>

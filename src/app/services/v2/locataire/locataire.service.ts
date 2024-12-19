@@ -3,6 +3,7 @@ import { fetchWithHandling } from '../http-helpers';
 import {environment} from "../../../../environments/environment";
 import {LocataireDTO} from "../../../models/v2/entites/Locataire/LocataireDTO.model";
 import {SuccessResponse} from "../../../models/v2/exception/SuccessResponse.model";
+import {PeriodeDeLocationDTO} from "../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
 @Injectable({
   providedIn: 'root',
 })
@@ -33,6 +34,16 @@ export class LocataireService {
       method: 'GET',
     });
   }
+
+  async obtenirPeriodeDeLocationPourLocataire(
+    logementMasqueId: string,
+    locataireMasqueId: string
+  ): Promise<PeriodeDeLocationDTO> {
+    return fetchWithHandling<PeriodeDeLocationDTO>(`${this.apiUrl}/${logementMasqueId}/locataires/${locataireMasqueId}/periode-de-location/obtenir`, {
+      method: 'GET',
+    });
+  }
+
   async modifierLocatairePourPeriodeDeLocation(
     logementMasqueId: string,
     periodeMasqueId: string,

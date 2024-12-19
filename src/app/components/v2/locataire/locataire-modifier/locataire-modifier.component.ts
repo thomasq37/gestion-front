@@ -18,6 +18,8 @@ export class LocataireModifierComponent implements OnInit {
   logementMasqueId: string | null = null;
   locataireMasqueId: string | null = null;
   periodesDeLocation: PeriodeDeLocationDTO[] = [];
+  locataireActuel!: LocataireDTO;
+  periodeDeLocationActuel!: PeriodeDeLocationDTO;
   protected readonly SearchCountryField = SearchCountryField;
   protected readonly CountryISO = CountryISO;
   constructor(
@@ -46,32 +48,42 @@ export class LocataireModifierComponent implements OnInit {
       this.logementMasqueId = params.get('logementMasqueId');
       if (this.logementMasqueId) {
         this.listerPeriodesDeLocation(this.logementMasqueId);
-        this.obtenirLocatairePourPeriodeDeLocation(this.logementMasqueId, '', this.locataireMasqueId);
+        this.obtenirPeriodeDeLocationPourLocataire(this.logementMasqueId, this.locataireMasqueId)
       }
     });
   }
-  private async obtenirLocatairePourPeriodeDeLocation(logementMasqueId: string, periodeMasqueId: string, locataireMasqueId: string): Promise<void> {
+  private async listerPeriodesDeLocation(logementMasqueId: string,): Promise<void> {
     try {
-      const locataire = await this.locataireService.obtenirLocatairePourPeriodeDeLocation(logementMasqueId, periodeMasqueId, locataireMasqueId);
-      this.locataireForm.patchValue(locataire);
+      this.periodesDeLocation = await this.periodeDeLocationService.listerPeriodesDeLocation(logementMasqueId);
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Impossible de charger l’adresse.');
     }
   }
-  private async listerPeriodesDeLocation(logementMasqueId: string): Promise<void> {
+  private async obtenirPeriodeDeLocationPourLocataire(logementMasqueId: string, locataireMasqueId: string): Promise<void> {
     try {
-      this.periodesDeLocation = await this.periodeDeLocationService.listerPeriodesDeLocation(logementMasqueId)
+      this.periodeDeLocationActuel = await this.locataireService.obtenirPeriodeDeLocationPourLocataire(logementMasqueId, locataireMasqueId);
+      this.locataireForm.patchValue({periodeDeLocation: this.periodeDeLocationActuel.masqueId});
+      this.obtenirLocatairePourPeriodeDeLocation(this.logementMasqueId, this.periodeDeLocationActuel.masqueId, this.locataireMasqueId);
     } catch (error: any) {
       console.warn(error);
-      this.error = (error?.message || 'Impossible de charger les périodes de location.');
+      this.error = (error?.message || 'Impossible de charger l’adresse.');
+    }
+  }
+  private async obtenirLocatairePourPeriodeDeLocation(logementMasqueId: string, periodeMasqueId: string, locataireMasqueId: string): Promise<void> {
+    try {
+      this.locataireActuel = await this.locataireService.obtenirLocatairePourPeriodeDeLocation(logementMasqueId, periodeMasqueId, locataireMasqueId);
+      this.locataireForm.patchValue(this.locataireActuel);
+    } catch (error: any) {
+      console.warn(error);
+      this.error = (error?.message || 'Impossible de charger l’adresse.');
     }
   }
   async modifierLocatairePourPeriodeDeLocation(): Promise<void> {
     const locataire: LocataireDTO = this.locataireForm.value as LocataireDTO;
     try {
       console.log(this.locataireForm.get('periodeDeLocation'))
-      await this.locataireService.modifierLocatairePourPeriodeDeLocation(this.logementMasqueId, this.locataireForm.get('periodeDeLocation').value, locataire.masqueId, locataire);
+      await this.locataireService.modifierLocatairePourPeriodeDeLocation(this.logementMasqueId, this.locataireForm.get('periodeDeLocation').value, this.locataireActuel.masqueId, locataire);
       await this.router.navigate([`/logements/${this.logementMasqueId}`]);
     } catch (error: any) {
       console.warn(error);

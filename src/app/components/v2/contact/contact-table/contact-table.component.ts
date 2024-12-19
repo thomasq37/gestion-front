@@ -12,8 +12,10 @@ export class ContactTableComponent {
   @Input() logementMasqueId!: string;
   constructor(private router: Router) {
   }
-  modifierContacts() {
-
+  modifierContact(logementMasqueId: string, contactMasqueId: string) {
+/*
+    this.router.navigate([`/logements/${logementMasqueId}/contact/${contactMasqueId}/modifier`]);
+*/
   }
 
   ajouterUnContact(logementMasqueId: any) {
