@@ -24,6 +24,7 @@ import {
   CaracteristiquesModifierComponent
 } from "./components/v2/caracteristiques/caracteristiques-modifier/caracteristiques-modifier.component";
 import {LocataireCreerComponent} from "./components/v2/locataire/locataire-creer/locataire-creer.component";
+import {ContactCreerComponent} from "./components/v2/contact/contact-creer/contact-creer.component";
 
 
 const routes: Routes = [
@@ -51,12 +52,16 @@ const routes: Routes = [
   { path: 'logements', component: LogementsComponent, canActivate: [AuthGuard] },
   { path: 'connexion', component: ConnexionComponent, canActivate: [AlreadyAuthGuard] },
   { path: 'inscription', component: InscriptionComponent, canActivate: [AlreadyAuthGuard] },
-  { path: 'logements/:masqueId', component: LogementComponent, canActivate: [AuthGuard] },
-  { path: 'logements/:masqueId/adresse/creer', component: AdresseCreerComponent, canActivate: [AuthGuard] },
-  { path: 'logements/:masqueId/adresse/modifier', component: AdresseModifierComponent, canActivate: [AuthGuard] },
-  { path: 'logements/:masqueId/caracteristiques/creer', component: CaracteristiquesCreerComponent, canActivate: [AuthGuard] },
-  { path: 'logements/:masqueId/caracteristiques/modifier', component: CaracteristiquesModifierComponent, canActivate: [AuthGuard] },
-  { path: 'logements/:masqueId/locataire/creer', component: LocataireCreerComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId', component: LogementComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId/adresse/creer', component: AdresseCreerComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId/adresse/modifier', component: AdresseModifierComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId/caracteristiques/creer', component: CaracteristiquesCreerComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId/caracteristiques/modifier', component: CaracteristiquesModifierComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId/locataire/creer', component: LocataireCreerComponent, canActivate: [AuthGuard] },
+/*
+  { path: 'logements/:logementMasqueId/locataire/:locataireMasqueId/modifier', component: LocataireModifierComponent, canActivate: [AuthGuard] },
+*/
+  { path: 'logements/:logementMasqueId/contact/creer', component: ContactCreerComponent, canActivate: [AuthGuard] },
 
 ];
 @NgModule({

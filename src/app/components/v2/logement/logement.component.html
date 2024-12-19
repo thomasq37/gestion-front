@@ -50,7 +50,11 @@
         [logementMasqueId]="logement.masqueId"
         [locataires]="getLocataires()">
       </app-locataire-table>
-      <app-contact-table *ngIf="activeIndex === 5" [contacts]="logement.contacts"></app-contact-table>
+      <app-contact-table
+        *ngIf="activeIndex === 5"
+        [logementMasqueId]="logement.masqueId"
+        [contacts]="logement.contacts">
+      </app-contact-table>
       <button *ngIf="activeIndex === 6" class="btn-supprimer-logement" (click)="supprimerLogement(logement.masqueId)">Supprimer le logement</button>
     </div>
   </div>

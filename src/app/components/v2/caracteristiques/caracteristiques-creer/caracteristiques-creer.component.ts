@@ -39,7 +39,7 @@ export class CaracteristiquesCreerComponent {
       dpeFichier:[''],
     });
     this.activatedRoute.paramMap.subscribe(params => {
-      this.logementMasqueId = params.get('masqueId');
+      this.logementMasqueId = params.get('logementMasqueId');
     });
   }
 

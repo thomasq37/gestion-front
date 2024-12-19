@@ -2,7 +2,7 @@
   <div class="custom-card">
     <div class="custom-card-header">
       <h2>{{ contacts.length === 0 ? 'Aucun contact trouvé' : 'Contacts' }}</h2>
-      <img (click)="modifierContacts()" src="./assets/img/v2/edit-icon.svg" alt="icone de modification">
+      <img (click)="ajouterUnContact(logementMasqueId)" src="./assets/img/v2/plus-icon.svg" alt="icone de modification">
     </div>
     <div class="contact-contenu" *ngIf="contacts.length > 0">
       <table>

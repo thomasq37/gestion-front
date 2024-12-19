@@ -42,7 +42,7 @@ export class CaracteristiquesModifierComponent {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      this.logementMasqueId = params.get('masqueId');
+      this.logementMasqueId = params.get('logementMasqueId');
       if (this.logementMasqueId) {
         this.obtenirCaracteristiquesPourLogement(this.logementMasqueId);
       }

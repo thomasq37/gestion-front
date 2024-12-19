@@ -1,0 +1,60 @@
+<section class="formulaire-basique">
+
+  <form [formGroup]="contactForm" (ngSubmit)="creerContactPourLogement()">
+    <div class="header">
+      <h1>Créer le contact</h1>
+    </div>
+    <div class="champs">
+      <div class="champ">
+        <label for="nom">Nom</label>
+        <input
+          type="text"
+          id="nom"
+          formControlName="nom"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="prenom">Prénom</label>
+        <input
+          type="text"
+          id="prenom"
+          formControlName="prenom"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="email">E-mail</label>
+        <input
+          type="text"
+          id="email"
+          formControlName="email">
+      </div>
+      <div class="champ">
+        <label>Téléphone</label>
+        <ngx-intl-tel-input
+          inputId="telephone"
+          formControlName="telephone"
+          [preferredCountries]="[CountryISO.France, CountryISO.Spain]"
+          [enableAutoCountrySelect]="false"
+          [enablePlaceholder]="false"
+          [searchCountryFlag]="true"
+          [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+          [selectFirstCountry]="false"
+          [selectedCountryISO]="CountryISO.France"
+          [maxLength]="15"
+          [phoneValidation]="true"
+        ></ngx-intl-tel-input>
+      </div>
+      <div class="error">
+        {{ error }}
+      </div>
+      <button type="submit" [disabled]="!contactForm.valid">
+        Ajouter le contact
+      </button>
+    </div>
+    <div class="fil-ariane">
+      <a href="/logements/{{logementMasqueId}}">Sythèse logement</a>
+      <span class="arrow-next">></span>
+      <span class="onglet-actuel">Créer le contact</span>
+    </div>
+  </form>
+</section>

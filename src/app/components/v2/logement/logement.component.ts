@@ -23,19 +23,19 @@ export class LogementComponent {
     private logementService: LogementService) {}
 
   ngOnInit(): void {
-    const masqueId = this.route.snapshot.paramMap.get('masqueId');
-    if (masqueId) {
-      this.obtenirLogement(masqueId);
+    const logementMasqueId = this.route.snapshot.paramMap.get('logementMasqueId');
+    if (logementMasqueId) {
+      this.obtenirLogement(logementMasqueId);
     } else {
       this.error = 'Aucun identifiant de logement fourni.';
     }
   }
 
-  async obtenirLogement(masqueId: string): Promise<void> {
+  async obtenirLogement(logementMasqueId: string): Promise<void> {
     this.loading = true;
     this.error = null;
     try {
-      this.logement = await this.logementService.obtenirLogement(masqueId);
+      this.logement = await this.logementService.obtenirLogement(logementMasqueId);
     } catch (err) {
       this.error = 'Erreur lors du chargement des logements.';
     } finally {
@@ -74,10 +74,10 @@ export class LogementComponent {
     return Array.from(locatairesSet);
   }
 
-  supprimerLogement(masqueId: string) {
+  supprimerLogement(logementMasqueId: string) {
     const confirmed = window.confirm('Voulez-vous vraiment supprimer ce logement ?');
     if (confirmed) {
-      this.logementService.supprimerLogement(masqueId).then(() => {
+      this.logementService.supprimerLogement(logementMasqueId).then(() => {
         this.router.navigate(['/logements']);
       }).catch(error => {
         console.error('Erreur lors de la suppression du logement:', error);

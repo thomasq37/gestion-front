@@ -16,4 +16,8 @@ export class LocataireTableComponent {
   ajouterUnLocataire(logementMasqueId: string) {
     this.router.navigate([`/logements/${logementMasqueId}/locataire/creer`]);
   }
+
+  modifierLocataire(logementMasqueId: string, locataireMasqueId: string) {
+    this.router.navigate([`/logements/${logementMasqueId}/locataire/${locataireMasqueId}/modifier`]);
+  }
 }

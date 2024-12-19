@@ -34,7 +34,7 @@ export class AdresseModifierComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      this.logementMasqueId = params.get('masqueId');
+      this.logementMasqueId = params.get('logementMasqueId');
       if (this.logementMasqueId) {
         this.obtenirAdressePourLogement(this.logementMasqueId);
       }

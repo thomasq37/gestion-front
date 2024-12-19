@@ -12,14 +12,16 @@
           <th>Prénom</th>
           <th>Email</th>
           <th>Téléphone</th>
+          <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let locataire of locataires">
           <td>{{ locataire.nom }}</td>
           <td>{{ locataire.prenom }}</td>
-          <td class="email"><a href="mailto:{{ locataire.email }}">{{ locataire.email }}</a></td>
-          <td class="phone"><a href="tel:{{ locataire.telephone }}">{{ locataire.telephone }}</a></td>
+          <td><a href="mailto:{{ locataire.email }}">{{ locataire.email }}</a></td>
+          <td><a href="tel:{{ locataire.telephone }}">{{ locataire.telephone }}</a></td>
+          <td><a class="btn-editer-basique" (click)="modifierLocataire(logementMasqueId, locataire.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>
         </tr>
         </tbody>
       </table>

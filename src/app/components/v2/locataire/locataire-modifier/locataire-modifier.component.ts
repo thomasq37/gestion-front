@@ -1,21 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
 import {LocataireService} from "../../../../services/v2/locataire/locataire.service";
-import {LocataireDTO} from "../../../../models/v2/entites/Locataire/LocataireDTO.model";
-import {PeriodeDeLocationDTO} from "../../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PeriodeDeLocationService} from "../../../../services/v2/periode-de-location/periode-de-location.service";
+import {PeriodeDeLocationDTO} from "../../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
+import {LocataireDTO} from "../../../../models/v2/entites/Locataire/LocataireDTO.model";
 import {CountryISO, SearchCountryField} from "ngx-intl-tel-input-gg";
 
 @Component({
-  selector: 'app-locataire-creer',
-  templateUrl: './locataire-creer.component.html',
-  styleUrls: ['./locataire-creer.component.scss']
+  selector: 'app-locataire-modifier',
+  templateUrl: './locataire-modifier.component.html',
+  styleUrls: ['./locataire-modifier.component.scss']
 })
-export class LocataireCreerComponent implements OnInit {
+export class LocataireModifierComponent implements OnInit {
   locataireForm: FormGroup;
   error: string | null = null;
   logementMasqueId: string | null = null;
+  locataireMasqueId: string | null = null;
   periodesDeLocation: PeriodeDeLocationDTO[] = [];
   protected readonly SearchCountryField = SearchCountryField;
   protected readonly CountryISO = CountryISO;
@@ -37,6 +38,7 @@ export class LocataireCreerComponent implements OnInit {
     });
     this.activatedRoute.paramMap.subscribe(params => {
       this.logementMasqueId = params.get('logementMasqueId');
+      this.locataireMasqueId = params.get('locataireMasqueId');
     });
   }
   ngOnInit(): void {
@@ -44,8 +46,18 @@ export class LocataireCreerComponent implements OnInit {
       this.logementMasqueId = params.get('logementMasqueId');
       if (this.logementMasqueId) {
         this.listerPeriodesDeLocation(this.logementMasqueId);
+        this.obtenirLocatairePourPeriodeDeLocation(this.logementMasqueId, '', this.locataireMasqueId);
       }
     });
+  }
+  private async obtenirLocatairePourPeriodeDeLocation(logementMasqueId: string, periodeMasqueId: string, locataireMasqueId: string): Promise<void> {
+    try {
+      const locataire = await this.locataireService.obtenirLocatairePourPeriodeDeLocation(logementMasqueId, periodeMasqueId, locataireMasqueId);
+      this.locataireForm.patchValue(locataire);
+    } catch (error: any) {
+      console.warn(error);
+      this.error = (error?.message || 'Impossible de charger l’adresse.');
+    }
   }
   private async listerPeriodesDeLocation(logementMasqueId: string): Promise<void> {
     try {
@@ -55,11 +67,11 @@ export class LocataireCreerComponent implements OnInit {
       this.error = (error?.message || 'Impossible de charger les périodes de location.');
     }
   }
-  async creerLocatairePourPeriodeDeLocation(): Promise<void> {
+  async modifierLocatairePourPeriodeDeLocation(): Promise<void> {
     const locataire: LocataireDTO = this.locataireForm.value as LocataireDTO;
     try {
       console.log(this.locataireForm.get('periodeDeLocation'))
-      await this.locataireService.creerLocatairePourPeriodeDeLocation(this.logementMasqueId, this.locataireForm.get('periodeDeLocation').value, locataire);
+      await this.locataireService.modifierLocatairePourPeriodeDeLocation(this.logementMasqueId, this.locataireForm.get('periodeDeLocation').value, locataire.masqueId, locataire);
       await this.router.navigate([`/logements/${this.logementMasqueId}`]);
     } catch (error: any) {
       console.warn(error);
@@ -67,3 +79,4 @@ export class LocataireCreerComponent implements OnInit {
     }
   }
 }
+

@@ -62,6 +62,8 @@ import { AdresseModifierComponent } from './components/v2/adresse/adresse-modifi
 import { CaracteristiquesCreerComponent } from './components/v2/caracteristiques/caracteristiques-creer/caracteristiques-creer.component';
 import { CaracteristiquesModifierComponent } from './components/v2/caracteristiques/caracteristiques-modifier/caracteristiques-modifier.component';
 import { LocataireCreerComponent } from './components/v2/locataire/locataire-creer/locataire-creer.component';
+import { LocataireModifierComponent } from './components/v2/locataire/locataire-modifier/locataire-modifier.component';
+import { ContactCreerComponent } from './components/v2/contact/contact-creer/contact-creer.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -119,6 +121,8 @@ registerLocaleData(localeFr, 'fr');
     CaracteristiquesCreerComponent,
     CaracteristiquesModifierComponent,
     LocataireCreerComponent,
+    LocataireModifierComponent,
+    ContactCreerComponent,
   ],
   imports: [
     BrowserModule,
