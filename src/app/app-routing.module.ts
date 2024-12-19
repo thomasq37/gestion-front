@@ -26,6 +26,7 @@ import {
 import {LocataireCreerComponent} from "./components/v2/locataire/locataire-creer/locataire-creer.component";
 import {ContactCreerComponent} from "./components/v2/contact/contact-creer/contact-creer.component";
 import {LocataireModifierComponent} from "./components/v2/locataire/locataire-modifier/locataire-modifier.component";
+import {ContactModifierComponent} from "./components/v2/contact/contact-modifier/contact-modifier.component";
 
 
 const routes: Routes = [
@@ -61,6 +62,7 @@ const routes: Routes = [
   { path: 'logements/:logementMasqueId/locataire/creer', component: LocataireCreerComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/locataire/:locataireMasqueId/modifier', component: LocataireModifierComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/contact/creer', component: ContactCreerComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId/contact/:contactMasqueId/modifier', component: ContactModifierComponent, canActivate: [AuthGuard] },
 
 ];
 @NgModule({

@@ -27,7 +27,6 @@ export class ContactCreerComponent {
       prenom: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.email]),
       telephone: new FormControl('', [
-        Validators.pattern('^\\+?[0-9 ]{7,15}$')
       ])
     });
     this.activatedRoute.paramMap.subscribe(params => {
@@ -37,6 +36,7 @@ export class ContactCreerComponent {
 
   async creerContactPourLogement(): Promise<void> {
     const contact: ContactDTO = this.contactForm.value as ContactDTO;
+    contact.telephone = this.contactForm.value.telephone?.e164Numbers
     try {
       await this.contactService.creerContactPourLogement(this.logementMasqueId, contact);
       await this.router.navigate([`/logements/${this.logementMasqueId}`]);

@@ -32,7 +32,6 @@ export class LocataireCreerComponent implements OnInit {
       prenom: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.email]),
       telephone: new FormControl('', [
-        Validators.pattern('^\\+?[0-9 ]{7,15}$')
       ])
     });
     this.activatedRoute.paramMap.subscribe(params => {
@@ -57,8 +56,9 @@ export class LocataireCreerComponent implements OnInit {
   }
   async creerLocatairePourPeriodeDeLocation(): Promise<void> {
     const locataire: LocataireDTO = this.locataireForm.value as LocataireDTO;
+    locataire.telephone = this.locataireForm.value.telephone?.e164Number
+
     try {
-      console.log(this.locataireForm.get('periodeDeLocation'))
       await this.locataireService.creerLocatairePourPeriodeDeLocation(this.logementMasqueId, this.locataireForm.get('periodeDeLocation').value, locataire);
       await this.router.navigate([`/logements/${this.logementMasqueId}`]);
     } catch (error: any) {

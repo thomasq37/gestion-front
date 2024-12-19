@@ -13,7 +13,8 @@ import {AuthentService} from "../../../services/v2/auth/authent.service";
 export class InscriptionComponent {
   registerForm: FormGroup;
   error: string | null = null;
-
+  protected readonly CountryISO = CountryISO;
+  protected readonly SearchCountryField = SearchCountryField;
   constructor(
     private formBuilder: FormBuilder,
     private authenticationService: AuthentService,
@@ -53,6 +54,4 @@ export class InscriptionComponent {
     return password === confirmPassword ? null : { notMatching: true };
   }
 
-  protected readonly CountryISO = CountryISO;
-  protected readonly SearchCountryField = SearchCountryField;
 }

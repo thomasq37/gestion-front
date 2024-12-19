@@ -102,6 +102,15 @@ table{
   width: 100%;
   margin-top: 1.5rem;
   table-layout: fixed;
+  .btn-editer-basique{
+    background-color: #1c5eeb;
+    color: white;
+    border-radius: .5rem;
+    margin: .2rem;
+    padding: .3rem 1.1rem;
+    text-decoration: none;
+    font-size: 0.8rem;
+  }
 }
 thead, tbody, tfoot, tr, td, th {
   font-size: 1.2rem;

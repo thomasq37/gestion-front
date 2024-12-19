@@ -13,9 +13,7 @@ export class ContactTableComponent {
   constructor(private router: Router) {
   }
   modifierContact(logementMasqueId: string, contactMasqueId: string) {
-/*
     this.router.navigate([`/logements/${logementMasqueId}/contact/${contactMasqueId}/modifier`]);
-*/
   }
 
   ajouterUnContact(logementMasqueId: any) {
