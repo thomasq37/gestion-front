@@ -89,5 +89,17 @@ export class LocataireModifierComponent implements OnInit {
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
     }
   }
+  supprimerLocatairePourPeriodeDeLocation(logementMasqueId: string) {
+    const confirmed = window.confirm('Voulez-vous vraiment supprimer le locataire ?');
+    if (confirmed) {
+      this.locataireService.supprimerLocatairePourPeriodeDeLocation(logementMasqueId, this.periodeDeLocationActuel.masqueId, this.locataireMasqueId).then(() => {
+        this.router.navigate([`/logements/${this.logementMasqueId}`]);
+      }).catch(error => {
+        console.error('Erreur lors de la suppression du locataire:', error);
+      });
+    } else {
+      console.log('Suppression annulée');
+    }
+  }
 }
 
