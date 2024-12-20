@@ -107,7 +107,7 @@ export class CaracteristiquesModifierComponent {
 
   remplacerFichier(): void {
     this.nomFichier = null;
-    this.caracteristiquesForm.patchValue({ dpeFichier: null });
+    this.caracteristiquesForm.patchValue({ dpeFichier: '' });
     console.log('Le fichier a été réinitialisé.');
   }
 }
