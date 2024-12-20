@@ -17,7 +17,7 @@ export class CaracteristiquesModifierComponent {
   logementMasqueId: string | null = null;
   typeDeLogements = Object.values(TypeDeLogement);
   dpeLettres = Object.values(DpeLettre);
-
+  nomFichier: string | null = null;
   constructor(
     private formBuilder: FormBuilder,
     private caracteristiquesService: CaracteristiquesService,
@@ -81,5 +81,33 @@ export class CaracteristiquesModifierComponent {
     } else {
       console.log('Suppression annulée');
     }
+  }
+  auChargementDuFichier(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input && input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64StringWithPrefix = reader.result as string;
+        const base64String = base64StringWithPrefix.split(',')[1];
+        this.caracteristiquesForm.patchValue({
+          dpeFichier: base64String
+        });
+        this.nomFichier = file.name;
+        console.log('Base64 sans préfixe ajouté au formulaire:', base64String);
+      };
+
+      reader.onerror = (error) => {
+        console.error('Erreur lors de la conversion du fichier en Base64:', error);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  remplacerFichier(): void {
+    this.nomFichier = null;
+    this.caracteristiquesForm.patchValue({ dpeFichier: null });
+    console.log('Le fichier a été réinitialisé.');
   }
 }

@@ -182,6 +182,23 @@ strong{
         flex-direction: column;
         gap: .5rem;
         margin-bottom: 1rem;
+        .remplacer-dpe-container{
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+          button {
+            width: max-content;
+            margin: 0;
+            background-color: red;
+          }
+          .file-name{
+            color: black;
+            font-size: 1.4rem;
+          }
+
+        }
+
+
         label{
           font-weight: bold;
           color: #143b86;
