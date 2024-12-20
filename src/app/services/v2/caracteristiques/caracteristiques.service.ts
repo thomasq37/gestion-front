@@ -30,7 +30,6 @@ export class CaracteristiquesService {
     logementMasqueId: string,
     caracteristiquesDTO: CaracteristiquesDTO
   ): Promise<CaracteristiquesDTO> {
-    console.log(caracteristiquesDTO)
     return fetchWithHandling<CaracteristiquesDTO>(`${this.apiUrl}/${logementMasqueId}/caracteristiques/modifier`, {
       method: 'PATCH',
       body: JSON.stringify(caracteristiquesDTO),
