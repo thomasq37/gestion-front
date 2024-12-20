@@ -60,22 +60,24 @@
           <option *ngFor="let typeDeLogement of typeDeLogements" [value]="typeDeLogement">{{ typeDeLogement }}</option>
         </select>
       </div>
-      <div class="champ checkbox">
+      <div class="champ">
         <label for="meubleeOuNon">Meublé ou non</label>
-        <input
-          type="checkbox"
-          id="meubleeOuNon"
-          formControlName="meubleeOuNon"
-          aria-required="true">
+        <select id="meubleeOuNon" formControlName="meubleeOuNon" aria-required="true">
+          <option value="" disabled selected>Sélectionnez</option>
+          <option value="true">Meublé</option>
+          <option value="false">Non meublé</option>
+        </select>
       </div>
-      <div class="champ checkbox">
+
+      <div class="champ">
         <label for="balconOuTerrasse">Balcon ou terrasse</label>
-        <input
-          type="checkbox"
-          id="balconOuTerrasse"
-          formControlName="balconOuTerrasse"
-          aria-required="true">
+        <select id="balconOuTerrasse" formControlName="balconOuTerrasse" aria-required="true">
+          <option value="" disabled selected>Sélectionnez</option>
+          <option value="true">Oui</option>
+          <option value="false">Non</option>
+        </select>
       </div>
+
       <div class="champ">
         <label for="surfaceBalconOuTerrasse">Surface extérieur</label>
         <input
