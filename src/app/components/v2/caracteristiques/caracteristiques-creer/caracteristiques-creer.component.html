@@ -97,7 +97,7 @@
         <div class="remplacer-dpe-container"
              *ngIf="caracteristiquesForm.getRawValue()?.dpeFichier !== '' &&
                     caracteristiquesForm.getRawValue()?.dpeFichier !== null">
-          <p class="file-name">{{nomFichier ? nomFichier : 'DPE-FICHIER.pdf'}}</p>
+          <p class="file-name">{{nomFichier ? nomFichier : 'DPE_Fichier.pdf'}}</p>
           <button type="button" (click)="remplacerFichier()">Supprimer</button>
         </div>
         <input *ngIf="caracteristiquesForm.getRawValue()?.dpeFichier === '' ||
