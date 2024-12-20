@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 export class LocataireTableComponent {
   @Input() locataires!: LocataireDTO[];
   @Input() logementMasqueId!: string;
+  actionsIsVisible: boolean = false;
   constructor(private router: Router) {
   }
 
@@ -19,5 +20,9 @@ export class LocataireTableComponent {
 
   modifierLocataire(logementMasqueId: string, locataireMasqueId: string) {
     this.router.navigate([`/logements/${logementMasqueId}/locataire/${locataireMasqueId}/modifier`]);
+  }
+
+  toggleActions() {
+    this.actionsIsVisible = !this.actionsIsVisible;
   }
 }

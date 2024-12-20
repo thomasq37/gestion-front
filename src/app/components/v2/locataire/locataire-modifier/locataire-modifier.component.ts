@@ -6,6 +6,7 @@ import {PeriodeDeLocationService} from "../../../../services/v2/periode-de-locat
 import {PeriodeDeLocationDTO} from "../../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
 import {LocataireDTO} from "../../../../models/v2/entites/Locataire/LocataireDTO.model";
 import {CountryISO, SearchCountryField} from "ngx-intl-tel-input-gg";
+import {TelephoneUtil} from "../../util/telephone-util";
 
 @Component({
   selector: 'app-locataire-modifier',
@@ -22,6 +23,8 @@ export class LocataireModifierComponent implements OnInit {
   periodeDeLocationActuel!: PeriodeDeLocationDTO;
   protected readonly SearchCountryField = SearchCountryField;
   protected readonly CountryISO = CountryISO;
+  protected selectedCountryISO: CountryISO;
+
   constructor(
     private formBuilder: FormBuilder,
     private locataireService: LocataireService,
@@ -72,6 +75,7 @@ export class LocataireModifierComponent implements OnInit {
   private async obtenirLocatairePourPeriodeDeLocation(logementMasqueId: string, periodeMasqueId: string, locataireMasqueId: string): Promise<void> {
     try {
       this.locataireActuel = await this.locataireService.obtenirLocatairePourPeriodeDeLocation(logementMasqueId, periodeMasqueId, locataireMasqueId);
+      this.selectedCountryISO = TelephoneUtil.obtenirCountryISO(this.locataireActuel.telephone)
       this.locataireForm.patchValue(this.locataireActuel);
     } catch (error: any) {
       console.warn(error);

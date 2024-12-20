@@ -97,6 +97,20 @@ a{
       background-color: white;
     }
   }
+  .actions-boutons {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    button {
+      height: 3rem;
+      padding: 0 1rem;
+      border: 1px solid #d8d8d8;
+      box-shadow: rgba(188, 189, 191, 0.2) 0 2px 11px;
+      background-color: white;
+      border-radius: 1.5rem;
+      color: red;
+    }
+  }
 }
 table{
   width: 100%;

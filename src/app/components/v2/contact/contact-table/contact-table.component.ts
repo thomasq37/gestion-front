@@ -10,6 +10,8 @@ import {Router} from "@angular/router";
 export class ContactTableComponent {
   @Input() contacts!: ContactDTO[];
   @Input() logementMasqueId!: string;
+  actionsIsVisible: boolean = false;
+
   constructor(private router: Router) {
   }
   modifierContact(logementMasqueId: string, contactMasqueId: string) {
@@ -18,5 +20,8 @@ export class ContactTableComponent {
 
   ajouterUnContact(logementMasqueId: any) {
     this.router.navigate([`/logements/${logementMasqueId}/contact/creer`]);
+  }
+  toggleActions() {
+    this.actionsIsVisible = !this.actionsIsVisible;
   }
 }

@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ContactService} from "../../../../services/v2/contact/contact.service";
 import {ContactDTO} from "../../../../models/v2/entites/Contact/ContactDTO.model";
 import {CountryISO, SearchCountryField} from "ngx-intl-tel-input-gg";
-
+import {TelephoneUtil} from "../../util/telephone-util";
 @Component({
   selector: 'app-contact-modifier',
   templateUrl: './contact-modifier.component.html',
@@ -17,6 +17,7 @@ export class ContactModifierComponent {
   contactMasqueId: string | null = null;
   protected readonly CountryISO = CountryISO;
   protected readonly SearchCountryField = SearchCountryField;
+  protected selectedCountryISO: CountryISO;
   constructor(
     private formBuilder: FormBuilder,
     private contactService: ContactService,
@@ -45,6 +46,7 @@ export class ContactModifierComponent {
   private async obtenirContactPourLogement(logementMasqueId: string, contactMasqueId: string): Promise<void> {
     try {
       const contact = await this.contactService.obtenirContactPourLogement(logementMasqueId, contactMasqueId);
+      this.selectedCountryISO = TelephoneUtil.obtenirCountryISO(contact.telephone)
       this.contactForm.patchValue(contact);
     } catch (error: any) {
       console.warn(error);

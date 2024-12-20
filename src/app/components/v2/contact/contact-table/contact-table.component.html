@@ -2,7 +2,16 @@
   <div class="custom-card">
     <div class="custom-card-header">
       <h2>{{ contacts.length === 0 ? 'Aucun contact trouvé' : 'Contacts' }}</h2>
-      <img (click)="ajouterUnContact(logementMasqueId)" src="./assets/img/v2/plus-icon.svg" alt="icone de modification">
+      <div class="actions-boutons">
+        <button
+          *ngIf="actionsIsVisible"
+          (click)="toggleActions()">Fermer</button>
+        <img
+          *ngIf="!actionsIsVisible"
+          (click)="toggleActions()"
+          src="./assets/img/v2/edit-icon.svg" alt="icone de modification">
+        <img *ngIf="actionsIsVisible" (click)="ajouterUnContact(logementMasqueId)" src="./assets/img/v2/plus-icon.svg" alt="icone de modification">
+      </div>
     </div>
     <div class="contact-contenu" *ngIf="contacts.length > 0">
       <table>
@@ -12,7 +21,7 @@
           <th>Prénom</th>
           <th>Email</th>
           <th>Téléphone</th>
-          <th>Actions</th>
+          <th *ngIf="actionsIsVisible">Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -21,7 +30,7 @@
           <td>{{ contact.prenom }}</td>
           <td class="email"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
           <td class="phone"><a href="tel:{{ contact.telephone }}">{{ contact.telephone }}</a></td>
-          <td><a class="btn-editer-basique" (click)="modifierContact(logementMasqueId, contact.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>
+          <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="modifierContact(logementMasqueId, contact.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>
 
         </tr>
         </tbody>
