@@ -94,11 +94,14 @@
 
       <div class="champ">
         <label for="dpeFichier">Fichier DPE</label>
-        <div class="remplacer-dpe-container" *ngIf="caracteristiquesForm.getRawValue()?.dpeFichier !== ''">
+        <div class="remplacer-dpe-container"
+             *ngIf="caracteristiquesForm.getRawValue()?.dpeFichier !== '' &&
+                    caracteristiquesForm.getRawValue()?.dpeFichier !== null">
           <p class="file-name">{{nomFichier ? nomFichier : 'DPE-FICHIER.pdf'}}</p>
           <button type="button" (click)="remplacerFichier()">Supprimer</button>
         </div>
-        <input *ngIf="caracteristiquesForm.getRawValue()?.dpeFichier === ''" id="dpeFichier" type="file" accept="application/pdf" (change)="auChargementDuFichier($event)">
+        <input *ngIf="caracteristiquesForm.getRawValue()?.dpeFichier === '' ||
+                    caracteristiquesForm.getRawValue()?.dpeFichier === null" id="dpeFichier" type="file" accept="application/pdf" (change)="auChargementDuFichier($event)">
       </div>
       <div class="error">
         {{ error }}
