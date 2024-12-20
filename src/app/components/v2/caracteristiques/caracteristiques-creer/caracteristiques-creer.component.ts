@@ -5,6 +5,7 @@ import {CaracteristiquesService} from "../../../../services/v2/caracteristiques/
 import {CaracteristiquesDTO} from "../../../../models/v2/entites/Caracteristiques/CaracteristiquesDTO.model";
 import {TypeDeLogement} from "../../../../models/v2/enumeration/TypeDeLogement.enum";
 import {DpeLettre} from "../../../../models/v2/enumeration/DpeLettre.enum";
+import {CaracteristiquesFormUtil} from "../util/caracteristiques-form-util";
 
 @Component({
   selector: 'app-caracteristiques-creer',
@@ -56,31 +57,15 @@ export class CaracteristiquesCreerComponent {
     }
   }
   auChargementDuFichier(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input && input.files && input.files.length > 0) {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64StringWithPrefix = reader.result as string;
-        const base64String = base64StringWithPrefix.split(',')[1];
-        this.caracteristiquesForm.patchValue({
-          dpeFichier: base64String
-        });
-        this.nomFichier = file.name;
-        console.log('Base64 sans préfixe ajouté au formulaire:', base64String);
-      };
-
-      reader.onerror = (error) => {
-        console.error('Erreur lors de la conversion du fichier en Base64:', error);
-      };
-
-      reader.readAsDataURL(file);
-    }
+    this.nomFichier = CaracteristiquesFormUtil.auChargementDuFichier(event, this.caracteristiquesForm, 'dpeFichier');
   }
 
   remplacerFichier(): void {
+    CaracteristiquesFormUtil.remplacerFichier(this.caracteristiquesForm, 'dpeFichier');
     this.nomFichier = null;
-    this.caracteristiquesForm.patchValue({ dpeFichier: '' });
-    console.log('Le fichier a été réinitialisé.');
+  }
+
+  onBalconOuTerrasseChange(event: Event): void {
+    CaracteristiquesFormUtil.onBalconOuTerrasseChange(event, this.caracteristiquesForm, 'surfaceBalconOuTerrasse');
   }
 }

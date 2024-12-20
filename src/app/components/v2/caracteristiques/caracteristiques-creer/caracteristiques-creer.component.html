@@ -71,14 +71,15 @@
 
       <div class="champ">
         <label for="balconOuTerrasse">Balcon ou terrasse</label>
-        <select id="balconOuTerrasse" formControlName="balconOuTerrasse" aria-required="true">
+        <select  (change)="onBalconOuTerrasseChange($event)" id="balconOuTerrasse" formControlName="balconOuTerrasse" aria-required="true">
           <option value="" disabled selected>Sélectionnez</option>
           <option value="true">Oui</option>
           <option value="false">Non</option>
         </select>
       </div>
 
-      <div class="champ">
+      <div class="champ"
+           *ngIf="caracteristiquesForm.get('balconOuTerrasse')?.value === 'true' || caracteristiquesForm.get('balconOuTerrasse')?.value === true">
         <label for="surfaceBalconOuTerrasse">Surface extérieur</label>
         <input
           type="number"
@@ -87,7 +88,7 @@
           aria-required="true">
       </div>
       <div class="champ">
-        <label for="dpeLettre">Type de logement</label>
+        <label for="dpeLettre">Classe énergie</label>
         <select id="dpeLettre" formControlName="dpeLettre" aria-required="true">
           <option value="" disabled>Sélectionner la classe énérgie</option>
           <option *ngFor="let dpeLettre of dpeLettres" [value]="dpeLettre">{{ dpeLettre }}</option>
