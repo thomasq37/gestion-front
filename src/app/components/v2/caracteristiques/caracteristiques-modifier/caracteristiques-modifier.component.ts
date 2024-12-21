@@ -79,6 +79,12 @@ export class CaracteristiquesModifierComponent {
     }
   }
 
+  remplacerFichier(): void {
+    CaracteristiquesFormUtil.remplacerFichier(this.caracteristiquesForm, 'dpeFichier');
+    this.nomFichier = null;
+  }
+
+
   supprimerCaracteristiquesPourLogement(logementMasqueId: string) {
     const confirmed = window.confirm('Voulez-vous vraiment supprimer les caracteristiques pour ce logement ?');
     if (confirmed) {

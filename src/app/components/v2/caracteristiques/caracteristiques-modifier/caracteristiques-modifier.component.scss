@@ -15,5 +15,15 @@
         color: black;
       }
     }
+
+  }
+  .btn-supprimer-fichier-dpe{
+    background: none;
+    width: max-content;
+    margin: 0;
+    padding: .5rem 0;
+    text-decoration: underline;
+    color: red;
+    font-weight: initial;
   }
 }
