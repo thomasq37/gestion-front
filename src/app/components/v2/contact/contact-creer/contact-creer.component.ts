@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Pays} from "../../../../models/v2/enumeration/Pays.enum";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ContactService} from "../../../../services/v2/contact/contact.service";
 import {ContactDTO} from "../../../../models/v2/entites/Contact/ContactDTO.model";
@@ -15,7 +14,7 @@ export class ContactCreerComponent {
   contactForm: FormGroup;
   error: string | null = null;
   logementMasqueId: string | null = null;
-  paysList = Object.values(Pays);
+  loading = false;
   constructor(
     private formBuilder: FormBuilder,
     private contactService: ContactService,
@@ -35,6 +34,8 @@ export class ContactCreerComponent {
   }
 
   async creerContactPourLogement(): Promise<void> {
+
+    this.loading = true
     const contact: ContactDTO = this.contactForm.value as ContactDTO;
     contact.telephone = this.contactForm.value.telephone?.e164Numbers
     try {
@@ -43,6 +44,9 @@ export class ContactCreerComponent {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
+    }
+    finally {
+      this.loading = false;
     }
   }
 

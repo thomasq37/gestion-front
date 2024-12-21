@@ -1,6 +1,6 @@
 <section class="formulaire-basique">
-
-  <form [formGroup]="locataireForm" (ngSubmit)="creerLocatairePourPeriodeDeLocation()">
+  <app-loader *ngIf="loading"></app-loader>
+  <form *ngIf="!loading" [formGroup]="locataireForm" (ngSubmit)="creerLocatairePourPeriodeDeLocation()">
     <div class="header">
       <h1>Ajouter un locataire</h1>
     </div>

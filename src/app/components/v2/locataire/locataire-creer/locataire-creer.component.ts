@@ -17,6 +17,8 @@ export class LocataireCreerComponent implements OnInit {
   error: string | null = null;
   logementMasqueId: string | null = null;
   periodesDeLocation: PeriodeDeLocationDTO[] = [];
+  loading = false;
+
   protected readonly SearchCountryField = SearchCountryField;
   protected readonly CountryISO = CountryISO;
   constructor(
@@ -55,6 +57,7 @@ export class LocataireCreerComponent implements OnInit {
     }
   }
   async creerLocatairePourPeriodeDeLocation(): Promise<void> {
+    this.loading = true;
     const locataire: LocataireDTO = this.locataireForm.value as LocataireDTO;
     locataire.telephone = this.locataireForm.value.telephone?.e164Number
 
@@ -64,6 +67,9 @@ export class LocataireCreerComponent implements OnInit {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
+    }
+    finally {
+      this.loading = false;
     }
   }
 }

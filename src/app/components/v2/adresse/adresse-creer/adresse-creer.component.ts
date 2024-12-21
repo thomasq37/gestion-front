@@ -15,6 +15,7 @@ export class AdresseCreerComponent {
   error: string | null = null;
   logementMasqueId: string | null = null;
   paysList = Object.values(Pays);
+  loading = false;
   constructor(
     private formBuilder: FormBuilder,
     private adresseService: AdresseService,
@@ -35,6 +36,7 @@ export class AdresseCreerComponent {
   }
 
   async creerAdressePourLogement(): Promise<void> {
+    this.loading = true
     const adresse: AdresseDTO = this.adresseForm.value as AdresseDTO;
     try {
       await this.adresseService.creerAdressePourLogement(this.logementMasqueId, adresse);
@@ -42,6 +44,9 @@ export class AdresseCreerComponent {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
+    }
+    finally {
+      this.loading = false;
     }
   }
 }

@@ -20,6 +20,7 @@ export class CaracteristiquesCreerComponent {
   typeDeLogements = Object.values(TypeDeLogement);
   dpeLettres = Object.values(DpeLettre);
   nomFichier: string | null = null;
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,6 +48,7 @@ export class CaracteristiquesCreerComponent {
   }
 
   async creerCaracteristiquesPourLogement(): Promise<void> {
+    this.loading = true
     const caracteristiques: CaracteristiquesDTO = this.caracteristiquesForm.value as CaracteristiquesDTO;
     try {
       await this.caracteristiquesService.creerCaracteristiquesPourLogement(this.logementMasqueId, caracteristiques);
@@ -54,6 +56,9 @@ export class CaracteristiquesCreerComponent {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
+    }
+    finally {
+      this.loading = false;
     }
   }
   auChargementDuFichier(event: Event): void {

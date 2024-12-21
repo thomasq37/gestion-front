@@ -1,6 +1,6 @@
 <section class="formulaire-basique">
-
-  <form [formGroup]="caracteristiquesForm" (ngSubmit)="creerCaracteristiquesPourLogement()">
+  <app-loader *ngIf="loading"></app-loader>
+  <form *ngIf="!loading" [formGroup]="caracteristiquesForm" (ngSubmit)="creerCaracteristiquesPourLogement()">
     <div class="header">
       <h1>Créer les caracteristiques</h1>
     </div>

@@ -57,6 +57,7 @@ export class AdresseModifierComponent implements OnInit {
   }
 
   async modifierAdressePourLogement(): Promise<void> {
+    this.loading = true;
     const adresse: AdresseDTO = this.adresseForm.value as AdresseDTO;
     try {
       await this.adresseService.modifierAdressePourLogement(this.logementMasqueId, adresse);
@@ -64,6 +65,9 @@ export class AdresseModifierComponent implements OnInit {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
+    }
+    finally {
+      this.loading = false;
     }
   }
 

@@ -88,6 +88,7 @@ export class LocataireModifierComponent implements OnInit {
     }
   }
   async modifierLocatairePourPeriodeDeLocation(): Promise<void> {
+    this.loading = true;
     const locataire: LocataireDTO = this.locataireForm.value as LocataireDTO;
     locataire.telephone = this.locataireForm.value.telephone?.e164Number
     try {
@@ -96,6 +97,9 @@ export class LocataireModifierComponent implements OnInit {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
+    }
+    finally {
+      this.loading = false;
     }
   }
   supprimerLocatairePourPeriodeDeLocation(logementMasqueId: string) {

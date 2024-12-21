@@ -69,6 +69,7 @@ export class CaracteristiquesModifierComponent {
   }
 
   async modifierCaracteristiquesPourLogement(): Promise<void> {
+    this.loading = true
     const caracteristiques: CaracteristiquesDTO = this.caracteristiquesForm.value as CaracteristiquesDTO;
     try {
       await this.caracteristiquesService.modifierCaracteristiquesPourLogement(this.logementMasqueId, caracteristiques);
@@ -76,6 +77,9 @@ export class CaracteristiquesModifierComponent {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
+    }
+    finally {
+      this.loading = false;
     }
   }
 

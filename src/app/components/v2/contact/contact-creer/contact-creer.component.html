@@ -1,6 +1,6 @@
 <section class="formulaire-basique">
-
-  <form [formGroup]="contactForm" (ngSubmit)="creerContactPourLogement()">
+  <app-loader *ngIf="loading"></app-loader>
+  <form *ngIf="!loading" [formGroup]="contactForm" (ngSubmit)="creerContactPourLogement()">
     <div class="header">
       <h1>Créer le contact</h1>
     </div>

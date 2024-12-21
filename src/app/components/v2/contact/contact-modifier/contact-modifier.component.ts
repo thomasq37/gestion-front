@@ -60,6 +60,8 @@ export class ContactModifierComponent implements OnInit {
   }
 
   async modifierContactPourLogement(): Promise<void> {
+    this.loading = true;
+
     const contact: ContactDTO = this.contactForm.value as ContactDTO;
     contact.telephone = this.contactForm.value.telephone?.e164Number
 
@@ -69,6 +71,9 @@ export class ContactModifierComponent implements OnInit {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
+    }
+    finally {
+      this.loading = false;
     }
   }
 
