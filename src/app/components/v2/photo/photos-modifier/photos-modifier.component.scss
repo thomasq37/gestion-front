@@ -1,12 +1,15 @@
 .photos-liste{
   background-color: #f7f7f8;
   min-height: 100vh;
+
+
   &.on-load{
     display: flex;
     justify-content: center;
 
   }
   .photos-liste-container{
+    padding: 0 2rem 0;
     h1{
       padding: 4rem 0 2rem;
       font-size: 2.2rem;
@@ -14,14 +17,13 @@
       color: #143b86;
       text-align: center;
     }
-    max-width: 46rem;
+    max-width: 48rem;
     margin: 0 auto;
     background-color: white;
     .photos-liste-liste{
-      padding: 2rem !important;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      gap: 1.5rem;
       margin-bottom: 0 !important;
       li{
         position: relative;
@@ -83,9 +85,6 @@
     }
     .bouton-modifier-photos,
     .bouton-annuler-photos{
-      margin: 0 2rem 1rem;
-      width: 100%;
-      max-width: 42rem;
       border-radius: .5rem;
       border: none;
       font-size: 1.3rem;
@@ -93,13 +92,11 @@
       font-weight: bold;
       background-color: #1c5eeb;
       color: white;
-    }
-    .bouton-annuler-photos{
-      background-color: red;
-      margin: 0 2rem 2rem;
+      width: 100%;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
     }
     .fil-ariane{
-      padding-left: 2rem;
       padding-bottom: 2rem;
     }
   }
