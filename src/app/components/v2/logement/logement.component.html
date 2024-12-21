@@ -7,7 +7,11 @@
       <span class="arrow-next">></span>
       <span class="onglet-actuel">Synthèse logement</span>
     </div>
-    <app-photo-caroussel [onItem]="true" *ngIf="logement" [photos]="logement.photos"></app-photo-caroussel>
+    <app-photo-caroussel
+      *ngIf="logement"
+      [onItem]="true"
+      [photos]="logement.photos"
+      [logementId]="logement.masqueId"></app-photo-caroussel>
     <div class="container" *ngIf="logement">
       <div class="logement-infos" *ngIf="logement.adresse && logement.caracteristiques">
         <h2>{{logement.caracteristiques.typeDeLogement | titlecase}} {{logement.adresse.numero}} {{logement.adresse.voie}}</h2>

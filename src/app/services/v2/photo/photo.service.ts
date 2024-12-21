@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { fetchWithHandling } from '../http-helpers';
-import { PhotoDTO } from '../../models/v2/entites/Photo/PhotoDTO.model';
-import { SuccessResponse } from '../../models/v2/exception/SuccessResponse.model';
+import {environment} from "../../../../environments/environment";
+import {PhotoDTO} from "../../../models/v2/entites/Photo/PhotoDTO.model";
+import {SuccessResponse} from "../../../models/v2/exception/SuccessResponse.model";
 
 @Injectable({
   providedIn: 'root',

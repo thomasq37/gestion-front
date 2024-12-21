@@ -65,6 +65,7 @@ import { LocataireCreerComponent } from './components/v2/locataire/locataire-cre
 import { LocataireModifierComponent } from './components/v2/locataire/locataire-modifier/locataire-modifier.component';
 import { ContactCreerComponent } from './components/v2/contact/contact-creer/contact-creer.component';
 import { ContactModifierComponent } from './components/v2/contact/contact-modifier/contact-modifier.component';
+import { PhotosModifierComponent } from './components/v2/photo/photos-modifier/photos-modifier.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -125,6 +126,7 @@ registerLocaleData(localeFr, 'fr');
     LocataireModifierComponent,
     ContactCreerComponent,
     ContactModifierComponent,
+    PhotosModifierComponent,
   ],
   imports: [
     BrowserModule,

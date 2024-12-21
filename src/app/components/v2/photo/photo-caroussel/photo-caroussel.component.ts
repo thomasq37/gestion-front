@@ -11,13 +11,13 @@ import {HttpClient} from "@angular/common/http";
 export class PhotoCarousselComponent implements OnInit {
   @Input() photos!: PhotoDTO[];
   @Input() onItem!: boolean;
+  @Input() logementId!: string;
   @ViewChild('carousel', { static: false }) carousel: NgbCarousel | undefined;
   selectedImage: string | null = null;
   rightSidePhotos: PhotoDTO[] = [];
   private touchStartX: number = 0;
   private touchEndX: number = 0;
   private isClick: boolean = true;
-  @Input() logementId!: string;
 
   constructor(
     private modalService: NgbModal,
@@ -85,8 +85,9 @@ export class PhotoCarousselComponent implements OnInit {
       }
     }
   }
-  modifierPhotos() {
 
+  modifierPhotos() {
+    this.router.navigate([`/logements/${this.logementId}/photos/modifier`]);
   }
 
   naviguerALogement() {
