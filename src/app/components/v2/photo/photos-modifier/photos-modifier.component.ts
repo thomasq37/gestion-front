@@ -51,22 +51,30 @@ export class PhotosModifierComponent implements OnInit {
 
   auChargementDuFichier(event: Event): void {
     const input = event.target as HTMLInputElement;
+
     if (input && input.files && input.files.length > 0) {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64StringWithPrefix = reader.result as string;
-        const isPrincipal = this.photos.length === 0; // Si c'est la première photo, elle est principale
-        const newPhoto: PhotoDTO = {
-          image: base64StringWithPrefix.split(',')[1],
-          isPrincipal,
+      Array.from(input.files).forEach((file) => {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          const base64StringWithPrefix = reader.result as string;
+
+          const isPrincipal = this.photos.length === 0 && this.photos.every(p => !p.isPrincipal); // Première photo ajoutée ou aucune principale
+          const newPhoto: PhotoDTO = {
+            image: base64StringWithPrefix.split(',')[1],
+            isPrincipal,
+          };
+
+          this.photos.push(newPhoto); // Ajouter localement
+          this.modifications.push({ photo: newPhoto, action: 'new' }); // Ajouter aux modifications
         };
 
-        this.photos.push(newPhoto); // Ajouter localement
-        this.modifications.push({photo: newPhoto, action: 'new'}); // Ajouter aux modifications
-      };
+        reader.onerror = (error) => {
+          console.error('Erreur lors de la lecture du fichier :', error);
+        };
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      });
     }
   }
 
