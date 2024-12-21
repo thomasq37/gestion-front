@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PeriodeDeLocationDTO} from "../../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-periode-location-table',
@@ -8,6 +9,11 @@ import {PeriodeDeLocationDTO} from "../../../../models/v2/entites/PeriodeDeLocat
 })
 export class PeriodeLocationTableComponent implements OnInit {
   @Input() periodesDeLocation!: PeriodeDeLocationDTO[];
+  @Input() logementMasqueId!: string;
+  actionsIsVisible: boolean = false;
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
     this.periodesDeLocation.sort((a, b) => {
@@ -17,6 +23,14 @@ export class PeriodeLocationTableComponent implements OnInit {
     });
   }
 
-  modifierPeriodesDeLocation() {
+  modifierPeriodeDeLocation(logementMasqueId: string, periodeDeLocationMasqueId: string) {
+    this.router.navigate([`/logements/${logementMasqueId}/periode-de-location/${periodeDeLocationMasqueId}/modifier`]);
+  }
+
+  ajouterUnePeriodeDeLocation(logementMasqueId: any) {
+    this.router.navigate([`/logements/${logementMasqueId}/periode-de-location/creer`]);
+  }
+  toggleActions() {
+    this.actionsIsVisible = !this.actionsIsVisible;
   }
 }

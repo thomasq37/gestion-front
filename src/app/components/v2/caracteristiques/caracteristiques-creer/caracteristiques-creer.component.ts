@@ -13,11 +13,10 @@ import {CaracteristiquesFormUtil} from "../util/caracteristiques-form-util";
   styleUrls: ['./caracteristiques-creer.component.scss']
 })
 export class CaracteristiquesCreerComponent {
-  // TODO fichier dpe,  patterns et style select et checkbox
   caracteristiquesForm: FormGroup;
   error: string | null = null;
   logementMasqueId: string | null = null;
-  typeDeLogements = Object.values(TypeDeLogement);
+  typesDeLogement = Object.values(TypeDeLogement);
   dpeLettres = Object.values(DpeLettre);
   nomFichier: string | null = null;
   loading = false;

@@ -1,0 +1,52 @@
+<section class="formulaire-basique">
+  <app-loader *ngIf="loading"></app-loader>
+  <form *ngIf="!loading" [formGroup]="periodeDeLocationForm" (ngSubmit)="modifierPeriodeDeLocationPourLogement()">
+    <div class="header">
+      <h1>Modifier une période de location</h1>
+    </div>
+    <div class="champs">
+      <div class="champ">
+        <label for="tarif">Tarif</label>
+        <input
+          type="number"
+          id="tarif"
+          formControlName="tarif"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="dateDeDebut">Date de début</label>
+        <input
+          type="date"
+          id="dateDeDebut"
+          formControlName="dateDeDebut"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="dateDeFin">Date de fin</label>
+        <input
+          type="date"
+          id="dateDeFin"
+          formControlName="dateDeFin">
+      </div>
+      <div class="champ">
+        <label for="typeDeLocation">Type de location</label>
+        <select id="typeDeLocation" formControlName="typeDeLocation" aria-required="true">
+          <option value="" disabled>Sélectionner un type de location</option>
+          <option *ngFor="let typeDeLocation of typesDeLocation" [value]="typeDeLocation">{{ typeDeLocation }}</option>
+        </select>
+      </div>
+      <div class="error">
+        {{ error }}
+      </div>
+      <button type="submit" [disabled]="!periodeDeLocationForm.valid">
+        Enregistrer les modifications
+      </button>
+    </div>
+    <button type="button" class="btn-supprimer-formulaire-basique" (click)="supprimerPeriodeDeLocationPourLogement(logementMasqueId)">Supprimer la période de location</button>
+    <div class="fil-ariane">
+      <a href="/logements/{{logementMasqueId}}">Sythèse logement</a>
+      <span class="arrow-next">></span>
+      <span class="onglet-actuel">Modifer une période de location</span>
+    </div>
+  </form>
+</section>

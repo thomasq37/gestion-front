@@ -57,7 +57,7 @@
         <label for="typeDeLogement">Type de logement</label>
         <select id="typeDeLogement" formControlName="typeDeLogement" aria-required="true">
           <option value="" disabled>Sélectionner un type de logement</option>
-          <option *ngFor="let typeDeLogement of typeDeLogements" [value]="typeDeLogement">{{ typeDeLogement }}</option>
+          <option *ngFor="let typeDeLogement of typesDeLogement" [value]="typeDeLogement">{{ typeDeLogement }}</option>
         </select>
       </div>
       <div class="champ">

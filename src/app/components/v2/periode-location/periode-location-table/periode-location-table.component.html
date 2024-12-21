@@ -2,7 +2,16 @@
   <div class="custom-card">
     <div class="custom-card-header">
       <h2>{{ periodesDeLocation.length === 0 ? 'Aucune période de location trouvé' : 'Périodes de location' }}</h2>
-      <img (click)="modifierPeriodesDeLocation()" src="./assets/img/v2/edit-icon.svg" alt="icone de modification">
+      <div class="actions-boutons">
+        <button
+          *ngIf="actionsIsVisible"
+          (click)="toggleActions()">Fermer</button>
+        <img
+          *ngIf="!actionsIsVisible"
+          (click)="toggleActions()"
+          src="./assets/img/v2/edit-icon.svg" alt="icone de modification">
+        <img *ngIf="actionsIsVisible" (click)="ajouterUnePeriodeDeLocation(logementMasqueId)" src="./assets/img/v2/plus-icon.svg" alt="icone de modification">
+      </div>
     </div>
     <div class="periode-de-location-contenu" *ngIf="periodesDeLocation.length > 0">
       <table>
@@ -12,6 +21,8 @@
           <th>Entrée</th>
           <th>Sortie</th>
           <th>Prix par mois</th>
+          <th *ngIf="actionsIsVisible">Actions</th>
+
         </tr>
         </thead>
         <tbody>
@@ -24,6 +35,7 @@
             <td>{{ periodeDeLocation.dateDeDebut | customDate  }}</td>
             <td>{{ periodeDeLocation.dateDeFin === null ? 'Pas de sortie' : periodeDeLocation.dateDeFin | customDate }}</td>
             <td>{{ periodeDeLocation.tarif | currency: 'EUR'}}</td>
+            <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="modifierPeriodeDeLocation(logementMasqueId, periodeDeLocation.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>
           </tr>
         </tbody>
       </table>
