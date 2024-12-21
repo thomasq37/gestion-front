@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FraisDTO } from '../../../../models/v2/entites/Frais/FraisDTO.model';
 import { Frequence } from '../../../../models/v2/enumeration/Frequence.enum';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-frais-table',
@@ -9,10 +10,15 @@ import { Frequence } from '../../../../models/v2/enumeration/Frequence.enum';
 })
 export class FraisTableComponent implements OnInit {
   @Input() frais!: FraisDTO[];
+  @Input() logementMasqueId!: string;
   totalPages: number = 0;
   currentPage: number = 1;
   itemsPerPage: number = 5;
   pagedFrais: FraisDTO[] = [];
+  actionsIsVisible: boolean = false;
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
     this.frais = this.sortFrais(this.frais);
@@ -54,9 +60,6 @@ export class FraisTableComponent implements OnInit {
     this.updatePagedFrais();
   }
 
-  modifierFrais() {
-  }
-
   getNombreOccurrences(dateDeDebut: string, dateDeFin: string, frequence: Frequence): number {
     if (dateDeFin === null) {
       const dateActuelle = new Date();
@@ -81,5 +84,16 @@ export class FraisTableComponent implements OnInit {
       default:
         return 0;
     }
+  }
+
+  modifierFraisPourLogement(logementMasqueId: string, fraisMasqueId: string) {
+    this.router.navigate([`/logements/${logementMasqueId}/frais/${fraisMasqueId}/modifier`]);
+  }
+
+  ajouterUnFraisPourLogement(logementMasqueId: any) {
+    this.router.navigate([`/logements/${logementMasqueId}/frais/creer`]);
+  }
+  toggleActions() {
+    this.actionsIsVisible = !this.actionsIsVisible;
   }
 }

@@ -68,6 +68,8 @@ import { ContactModifierComponent } from './components/v2/contact/contact-modifi
 import { PhotosModifierComponent } from './components/v2/photo/photos-modifier/photos-modifier.component';
 import { PeriodeLocationCreerComponent } from './components/v2/periode-location/periode-location-creer/periode-location-creer.component';
 import { PeriodeLocationModifierComponent } from './components/v2/periode-location/periode-location-modifier/periode-location-modifier.component';
+import { FraisModifierComponent } from './components/v2/frais/frais-modifier/frais-modifier.component';
+import { FraisCreerComponent } from './components/v2/frais/frais-creer/frais-creer.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -131,6 +133,8 @@ registerLocaleData(localeFr, 'fr');
     PhotosModifierComponent,
     PeriodeLocationCreerComponent,
     PeriodeLocationModifierComponent,
+    FraisModifierComponent,
+    FraisCreerComponent,
   ],
   imports: [
     BrowserModule,

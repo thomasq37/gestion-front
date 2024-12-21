@@ -34,6 +34,8 @@ import {
 import {
   PeriodeLocationModifierComponent
 } from "./components/v2/periode-location/periode-location-modifier/periode-location-modifier.component";
+import {FraisModifierComponent} from "./components/v2/frais/frais-modifier/frais-modifier.component";
+import {FraisCreerComponent} from "./components/v2/frais/frais-creer/frais-creer.component";
 
 
 const routes: Routes = [
@@ -73,6 +75,8 @@ const routes: Routes = [
   { path: 'logements/:logementMasqueId/photos/modifier', component: PhotosModifierComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/periode-de-location/creer', component: PeriodeLocationCreerComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/periode-de-location/:periodeDeLocationMasqueId/modifier', component: PeriodeLocationModifierComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId/frais/creer', component: FraisCreerComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId/frais/:fraisMasqueId/modifier', component: FraisModifierComponent, canActivate: [AuthGuard] },
 
 ];
 @NgModule({

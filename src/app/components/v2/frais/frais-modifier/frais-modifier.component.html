@@ -1,0 +1,66 @@
+<section class="formulaire-basique">
+  <app-loader *ngIf="loading"></app-loader>
+  <form *ngIf="!loading" [formGroup]="fraisForm" (ngSubmit)="modifierFraisPourLogement()">
+    <div class="header">
+      <h1>Modifier un frais</h1>
+    </div>
+    <div class="champs">
+      <div class="champ">
+        <label for="nom">Nom</label>
+        <input
+          type="text"
+          id="nom"
+          formControlName="nom">
+      </div>
+      <div class="champ">
+        <label for="montant">Montant</label>
+        <input
+          type="number"
+          id="montant"
+          formControlName="montant"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="dateDeDebut">Date de début</label>
+        <input
+          type="date"
+          id="dateDeDebut"
+          formControlName="dateDeDebut"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="dateDeFin">Date de fin</label>
+        <input
+          type="date"
+          id="dateDeFin"
+          formControlName="dateDeFin">
+      </div>
+      <div class="champ">
+        <label for="frequence">Fréquence</label>
+        <select id="frequence" formControlName="frequence" aria-required="true">
+          <option value="" disabled>Sélectionner une fréquence</option>
+          <option *ngFor="let frequence of frequences" [value]="frequence">{{ frequence }}</option>
+        </select>
+      </div>
+      <div class="champ">
+        <label for="categorieFrais">Catégorie</label>
+        <select id="categorieFrais" formControlName="categorieFrais" aria-required="true">
+          <option value="" disabled>Sélectionner une catégorie</option>
+          <option *ngFor="let categorieFrais of categoriesFrais" [value]="categorieFrais">{{ categorieFrais }}</option>
+        </select>
+      </div>
+      <div class="error">
+        {{ error }}
+      </div>
+      <button type="submit" [disabled]="!fraisForm.valid">
+        Enregistrer les modifications
+      </button>
+    </div>
+    <button type="button" class="btn-supprimer-formulaire-basique" (click)="supprimerFraisPourLogement(logementMasqueId)">Supprimer le frais</button>
+    <div class="fil-ariane">
+      <a href="/logements/{{logementMasqueId}}">Sythèse logement</a>
+      <span class="arrow-next">></span>
+      <span class="onglet-actuel">Modifer un frais</span>
+    </div>
+  </form>
+</section>
