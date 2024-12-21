@@ -102,7 +102,7 @@
             <span class="file-name">{{ nomFichier || 'Aucun fichier sélectionné' }}</span>
           </div>
         </div>
-        <button class="btn-supprimer-fichier-dpe" (click)="remplacerFichier()" type="button">Supprimer le fichier</button>
+        <button *ngIf="nomFichier" class="btn-supprimer-fichier-dpe" (click)="remplacerFichier()" type="button">Supprimer le fichier</button>
 
         <!--<div class="remplacer-dpe-container"
              *ngIf="caracteristiquesForm.getRawValue()?.dpeFichier !== '' &&
