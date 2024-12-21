@@ -12,36 +12,42 @@
         <div class="actions-photos-container">
           <button
             (click)="definirCommePrincipale(i)"
-            class="button-is-principal {{photo.isPrincipal ? 'active' :''}}">
+            class="button-is-principal {{photo.isPrincipal ? 'active' : ''}}"
+          >
             Photo principale
           </button>
           <button (click)="supprimerPhoto(i)" class="bouton-supprimer-image">
-            <img src="assets/img/trash-icon.svg" alt="icône supprimer">
+            <img src="assets/img/trash-icon.svg" alt="icône supprimer" />
           </button>
         </div>
       </li>
 
       <li>
         <button class="bouton-ajouter-image" (click)="onButtonClick()">
-          <img src="assets/img/v2/plus-icon-black.svg" alt="icône plus">
+          <img src="assets/img/v2/plus-icon-black.svg" alt="icône plus" />
         </button>
         <input
           #fileInput
           type="file"
           accept="image/*"
-          style="display: none;"
+          style="display: none"
           (change)="auChargementDuFichier($event)"
-        >
-
+        />
       </li>
     </ul>
-    <button class="bouton-modifier-photos">Enregistrer les modifications</button>
+    <button
+      class="bouton-modifier-photos"
+      (click)="enregistrerModifications()"
+    >
+      Enregistrer les modifications
+    </button>
     <div class="fil-ariane">
-      <a href="/logements/{{logementMasqueId}}">Sythèse logement</a>
+      <a [routerLink]="['/logements', logementMasqueId]">Synthèse logement</a>
       <span class="arrow-next">></span>
       <span class="onglet-actuel">Modifier les photos</span>
     </div>
   </div>
 </section>
+
 
 
