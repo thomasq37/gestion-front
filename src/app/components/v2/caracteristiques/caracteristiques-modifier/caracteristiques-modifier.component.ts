@@ -19,6 +19,8 @@ export class CaracteristiquesModifierComponent {
   typeDeLogements = Object.values(TypeDeLogement);
   dpeLettres = Object.values(DpeLettre);
   nomFichier: string | null = null;
+  loading = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private caracteristiquesService: CaracteristiquesService,
@@ -42,6 +44,7 @@ export class CaracteristiquesModifierComponent {
   }
 
   ngOnInit(): void {
+    this.loading = true
     this.activatedRoute.paramMap.subscribe(params => {
       this.logementMasqueId = params.get('logementMasqueId');
       if (this.logementMasqueId) {
@@ -57,6 +60,8 @@ export class CaracteristiquesModifierComponent {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Impossible de charger les caracteristiques.');
+    } finally {
+      this.loading = false;
     }
   }
 

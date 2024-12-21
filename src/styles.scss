@@ -201,7 +201,7 @@ strong{
 
         label{
           font-weight: bold;
-          color: #143b86;
+          color: black;
         }
         input, select, , ngx-intl-tel-input{
           width: 44rem;
@@ -210,6 +210,7 @@ strong{
           border: 1px solid #989797;
           padding: .4rem;
           color: #000;
+          height: 4rem;
         }
         select{
           padding: .8rem;
