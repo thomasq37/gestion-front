@@ -10,6 +10,7 @@
       width: 95%;
       height: 89%;
       padding: .5rem;
+      pointer-events: none;
       /*background-color: #f7f7f8;
       margin-top: .2rem;;
       position: absolute;
@@ -28,9 +29,13 @@
         padding: .1rem 0.3rem;
         color: black;
         border: 1px solid grey;
+        pointer-events: none;
+
       }
       .file-name{
         color: black;
+        pointer-events: none;
+
       }
     }
 
