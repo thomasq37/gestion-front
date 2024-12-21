@@ -208,13 +208,14 @@ strong{
           max-width: 100%;
           border-radius: .5rem;
           border: 1px solid #989797;
+          background-color: #f7f7f8;
           padding: .4rem;
           color: #000;
           height: 4rem;
         }
         select{
           padding: .8rem;
-          background-color: white;
+          background-color: #f7f7f8;
         }
 
         div{
@@ -228,14 +229,6 @@ strong{
           margin-top: 0;
         }
 
-      }
-      .checkbox{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        input[type="checkbox"]{
-          width: 1.5rem;
-        }
       }
     }
     .error{

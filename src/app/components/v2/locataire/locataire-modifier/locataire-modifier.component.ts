@@ -21,6 +21,7 @@ export class LocataireModifierComponent implements OnInit {
   periodesDeLocation: PeriodeDeLocationDTO[] = [];
   locataireActuel!: LocataireDTO;
   periodeDeLocationActuel!: PeriodeDeLocationDTO;
+  loading = false;
   protected readonly SearchCountryField = SearchCountryField;
   protected readonly CountryISO = CountryISO;
   protected selectedCountryISO: CountryISO;
@@ -46,6 +47,7 @@ export class LocataireModifierComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.loading = true;
     this.activatedRoute.paramMap.subscribe(params => {
       this.logementMasqueId = params.get('logementMasqueId');
       if (this.logementMasqueId) {
@@ -80,6 +82,9 @@ export class LocataireModifierComponent implements OnInit {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Impossible de charger l’adresse.');
+    }
+    finally {
+      this.loading = false;
     }
   }
   async modifierLocatairePourPeriodeDeLocation(): Promise<void> {

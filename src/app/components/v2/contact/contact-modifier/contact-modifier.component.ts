@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ContactService} from "../../../../services/v2/contact/contact.service";
@@ -10,11 +10,12 @@ import {TelephoneUtil} from "../../util/telephone-util";
   templateUrl: './contact-modifier.component.html',
   styleUrls: ['./contact-modifier.component.scss']
 })
-export class ContactModifierComponent {
+export class ContactModifierComponent implements OnInit {
   contactForm: FormGroup;
   error: string | null = null;
   logementMasqueId: string | null = null;
   contactMasqueId: string | null = null;
+  loading = false;
   protected readonly CountryISO = CountryISO;
   protected readonly SearchCountryField = SearchCountryField;
   protected selectedCountryISO: CountryISO;
@@ -34,6 +35,7 @@ export class ContactModifierComponent {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.activatedRoute.paramMap.subscribe(params => {
       this.logementMasqueId = params.get('logementMasqueId');
       this.contactMasqueId = params.get('contactMasqueId');
@@ -51,6 +53,9 @@ export class ContactModifierComponent {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Impossible de charger le contact.');
+    }
+    finally {
+      this.loading = false;
     }
   }
 

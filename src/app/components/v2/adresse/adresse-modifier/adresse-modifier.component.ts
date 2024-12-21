@@ -15,6 +15,7 @@ export class AdresseModifierComponent implements OnInit {
   error: string | null = null;
   logementMasqueId: string | null = null;
   paysList = Object.values(Pays);
+  loading = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +34,7 @@ export class AdresseModifierComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loading = true;
     this.activatedRoute.paramMap.subscribe(params => {
       this.logementMasqueId = params.get('logementMasqueId');
       if (this.logementMasqueId) {
@@ -48,6 +50,9 @@ export class AdresseModifierComponent implements OnInit {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Impossible de charger l’adresse.');
+    }
+    finally {
+      this.loading = false;
     }
   }
 

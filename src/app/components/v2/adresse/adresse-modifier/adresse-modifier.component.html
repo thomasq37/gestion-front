@@ -1,6 +1,6 @@
 <section class="formulaire-basique">
-
-  <form [formGroup]="adresseForm" (ngSubmit)="modifierAdressePourLogement()">
+  <app-loader *ngIf="loading"></app-loader>
+  <form *ngIf="!loading" [formGroup]="adresseForm" (ngSubmit)="modifierAdressePourLogement()">
     <div class="header">
       <h1>Modifier l'adresse</h1>
     </div>

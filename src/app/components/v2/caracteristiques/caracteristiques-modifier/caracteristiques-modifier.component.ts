@@ -57,6 +57,9 @@ export class CaracteristiquesModifierComponent {
     try {
       const caracteristiques = await this.caracteristiquesService.obtenirCaracteristiquesPourLogement(logementMasqueId);
       this.caracteristiquesForm.patchValue(caracteristiques);
+      if (caracteristiques.dpeFichier) {
+        this.nomFichier = "1 fichier séléctionné"; // Exemple - utilisez un nom significatif
+      }
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Impossible de charger les caracteristiques.');
@@ -90,11 +93,6 @@ export class CaracteristiquesModifierComponent {
   }
   auChargementDuFichier(event: Event): void {
     this.nomFichier = CaracteristiquesFormUtil.auChargementDuFichier(event, this.caracteristiquesForm, 'dpeFichier');
-  }
-
-  remplacerFichier(): void {
-    CaracteristiquesFormUtil.remplacerFichier(this.caracteristiquesForm, 'dpeFichier');
-    this.nomFichier = null;
   }
 
   onBalconOuTerrasseChange(event: Event): void {

@@ -1,1 +1,19 @@
-
+.champ{
+  .test{
+    position: relative;
+    .nom-fichier-container{
+      background-color: #f7f7f8;
+      margin-top: .2rem;;
+      position: absolute;
+      left: 8.2rem;
+      top: 0;
+      display: flex;
+      align-items: center;
+      height: 80%;
+      width: 15rem;
+      .file-name{
+        color: black;
+      }
+    }
+  }
+}

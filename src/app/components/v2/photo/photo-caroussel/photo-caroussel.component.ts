@@ -42,10 +42,15 @@ export class PhotoCarousselComponent implements OnInit {
   }
 
   setRightSidePhotos(): void {
-    if (this.photos.length > 2) {
-      this.rightSidePhotos = [this.photos[1], this.photos[2]];
+    if (this.photos.length > 1) {
+      this.rightSidePhotos = this.photos.slice(1, 3);
+    } else if (this.photos.length === 1) {
+      this.rightSidePhotos = [this.photos[0]];
+    } else {
+      this.rightSidePhotos = [];
     }
   }
+
   sortPhotosByIsPrincipal(): void {
     if (this.photos) {
       this.photos.sort((a, b) => {
