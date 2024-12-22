@@ -42,11 +42,9 @@
     >
       Enregistrer les modifications
     </button>
-    <div class="fil-ariane">
-      <a [routerLink]="['/logements', logementMasqueId]">Synthèse logement</a>
-      <span class="arrow-next">></span>
-      <span class="onglet-actuel">Modifier les photos</span>
-    </div>
+    <app-fil-ariane
+      [ongletRetour]="{url: '/logements/'+ logementMasqueId, label:'Sythèse logement'}"
+      [ongletActuel]="'Modifier les photos'"></app-fil-ariane>
   </div>
 </section>
 

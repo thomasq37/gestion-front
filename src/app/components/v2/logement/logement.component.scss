@@ -1,24 +1,8 @@
 .contenu-logement {
   background-color: #f7f7f8;
   min-height: 90vh;
-  .fil-ariane{
-    color: #143b86;
-    display: flex;
-    max-width: 120rem;
-    margin: auto;
-    padding: 0 1rem;
-    a{
-      padding: 1.5rem;
-      display: block;
-    }
-    .arrow-next{
-      color: grey;
-      font-weight: bold;
-      padding-right: 1rem;
-    }
-    .onglet-actuel{
-      text-decoration: underline;
-    }
+  .container-fil-ariane{
+    padding-left: 1rem;
   }
   &.on-load {
     display: flex;

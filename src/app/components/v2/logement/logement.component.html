@@ -2,10 +2,11 @@
   <app-header [h1]="'Synthèse logement'"></app-header>
   <div class="contenu-logement {{loading ? 'on-load' : ''}}">
     <app-loader *ngIf="loading"></app-loader>
-    <div class="fil-ariane" *ngIf="logement">
-      <a href="/logements">Vue d'ensemble</a>
-      <span class="arrow-next">></span>
-      <span class="onglet-actuel">Synthèse logement</span>
+    <div class="container-fil-ariane">
+      <app-fil-ariane
+        *ngIf="logement"
+        [ongletRetour]="{url: '/logements', label:'Vue d\'ensemble'}"
+        [ongletActuel]="'Synthèse logement'"></app-fil-ariane>
     </div>
     <app-photo-caroussel
       *ngIf="logement"

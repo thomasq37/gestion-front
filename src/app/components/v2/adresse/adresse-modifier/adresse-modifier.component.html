@@ -76,10 +76,8 @@
       </button>
     </div>
     <button type="button" class="btn-supprimer-formulaire-basique" (click)="supprimerAdressePourLogement(logementMasqueId)">Supprimer l'adresse</button>
-    <div class="fil-ariane">
-      <a href="/logements/{{logementMasqueId}}?tab=0">Sythèse logement</a>
-      <span class="arrow-next">></span>
-      <span class="onglet-actuel">Modifer l'adresse</span>
-    </div>
+    <app-fil-ariane
+      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=0', label:'Sythèse logement'}"
+      [ongletActuel]="'Modifer l\'adresse'"></app-fil-ariane>
   </form>
 </section>

@@ -43,10 +43,8 @@
       </button>
     </div>
     <button type="button" class="btn-supprimer-formulaire-basique" (click)="supprimerPeriodeDeLocationPourLogement(logementMasqueId)">Supprimer la période de location</button>
-    <div class="fil-ariane">
-      <a href="/logements/{{logementMasqueId}}?tab=3">Sythèse logement</a>
-      <span class="arrow-next">></span>
-      <span class="onglet-actuel">Modifer une période de location</span>
-    </div>
+    <app-fil-ariane
+      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=3', label:'Sythèse logement'}"
+      [ongletActuel]="'Modifer la période de location'"></app-fil-ariane>
   </form>
 </section>

@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthGuard } from "./guards/auth.guard";
-import { PaginationComponent } from './components/pagination/pagination.component';
+import { PaginationComponent } from './components/v2/pagination/pagination.component';
 import { NgOptimizedImage, registerLocaleData } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import { AppRoutingModule } from "./app-routing.module";
@@ -42,6 +42,7 @@ import { PeriodeLocationModifierComponent } from './components/v2/periode-locati
 import { FraisModifierComponent } from './components/v2/frais/frais-modifier/frais-modifier.component';
 import { FraisCreerComponent } from './components/v2/frais/frais-creer/frais-creer.component';
 import { CustomDatePipe } from "./components/v2/util/custom-date-pipe";
+import { FilArianeComponent } from './components/v2/fil-ariane/fil-ariane.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -79,6 +80,7 @@ registerLocaleData(localeFr, 'fr');
     PeriodeLocationModifierComponent,
     FraisModifierComponent,
     FraisCreerComponent,
+    FilArianeComponent,
   ],
   imports: [
     BrowserModule,

@@ -58,11 +58,9 @@
        Ajouter le locataire
      </button>
    </div>
-    <div class="fil-ariane">
-      <a href="/logements/{{logementMasqueId}}?tab=4">Sythèse logement</a>
-      <span class="arrow-next">></span>
-      <span class="onglet-actuel">Ajouter un locataire</span>
-    </div>
+    <app-fil-ariane
+      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=4', label:'Sythèse logement'}"
+      [ongletActuel]="'Ajouter un locataire'"></app-fil-ariane>
   </form>
 
 </section>
