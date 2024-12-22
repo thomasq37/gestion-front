@@ -1,15 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {DashboardComponent} from "./components/dashboard/dashboard.component";
-import {AppartementItemComponent} from "./components/appartement/appartement-item/appartement-item.component";
 import {AuthGuard} from "./guards/auth.guard";
-import {AppartementPeriodeManageComponent} from "./components/appartement/appartement-item/appartement-periode/appartement-periode-manage/appartement-periode-manage.component";
-import {AppartementContactManageComponent} from "./components/appartement/appartement-item/appartement-contact/appartement-contact-manage/appartement-contact-manage.component";
-import {AppartementFraisManageComponent} from "./components/appartement/appartement-item/appartement-frais/appartement-frais-manage/appartement-frais-manage.component";
-import {AppartementDescManageComponent} from "./components/appartement/appartement-item/appartement-desc/appartement-desc-manage/appartement-desc-manage.component";
-import {AppartementPictureManageComponent} from "./components/appartement/appartement-item/appartement-picture/appartement-picture-manage/appartement-picture-manage.component";
-import {AppartementAddComponent} from "./components/appartement/appartement-add/appartement-add.component";
-import {UtilisateurAddComponent} from "./components/utilisateur/utilisateur-add/utilisateur-add.component";
 import {LogementsComponent} from "./components/v2/logements/logements.component";
 import {ConnexionComponent} from "./components/v2/connexion/connexion.component";
 import {AlreadyAuthGuard} from "./guards/already-auth.guard";
@@ -39,27 +30,6 @@ import {FraisCreerComponent} from "./components/v2/frais/frais-creer/frais-creer
 
 
 const routes: Routes = [
-
-  // Home
-
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-
-  // Registration
-
-  { path: 'create', component: UtilisateurAddComponent, pathMatch: 'full'  },
-
-  { path: 'appartement/:id', component: AppartementItemComponent, canActivate: [AuthGuard] },
-  { path: 'appartements/add', component: AppartementAddComponent, canActivate: [AuthGuard]},
-
-  // Manage
-
-  { path: 'appartement/:id/periodes', component: AppartementPeriodeManageComponent, canActivate: [AuthGuard] },
-  { path: 'appartement/:id/contacts', component: AppartementContactManageComponent, canActivate: [AuthGuard] },
-  { path: 'appartement/:id/frais', component: AppartementFraisManageComponent, canActivate: [AuthGuard] },
-  { path: 'appartement/:id/description', component: AppartementDescManageComponent, canActivate: [AuthGuard] },
-  { path: 'appartement/:id/photos', component: AppartementPictureManageComponent, canActivate: [AuthGuard] },
-  // v2 //
   { path: 'logements', component: LogementsComponent, canActivate: [AuthGuard] },
   { path: 'connexion', component: ConnexionComponent, canActivate: [AlreadyAuthGuard] },
   { path: 'inscription', component: InscriptionComponent, canActivate: [AlreadyAuthGuard] },
