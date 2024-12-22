@@ -67,7 +67,9 @@ export class FraisModifierComponent {
 
     try {
       await this.fraisService.modifierFraisPourLogement(this.logementMasqueId, this.fraisMasqueId, frais);
-      await this.router.navigate([`/logements/${this.logementMasqueId}`]);
+      await this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 2 },
+      });
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
@@ -81,7 +83,9 @@ export class FraisModifierComponent {
     const confirmed = window.confirm('Voulez-vous vraiment supprimer le frais pour ce logement ?');
     if (confirmed) {
       this.fraisService.supprimerFraisPourLogement(logementMasqueId, this.fraisMasqueId).then(() => {
-        this.router.navigate([`/logements/${this.logementMasqueId}`]);
+        this.router.navigate([`/logements/${this.logementMasqueId}`], {
+          queryParams: { tab: 2 },
+        });
       }).catch(error => {
         console.error('Erreur lors de la suppression de le frais:', error);
       });

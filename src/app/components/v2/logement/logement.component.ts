@@ -29,6 +29,12 @@ export class LogementComponent {
     } else {
       this.error = 'Aucun identifiant de logement fourni.';
     }
+    this.route.queryParams.subscribe(params => {
+      const tabIndex = +params['tab']; // Convertir en nombre
+      if (!isNaN(tabIndex) && tabIndex >= 0 && tabIndex < this.menuItems.length) {
+        this.activeIndex = tabIndex;
+      }
+    });
   }
 
   async obtenirLogement(logementMasqueId: string): Promise<void> {

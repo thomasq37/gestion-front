@@ -51,7 +51,9 @@ export class CaracteristiquesCreerComponent {
     const caracteristiques: CaracteristiquesDTO = this.caracteristiquesForm.value as CaracteristiquesDTO;
     try {
       await this.caracteristiquesService.creerCaracteristiquesPourLogement(this.logementMasqueId, caracteristiques);
-      await this.router.navigate([`/logements/${this.logementMasqueId}`]);
+      await this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 1 },
+      });
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');

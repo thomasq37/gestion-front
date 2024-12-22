@@ -44,7 +44,9 @@ export class FraisCreerComponent {
     const frais: FraisDTO = this.fraisForm.value as FraisDTO;
     try {
       await this.fraisService.creerFraisPourLogement(this.logementMasqueId, frais);
-      await this.router.navigate([`/logements/${this.logementMasqueId}`]);
+      await this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 2 },
+      });
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');

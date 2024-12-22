@@ -40,7 +40,9 @@ export class PeriodeLocationCreerComponent {
     const periodeDeLocation: PeriodeDeLocationDTO = this.periodeDeLocationForm.value as PeriodeDeLocationDTO;
     try {
       await this.periodeDeLocationService.creerPeriodeDeLocationPourLogement(this.logementMasqueId, periodeDeLocation);
-      await this.router.navigate([`/logements/${this.logementMasqueId}`]);
+      await this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab:3 },
+      });
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');

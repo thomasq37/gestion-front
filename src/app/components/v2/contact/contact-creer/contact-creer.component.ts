@@ -15,6 +15,8 @@ export class ContactCreerComponent {
   error: string | null = null;
   logementMasqueId: string | null = null;
   loading = false;
+  protected readonly SearchCountryField = SearchCountryField;
+  protected readonly CountryISO = CountryISO;
   constructor(
     private formBuilder: FormBuilder,
     private contactService: ContactService,
@@ -40,7 +42,9 @@ export class ContactCreerComponent {
     contact.telephone = this.contactForm.value.telephone?.e164Numbers
     try {
       await this.contactService.creerContactPourLogement(this.logementMasqueId, contact);
-      await this.router.navigate([`/logements/${this.logementMasqueId}`]);
+      await this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 5 },
+      });
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
@@ -49,7 +53,4 @@ export class ContactCreerComponent {
       this.loading = false;
     }
   }
-
-  protected readonly SearchCountryField = SearchCountryField;
-  protected readonly CountryISO = CountryISO;
 }

@@ -93,7 +93,9 @@ export class LocataireModifierComponent implements OnInit {
     locataire.telephone = this.locataireForm.value.telephone?.e164Number
     try {
       await this.locataireService.modifierLocatairePourPeriodeDeLocation(this.logementMasqueId, this.locataireForm.get('periodeDeLocation').value, this.locataireActuel.masqueId, locataire);
-      await this.router.navigate([`/logements/${this.logementMasqueId}`]);
+      await this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 4 },
+      });
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
@@ -106,7 +108,9 @@ export class LocataireModifierComponent implements OnInit {
     const confirmed = window.confirm('Voulez-vous vraiment supprimer le locataire ?');
     if (confirmed) {
       this.locataireService.supprimerLocatairePourPeriodeDeLocation(logementMasqueId, this.periodeDeLocationActuel.masqueId, this.locataireMasqueId).then(() => {
-        this.router.navigate([`/logements/${this.logementMasqueId}`]);
+        this.router.navigate([`/logements/${this.logementMasqueId}`], {
+          queryParams: { tab: 4 },
+        });
       }).catch(error => {
         console.error('Erreur lors de la suppression du locataire:', error);
       });

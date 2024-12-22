@@ -73,7 +73,9 @@ export class CaracteristiquesModifierComponent {
     const caracteristiques: CaracteristiquesDTO = this.caracteristiquesForm.value as CaracteristiquesDTO;
     try {
       await this.caracteristiquesService.modifierCaracteristiquesPourLogement(this.logementMasqueId, caracteristiques);
-      await this.router.navigate([`/logements/${this.logementMasqueId}`]);
+      await this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 1 },
+      });
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
@@ -93,7 +95,9 @@ export class CaracteristiquesModifierComponent {
     const confirmed = window.confirm('Voulez-vous vraiment supprimer les caracteristiques pour ce logement ?');
     if (confirmed) {
       this.caracteristiquesService.supprimerCaracteristiquesPourLogement(logementMasqueId).then(() => {
-        this.router.navigate([`/logements/${this.logementMasqueId}`]);
+        this.router.navigate([`/logements/${this.logementMasqueId}`], {
+          queryParams: { tab: 1 },
+        });
       }).catch(error => {
         console.error('Erreur lors de la suppression des caracteristiques:', error);
       });

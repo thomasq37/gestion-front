@@ -61,7 +61,9 @@ export class AdresseModifierComponent implements OnInit {
     const adresse: AdresseDTO = this.adresseForm.value as AdresseDTO;
     try {
       await this.adresseService.modifierAdressePourLogement(this.logementMasqueId, adresse);
-      await this.router.navigate([`/logements/${this.logementMasqueId}`]);
+      await this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 0 },
+      });
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
