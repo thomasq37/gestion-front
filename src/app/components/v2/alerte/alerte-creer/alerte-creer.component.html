@@ -1,0 +1,37 @@
+<section class="formulaire-basique">
+  <app-loader *ngIf="loading"></app-loader>
+  <form *ngIf="!loading" [formGroup]="alerteForm" (ngSubmit)="creerAlertePourLogement()">
+    <div class="header">
+      <h1>Créer une alerte</h1>
+    </div>
+    <div class="champs">
+      <div class="champ">
+        <label for="probleme">Problème</label>
+        <textarea
+          type="text"
+          id="probleme"
+          formControlName="probleme"
+          aria-required="true">
+        </textarea>
+      </div>
+      <div class="champ">
+        <label for="solution">Solution</label>
+        <textarea
+          type="text"
+          id="solution"
+          formControlName="solution"
+          aria-required="true">
+        </textarea>
+      </div>
+      <div class="error">
+        {{ error }}
+      </div>
+      <button type="submit" [disabled]="!alerteForm.valid">
+        Ajouter l'alerte
+      </button>
+    </div>
+    <app-fil-ariane
+      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=6', label:'Sythèse logement'}"
+      [ongletActuel]="'Créer une alerte'"></app-fil-ariane>
+  </form>
+</section>

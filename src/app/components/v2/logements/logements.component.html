@@ -20,6 +20,10 @@
               <p class="ville-logement">{{logement.adresse.ville}}</p>
               <p class="details-logement">{{logement.caracteristiques.nombreDePieces}} pièces • {{logement.caracteristiques.surfaceLogement }} m² {{logement.caracteristiques.meubleeOuNon ? '•  Meublé' : ''}}  {{getBalconOuTerrasse(logement.caracteristiques)}} {{logement.caracteristiques.parkingOuNon ? '•  Parking' : ''}}</p>
               <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/v2/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
+              <div class="logement-alertes" *ngIf="logement.alertes.length > 0">
+                <img class="danger-icone" src="assets/img/v2/danger-icon.svg" alt="danger icone">
+                <div>{{ logement.alertes.length }} alerte(s)</div>
+              </div>
             </div>
             <div class="logement-infos" *ngIf="!logement.adresse || !logement.caracteristiques">
               <div class="header-logement-infos">

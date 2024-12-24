@@ -43,6 +43,9 @@ import { FraisModifierComponent } from './components/v2/frais/frais-modifier/fra
 import { FraisCreerComponent } from './components/v2/frais/frais-creer/frais-creer.component';
 import { CustomDatePipe } from "./components/v2/util/custom-date-pipe";
 import { FilArianeComponent } from './components/v2/fil-ariane/fil-ariane.component';
+import { AlerteCreerComponent } from './components/v2/alerte/alerte-creer/alerte-creer.component';
+import { AlerteTableComponent } from './components/v2/alerte/alerte-table/alerte-table.component';
+import { AlerteModifierComponent } from './components/v2/alerte/alerte-modifier/alerte-modifier.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -81,6 +84,9 @@ registerLocaleData(localeFr, 'fr');
     FraisModifierComponent,
     FraisCreerComponent,
     FilArianeComponent,
+    AlerteCreerComponent,
+    AlerteTableComponent,
+    AlerteModifierComponent,
   ],
   imports: [
     BrowserModule,

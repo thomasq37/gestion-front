@@ -43,7 +43,6 @@
         [logementMasqueId]="logement.masqueId"
         [adresse]="logement.adresse">
       </app-adresse-element>
-
       <app-caracteristiques-element
         *ngIf="activeIndex === 1"
         [logementMasqueId]="logement.masqueId"
@@ -70,7 +69,12 @@
         [logementMasqueId]="logement.masqueId"
         [contacts]="logement.contacts">
       </app-contact-table>
-      <button *ngIf="activeIndex === 6" class="btn-supprimer-logement" (click)="supprimerLogement(logement.masqueId)">Supprimer le logement</button>
+      <app-alerte-table
+        *ngIf="activeIndex === 6"
+        [logementMasqueId]="logement.masqueId"
+        [alertes]="logement.alertes">
+      </app-alerte-table>
+      <button *ngIf="activeIndex === 7" class="btn-supprimer-logement" (click)="supprimerLogement(logement.masqueId)">Supprimer le logement</button>
       <nav class="nav-logement periode-de-location" *ngIf="activeIndex === 3">
         <ul>
           <li

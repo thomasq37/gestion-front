@@ -1,0 +1,35 @@
+<section class="alerte-element">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h2>{{ alertes.length === 0 ? 'Aucune alerte trouvé' : 'Alertes' }}</h2>
+      <div class="actions-boutons">
+        <button
+          *ngIf="actionsIsVisible"
+          (click)="toggleActions()">Fermer</button>
+        <img
+          *ngIf="!actionsIsVisible"
+          (click)="toggleActions()"
+          src="./assets/img/v2/edit-icon.svg" alt="icone de modification">
+        <img *ngIf="actionsIsVisible" (click)="ajouterUneAlerte(logementMasqueId)" src="./assets/img/v2/plus-icon.svg" alt="icone de modification">
+      </div>
+    </div>
+    <div class="alerte-contenu" *ngIf="alertes.length > 0">
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Solution</th>
+          <th *ngIf="actionsIsVisible">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let alerte of alertes">
+          <td>{{ alerte.probleme }}</td>
+          <td>{{ alerte.solution }}</td>
+          <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="modifierAlerte(logementMasqueId, alerte.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

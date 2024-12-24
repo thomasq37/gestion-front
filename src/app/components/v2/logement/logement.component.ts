@@ -16,7 +16,7 @@ export class LogementComponent {
   logement!: LogementDTO;
   loading = false;
   error: string | null = null;
-  menuItems = ['Adresse', 'Caractéristiques', 'Frais fixes', 'Périodes de locations', 'Locataires', 'Contacts', 'Supprimer'];
+  menuItems = ['Adresse', 'Caractéristiques', 'Frais fixes', 'Périodes de locations', 'Locataires', 'Contacts', 'Alertes', 'Supprimer'];
   menuPeriodesDeLocation = ['Frais périodes de location'];
   activeIndexPeriodeDeLocation = 0;
   activeIndex = 0;

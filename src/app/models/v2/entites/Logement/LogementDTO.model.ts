@@ -5,6 +5,7 @@ import {ContactDTO} from "../Contact/ContactDTO.model";
 import {FraisDTO} from "../Frais/FraisDTO.model";
 import {PeriodeDeLocationDTO} from "../PeriodeDeLocation/PeriodeDeLocationDTO.model";
 import {PhotoDTO} from "../Photo/PhotoDTO.model";
+import {AlerteDTO} from "../Alerte/AlerteDTO.model";
 
 export interface LogementDTO {
   masqueId: string;
@@ -14,6 +15,7 @@ export interface LogementDTO {
   contacts: ContactDTO[];
   frais: FraisDTO[];
   periodesDeLocation: PeriodeDeLocationDTO[];
+  alertes: AlerteDTO[];
   photos: PhotoDTO[];
   gestionnaires: UtilisateurDTO[];
 }
