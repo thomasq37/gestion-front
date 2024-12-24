@@ -10,7 +10,7 @@
           *ngIf="!actionsIsVisible"
           (click)="toggleActions()"
           src="./assets/img/v2/edit-icon.svg" alt="icone de modification">
-        <img *ngIf="actionsIsVisible" (click)="ajouterUnFraisPourLogement(logementMasqueId)" src="./assets/img/v2/plus-icon.svg" alt="icone de modification">
+        <img *ngIf="actionsIsVisible" (click)="ajouterUnFrais()" src="./assets/img/v2/plus-icon.svg" alt="icone de modification">
       </div>    </div>
     <div class="frais-contenu" *ngIf="frais.length > 0">
       <table>
@@ -30,7 +30,7 @@
           <td>{{ fraisItem.montant | currency: 'EUR' }}</td>
           <td>{{ fraisItem.frequence === 'PONCTUELLE' ? (fraisItem.dateDeDebut | customDate) : fraisItem.frequence }}</td>
           <td>{{ getNombreOccurrences(fraisItem.dateDeDebut, fraisItem.dateDeFin, fraisItem.frequence) }}</td>
-          <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="modifierFraisPourLogement(logementMasqueId, fraisItem.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>
+          <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="modifierFrais(fraisItem.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>
         </tr>
         </tbody>
       </table>

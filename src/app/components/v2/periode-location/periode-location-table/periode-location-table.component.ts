@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PeriodeDeLocationDTO} from "../../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
 import {Router} from "@angular/router";
 
@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 export class PeriodeLocationTableComponent implements OnInit {
   @Input() periodesDeLocation!: PeriodeDeLocationDTO[];
   @Input() logementMasqueId!: string;
+  @Output() periodeSelectionnee = new EventEmitter<PeriodeDeLocationDTO>();
   actionsIsVisible: boolean = false;
 
   constructor(private router: Router) {
@@ -32,5 +33,9 @@ export class PeriodeLocationTableComponent implements OnInit {
   }
   toggleActions() {
     this.actionsIsVisible = !this.actionsIsVisible;
+  }
+
+  afficherFraisPeriodeDeLocation(periodeDeLocation: PeriodeDeLocationDTO) {
+    this.periodeSelectionnee.emit(periodeDeLocation);
   }
 }

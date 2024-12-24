@@ -16,7 +16,7 @@
     <div class="container" *ngIf="logement">
       <div class="logement-infos" *ngIf="logement.adresse && logement.caracteristiques">
         <h2>{{logement.caracteristiques.typeDeLogement | titlecase}} {{logement.adresse.numero}} {{logement.adresse.voie}}</h2>
-        <p class="prix-loyer-actuelle">{{getTarifActuel()}}</p>
+        <p class="prix-loyer-actuelle">{{getTarifActuel(logement.periodesDeLocation)}}</p>
         <div class="details-logement">
           <div>{{logement.caracteristiques.nombreDePieces}} pièces</div>
           <div>{{logement.caracteristiques.surfaceLogement }} m²</div>
@@ -56,7 +56,8 @@
       <app-periode-location-table
         *ngIf="activeIndex === 3"
         [logementMasqueId]="logement.masqueId"
-        [periodesDeLocation]="logement.periodesDeLocation">
+        [periodesDeLocation]="logement.periodesDeLocation"
+        (periodeSelectionnee)="onPeriodeSelectionnee($event)">
       </app-periode-location-table>
       <app-locataire-table
         *ngIf="activeIndex === 4"
@@ -69,6 +70,22 @@
         [contacts]="logement.contacts">
       </app-contact-table>
       <button *ngIf="activeIndex === 6" class="btn-supprimer-logement" (click)="supprimerLogement(logement.masqueId)">Supprimer le logement</button>
+      <nav class="nav-logement periode-de-location" *ngIf="activeIndex === 3">
+        <ul>
+          <li
+            *ngFor="let item of menuPeriodesDeLocation"
+            [ngClass]="{'active': activeIndexPeriodeDeLocation === 0}"
+          >
+            {{ item }}
+          </li>
+        </ul>
+      </nav>
+      <app-frais-table
+        *ngIf="activeIndex === 3 && periodeActuelle !== null"
+        [logementMasqueId]="logement.masqueId"
+        [periodeMasqueId]="periodeActuelle.masqueId"
+        [frais]="periodeActuelle.frais">
+      </app-frais-table>
     </div>
   </div>
 </section>

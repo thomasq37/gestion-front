@@ -65,6 +65,19 @@
         border-bottom: .5rem solid red;
       }
     }
+    .nav-logement.periode-de-location{
+      margin-top: 2rem;
+      li {
+        white-space: nowrap;
+        font-weight: bold;
+        color: #143b86;
+        padding-bottom: 1rem;
+        border-bottom: .5rem solid transparent;
+      }
+      li.active {
+        border-bottom: .5rem solid #1c5eeb;
+      }
+    }
     .btn-supprimer-logement{
       width: 100%;
       padding: 1rem;

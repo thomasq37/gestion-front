@@ -35,7 +35,10 @@
             <td>{{ periodeDeLocation.dateDeDebut | customDate  }}</td>
             <td>{{ periodeDeLocation.dateDeFin === null ? 'Pas de sortie' : periodeDeLocation.dateDeFin | customDate }}</td>
             <td>{{ periodeDeLocation.tarif | currency: 'EUR'}}</td>
-            <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="modifierPeriodeDeLocation(logementMasqueId, periodeDeLocation.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>
+            <td *ngIf="actionsIsVisible">
+              <a class="btn-editer-basique" (click)="modifierPeriodeDeLocation(logementMasqueId, periodeDeLocation.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a>
+              <a class="btn-editer-basique" (click)="afficherFraisPeriodeDeLocation(periodeDeLocation)">Frais</a>
+            </td>
           </tr>
         </tbody>
       </table>

@@ -1,6 +1,6 @@
 <section class="formulaire-basique">
   <app-loader *ngIf="loading"></app-loader>
-  <form *ngIf="!loading" [formGroup]="fraisForm" (ngSubmit)="modifierFraisPourLogement()">
+  <form *ngIf="!loading" [formGroup]="fraisForm" (ngSubmit)="modifierFrais()">
     <div class="header">
       <h1>Modifier un frais</h1>
     </div>
@@ -56,7 +56,7 @@
         Enregistrer les modifications
       </button>
     </div>
-    <button type="button" class="btn-supprimer-formulaire-basique" (click)="supprimerFraisPourLogement(logementMasqueId)">Supprimer le frais</button>
+    <button type="button" class="btn-supprimer-formulaire-basique" (click)="supprimerFrais()">Supprimer le frais</button>
     <app-fil-ariane
       [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=2', label:'Sythèse logement'}"
       [ongletActuel]="'Modifer un frais'"></app-fil-ariane>

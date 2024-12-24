@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { FraisDTO } from '../../../../models/v2/entites/Frais/FraisDTO.model';
 import { Frequence } from '../../../../models/v2/enumeration/Frequence.enum';
 import {Router} from "@angular/router";
@@ -8,9 +8,10 @@ import {Router} from "@angular/router";
   templateUrl: './frais-table.component.html',
   styleUrls: ['./frais-table.component.scss'],
 })
-export class FraisTableComponent implements OnInit {
+export class FraisTableComponent implements OnInit, OnChanges {
   @Input() frais!: FraisDTO[];
   @Input() logementMasqueId!: string;
+  @Input() periodeMasqueId?: string; // Identifiant de la période de location
   totalPages: number = 0;
   currentPage: number = 1;
   itemsPerPage: number = 5;
@@ -19,8 +20,17 @@ export class FraisTableComponent implements OnInit {
 
   constructor(private router: Router) {
   }
-
   ngOnInit() {
+    this.initialiserFraisTable();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['frais'] && !changes['frais'].firstChange) {
+      this.initialiserFraisTable();
+    }
+  }
+
+  private initialiserFraisTable(): void {
     this.frais = this.sortFrais(this.frais);
     this.totalPages = this.calculateTotalPages(this.frais.length, this.itemsPerPage);
     this.updatePagedFrais();
@@ -86,13 +96,20 @@ export class FraisTableComponent implements OnInit {
     }
   }
 
-  modifierFraisPourLogement(logementMasqueId: string, fraisMasqueId: string) {
-    this.router.navigate([`/logements/${logementMasqueId}/frais/${fraisMasqueId}/modifier`]);
+  modifierFrais(fraisMasqueId: string) {
+    const queryParams = this.periodeMasqueId
+      ? { periodeMasqueId: this.periodeMasqueId }
+      : {};
+    this.router.navigate([`/logements/${this.logementMasqueId}/frais/${fraisMasqueId}/modifier`], { queryParams });
   }
 
-  ajouterUnFraisPourLogement(logementMasqueId: any) {
-    this.router.navigate([`/logements/${logementMasqueId}/frais/creer`]);
+  ajouterUnFrais() {
+    const queryParams = this.periodeMasqueId
+      ? { periodeMasqueId: this.periodeMasqueId }
+      : {};
+    this.router.navigate([`/logements/${this.logementMasqueId}/frais/creer`], { queryParams });
   }
+
   toggleActions() {
     this.actionsIsVisible = !this.actionsIsVisible;
   }

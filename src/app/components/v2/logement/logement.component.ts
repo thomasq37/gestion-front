@@ -4,6 +4,8 @@ import {LogementService} from "../../../services/v2/logement/logement.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CaracteristiquesDTO} from "../../../models/v2/entites/Caracteristiques/CaracteristiquesDTO.model";
 import {LocataireDTO} from "../../../models/v2/entites/Locataire/LocataireDTO.model";
+import {PeriodeDeLocationDTO} from "../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
+import {FunctionsUtil} from "../util/functions-util";
 
 @Component({
   selector: 'app-logement',
@@ -15,7 +17,10 @@ export class LogementComponent {
   loading = false;
   error: string | null = null;
   menuItems = ['Adresse', 'Caractéristiques', 'Frais fixes', 'Périodes de locations', 'Locataires', 'Contacts', 'Supprimer'];
+  menuPeriodesDeLocation = ['Frais périodes de location'];
+  activeIndexPeriodeDeLocation = 0;
   activeIndex = 0;
+  periodeActuelle: PeriodeDeLocationDTO | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -56,27 +61,19 @@ export class LogementComponent {
   }
   setActive(index: number): void {
     this.activeIndex = index;
+    this.periodeActuelle = null
   }
-  getTarifActuel(): string {
-    const now = new Date();
-    const periodeEnCours = this.logement.periodesDeLocation.find(periode => {
-      const debut = new Date(periode.dateDeDebut);
-      const fin = periode.dateDeFin ? new Date(periode.dateDeFin) : null;
-      return debut <= now && (!fin || now <= fin);
-    });
-    return periodeEnCours
-      ? `${periodeEnCours.tarif.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })} /mois`
-      : 'Non loué';
+
+  getTarifActuel(periodesDeLocation: PeriodeDeLocationDTO[]): string {
+    return FunctionsUtil.getTarifActuel(periodesDeLocation);
   }
   getLocataires(): LocataireDTO[] {
     const locatairesSet = new Set<LocataireDTO>();
-
     this.logement.periodesDeLocation.forEach(periode => {
       if (periode.locataires) {
         periode.locataires.forEach(locataire => locatairesSet.add(locataire));
       }
     });
-
     return Array.from(locatairesSet);
   }
 
@@ -92,5 +89,7 @@ export class LogementComponent {
       console.log('Suppression annulée');
     }
   }
-
+  onPeriodeSelectionnee(periode: PeriodeDeLocationDTO) {
+    this.periodeActuelle = periode;
+  }
 }

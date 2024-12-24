@@ -15,6 +15,7 @@ export class FraisModifierComponent {
   fraisForm: FormGroup;
   error: string | null = null;
   logementMasqueId: string | null = null;
+  periodeMasqueId: string | null = null;
   fraisMasqueId: string | null = null;
   loading = false;
   frequences = Object.values(Frequence);
@@ -38,59 +39,90 @@ export class FraisModifierComponent {
 
   ngOnInit(): void {
     this.loading = true;
+    this.activatedRoute.queryParamMap.subscribe(queryParams => {
+      this.periodeMasqueId = queryParams.get('periodeMasqueId');
+    });
     this.activatedRoute.paramMap.subscribe(params => {
       this.logementMasqueId = params.get('logementMasqueId');
       this.fraisMasqueId = params.get('fraisMasqueId');
-      if (this.logementMasqueId) {
-        this.obtenirFraisPourLogement(this.logementMasqueId, this.fraisMasqueId);
+      if (this.logementMasqueId && this.fraisMasqueId) {
+        this.obtenirFrais();
       }
     });
   }
-
-  private async obtenirFraisPourLogement(logementMasqueId: string, fraisMasqueId: string): Promise<void> {
+  private async obtenirFrais(): Promise<void> {
     try {
-      const frais = await this.fraisService.obtenirFraisPourLogement(logementMasqueId, fraisMasqueId);
+      let frais: FraisDTO;
+      if (this.periodeMasqueId) {
+        frais = await this.fraisService.obtenirFraisPourPeriodeDeLocation(
+          this.logementMasqueId!,
+          this.periodeMasqueId,
+          this.fraisMasqueId!
+        );
+      } else {
+        frais = await this.fraisService.obtenirFraisPourLogement(this.logementMasqueId!, this.fraisMasqueId!);
+      }
       this.fraisForm.patchValue(frais);
     } catch (error: any) {
       console.warn(error);
-      this.error = (error?.message || 'Impossible de charger le frais.');
-    }
-    finally {
+      this.error = error?.message || 'Impossible de charger le frais.';
+    } finally {
       this.loading = false;
     }
   }
-
-  async modifierFraisPourLogement(): Promise<void> {
+  async modifierFrais(): Promise<void> {
     this.loading = true;
-
     const frais: FraisDTO = this.fraisForm.value as FraisDTO;
 
     try {
-      await this.fraisService.modifierFraisPourLogement(this.logementMasqueId, this.fraisMasqueId, frais);
+      if (this.periodeMasqueId) {
+        await this.fraisService.modifierFraisPourPeriodeDeLocation(
+          this.logementMasqueId!,
+          this.periodeMasqueId,
+          this.fraisMasqueId!,
+          frais
+        );
+      } else {
+        await this.fraisService.modifierFraisPourLogement(this.logementMasqueId!, this.fraisMasqueId!, frais);
+      }
+
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 2 },
       });
     } catch (error: any) {
       console.warn(error);
-      this.error = (error?.message || 'Une erreur inconnue est survenue.');
-    }
-    finally {
+      this.error = error?.message || 'Une erreur inconnue est survenue.';
+    } finally {
       this.loading = false;
     }
   }
 
-  supprimerFraisPourLogement(logementMasqueId: string) {
-    const confirmed = window.confirm('Voulez-vous vraiment supprimer le frais pour ce logement ?');
-    if (confirmed) {
-      this.fraisService.supprimerFraisPourLogement(logementMasqueId, this.fraisMasqueId).then(() => {
-        this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 2 },
+  supprimerFrais() {
+    const confirmed = window.confirm('Voulez-vous vraiment supprimer le frais ?');
+    if (!confirmed) return;
+
+    if (this.periodeMasqueId) {
+      this.fraisService
+        .supprimerFraisPourPeriodeDeLocation(
+          this.logementMasqueId!,
+          this.periodeMasqueId,
+          this.fraisMasqueId!
+        )
+        .then(() => {
+          this.router.navigate([`/logements/${this.logementMasqueId}`], { queryParams: { tab: 2 } });
+        })
+        .catch(error => {
+          console.error('Erreur lors de la suppression du frais :', error);
         });
-      }).catch(error => {
-        console.error('Erreur lors de la suppression de le frais:', error);
-      });
     } else {
-      console.log('Suppression annulée');
+      this.fraisService
+        .supprimerFraisPourLogement(this.logementMasqueId!, this.fraisMasqueId!)
+        .then(() => {
+          this.router.navigate([`/logements/${this.logementMasqueId}`], { queryParams: { tab: 2 } });
+        })
+        .catch(error => {
+          console.error('Erreur lors de la suppression du frais :', error);
+        });
     }
   }
 }

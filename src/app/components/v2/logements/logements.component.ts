@@ -4,6 +4,7 @@ import {LogementService} from "../../../services/v2/logement/logement.service";
 import {CaracteristiquesDTO} from "../../../models/v2/entites/Caracteristiques/CaracteristiquesDTO.model";
 import {PeriodeDeLocationDTO} from "../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
 import {Router} from "@angular/router";
+import {FunctionsUtil} from "../util/functions-util";
 @Component({
   selector: 'app-logements',
   templateUrl: './logements.component.html',
@@ -52,16 +53,9 @@ export class LogementsComponent implements OnInit {
     }
     return '';
   }
+
   getTarifActuel(periodesDeLocation: PeriodeDeLocationDTO[]): string {
-    const now = new Date();
-    const periodeEnCours = periodesDeLocation.find(periode => {
-      const debut = new Date(periode.dateDeDebut);
-      const fin = periode.dateDeFin ? new Date(periode.dateDeFin) : null;
-      return debut <= now && (!fin || now <= fin);
-    });
-    return periodeEnCours
-      ? `${periodeEnCours.tarif.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })} /mois`
-      : 'Non loué';
+    return FunctionsUtil.getTarifActuel(periodesDeLocation);
   }
 
   creerLogement() {

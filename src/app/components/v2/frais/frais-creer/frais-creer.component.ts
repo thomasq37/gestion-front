@@ -15,6 +15,7 @@ export class FraisCreerComponent {
   fraisForm: FormGroup;
   error: string | null = null;
   logementMasqueId: string | null = null;
+  periodeMasqueId: string | null = null;
   loading = false;
   frequences = Object.values(Frequence);
   categoriesFrais = Object.values(CategorieFrais);
@@ -36,6 +37,9 @@ export class FraisCreerComponent {
     this.activatedRoute.paramMap.subscribe(params => {
       this.logementMasqueId = params.get('logementMasqueId');
     });
+    this.activatedRoute.queryParamMap.subscribe(queryParams => {
+      this.periodeMasqueId = queryParams.get('periodeMasqueId');
+    });
   }
 
   async creerFraisPourLogement(): Promise<void> {
@@ -43,7 +47,17 @@ export class FraisCreerComponent {
     this.loading = true
     const frais: FraisDTO = this.fraisForm.value as FraisDTO;
     try {
-      await this.fraisService.creerFraisPourLogement(this.logementMasqueId, frais);
+      if (this.periodeMasqueId) {
+        // Créer un frais pour une période de location
+        await this.fraisService.creerFraisPourPeriodeDeLocation(
+          this.logementMasqueId!,
+          this.periodeMasqueId,
+          frais
+        );
+      } else {
+        // Créer un frais pour un logement
+        await this.fraisService.creerFraisPourLogement(this.logementMasqueId!, frais);
+      }
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 2 },
       });
