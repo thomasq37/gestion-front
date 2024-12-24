@@ -38,6 +38,7 @@ export class CaracteristiquesCreerComponent {
       meubleeOuNon: [''],
       balconOuTerrasse: [''],
       surfaceBalconOuTerrasse: [''],
+      parkingOuNon: [''],
       dpeLettre:['', Validators.required],
       dpeFichier:[''],
     });
@@ -64,11 +65,6 @@ export class CaracteristiquesCreerComponent {
   }
   auChargementDuFichier(event: Event): void {
     this.nomFichier = CaracteristiquesFormUtil.auChargementDuFichier(event, this.caracteristiquesForm, 'dpeFichier');
-  }
-
-  remplacerFichier(): void {
-    CaracteristiquesFormUtil.remplacerFichier(this.caracteristiquesForm, 'dpeFichier');
-    this.nomFichier = null;
   }
 
   onBalconOuTerrasseChange(event: Event): void {

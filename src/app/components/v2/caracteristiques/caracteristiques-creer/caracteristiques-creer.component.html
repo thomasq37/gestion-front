@@ -88,6 +88,14 @@
           aria-required="true">
       </div>
       <div class="champ">
+        <label for="parkingOuNon">Parking ou non</label>
+        <select id="parkingOuNon" formControlName="parkingOuNon" aria-required="true">
+          <option value="" disabled selected>Sélectionnez</option>
+          <option value="true">Oui</option>
+          <option value="false">Non</option>
+        </select>
+      </div>
+      <div class="champ">
         <label for="dpeLettre">Classe énergie</label>
         <select id="dpeLettre" formControlName="dpeLettre" aria-required="true">
           <option value="" disabled>Sélectionner la classe énérgie</option>

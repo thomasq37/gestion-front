@@ -12,7 +12,6 @@ import {CaracteristiquesFormUtil} from "../util/caracteristiques-form-util";
   styleUrls: ['./caracteristiques-modifier.component.scss']
 })
 export class CaracteristiquesModifierComponent {
-  // TODO fichier dpe,  patterns et style select et checkbox
   caracteristiquesForm: FormGroup;
   error: string | null = null;
   logementMasqueId: string | null = null;
@@ -38,6 +37,7 @@ export class CaracteristiquesModifierComponent {
       meubleeOuNon: [''],
       balconOuTerrasse: [''],
       surfaceBalconOuTerrasse: [''],
+      parkingOuNon: [''],
       dpeLettre:['', Validators.required],
       dpeFichier:[''],
     });

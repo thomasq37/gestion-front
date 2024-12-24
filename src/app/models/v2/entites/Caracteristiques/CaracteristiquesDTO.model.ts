@@ -13,6 +13,7 @@ export interface CaracteristiquesDTO {
   meubleeOuNon: boolean;
   balconOuTerrasse?: boolean;
   surfaceBalconOuTerrasse?: number;
+  parkingOuNon: boolean;
   dpeLettre: DpeLettre;
   dpeFichier?: string;
 }
