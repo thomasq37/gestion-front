@@ -105,7 +105,14 @@
 
       <div class="champ">
         <label for="dpeFichier">Fichier DPE</label>
-        <input id="dpeFichier" type="file" accept="application/pdf" (change)="auChargementDuFichier($event)">
+        <div class="test">
+          <input id="dpeFichier" type="file" accept="application/pdf" (change)="auChargementDuFichier($event)">
+          <div class="nom-fichier-container">
+            <button type="button">Parcourir</button>
+            <span class="file-name">{{ nomFichier || 'Aucun fichier sélectionné' }}</span>
+          </div>
+        </div>
+        <button *ngIf="nomFichier" class="btn-supprimer-fichier-dpe" (click)="remplacerFichier()" type="button">Supprimer le fichier</button>
       </div>
       <div class="error">
         {{ error }}

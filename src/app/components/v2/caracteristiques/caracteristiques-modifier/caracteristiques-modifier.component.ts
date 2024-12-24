@@ -32,7 +32,7 @@ export class CaracteristiquesModifierComponent {
       montantEstimation: [''],
       montantFraisDeNotaireEtNegociation: [''],
       nombreDePieces: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      surfaceLogement: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      surfaceLogement: ['', [Validators.required, Validators.pattern(/^\d+([.,]\d+)?$/)]],
       typeDeLogement: ['', Validators.required],
       meubleeOuNon: [''],
       balconOuTerrasse: [''],

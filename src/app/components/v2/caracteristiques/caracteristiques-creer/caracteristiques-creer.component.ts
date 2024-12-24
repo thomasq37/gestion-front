@@ -33,7 +33,7 @@ export class CaracteristiquesCreerComponent {
       montantEstimation: [''],
       montantFraisDeNotaireEtNegociation: [''],
       nombreDePieces: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
-      surfaceLogement: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      surfaceLogement: ['', [Validators.required, Validators.pattern(/^\d+([.,]\d+)?$/)]],
       typeDeLogement: ['', Validators.required],
       meubleeOuNon: [''],
       balconOuTerrasse: [''],
@@ -69,5 +69,10 @@ export class CaracteristiquesCreerComponent {
 
   onBalconOuTerrasseChange(event: Event): void {
     CaracteristiquesFormUtil.onBalconOuTerrasseChange(event, this.caracteristiquesForm, 'surfaceBalconOuTerrasse');
+  }
+
+  remplacerFichier(): void {
+    CaracteristiquesFormUtil.remplacerFichier(this.caracteristiquesForm, 'dpeFichier');
+    this.nomFichier = null;
   }
 }
