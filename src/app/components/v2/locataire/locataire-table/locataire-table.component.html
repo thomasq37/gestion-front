@@ -24,6 +24,7 @@
           <th>Prénom</th>
           <th>Email</th>
           <th>Téléphone</th>
+          <th>Date de naissance</th>
           <th *ngIf="actionsIsVisible">Actions</th>
         </tr>
         </thead>
@@ -33,6 +34,7 @@
           <td>{{ locataire.prenom }}</td>
           <td><a href="mailto:{{ locataire.email }}">{{ locataire.email }}</a></td>
           <td><a href="tel:{{ locataire.telephone }}">{{ locataire.telephone }}</a></td>
+          <td>{{ locataire.dateDeNaissance }}</td>
           <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="modifierLocataire(logementMasqueId, locataire.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>
         </tr>
         </tbody>

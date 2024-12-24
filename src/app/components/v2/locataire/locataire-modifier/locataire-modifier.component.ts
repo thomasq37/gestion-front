@@ -38,8 +38,8 @@ export class LocataireModifierComponent implements OnInit {
       nom: new FormControl('', Validators.required),
       prenom: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.email]),
-      telephone: new FormControl('', [
-      ])
+      telephone: new FormControl('', []),
+      dateDeNaissance: new FormControl('', []),
     });
     this.activatedRoute.paramMap.subscribe(params => {
       this.logementMasqueId = params.get('logementMasqueId');

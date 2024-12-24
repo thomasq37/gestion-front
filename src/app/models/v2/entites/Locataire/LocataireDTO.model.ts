@@ -4,4 +4,5 @@ export interface LocataireDTO {
   prenom: string;
   email?: string;
   telephone?: string;
+  dateDeNaissance?: string;
 }

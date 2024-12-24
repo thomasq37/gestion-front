@@ -52,6 +52,13 @@
           [phoneValidation]="true"
         ></ngx-intl-tel-input>
       </div>
+      <div class="champ">
+        <label for="dateDeNaissance">Date de naissance</label>
+        <input
+          type="date"
+          id="dateDeNaissance"
+          formControlName="dateDeNaissance">
+      </div>
       <div class="error">
         {{ error }}
       </div>
