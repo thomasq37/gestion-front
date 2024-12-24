@@ -9,7 +9,7 @@
          <label for="periodeDeLocation">Période de location</label>
          <select id="periodeDeLocation" formControlName="periodeDeLocation" aria-required="true">
            <option value="" disabled>Sélectionner une période de location</option>
-           <option *ngFor="let periodeDeLocation of periodesDeLocation" [value]="periodeDeLocation.masqueId">{{ (periodeDeLocation.dateDeDebut | customDate) + ' - ' + (periodeDeLocation.dateDeFin | customDate) }}</option>
+           <option *ngFor="let periodeDeLocation of periodesDeLocation" [value]="periodeDeLocation.masqueId">{{ (periodeDeLocation.dateDeDebut | customDate) + ' - ' + (periodeDeLocation.dateDeFin ? (periodeDeLocation.dateDeFin | customDate) : 'Pas de sortie') }}</option>
          </select>
        </div>
        <div class="champ">

@@ -4,7 +4,7 @@ import {Pipe, PipeTransform} from "@angular/core";
 export class CustomDatePipe implements PipeTransform {
   transform(value: string | null): string {
     if(value === null){
-      return "Pas de sortie"
+      return ""
     }
     const date = new Date(value);
     const monthNames = [
