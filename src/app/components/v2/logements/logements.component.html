@@ -18,7 +18,7 @@
                 <p class="prix-loyer-actuelle">{{getTarifActuel(logement.periodesDeLocation)}}</p>
               </div>
               <p class="ville-logement">{{logement.adresse.ville}}</p>
-              <p class="details-logement">{{logement.caracteristiques.nombreDePieces}} pièces • {{logement.caracteristiques.surfaceLogement }} m² {{logement.caracteristiques.meubleeOuNon ? '•  Meublé' : ''}}  {{getBalconOuTerrasse(logement.caracteristiques)}}</p>
+              <p class="details-logement">{{logement.caracteristiques.nombreDePieces}} pièces • {{logement.caracteristiques.surfaceLogement }} m² {{logement.caracteristiques.meubleeOuNon ? '•  Meublé' : ''}}  {{getBalconOuTerrasse(logement.caracteristiques)}} {{logement.caracteristiques.parkingOuNon ? '•  Parking' : ''}}</p>
               <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/v2/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
             </div>
             <div class="logement-infos" *ngIf="!logement.adresse || !logement.caracteristiques">
