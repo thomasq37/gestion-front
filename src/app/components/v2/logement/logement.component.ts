@@ -21,7 +21,7 @@ export class LogementComponent {
   activeIndexPeriodeDeLocation = 0;
   activeIndex = 0;
   periodeActuelle: PeriodeDeLocationDTO | null = null;
-
+  alertesIsOpen = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,

@@ -1,0 +1,15 @@
+<div class="logement-alertes-container">
+  <div (click)="toggleAlertesIsOpen()" class="logement-alertes" *ngIf="alertes.length > 0">
+    <div>
+      <img class="danger-icone" src="assets/img/v2/danger-icon.svg" alt="danger icone">
+      <div class="alerte-infos">{{ alertes.length }} alerte(s)</div>
+    </div>
+    <img *ngIf="ouvrable" class="fleche-bas-icone" src="assets/img/v2/{{alertesIsOpen ? 'fermer-icon' : 'fleche-bas-icon'}}.svg" alt="icone fermeture/ouverture">
+  </div>
+  <ul *ngIf="alertesIsOpen" @toggleAlertes>
+    <li *ngFor="let alerte of alertes">
+      <p>Problème: <span>{{alerte.probleme}}</span></p>
+      <p>Solution: <span>{{alerte.solution}}</span></p>
+    </li>
+  </ul>
+</div>

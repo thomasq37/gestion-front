@@ -25,7 +25,7 @@
           <div *ngIf="logement.caracteristiques.balconOuTerrasse">{{getBalconOuTerrasse(logement.caracteristiques)}}</div>
         </div>
         <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/v2/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
-
+        <app-alerte-element [alertes]="logement.alertes" [ouvrable]="true"></app-alerte-element>
       </div>
       <nav class="nav-logement">
         <ul>

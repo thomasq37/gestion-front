@@ -1,0 +1,41 @@
+.logement-alertes-container{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .logement-alertes{
+    display: flex;
+    background-color: #f8f3d6;
+    padding: 1rem;
+    border-radius: .7rem;
+    border: 2px solid #ebe5be;
+    justify-content: space-between;
+    div{
+      display: flex;
+      gap: 1rem;
+      .alerte-infos{
+        color: #91692a;
+        font-size: 1.3rem;
+      }
+      .danger-icone{
+        width: 2rem;
+      }
+    }
+    .fleche-bas-icone{
+      width: 2rem;
+    }
+  }
+  ul{
+    li{
+      background-color: #f8f3d6;
+      padding: 1rem;
+      border-radius: .7rem;
+      border: 2px solid #ebe5be;
+      color: #91692a;
+      font-size: 1.3rem;
+      font-weight: bold;
+      span{
+        font-weight: normal;
+      }
+    }
+  }
+}

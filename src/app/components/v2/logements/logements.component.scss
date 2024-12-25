@@ -58,24 +58,8 @@
             .dpe-logement{
               width: 9rem;
               margin-top: 1rem;
+              margin-bottom: 1.5rem;
             }
-            .logement-alertes{
-              display: flex;
-              background-color: #f8f3d6;
-              padding: 1rem;
-              border-radius: .7rem;
-              margin-top: 2rem;
-              border: 2px solid #ebe5be;
-              gap: 1rem;
-              div{
-                color: #91692a;
-                font-size: 1.3rem;
-              }
-              .danger-icone{
-                width: 2rem;
-              }
-            }
-
           }
         }
       }

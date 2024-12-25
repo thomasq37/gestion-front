@@ -46,6 +46,7 @@ import { FilArianeComponent } from './components/v2/fil-ariane/fil-ariane.compon
 import { AlerteCreerComponent } from './components/v2/alerte/alerte-creer/alerte-creer.component';
 import { AlerteTableComponent } from './components/v2/alerte/alerte-table/alerte-table.component';
 import { AlerteModifierComponent } from './components/v2/alerte/alerte-modifier/alerte-modifier.component';
+import { AlerteElementComponent } from './components/v2/alerte/alerte-element/alerte-element.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -87,6 +88,7 @@ registerLocaleData(localeFr, 'fr');
     AlerteCreerComponent,
     AlerteTableComponent,
     AlerteModifierComponent,
+    AlerteElementComponent,
   ],
   imports: [
     BrowserModule,
