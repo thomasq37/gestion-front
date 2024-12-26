@@ -6,36 +6,11 @@ import {CaracteristiquesDTO} from "../../../models/v2/entites/Caracteristiques/C
 import {LocataireDTO} from "../../../models/v2/entites/Locataire/LocataireDTO.model";
 import {PeriodeDeLocationDTO} from "../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
 import {FunctionsUtil} from "../util/functions-util";
-import {animate, group, query, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-logement',
   templateUrl: './logement.component.html',
   styleUrls: ['./logement.component.scss'],
-  animations: [
-    trigger('fadeAnimation', [
-      transition('* <=> *', [
-        group([
-          query(
-            ':enter',
-            [
-              style({ opacity: 0 }),
-              animate('200ms ease-out', style({ opacity: 1 })),
-            ],
-            { optional: true }
-          ),
-          query(
-            ':leave',
-            [
-              style({ opacity: 1 }),
-              animate('200ms ease-out', style({ opacity: 0 })),
-            ],
-            { optional: true }
-          ),
-        ]),
-      ]),
-    ]),
-  ],
 })
 export class LogementComponent implements OnInit {
   logement!: LogementDTO;
