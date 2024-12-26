@@ -38,43 +38,47 @@
           </li>
         </ul>
       </nav>
-      <app-adresse-element
+      <app-statistiques
         *ngIf="activeIndex === 0"
+        [logement]="logement"
+      ></app-statistiques>
+      <app-adresse-element
+        *ngIf="activeIndex === 1"
         [logementMasqueId]="logement.masqueId"
         [adresse]="logement.adresse">
       </app-adresse-element>
       <app-caracteristiques-element
-        *ngIf="activeIndex === 1"
+        *ngIf="activeIndex === 2"
         [logementMasqueId]="logement.masqueId"
         [caracteristiques]="logement.caracteristiques">
       </app-caracteristiques-element>
       <app-frais-table
-        *ngIf="activeIndex === 2"
+        *ngIf="activeIndex === 3"
         [logementMasqueId]="logement.masqueId"
         [frais]="logement.frais">
       </app-frais-table>
       <app-periode-location-table
-        *ngIf="activeIndex === 3"
+        *ngIf="activeIndex === 4"
         [logementMasqueId]="logement.masqueId"
         [periodesDeLocation]="logement.periodesDeLocation"
         (periodeSelectionnee)="onPeriodeSelectionnee($event)">
       </app-periode-location-table>
       <app-locataire-table
-        *ngIf="activeIndex === 4"
+        *ngIf="activeIndex === 5"
         [logementMasqueId]="logement.masqueId"
         [locataires]="getLocataires()">
       </app-locataire-table>
       <app-contact-table
-        *ngIf="activeIndex === 5"
+        *ngIf="activeIndex === 6"
         [logementMasqueId]="logement.masqueId"
         [contacts]="logement.contacts">
       </app-contact-table>
       <app-alerte-table
-        *ngIf="activeIndex === 6"
+        *ngIf="activeIndex === 7"
         [logementMasqueId]="logement.masqueId"
         [alertes]="logement.alertes">
       </app-alerte-table>
-      <button *ngIf="activeIndex === 7" class="btn-supprimer-logement" (click)="supprimerLogement(logement.masqueId)">Supprimer le logement</button>
+      <button *ngIf="activeIndex === 8" class="btn-supprimer-logement" (click)="supprimerLogement(logement.masqueId)">Supprimer le logement</button>
       <nav class="nav-logement periode-de-location" *ngIf="activeIndex === 3">
         <ul>
           <li
@@ -86,7 +90,7 @@
         </ul>
       </nav>
       <app-frais-table
-        *ngIf="activeIndex === 3 && periodeActuelle !== null"
+        *ngIf="activeIndex === 4 && periodeActuelle !== null"
         [logementMasqueId]="logement.masqueId"
         [periodeMasqueId]="periodeActuelle.masqueId"
         [frais]="periodeActuelle.frais">

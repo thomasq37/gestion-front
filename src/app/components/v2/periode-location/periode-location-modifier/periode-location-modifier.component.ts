@@ -63,7 +63,7 @@ export class PeriodeLocationModifierComponent {
     try {
       await this.periodeDeLocationService.modifierPeriodeDeLocationPourLogement(this.logementMasqueId, this.periodeDeLocationMasqueId, periodeDeLocation);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 3 },
+        queryParams: { tab: 4 },
       });
     } catch (error: any) {
       console.warn(error);
@@ -79,7 +79,7 @@ export class PeriodeLocationModifierComponent {
     if (confirmed) {
       this.periodeDeLocationService.supprimerPeriodeDeLocationPourLogement(logementMasqueId, this.periodeDeLocationMasqueId).then(() => {
         this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 3 },
+          queryParams: { tab: 4 },
         });
       }).catch(error => {
         console.error('Erreur lors de la suppression de la période de location:', error);

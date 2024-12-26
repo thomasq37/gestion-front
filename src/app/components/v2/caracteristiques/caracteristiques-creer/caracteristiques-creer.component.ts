@@ -53,7 +53,7 @@ export class CaracteristiquesCreerComponent {
     try {
       await this.caracteristiquesService.creerCaracteristiquesPourLogement(this.logementMasqueId, caracteristiques);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 1 },
+        queryParams: { tab: 2 },
       });
     } catch (error: any) {
       console.warn(error);

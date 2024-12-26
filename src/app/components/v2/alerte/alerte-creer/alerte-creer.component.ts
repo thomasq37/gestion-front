@@ -36,7 +36,7 @@ export class AlerteCreerComponent {
     try {
       await this.alerteService.creerAlertePourLogement(this.logementMasqueId, alerte);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 6 },
+        queryParams: { tab: 7 },
       });
     } catch (error: any) {
       console.warn(error);

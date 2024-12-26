@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LogementDTO} from "../../../models/v2/entites/Logement/LogementDTO.model";
 import {LogementService} from "../../../services/v2/logement/logement.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -12,16 +12,15 @@ import {FunctionsUtil} from "../util/functions-util";
   templateUrl: './logement.component.html',
   styleUrls: ['./logement.component.scss']
 })
-export class LogementComponent {
+export class LogementComponent implements OnInit {
   logement!: LogementDTO;
   loading = false;
   error: string | null = null;
-  menuItems = ['Adresse', 'Caractéristiques', 'Frais fixes', 'Périodes de locations', 'Locataires', 'Contacts', 'Alertes', 'Supprimer'];
+  menuItems = ['Statistiques', 'Adresse', 'Caractéristiques', 'Frais fixes', 'Périodes de locations', 'Locataires', 'Contacts', 'Alertes', 'Supprimer'];
   menuPeriodesDeLocation = ['Frais périodes de location'];
   activeIndexPeriodeDeLocation = 0;
   activeIndex = 0;
   periodeActuelle: PeriodeDeLocationDTO | null = null;
-  alertesIsOpen = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,

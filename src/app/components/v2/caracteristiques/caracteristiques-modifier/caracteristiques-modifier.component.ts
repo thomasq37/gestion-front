@@ -74,7 +74,7 @@ export class CaracteristiquesModifierComponent {
     try {
       await this.caracteristiquesService.modifierCaracteristiquesPourLogement(this.logementMasqueId, caracteristiques);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 1 },
+        queryParams: { tab: 2 },
       });
     } catch (error: any) {
       console.warn(error);
@@ -96,7 +96,7 @@ export class CaracteristiquesModifierComponent {
     if (confirmed) {
       this.caracteristiquesService.supprimerCaracteristiquesPourLogement(logementMasqueId).then(() => {
         this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 1 },
+          queryParams: { tab: 2 },
         });
       }).catch(error => {
         console.error('Erreur lors de la suppression des caracteristiques:', error);

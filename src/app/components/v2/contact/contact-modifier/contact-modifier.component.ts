@@ -68,7 +68,7 @@ export class ContactModifierComponent implements OnInit {
     try {
       await this.contactService.modifierContactPourLogement(this.logementMasqueId, this.contactMasqueId, contact);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 5 },
+        queryParams: { tab: 6 },
       });
     } catch (error: any) {
       console.warn(error);
@@ -84,7 +84,7 @@ export class ContactModifierComponent implements OnInit {
     if (confirmed) {
       this.contactService.supprimerContactPourLogement(logementMasqueId, this.contactMasqueId).then(() => {
         this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 5 },
+          queryParams: { tab: 6 },
         });
       }).catch(error => {
         console.error('Erreur lors de la suppression de le contact:', error);

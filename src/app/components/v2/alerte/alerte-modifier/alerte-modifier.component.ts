@@ -58,7 +58,7 @@ export class AlerteModifierComponent {
     try {
       await this.alerteService.modifierAlertePourLogement(this.logementMasqueId, this.alerteMasqueId, alerte);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 5 },
+        queryParams: { tab: 6 },
       });
     } catch (error: any) {
       console.warn(error);
@@ -74,7 +74,7 @@ export class AlerteModifierComponent {
     if (confirmed) {
       this.alerteService.supprimerAlertePourLogement(logementMasqueId, this.alerteMasqueId).then(() => {
         this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 5 },
+          queryParams: { tab: 6 },
         });
       }).catch(error => {
         console.error('Erreur lors de la suppression de l\'alerte:', error);

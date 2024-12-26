@@ -1,0 +1,29 @@
+<section class="statistiques-element">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h2>Statistiques</h2>
+    </div>
+    <div class="statistiques-contenu">
+      <table>
+        <tbody>
+          <tr>
+            <td class="categorie">Total des revenus</td>
+            <td>{{ totalRevenus | number:'1.0-2':'fr-FR'}} €</td>
+          </tr>
+          <tr>
+            <td class="categorie">Total des dépenses</td>
+            <td>{{ totalDepenses | number:'1.0-2':'fr-FR'}} €</td>
+          </tr>
+          <tr>
+            <td class="categorie">Bénéfice net</td>
+            <td>{{ (totalRevenus - totalDepenses) | number:'1.0-2':'fr-FR'}} €</td>
+          </tr>
+          <tr>
+            <td class="categorie">Taux d'occupation</td>
+            <td>{{ tauxOccupation }} %</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

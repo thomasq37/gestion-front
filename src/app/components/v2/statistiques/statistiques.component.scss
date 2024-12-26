@@ -1,0 +1,16 @@
+.statistiques-element{
+  .statistiques-contenu{
+    padding: 1rem;
+    table{
+      tbody{
+        tr{
+          .categorie{
+            font-weight: bold;
+            &.light{
+            }
+          }
+        }
+      }
+    }
+  }
+}

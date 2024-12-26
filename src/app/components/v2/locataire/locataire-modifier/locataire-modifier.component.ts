@@ -94,7 +94,7 @@ export class LocataireModifierComponent implements OnInit {
     try {
       await this.locataireService.modifierLocatairePourPeriodeDeLocation(this.logementMasqueId, this.locataireForm.get('periodeDeLocation').value, this.locataireActuel.masqueId, locataire);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 4 },
+        queryParams: { tab: 5 },
       });
     } catch (error: any) {
       console.warn(error);
@@ -109,7 +109,7 @@ export class LocataireModifierComponent implements OnInit {
     if (confirmed) {
       this.locataireService.supprimerLocatairePourPeriodeDeLocation(logementMasqueId, this.periodeDeLocationActuel.masqueId, this.locataireMasqueId).then(() => {
         this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 4 },
+          queryParams: { tab: 5 },
         });
       }).catch(error => {
         console.error('Erreur lors de la suppression du locataire:', error);

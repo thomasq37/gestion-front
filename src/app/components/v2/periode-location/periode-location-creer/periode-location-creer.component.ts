@@ -41,7 +41,7 @@ export class PeriodeLocationCreerComponent {
     try {
       await this.periodeDeLocationService.creerPeriodeDeLocationPourLogement(this.logementMasqueId, periodeDeLocation);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab:3 },
+        queryParams: { tab: 4 },
       });
     } catch (error: any) {
       console.warn(error);

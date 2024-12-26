@@ -43,7 +43,7 @@ export class ContactCreerComponent {
     try {
       await this.contactService.creerContactPourLogement(this.logementMasqueId, contact);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 5 },
+        queryParams: { tab: 6 },
       });
     } catch (error: any) {
       console.warn(error);

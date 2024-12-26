@@ -62,7 +62,7 @@ export class AdresseModifierComponent implements OnInit {
     try {
       await this.adresseService.modifierAdressePourLogement(this.logementMasqueId, adresse);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 0 },
+        queryParams: { tab: 1 },
       });
     } catch (error: any) {
       console.warn(error);
