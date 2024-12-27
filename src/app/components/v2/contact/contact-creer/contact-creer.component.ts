@@ -39,7 +39,7 @@ export class ContactCreerComponent {
 
     this.loading = true
     const contact: ContactDTO = this.contactForm.value as ContactDTO;
-    contact.telephone = this.contactForm.value.telephone?.e164Numbers
+    contact.telephone = this.contactForm.value.telephone?.e164Number
     try {
       await this.contactService.creerContactPourLogement(this.logementMasqueId, contact);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
