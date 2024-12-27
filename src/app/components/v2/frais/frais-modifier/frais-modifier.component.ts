@@ -29,7 +29,7 @@ export class FraisModifierComponent {
   ) {
     this.fraisForm = this.formBuilder.group({
       nom: [''],
-      montant: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      montant: ['', [Validators.required, Validators.pattern(/^\d+([.,]\d+)?$/)]],
       dateDeDebut: ['', Validators.required],
       dateDeFin: [''],
       frequence: ['', Validators.required],
