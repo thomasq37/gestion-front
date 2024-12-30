@@ -48,6 +48,8 @@ import { AlerteTableComponent } from './components/v2/alerte/alerte-table/alerte
 import { AlerteModifierComponent } from './components/v2/alerte/alerte-modifier/alerte-modifier.component';
 import { AlerteElementComponent } from './components/v2/alerte/alerte-element/alerte-element.component';
 import { StatistiquesComponent } from './components/v2/statistiques/statistiques.component';
+import { DocumentTableComponent } from './components/v2/document/document-table/document-table.component';
+import { DocumentCreerComponent } from './components/v2/document/document-creer/document-creer.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -91,6 +93,8 @@ registerLocaleData(localeFr, 'fr');
     AlerteModifierComponent,
     AlerteElementComponent,
     StatistiquesComponent,
+    DocumentTableComponent,
+    DocumentCreerComponent,
   ],
   imports: [
     BrowserModule,

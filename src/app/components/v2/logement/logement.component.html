@@ -96,7 +96,12 @@
           [logementMasqueId]="logement.masqueId"
           [alertes]="logement.alertes">
         </app-alerte-table>
-        <button *ngIf="activeIndex === 8" class="btn-supprimer-logement" (click)="supprimerLogement(logement.masqueId)">Supprimer le logement</button>
+        <app-document-table
+          *ngIf="activeIndex === 8"
+          [logementMasqueId]="logement.masqueId"
+          [documents]="logement.documents">
+        </app-document-table>
+        <button *ngIf="activeIndex === 9" class="btn-supprimer-logement" (click)="supprimerLogement(logement.masqueId)">Supprimer le logement</button>
       </div>
 
     </div>

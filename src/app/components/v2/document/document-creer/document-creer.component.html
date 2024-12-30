@@ -1,0 +1,46 @@
+<section class="formulaire-basique">
+  <app-loader *ngIf="loading"></app-loader>
+  <form *ngIf="!loading" [formGroup]="documentForm" (ngSubmit)="ajouterDocument()">
+    <div class="header">
+      <h1>Ajouter un document</h1>
+    </div>
+
+    <div class="champs">
+      <!-- Ajouter un fichier local -->
+      <div class="champ">
+        <label for="fichier">Fichier local</label>
+        <input
+          type="file"
+          id="fichier"
+          (change)="onFileSelected($event)"
+          aria-required="true"
+        />
+      </div>
+
+      <!-- Choisir parmi les documents existants -->
+      <div class="champ">
+        <label for="documents-existants">Documents existants</label>
+        <select
+          id="documents-existants"
+          formControlName="documentExistant"
+        >
+          <option value="">-- Choisir un document existant --</option>
+          <option *ngFor="let doc of documentsDisponibles" [value]="doc.masqueId">
+            {{ doc.nom }}
+          </option>
+        </select>
+      </div>
+
+      <div class="error">
+        {{ error }}
+      </div>
+      <button type="submit" [disabled]="!documentForm.valid && !selectedFile">
+        Ajouter un document
+      </button>
+    </div>
+    <app-fil-ariane
+      [ongletRetour]="{ url: '/logements/' + logementMasqueId + '?tab=7', label: 'Synthèse logement' }"
+      [ongletActuel]="'Ajouter un document'"
+    ></app-fil-ariane>
+  </form>
+</section>

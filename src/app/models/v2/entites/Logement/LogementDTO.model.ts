@@ -6,6 +6,7 @@ import {FraisDTO} from "../Frais/FraisDTO.model";
 import {PeriodeDeLocationDTO} from "../PeriodeDeLocation/PeriodeDeLocationDTO.model";
 import {PhotoDTO} from "../Photo/PhotoDTO.model";
 import {AlerteDTO} from "../Alerte/AlerteDTO.model";
+import {DocumentDTO} from "../Document/DocumentDTO.model";
 
 export interface LogementDTO {
   masqueId: string;
@@ -17,5 +18,6 @@ export interface LogementDTO {
   periodesDeLocation: PeriodeDeLocationDTO[];
   alertes: AlerteDTO[];
   photos: PhotoDTO[];
+  documents: DocumentDTO[];
   gestionnaires: UtilisateurDTO[];
 }

@@ -29,6 +29,7 @@ import {FraisModifierComponent} from "./components/v2/frais/frais-modifier/frais
 import {FraisCreerComponent} from "./components/v2/frais/frais-creer/frais-creer.component";
 import {AlerteCreerComponent} from "./components/v2/alerte/alerte-creer/alerte-creer.component";
 import {AlerteModifierComponent} from "./components/v2/alerte/alerte-modifier/alerte-modifier.component";
+import {DocumentCreerComponent} from "./components/v2/document/document-creer/document-creer.component";
 
 
 const routes: Routes = [
@@ -51,6 +52,8 @@ const routes: Routes = [
   { path: 'logements/:logementMasqueId/frais/:fraisMasqueId/modifier', component: FraisModifierComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/alerte/creer', component: AlerteCreerComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/alerte/:alerteMasqueId/modifier', component: AlerteModifierComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId/document/creer', component: DocumentCreerComponent, canActivate: [AuthGuard] },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
