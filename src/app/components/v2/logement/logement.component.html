@@ -50,6 +50,7 @@
         </app-adresse-element>
         <app-caracteristiques-element
           *ngIf="activeIndex === 2"
+          [adresse]="logement.adresse"
           [logementMasqueId]="logement.masqueId"
           [caracteristiques]="logement.caracteristiques">
         </app-caracteristiques-element>

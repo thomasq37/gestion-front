@@ -25,9 +25,7 @@
         <tr *ngFor="let document of documents">
           <td>{{ document.nom }}</td>
           <td *ngIf="!actionsIsVisible">
-            <a class="btn-editer-basique" [href]="document.fichier" download="{{document.nom}}" target="_blank">
-              Télécharger
-            </a>
+            <button class="btn-editer-basique" (click)="telechargerFichier(document.fichier, document.nom)">Télécharger</button>
           </td>
           <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="supprimerDocument(logementMasqueId, document.masqueId)" src="assets/img/v2/edit-icon.svg">Supprimer</a></td>
         </tr>

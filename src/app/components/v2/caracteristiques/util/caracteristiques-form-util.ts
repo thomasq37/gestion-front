@@ -9,9 +9,8 @@ export class CaracteristiquesFormUtil {
       const reader = new FileReader();
       reader.onload = () => {
         const base64StringWithPrefix = reader.result as string;
-        const base64String = base64StringWithPrefix.split(',')[1];
         form.patchValue({
-          [formControlName]: base64String
+          [formControlName]: base64StringWithPrefix
         });
       };
       reader.onerror = (error) => {
@@ -34,4 +33,33 @@ export class CaracteristiquesFormUtil {
       form.get(surfaceControlName)?.setValue(0);
     }
   }
+
+  static telechargerFichier(base64Document: string, nomFichier: string) {
+    // Vérifiez que le fichier est bien encodé en base64
+    if (!base64Document.startsWith('data:')) {
+      console.error('Le fichier n\'est pas au format Base64 valide.');
+      return;
+    }
+
+    // Crée un Blob à partir du contenu Base64
+    const base64Data = base64Document.split(',')[1];
+    const contentType = base64Document.split(';')[0].split(':')[1];
+    const byteCharacters = atob(base64Data);
+    const byteNumbers = new Array(byteCharacters.length);
+
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: contentType });
+    const a = window.document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    a.href = url;
+    a.download = "DPE " + nomFichier;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+
 }

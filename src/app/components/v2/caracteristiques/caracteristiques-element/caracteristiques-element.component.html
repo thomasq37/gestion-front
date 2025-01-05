@@ -114,9 +114,9 @@
       </div>
       <!-- Fichier classe énergie -->
       <div *ngIf="caracteristiques.dpeFichier">
-        <a [href]="'data:application/pdf;base64,' + caracteristiques.dpeFichier" download="DPE_Fichier.pdf" target="_blank">
+        <button class="btn-editer-basique" (click)="telechargerDPE(caracteristiques.dpeFichier)">
           Télécharger le DPE
-        </a>
+        </button>
       </div>
       <div *ngIf="!caracteristiques.dpeFichier">
         <p>Aucun fichier DPE</p>
