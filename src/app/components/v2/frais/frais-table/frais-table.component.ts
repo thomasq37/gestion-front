@@ -14,7 +14,7 @@ export class FraisTableComponent implements OnInit, OnChanges {
   @Input() periodeMasqueId?: string; // Identifiant de la période de location
   totalPages: number = 0;
   currentPage: number = 1;
-  itemsPerPage: number = 5;
+  itemsPerPage: number = 10;
   pagedFrais: FraisDTO[] = [];
   actionsIsVisible: boolean = false;
 
@@ -51,7 +51,8 @@ export class FraisTableComponent implements OnInit, OnChanges {
       if (priorityDiff !== 0) {
         return priorityDiff;
       }
-      return new Date(a.dateDeDebut).getTime() - new Date(b.dateDeDebut).getTime();
+      // d'abbord les frais recents
+      return new Date(b.dateDeDebut).getTime() - new Date(a.dateDeDebut).getTime();
     });
   }
 
