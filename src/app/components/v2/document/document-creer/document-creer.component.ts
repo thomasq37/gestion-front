@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { DocumentDTO } from '../../../../models/v2/entites/Document/DocumentDTO.model';
 import { DocumentService } from '../../../../services/v2/document/document.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,7 +24,7 @@ export class DocumentCreerComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.documentForm = this.formBuilder.group({
-      documentExistant: new FormControl(''), // ID du document existant
+      documentExistant: new FormControl('', Validators.required), // ID du document existant
     });
 
     this.activatedRoute.paramMap.subscribe((params) => {
@@ -44,9 +44,31 @@ export class DocumentCreerComponent implements OnInit {
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input?.files && input.files.length > 0) {
-      this.selectedFile = input.files[0]; // Un seul fichier est sélectionné
+      const file = input.files[0];
+
+      // Vérification du type de fichier
+      if (file.type !== 'application/pdf') {
+        this.error = 'Seuls les fichiers PDF sont autorisés.';
+        this.selectedFile = null;
+        input.value = ''; // Réinitialise l'input
+        return;
+      }
+
+      // Vérification de la taille (7 Mo = 7 * 1024 * 1024 octets)
+      const maxSizeInBytes = 7 * 1024 * 1024;
+      if (file.size > maxSizeInBytes) {
+        this.error = 'La taille du fichier ne doit pas dépasser 7 Mo.';
+        this.selectedFile = null;
+        input.value = ''; // Réinitialise l'input
+        return;
+      }
+
+      // Si toutes les vérifications passent
+      this.error = null; // Réinitialise les erreurs
+      this.selectedFile = file;
     }
   }
+
 
   async ajouterDocument(): Promise<void> {
     if (!this.logementMasqueId) {
@@ -76,7 +98,7 @@ export class DocumentCreerComponent implements OnInit {
 
       // Redirection après ajout
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 7 },
+        queryParams: { tab: 8 },
       });
     } catch (error: any) {
       console.warn(error);
@@ -93,5 +115,9 @@ export class DocumentCreerComponent implements OnInit {
       reader.onerror = (error) => reject(error);
       reader.readAsDataURL(file);
     });
+  }
+  isFormInvalid(): boolean {
+    // Désactiver si un fichier est sélectionné ET un document existant est choisi
+    return (!this.selectedFile && !this.documentForm.valid) || (this.selectedFile && this.documentForm.get('documentExistant')?.value);
   }
 }

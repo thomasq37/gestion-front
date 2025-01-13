@@ -63,6 +63,11 @@ export class LogementComponent implements OnInit {
   setActive(index: number): void {
     this.activeIndex = index;
     this.periodeActuelle = null
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { tab: index },
+      queryParamsHandling: 'merge',
+    });
   }
 
   getTarifActuel(periodesDeLocation: PeriodeDeLocationDTO[]): string {

@@ -14,6 +14,7 @@
           id="fichier"
           (change)="onFileSelected($event)"
           aria-required="true"
+          accept="application/pdf"
         />
       </div>
 
@@ -34,7 +35,7 @@
       <div class="error">
         {{ error }}
       </div>
-      <button type="submit" [disabled]="!documentForm.valid && !selectedFile">
+      <button type="submit" [disabled]="isFormInvalid()">
         Ajouter un document
       </button>
     </div>

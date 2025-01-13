@@ -56,8 +56,10 @@ export class DocumentTableComponent {
   supprimerDocument() {
     this.documentService.supprimerDocument(this.logementMasqueId, this.idDocumentToDelete).then(() => {
       this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 4 },
+        queryParams: { tab: 8 },
       });
+      const indexToDelete = this.documents.findIndex(doc => doc.masqueId === this.idDocumentToDelete)
+      this.documents.splice(indexToDelete, 1);
     }).catch(error => {
       console.error('Erreur lors de la suppression de le document:', error);
     });
