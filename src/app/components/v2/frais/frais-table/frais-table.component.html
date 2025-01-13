@@ -26,7 +26,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let fraisItem of pagedFrais">
-          <td>{{ fraisItem.nom !== null && fraisItem.nom !== '' ? fraisItem.nom : fraisItem.categorieFrais }}</td>
+          <td>{{ fraisItem.nom !== null && fraisItem.nom !== '' ? fraisItem.nom : CategorieFrais[fraisItem.categorieFrais] }}</td>
           <td>{{ fraisItem.montant | currency: 'EUR' }}</td>
           <td>{{ fraisItem.frequence === 'PONCTUELLE' ? (fraisItem.dateDeDebut | customDate) : fraisItem.frequence }}</td>
           <td>{{ occurrencesMap[fraisItem.masqueId] }}</td>

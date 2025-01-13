@@ -3,6 +3,7 @@ import { FraisDTO } from '../../../../models/v2/entites/Frais/FraisDTO.model';
 import { Frequence } from '../../../../models/v2/enumeration/Frequence.enum';
 import {Router} from "@angular/router";
 import {FunctionsUtil} from "../../util/functions-util";
+import { CategorieFrais } from 'src/app/models/v2/enumeration/CategorieFrais.enum';
 
 @Component({
   selector: 'app-frais-table',
@@ -19,7 +20,8 @@ export class FraisTableComponent implements OnInit, OnChanges {
   pagedFrais: FraisDTO[] = [];
   actionsIsVisible: boolean = false;
   occurrencesMap: { [key: string]: number } = {};
-
+  protected readonly FunctionsUtil = FunctionsUtil;
+  public readonly CategorieFrais = CategorieFrais; // Référence publique à l'enum
   constructor(private router: Router) {
   }
   ngOnInit() {
@@ -95,7 +97,6 @@ export class FraisTableComponent implements OnInit, OnChanges {
     this.actionsIsVisible = !this.actionsIsVisible;
   }
 
-  protected readonly FunctionsUtil = FunctionsUtil;
 
   calculerOccurrences(frequence: Frequence, dateDeDebut: string, dateDeFin: string) {
     if (dateDeFin === null) {

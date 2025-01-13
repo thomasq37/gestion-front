@@ -18,8 +18,11 @@ export class FraisCreerComponent {
   periodeMasqueId: string | null = null;
   loading = false;
   frequences = Object.values(Frequence);
-  categoriesFrais = Object.values(CategorieFrais);
   isPonctuelle: boolean = false;
+  categoriesFrais = Object.keys(CategorieFrais).map((key) => ({
+    key,
+    label: CategorieFrais[key as keyof typeof CategorieFrais],
+  }));
   constructor(
     private formBuilder: FormBuilder,
     private fraisService: FraisService,

@@ -46,7 +46,7 @@
         <label for="categorieFrais">Catégorie</label>
         <select id="categorieFrais" formControlName="categorieFrais" aria-required="true">
           <option value="" disabled>Sélectionner une catégorie</option>
-          <option *ngFor="let categorieFrais of categoriesFrais" [value]="categorieFrais">{{ categorieFrais }}</option>
+          <option *ngFor="let categorie of categoriesFrais" [value]="categorie.key">{{ categorie.label }}</option>
         </select>
       </div>
       <div class="error">

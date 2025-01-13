@@ -19,7 +19,10 @@ export class FraisModifierComponent {
   fraisMasqueId: string | null = null;
   loading = false;
   frequences = Object.values(Frequence);
-  categoriesFrais = Object.values(CategorieFrais);
+  categoriesFrais = Object.keys(CategorieFrais).map((key) => ({
+    key,
+    label: CategorieFrais[key as keyof typeof CategorieFrais],
+  }));
   isPonctuelle: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
