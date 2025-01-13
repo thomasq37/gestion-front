@@ -19,7 +19,7 @@ export class FraisCreerComponent {
   loading = false;
   frequences = Object.values(Frequence);
   categoriesFrais = Object.values(CategorieFrais);
-
+  isPonctuelle: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private fraisService: FraisService,
@@ -39,6 +39,9 @@ export class FraisCreerComponent {
     });
     this.activatedRoute.queryParamMap.subscribe(queryParams => {
       this.periodeMasqueId = queryParams.get('periodeMasqueId');
+    });
+    this.fraisForm.get('frequence')?.valueChanges.subscribe((value) => {
+      this.isPonctuelle = value === Frequence.PONCTUELLE;
     });
   }
 

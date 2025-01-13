@@ -20,7 +20,7 @@ export class FraisModifierComponent {
   loading = false;
   frequences = Object.values(Frequence);
   categoriesFrais = Object.values(CategorieFrais);
-
+  isPonctuelle: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private fraisService: FraisService,
@@ -34,6 +34,9 @@ export class FraisModifierComponent {
       dateDeFin: [''],
       frequence: ['', Validators.required],
       categorieFrais: ['', Validators.required],
+    });
+    this.fraisForm.get('frequence')?.valueChanges.subscribe((value) => {
+      this.isPonctuelle = value === Frequence.PONCTUELLE;
     });
   }
 
@@ -63,6 +66,7 @@ export class FraisModifierComponent {
         frais = await this.fraisService.obtenirFraisPourLogement(this.logementMasqueId!, this.fraisMasqueId!);
       }
       this.fraisForm.patchValue(frais);
+      this.isPonctuelle = frais.frequence === Frequence.PONCTUELLE;
     } catch (error: any) {
       console.warn(error);
       this.error = error?.message || 'Impossible de charger le frais.';

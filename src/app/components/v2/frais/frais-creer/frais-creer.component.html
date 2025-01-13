@@ -21,14 +21,14 @@
           aria-required="true">
       </div>
       <div class="champ">
-        <label for="dateDeDebut">Date de début</label>
+        <label for="dateDeDebut">{{ isPonctuelle ? 'Date de paiement' : 'Date de début' }}</label>
         <input
           type="date"
           id="dateDeDebut"
           formControlName="dateDeDebut"
           aria-required="true">
       </div>
-      <div class="champ">
+      <div class="champ" *ngIf="!isPonctuelle">
         <label for="dateDeFin">Date de fin</label>
         <input
           type="date"
