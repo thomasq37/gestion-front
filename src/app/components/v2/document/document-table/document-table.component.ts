@@ -12,25 +12,14 @@ export class DocumentTableComponent {
   @Input() documents!: DocumentDTO[];
   @Input() logementMasqueId!: string;
   actionsIsVisible: boolean = false;
-
+  msgConfirmationSuppression = "Voulez-vous vraiment supprimer le document pour ce logement ?"
+  isModalVisible = false;
+  idDocumentToDelete= null;
   constructor(
     private router: Router,
     private documentService: DocumentService,) {
   }
-  supprimerDocument(logementMasqueId: string, documentMasqueId: string) {
-    const confirmed = window.confirm('Voulez-vous vraiment supprimer le document pour ce logement ?');
-    if (confirmed) {
-      this.documentService.supprimerDocument(logementMasqueId, documentMasqueId).then(() => {
-        this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 4 },
-        });
-      }).catch(error => {
-        console.error('Erreur lors de la suppression de le document:', error);
-      });
-    } else {
-      console.log('Suppression annulée');
-    }
-  }
+
 
   ajouterUnDocument(logementMasqueId: any) {
     this.router.navigate([`/logements/${logementMasqueId}/document/creer`]);
@@ -63,5 +52,27 @@ export class DocumentTableComponent {
     a.download = "DPE " + nomFichier;
     a.click();
     URL.revokeObjectURL(url);
+  }
+  supprimerDocument() {
+    this.documentService.supprimerDocument(this.logementMasqueId, this.idDocumentToDelete).then(() => {
+      this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 4 },
+      });
+    }).catch(error => {
+      console.error('Erreur lors de la suppression de le document:', error);
+    });
+  }
+  openModal(masqueId: string): void {
+    this.isModalVisible = true;
+    this.idDocumentToDelete = masqueId;
+  }
+
+  closeModal(): void {
+    this.isModalVisible = false;
+  }
+
+  confirmDelete(): void {
+    this.isModalVisible = false;
+    this.supprimerDocument()
   }
 }

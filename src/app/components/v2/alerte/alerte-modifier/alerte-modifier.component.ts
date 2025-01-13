@@ -15,6 +15,8 @@ export class AlerteModifierComponent {
   logementMasqueId: string | null = null;
   alerteMasqueId: string | null = null;
   loading = false;
+  msgConfirmationSuppression = "Voulez-vous vraiment supprimer l'alerte pour ce logement ?"
+  isModalVisible = false;
   constructor(
     private formBuilder: FormBuilder,
     private alerteService: AlerteService,
@@ -69,18 +71,25 @@ export class AlerteModifierComponent {
     }
   }
 
-  supprimerAlertePourLogement(logementMasqueId: string) {
-    const confirmed = window.confirm('Voulez-vous vraiment supprimer l\'alerte pour ce logement ?');
-    if (confirmed) {
-      this.alerteService.supprimerAlertePourLogement(logementMasqueId, this.alerteMasqueId).then(() => {
-        this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 6 },
-        });
-      }).catch(error => {
-        console.error('Erreur lors de la suppression de l\'alerte:', error);
+  supprimerAlertePourLogement() {
+    this.alerteService.supprimerAlertePourLogement(this.logementMasqueId, this.alerteMasqueId).then(() => {
+      this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 6 },
       });
-    } else {
-      console.log('Suppression annulée');
-    }
+    }).catch(error => {
+      console.error('Erreur lors de la suppression de l\'alerte:', error);
+    });
+  }
+  openModal(): void {
+    this.isModalVisible = true;
+  }
+
+  closeModal(): void {
+    this.isModalVisible = false;
+  }
+
+  confirmDelete(): void {
+    this.isModalVisible = false;
+    this.supprimerAlertePourLogement()
   }
 }

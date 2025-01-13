@@ -19,6 +19,8 @@ export class ContactModifierComponent implements OnInit {
   protected readonly CountryISO = CountryISO;
   protected readonly SearchCountryField = SearchCountryField;
   protected selectedCountryISO: CountryISO;
+  msgConfirmationSuppression = "Voulez-vous vraiment supprimer le contact pour ce logement ?"
+  isModalVisible = false;
   constructor(
     private formBuilder: FormBuilder,
     private contactService: ContactService,
@@ -79,18 +81,25 @@ export class ContactModifierComponent implements OnInit {
     }
   }
 
-  supprimerContactPourLogement(logementMasqueId: string) {
-    const confirmed = window.confirm('Voulez-vous vraiment supprimer le contact pour ce logement ?');
-    if (confirmed) {
-      this.contactService.supprimerContactPourLogement(logementMasqueId, this.contactMasqueId).then(() => {
-        this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 6 },
-        });
-      }).catch(error => {
-        console.error('Erreur lors de la suppression de le contact:', error);
+  supprimerContactPourLogement() {
+    this.contactService.supprimerContactPourLogement(this.logementMasqueId, this.contactMasqueId).then(() => {
+      this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 6 },
       });
-    } else {
-      console.log('Suppression annulée');
-    }
+    }).catch(error => {
+      console.error('Erreur lors de la suppression de le contact:', error);
+    });
+  }
+  openModal(): void {
+    this.isModalVisible = true;
+  }
+
+  closeModal(): void {
+    this.isModalVisible = false;
+  }
+
+  confirmDelete(): void {
+    this.isModalVisible = false;
+    this.supprimerContactPourLogement()
   }
 }

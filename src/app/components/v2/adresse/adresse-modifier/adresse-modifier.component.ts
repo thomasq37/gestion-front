@@ -16,6 +16,8 @@ export class AdresseModifierComponent implements OnInit {
   logementMasqueId: string | null = null;
   paysList = Object.values(Pays);
   loading = false;
+  isModalVisible = false;
+  msgConfirmationSuppression = "Voulez-vous vraiment supprimer l'adresse pour ce logement ?"
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,8 +52,7 @@ export class AdresseModifierComponent implements OnInit {
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Impossible de charger l’adresse.');
-    }
-    finally {
+    } finally {
       this.loading = false;
     }
   }
@@ -62,27 +63,33 @@ export class AdresseModifierComponent implements OnInit {
     try {
       await this.adresseService.modifierAdressePourLogement(this.logementMasqueId, adresse);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 1 },
+        queryParams: {tab: 1},
       });
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
-    }
-    finally {
+    } finally {
       this.loading = false;
     }
   }
 
-  supprimerAdressePourLogement(logementMasqueId: string) {
-    const confirmed = window.confirm('Voulez-vous vraiment supprimer l\'adresse pour ce logement ?');
-    if (confirmed) {
-      this.adresseService.supprimerAdressePourLogement(logementMasqueId).then(() => {
-        this.router.navigate([`/logements/${this.logementMasqueId}`]);
-      }).catch(error => {
-        console.error('Erreur lors de la suppression de l\'adresse:', error);
-      });
-    } else {
-      console.log('Suppression annulée');
-    }
+  supprimerAdressePourLogement() {
+    this.adresseService.supprimerAdressePourLogement(this.logementMasqueId).then(() => {
+      this.router.navigate([`/logements/${this.logementMasqueId}`]);
+    }).catch(error => {
+      console.error('Erreur lors de la suppression de l\'adresse:', error);
+    });
+  }
+  openModal(): void {
+    this.isModalVisible = true;
+  }
+
+  closeModal(): void {
+    this.isModalVisible = false;
+  }
+
+  confirmDelete(): void {
+    this.isModalVisible = false;
+    this.supprimerAdressePourLogement()
   }
 }

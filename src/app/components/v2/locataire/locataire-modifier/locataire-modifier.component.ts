@@ -25,7 +25,8 @@ export class LocataireModifierComponent implements OnInit {
   protected readonly SearchCountryField = SearchCountryField;
   protected readonly CountryISO = CountryISO;
   protected selectedCountryISO: CountryISO;
-
+  msgConfirmationSuppression = "Voulez-vous vraiment supprimer le locataire ?"
+  isModalVisible = false;
   constructor(
     private formBuilder: FormBuilder,
     private locataireService: LocataireService,
@@ -104,19 +105,26 @@ export class LocataireModifierComponent implements OnInit {
       this.loading = false;
     }
   }
-  supprimerLocatairePourPeriodeDeLocation(logementMasqueId: string) {
-    const confirmed = window.confirm('Voulez-vous vraiment supprimer le locataire ?');
-    if (confirmed) {
-      this.locataireService.supprimerLocatairePourPeriodeDeLocation(logementMasqueId, this.periodeDeLocationActuel.masqueId, this.locataireMasqueId).then(() => {
-        this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 5 },
-        });
-      }).catch(error => {
-        console.error('Erreur lors de la suppression du locataire:', error);
+  supprimerLocatairePourPeriodeDeLocation() {
+    this.locataireService.supprimerLocatairePourPeriodeDeLocation(this.logementMasqueId, this.periodeDeLocationActuel.masqueId, this.locataireMasqueId).then(() => {
+      this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 5 },
       });
-    } else {
-      console.log('Suppression annulée');
-    }
+    }).catch(error => {
+      console.error('Erreur lors de la suppression du locataire:', error);
+    });
+  }
+  openModal(): void {
+    this.isModalVisible = true;
+  }
+
+  closeModal(): void {
+    this.isModalVisible = false;
+  }
+
+  confirmDelete(): void {
+    this.isModalVisible = false;
+    this.supprimerLocatairePourPeriodeDeLocation()
   }
 }
 

@@ -21,6 +21,8 @@ export class LogementComponent implements OnInit {
   activeIndexPeriodeDeLocation = 0;
   activeIndex = 0;
   periodeActuelle: PeriodeDeLocationDTO | null = null;
+  msgConfirmationSuppression = "Voulez-vous vraiment supprimer ce logement ?"
+  isModalVisible = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -76,19 +78,26 @@ export class LogementComponent implements OnInit {
     return Array.from(locatairesSet);
   }
 
-  supprimerLogement(logementMasqueId: string) {
-    const confirmed = window.confirm('Voulez-vous vraiment supprimer ce logement ?');
-    if (confirmed) {
-      this.logementService.supprimerLogement(logementMasqueId).then(() => {
-        this.router.navigate(['/logements']);
-      }).catch(error => {
-        console.error('Erreur lors de la suppression du logement:', error);
-      });
-    } else {
-      console.log('Suppression annulée');
-    }
+  supprimerLogement() {
+    this.logementService.supprimerLogement(this.logement.masqueId).then(() => {
+      this.router.navigate(['/logements']);
+    }).catch(error => {
+      console.error('Erreur lors de la suppression du logement:', error);
+    });
   }
   onPeriodeSelectionnee(periode: PeriodeDeLocationDTO) {
     this.periodeActuelle = periode;
+  }
+  openModal(): void {
+    this.isModalVisible = true;
+  }
+
+  closeModal(): void {
+    this.isModalVisible = false;
+  }
+
+  confirmDelete(): void {
+    this.isModalVisible = false;
+    this.supprimerLogement()
   }
 }

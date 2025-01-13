@@ -66,10 +66,16 @@
         Enregistrer les modifications
       </button>
     </div>
-    <button type="button" class="btn-supprimer-formulaire-basique" (click)="supprimerLocatairePourPeriodeDeLocation(logementMasqueId)">Supprimer le locataire</button>
+    <button type="button" class="btn-supprimer-formulaire-basique" (click)="openModal()">Supprimer le locataire</button>
     <app-fil-ariane
       [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=5', label:'Sythèse logement'}"
       [ongletActuel]="'Modifier un locataire'"></app-fil-ariane>
   </form>
 
 </section>
+<app-modale-confirmation
+  *ngIf="isModalVisible"
+  [message]=msgConfirmationSuppression
+  (confirm)="confirmDelete()"
+  (cancel)="closeModal()"
+></app-modale-confirmation>

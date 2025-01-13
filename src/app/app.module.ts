@@ -50,6 +50,7 @@ import { AlerteElementComponent } from './components/v2/alerte/alerte-element/al
 import { StatistiquesComponent } from './components/v2/statistiques/statistiques.component';
 import { DocumentTableComponent } from './components/v2/document/document-table/document-table.component';
 import { DocumentCreerComponent } from './components/v2/document/document-creer/document-creer.component';
+import {ModaleConfirmationComponent} from "./components/v2/modale-confirmation/modale-confirmation.component";
 
 registerLocaleData(localeFr, 'fr');
 
@@ -95,6 +96,7 @@ registerLocaleData(localeFr, 'fr');
     StatistiquesComponent,
     DocumentTableComponent,
     DocumentCreerComponent,
+    ModaleConfirmationComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,7 +17,8 @@ export class PeriodeLocationModifierComponent {
   periodeDeLocationMasqueId: string | null = null;
   loading = false;
   typesDeLocation = Object.values(TypeDeLocation);
-
+  msgConfirmationSuppression = "Voulez-vous vraiment supprimer la période de location pour ce logement ?"
+  isModalVisible = false;
   constructor(
     private formBuilder: FormBuilder,
     private periodeDeLocationService: PeriodeDeLocationService,
@@ -74,18 +75,25 @@ export class PeriodeLocationModifierComponent {
     }
   }
 
-  supprimerPeriodeDeLocationPourLogement(logementMasqueId: string) {
-    const confirmed = window.confirm('Voulez-vous vraiment supprimer la période de location pour ce logement ?');
-    if (confirmed) {
-      this.periodeDeLocationService.supprimerPeriodeDeLocationPourLogement(logementMasqueId, this.periodeDeLocationMasqueId).then(() => {
-        this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 4 },
-        });
-      }).catch(error => {
-        console.error('Erreur lors de la suppression de la période de location:', error);
+  supprimerPeriodeDeLocationPourLogement() {
+    this.periodeDeLocationService.supprimerPeriodeDeLocationPourLogement(this.logementMasqueId, this.periodeDeLocationMasqueId).then(() => {
+      this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 4 },
       });
-    } else {
-      console.log('Suppression annulée');
-    }
+    }).catch(error => {
+      console.error('Erreur lors de la suppression de la période de location:', error);
+    });
+
+  }
+  openModal(): void {
+    this.isModalVisible = true;
+  }
+
+  closeModal(): void {
+    this.isModalVisible = false;
+  }
+  confirmDelete(): void {
+    this.isModalVisible = false;
+    this.supprimerPeriodeDeLocationPourLogement()
   }
 }

@@ -24,6 +24,9 @@ export class FraisModifierComponent {
     label: CategorieFrais[key as keyof typeof CategorieFrais],
   }));
   isPonctuelle: boolean = false;
+  msgConfirmationSuppression = "Voulez-vous vraiment supprimer le frais ?"
+  isModalVisible = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private fraisService: FraisService,
@@ -80,7 +83,6 @@ export class FraisModifierComponent {
   async modifierFrais(): Promise<void> {
     this.loading = true;
     const frais: FraisDTO = this.fraisForm.value as FraisDTO;
-
     try {
       if (this.periodeMasqueId) {
         await this.fraisService.modifierFraisPourPeriodeDeLocation(
@@ -105,9 +107,6 @@ export class FraisModifierComponent {
   }
 
   supprimerFrais() {
-    const confirmed = window.confirm('Voulez-vous vraiment supprimer le frais ?');
-    if (!confirmed) return;
-
     if (this.periodeMasqueId) {
       this.fraisService
         .supprimerFraisPourPeriodeDeLocation(
@@ -131,5 +130,17 @@ export class FraisModifierComponent {
           console.error('Erreur lors de la suppression du frais :', error);
         });
     }
+  }
+  openModal(): void {
+    this.isModalVisible = true;
+  }
+
+  closeModal(): void {
+    this.isModalVisible = false;
+  }
+
+  confirmDelete(): void {
+    this.isModalVisible = false;
+    this.supprimerFrais()
   }
 }

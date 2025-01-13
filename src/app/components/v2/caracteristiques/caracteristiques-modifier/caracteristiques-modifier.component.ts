@@ -19,7 +19,8 @@ export class CaracteristiquesModifierComponent {
   dpeLettres = Object.values(DpeLettre);
   nomFichier: string | null = null;
   loading = false;
-
+  msgConfirmationSuppression = "Voulez-vous vraiment supprimer les caracteristiques pour ce logement ?"
+  isModalVisible = false;
   constructor(
     private formBuilder: FormBuilder,
     private caracteristiquesService: CaracteristiquesService,
@@ -91,19 +92,14 @@ export class CaracteristiquesModifierComponent {
   }
 
 
-  supprimerCaracteristiquesPourLogement(logementMasqueId: string) {
-    const confirmed = window.confirm('Voulez-vous vraiment supprimer les caracteristiques pour ce logement ?');
-    if (confirmed) {
-      this.caracteristiquesService.supprimerCaracteristiquesPourLogement(logementMasqueId).then(() => {
-        this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: { tab: 2 },
-        });
-      }).catch(error => {
-        console.error('Erreur lors de la suppression des caracteristiques:', error);
+  supprimerCaracteristiquesPourLogement() {
+    this.caracteristiquesService.supprimerCaracteristiquesPourLogement(this.logementMasqueId).then(() => {
+      this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 2 },
       });
-    } else {
-      console.log('Suppression annulée');
-    }
+    }).catch(error => {
+      console.error('Erreur lors de la suppression des caracteristiques:', error);
+    });
   }
   auChargementDuFichier(event: Event): void {
     this.nomFichier = CaracteristiquesFormUtil.auChargementDuFichier(event, this.caracteristiquesForm, 'dpeFichier');
@@ -111,5 +107,17 @@ export class CaracteristiquesModifierComponent {
 
   onBalconOuTerrasseChange(event: Event): void {
     CaracteristiquesFormUtil.onBalconOuTerrasseChange(event, this.caracteristiquesForm, 'surfaceBalconOuTerrasse');
+  }
+  openModal(): void {
+    this.isModalVisible = true;
+  }
+
+  closeModal(): void {
+    this.isModalVisible = false;
+  }
+
+  confirmDelete(): void {
+    this.isModalVisible = false;
+    this.supprimerCaracteristiquesPourLogement()
   }
 }

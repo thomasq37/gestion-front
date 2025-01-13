@@ -1,0 +1,14 @@
+<div class="modale-overlay" (click)="onCancel()">
+  <div class="modale" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="onCancel()">×</button>
+    <div class="modal-body">
+      <img src="assets/img/v2/close-icon.svg" alt="fermer icone">
+      <h2>Êtes-vous sûr(e) ?</h2>
+      <p>{{ message }}</p>
+      <div class="modal-footer">
+        <button (click)="onConfirm()">Confirmer</button>
+        <button (click)="onCancel()">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div>

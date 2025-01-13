@@ -119,10 +119,16 @@
       <button type="submit" [disabled]="!caracteristiquesForm.valid">
         Enregistrer les modifications
       </button>
-      <button type="button" class="btn-supprimer-formulaire-basique" (click)="supprimerCaracteristiquesPourLogement(logementMasqueId)">Supprimer les caractéristiques</button>
+      <button type="button" class="btn-supprimer-formulaire-basique" (click)="openModal()">Supprimer les caractéristiques</button>
     </div>
     <app-fil-ariane
       [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=2', label:'Sythèse logement'}"
       [ongletActuel]="'Modifier les caracteristiques'"></app-fil-ariane>
   </form>
 </section>
+<app-modale-confirmation
+  *ngIf="isModalVisible"
+  [message]=msgConfirmationSuppression
+  (confirm)="confirmDelete()"
+  (cancel)="closeModal()"
+></app-modale-confirmation>

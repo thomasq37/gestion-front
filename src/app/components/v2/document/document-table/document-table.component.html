@@ -27,10 +27,16 @@
           <td *ngIf="!actionsIsVisible">
             <button class="btn-editer-basique" (click)="telechargerFichier(document.fichier, document.nom)">Télécharger</button>
           </td>
-          <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="supprimerDocument(logementMasqueId, document.masqueId)" src="assets/img/v2/edit-icon.svg">Supprimer</a></td>
+          <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="openModal(document.masqueId)" src="assets/img/v2/edit-icon.svg">Supprimer</a></td>
         </tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
+<app-modale-confirmation
+  *ngIf="isModalVisible"
+  [message]=msgConfirmationSuppression
+  (confirm)="confirmDelete()"
+  (cancel)="closeModal()"
+></app-modale-confirmation>
