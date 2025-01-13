@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import { FraisDTO } from '../../../../models/v2/entites/Frais/FraisDTO.model';
 import { Frequence } from '../../../../models/v2/enumeration/Frequence.enum';
 import {Router} from "@angular/router";
+import {FunctionsUtil} from "../../util/functions-util";
 
 @Component({
   selector: 'app-frais-table',
@@ -76,25 +77,24 @@ export class FraisTableComponent implements OnInit, OnChanges {
       const dateActuelle = new Date();
       dateDeFin = dateActuelle.toISOString().split('T')[0];
     }
-    const jours = Math.ceil((new Date(dateDeFin).getTime() - new Date(dateDeDebut).getTime()) / (1000 * 60 * 60 * 24));
-    switch (frequence) {
-      case Frequence.MENSUELLE:
-        return Math.ceil(jours / 30);
-      case Frequence.BIMESTRIELLE:
-        return Math.ceil(jours / 60);
-      case Frequence.TRIMESTRIELLE:
-        return Math.ceil(jours / 90);
-      case Frequence.SEMESTRIELLE:
-        return Math.ceil(jours / 180);
-      case Frequence.ANNUELLE:
-        return Math.ceil(jours / 365);
-      case Frequence.HEBDOMADAIRE:
-        return Math.ceil(jours / 7);
-      case Frequence.PONCTUELLE:
-        return 1;
-      default:
-        return 0;
+
+    const jours = Math.floor((new Date(dateDeFin).getTime() - new Date(dateDeDebut).getTime()) / (1000 * 60 * 60 * 24));
+
+    const joursParFrequence: { [key in Frequence]: number } = {
+      [Frequence.MENSUELLE]: 30,
+      [Frequence.BIMESTRIELLE]: 60,
+      [Frequence.TRIMESTRIELLE]: 90,
+      [Frequence.SEMESTRIELLE]: 180,
+      [Frequence.ANNUELLE]: 365,
+      [Frequence.HEBDOMADAIRE]: 7,
+      [Frequence.PONCTUELLE]: Infinity, // Cas particulier
+    };
+
+    if (frequence === Frequence.PONCTUELLE) {
+      return 1;
     }
+
+    return Math.floor(jours / (joursParFrequence[frequence] || Infinity));
   }
 
   modifierFrais(fraisMasqueId: string) {
@@ -114,4 +114,6 @@ export class FraisTableComponent implements OnInit, OnChanges {
   toggleActions() {
     this.actionsIsVisible = !this.actionsIsVisible;
   }
+
+  protected readonly FunctionsUtil = FunctionsUtil;
 }
