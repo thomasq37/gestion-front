@@ -60,7 +60,7 @@ export class LocataireService {
     periodeMasqueId: string,
     locataireMasqueId: string
   ): Promise<SuccessResponse> {
-    return fetchWithHandling<SuccessResponse>(`${this.apiUrl}/${logementMasqueId}/locataire/${locataireMasqueId}/periodes-de-location/${periodeMasqueId}/supprimer`, {
+    return fetchWithHandling<SuccessResponse>(`${this.apiUrl}/${logementMasqueId}/locataires/${locataireMasqueId}/periodes-de-location/${periodeMasqueId}/supprimer`, {
       method: 'DELETE',
     });
   }
