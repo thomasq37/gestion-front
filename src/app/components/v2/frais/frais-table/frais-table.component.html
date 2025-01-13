@@ -29,7 +29,7 @@
           <td>{{ fraisItem.nom !== null && fraisItem.nom !== '' ? fraisItem.nom : fraisItem.categorieFrais }}</td>
           <td>{{ fraisItem.montant | currency: 'EUR' }}</td>
           <td>{{ fraisItem.frequence === 'PONCTUELLE' ? (fraisItem.dateDeDebut | customDate) : fraisItem.frequence }}</td>
-          <td>{{ FunctionsUtil.calculerOccurrences(fraisItem.frequence, fraisItem.dateDeDebut, fraisItem.dateDeFin) }}</td>
+          <td>{{ occurrencesMap[fraisItem.masqueId] }}</td>
           <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="modifierFrais(fraisItem.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>
         </tr>
         </tbody>

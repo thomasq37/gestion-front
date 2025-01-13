@@ -18,6 +18,7 @@ export class FraisTableComponent implements OnInit, OnChanges {
   itemsPerPage: number = 10;
   pagedFrais: FraisDTO[] = [];
   actionsIsVisible: boolean = false;
+  occurrencesMap: { [key: string]: number } = {};
 
   constructor(private router: Router) {
   }
@@ -34,6 +35,10 @@ export class FraisTableComponent implements OnInit, OnChanges {
   private initialiserFraisTable(): void {
     this.frais = this.sortFrais(this.frais);
     this.totalPages = this.calculateTotalPages(this.frais.length, this.itemsPerPage);
+    this.occurrencesMap = this.frais.reduce((map, fraisItem) => {
+      map[fraisItem.masqueId] = this.calculerOccurrences(fraisItem.frequence, fraisItem.dateDeDebut, fraisItem.dateDeFin);
+      return map;
+    }, {} as { [key: string]: number });
     this.updatePagedFrais();
   }
 
@@ -72,31 +77,6 @@ export class FraisTableComponent implements OnInit, OnChanges {
     this.updatePagedFrais();
   }
 
-  getNombreOccurrences(dateDeDebut: string, dateDeFin: string, frequence: Frequence): number {
-    if (dateDeFin === null) {
-      const dateActuelle = new Date();
-      dateDeFin = dateActuelle.toISOString().split('T')[0];
-    }
-
-    const jours = Math.floor((new Date(dateDeFin).getTime() - new Date(dateDeDebut).getTime()) / (1000 * 60 * 60 * 24));
-
-    const joursParFrequence: { [key in Frequence]: number } = {
-      [Frequence.MENSUELLE]: 30,
-      [Frequence.BIMESTRIELLE]: 60,
-      [Frequence.TRIMESTRIELLE]: 90,
-      [Frequence.SEMESTRIELLE]: 180,
-      [Frequence.ANNUELLE]: 365,
-      [Frequence.HEBDOMADAIRE]: 7,
-      [Frequence.PONCTUELLE]: Infinity, // Cas particulier
-    };
-
-    if (frequence === Frequence.PONCTUELLE) {
-      return 1;
-    }
-
-    return Math.floor(jours / (joursParFrequence[frequence] || Infinity));
-  }
-
   modifierFrais(fraisMasqueId: string) {
     const queryParams = this.periodeMasqueId
       ? { periodeMasqueId: this.periodeMasqueId }
@@ -116,4 +96,27 @@ export class FraisTableComponent implements OnInit, OnChanges {
   }
 
   protected readonly FunctionsUtil = FunctionsUtil;
+
+  calculerOccurrences(frequence: Frequence, dateDeDebut: string, dateDeFin: string) {
+    if (dateDeFin === null) {
+      const dateActuelle = new Date();
+      dateDeFin = dateActuelle.toISOString().split('T')[0];
+    }
+    const jours = Math.floor((new Date(dateDeFin).getTime() - new Date(dateDeDebut).getTime()) / (1000 * 60 * 60 * 24));
+    const joursParFrequence: { [key in Frequence]: number } = {
+      [Frequence.MENSUELLE]: 30,
+      [Frequence.BIMESTRIELLE]: 60,
+      [Frequence.TRIMESTRIELLE]: 90,
+      [Frequence.SEMESTRIELLE]: 180,
+      [Frequence.ANNUELLE]: 365,
+      [Frequence.HEBDOMADAIRE]: 7,
+      [Frequence.PONCTUELLE]: Infinity, // Cas particulier
+    };
+
+    if (frequence === Frequence.PONCTUELLE) {
+      return 1;
+    }
+
+    return Math.floor(jours / (joursParFrequence[frequence] || Infinity));
+  }
 }

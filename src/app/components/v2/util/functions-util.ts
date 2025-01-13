@@ -15,6 +15,7 @@ export class FunctionsUtil {
   }
 
   static calculerOccurrences(frequence: Frequence, dateDeDebut: string, dateDeFin: string): number {
+
     if (dateDeFin === null) {
       const dateActuelle = new Date();
       dateDeFin = dateActuelle.toISOString().split('T')[0];
@@ -36,5 +37,4 @@ export class FunctionsUtil {
 
     return Math.floor(jours / (joursParFrequence[frequence] || Infinity));
   }
-
 }
