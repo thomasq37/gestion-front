@@ -17,8 +17,8 @@
       <table>
         <thead>
         <tr>
-          <th>Nom</th>
           <th>Prénom</th>
+          <th>Nom</th>
           <th>Email</th>
           <th>Téléphone</th>
           <th *ngIf="actionsIsVisible">Actions</th>
@@ -26,8 +26,8 @@
         </thead>
         <tbody>
         <tr *ngFor="let contact of contacts">
-          <td>{{ contact.nom }}</td>
           <td>{{ contact.prenom }}</td>
+          <td>{{ contact.nom }}</td>
           <td class="email"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
           <td class="phone"><a href="tel:{{ contact.telephone }}">{{ contact.telephone }}</a></td>
           <td *ngIf="actionsIsVisible"><a class="btn-editer-basique" (click)="modifierContact(logementMasqueId, contact.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a></td>

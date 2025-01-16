@@ -5,6 +5,7 @@ import {ContactService} from "../../../../services/v2/contact/contact.service";
 import {ContactDTO} from "../../../../models/v2/entites/Contact/ContactDTO.model";
 import {CountryISO, SearchCountryField} from "ngx-intl-tel-input-gg";
 import {TelephoneUtil} from "../../util/telephone-util";
+import {Country} from "ngx-intl-tel-input-gg/lib/model/country.model";
 @Component({
   selector: 'app-contact-modifier',
   templateUrl: './contact-modifier.component.html',
@@ -28,8 +29,8 @@ export class ContactModifierComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.contactForm = this.formBuilder.group({
-      nom: new FormControl('', Validators.required),
       prenom: new FormControl('', Validators.required),
+      nom: new FormControl(''),
       email: new FormControl('', [Validators.email]),
       telephone: new FormControl('', [
       ])
@@ -101,5 +102,25 @@ export class ContactModifierComponent implements OnInit {
   confirmDelete(): void {
     this.isModalVisible = false;
     this.supprimerContactPourLogement()
+  }
+
+  onCountryChange(event: Country): void {
+    const phoneData = this.contactForm.get('telephone')?.value;
+    if(phoneData !== null){
+      let updatedPhone = { ...phoneData };
+      const oldDialCode = phoneData.dialCode;
+      const numberWithoutPrefix = phoneData.number.replace(oldDialCode, '');
+      const newDialCode = event.dialCode;
+      updatedPhone.number = `+${newDialCode}${numberWithoutPrefix}`;
+      updatedPhone.e164Number = `+${newDialCode}${numberWithoutPrefix}`;
+      const firstDigit = numberWithoutPrefix.charAt(0);
+      const restOfNumber = numberWithoutPrefix.slice(1);
+      const formattedRest = restOfNumber.match(/.{2}/g)?.join(' ') || restOfNumber;
+      updatedPhone.internationalNumber = `+${newDialCode} ${firstDigit} ${formattedRest}`;
+      updatedPhone.nationalNumber = `0${firstDigit} ${formattedRest}`;
+      updatedPhone.countryCode = event.iso2.toUpperCase();
+      updatedPhone.dialCode = `+${newDialCode}`;
+      this.contactForm.get('telephone')?.setValue(updatedPhone);
+    }
   }
 }

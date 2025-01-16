@@ -6,19 +6,19 @@
     </div>
     <div class="champs">
       <div class="champ">
-        <label for="nom">Nom</label>
-        <input
-          type="text"
-          id="nom"
-          formControlName="nom"
-          aria-required="true">
-      </div>
-      <div class="champ">
         <label for="prenom">Prénom</label>
         <input
           type="text"
           id="prenom"
           formControlName="prenom"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="nom">Nom</label>
+        <input
+          type="text"
+          id="nom"
+          formControlName="nom"
           aria-required="true">
       </div>
       <div class="champ">
@@ -42,6 +42,8 @@
           [selectedCountryISO]="selectedCountryISO"
           [maxLength]="15"
           [phoneValidation]="true"
+          (countryChange)="onCountryChange($event)"
+
         ></ngx-intl-tel-input>
       </div>
       <div class="error">
