@@ -14,6 +14,7 @@ export class LogementsComponent implements OnInit {
   logements: LogementDTO[] = [];
   loading = false;
   error: string | null = null;
+  protected statistiquesIsVisible: boolean = false;
 
   constructor(
     private logementService: LogementService
@@ -61,5 +62,10 @@ export class LogementsComponent implements OnInit {
   creerLogement() {
     this.logementService.creerLogement().then(r =>
     this.router.navigate(['/logements', r.masqueId]));
+  }
+
+  toggleStatistiques(event: Event) {
+    event.preventDefault();
+    this.statistiquesIsVisible = !this.statistiquesIsVisible
   }
 }
