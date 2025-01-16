@@ -21,16 +21,6 @@
               <p class="details-logement">{{logement.caracteristiques.nombreDePieces}} pièces • {{logement.caracteristiques.surfaceLogement }} m² {{logement.caracteristiques.meubleeOuNon ? '•  Meublé' : ''}}  {{getBalconOuTerrasse(logement.caracteristiques)}} {{logement.caracteristiques.parkingOuNon ? '•  Parking' : ''}}</p>
               <img class="dpe-logement" *ngIf="logement.caracteristiques.dpeLettre !== null" src="./assets/img/v2/energie-{{logement.caracteristiques.dpeLettre.toLowerCase()}}-icon.png" alt="Icône de la classe énergie">
               <app-alerte-element [alertes]="logement.alertes" [ouvrable]="false"></app-alerte-element>
-              <div class="logement-actions-container">
-                <button class="btn-editer-basique" (click)="toggleStatistiques($event)">Statistiques</button>
-<!--
-                <button class="btn-editer-basique" (click)="toggleStatistiques($event)">Conseils</button>
--->
-              </div>
-              <app-statistiques
-                *ngIf="statistiquesIsVisible"
-                class="statistiques-contenu"
-                [logement]="logement"></app-statistiques>
             </div>
             <div class="logement-infos" *ngIf="!logement.adresse || !logement.caracteristiques">
               <div class="header-logement-infos">

@@ -29,6 +29,7 @@ export class LogementComponent implements OnInit {
     private logementService: LogementService) {}
 
   ngOnInit(): void {
+
     const logementMasqueId = this.route.snapshot.paramMap.get('logementMasqueId');
     if (logementMasqueId) {
       this.obtenirLogement(logementMasqueId);
