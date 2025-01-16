@@ -17,6 +17,7 @@ export class PhotoCarousselComponent implements OnInit {
   rightSidePhotos: PhotoDTO[] = [];
   private touchStartX: number = 0;
   private touchEndX: number = 0;
+  private touchStartY: number = 0;
   private isClick: boolean = true;
 
   constructor(
@@ -70,13 +71,20 @@ export class PhotoCarousselComponent implements OnInit {
   }
   onTouchStart(event: TouchEvent): void {
     this.touchStartX = event.touches[0].clientX;
+    this.touchStartY = event.touches[0].clientY; // Ajoutez pour capturer la position Y
     this.isClick = true;
   }
 
   onTouchMove(event: TouchEvent): void {
-    this.touchEndX = event.touches[0].clientX;
-    if (Math.abs(this.touchStartX - this.touchEndX) > 10) {
+    const currentX = event.touches[0].clientX;
+    const currentY = event.touches[0].clientY;
+    const diffX = Math.abs(this.touchStartX - currentX);
+    const diffY = Math.abs(this.touchStartY - currentY);
+
+    // Vérifiez si le mouvement est horizontal
+    if (diffX > diffY && diffX > 10) {
       this.isClick = false;
+      event.preventDefault(); // Empêche le défilement de l'écran
     }
   }
 
@@ -90,6 +98,7 @@ export class PhotoCarousselComponent implements OnInit {
       }
     }
   }
+
 
   modifierPhotos() {
     this.router.navigate([`/logements/${this.logementId}/photos/modifier`]);
