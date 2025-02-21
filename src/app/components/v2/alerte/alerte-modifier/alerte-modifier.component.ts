@@ -74,7 +74,7 @@ export class AlerteModifierComponent {
   supprimerAlertePourLogement() {
     this.alerteService.supprimerAlertePourLogement(this.logementMasqueId, this.alerteMasqueId).then(() => {
       this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 6 },
+        queryParams: { tab: 7 },
       });
     }).catch(error => {
       console.error('Erreur lors de la suppression de l\'alerte:', error);
