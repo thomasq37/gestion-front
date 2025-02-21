@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {LogementDTO} from "../../../models/v2/entites/Logement/LogementDTO.model";
 import {LogementService} from "../../../services/v2/logement/logement.service";
 import {CaracteristiquesDTO} from "../../../models/v2/entites/Caracteristiques/CaracteristiquesDTO.model";
 import {PeriodeDeLocationDTO} from "../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
 import {Router} from "@angular/router";
 import {FunctionsUtil} from "../util/functions-util";
+import {LogementVueEnsembleDTO} from "../../../models/v2/entites/Logement/LogementVueEnsembleDTO.model";
 @Component({
   selector: 'app-logements',
   templateUrl: './logements.component.html',
   styleUrls: ['./logements.component.scss'],
 })
 export class LogementsComponent implements OnInit {
-  logements: LogementDTO[] = [];
+  logements: LogementVueEnsembleDTO[] = [];
   loading = false;
   error: string | null = null;
   protected statistiquesIsVisible: boolean = false;
@@ -21,22 +21,18 @@ export class LogementsComponent implements OnInit {
   , private router: Router) {}
 
   ngOnInit(): void {
-    this.listerLogements();
+    this.listerLogementsVueEnsemble();
   }
 
-  async listerLogements(): Promise<void> {
+  async listerLogementsVueEnsemble(): Promise<void> {
     this.loading = true;
     this.error = null;
     try {
-      this.logements = await this.logementService.listerLogements();
+      this.logements = await this.logementService.listerLogementsVueEnsemble();
     } catch (err) {
       this.error = 'Erreur lors du chargement des logements.';
     } finally {
-      this.logements.sort((a, b) => {
-        const dateAchatA = a.caracteristiques?.dateAchat ? new Date(a.caracteristiques.dateAchat).getTime() : 0;
-        const dateAchatB = b.caracteristiques?.dateAchat ? new Date(b.caracteristiques.dateAchat).getTime() : 0;
-        return dateAchatB - dateAchatA;
-      });
+
 
       this.logements.forEach(logement => {
         logement.periodesDeLocation.sort((a, b) => {

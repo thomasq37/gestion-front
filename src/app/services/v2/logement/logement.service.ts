@@ -3,6 +3,7 @@ import {environment} from "../../../../environments/environment";
 import {LogementDTO} from "../../../models/v2/entites/Logement/LogementDTO.model";
 import {fetchWithHandling} from "../http-helpers";
 import {SuccessResponse} from "../../../models/v2/exception/SuccessResponse.model";
+import {LogementVueEnsembleDTO} from "../../../models/v2/entites/Logement/LogementVueEnsembleDTO.model";
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,12 @@ export class LogementService {
 
   async listerLogements(): Promise<LogementDTO[]> {
     return fetchWithHandling<LogementDTO[]>(`${this.apiUrl}/lister`, {
+      method: 'GET',
+    });
+  }
+
+  async listerLogementsVueEnsemble(): Promise<LogementVueEnsembleDTO[]> {
+    return fetchWithHandling<LogementDTO[]>(`${this.apiUrl}/lister/vue-ensemble`, {
       method: 'GET',
     });
   }
