@@ -76,13 +76,17 @@ export class LogementComponent implements OnInit {
   }
   getLocataires(): LocataireDTO[] {
     const locatairesSet = new Set<LocataireDTO>();
-    this.logement.periodesDeLocation.forEach(periode => {
+    const periodesTriees = this.logement.periodesDeLocation.sort((a, b) =>
+      new Date(b.dateDeDebut).getTime() - new Date(a.dateDeDebut).getTime()
+    );
+    periodesTriees.forEach(periode => {
       if (periode.locataires) {
         periode.locataires.forEach(locataire => locatairesSet.add(locataire));
       }
     });
     return Array.from(locatairesSet);
   }
+
 
   supprimerLogement() {
     this.logementService.supprimerLogement(this.logement.masqueId).then(() => {
