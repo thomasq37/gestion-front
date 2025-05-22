@@ -26,7 +26,7 @@ export class PeriodeLocationModifierComponent {
     private activatedRoute: ActivatedRoute
   ) {
     this.periodeDeLocationForm = this.formBuilder.group({
-      tarif: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      tarif: ['', [Validators.required, Validators.pattern(/^\d+([.,]\d+)?$/)]],
       dateDeDebut: ['', Validators.required],
       dateDeFin: [''],
       typeDeLocation: ['', Validators.required],
