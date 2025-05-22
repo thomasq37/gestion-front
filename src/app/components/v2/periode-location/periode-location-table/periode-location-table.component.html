@@ -20,7 +20,7 @@
           <th>Locataire</th>
           <th>Entrée</th>
           <th>Sortie</th>
-          <th>Prix par mois</th>
+          <th>Prix</th>
           <th *ngIf="actionsIsVisible">Actions</th>
 
         </tr>
@@ -34,7 +34,7 @@
             </td>
             <td>{{ periodeDeLocation.dateDeDebut | customDate  }}</td>
             <td>{{ periodeDeLocation.dateDeFin ? (periodeDeLocation.dateDeFin | customDate) : 'Pas de sortie' }}</td>
-            <td>{{ periodeDeLocation.tarif | currency: 'EUR'}}</td>
+            <td>{{ periodeDeLocation.tarif | currency: 'EUR'}} {{periodeDeLocation.typeDeLocation === 'JOURNALIERE' ? '/séjour' : '/mois'}}</td>
             <td *ngIf="actionsIsVisible">
               <a class="btn-editer-basique" (click)="modifierPeriodeDeLocation(logementMasqueId, periodeDeLocation.masqueId)" src="assets/img/v2/edit-icon.svg">Éditer</a>
               <a class="btn-editer-basique" (click)="afficherFraisPeriodeDeLocation(periodeDeLocation)">Frais</a>

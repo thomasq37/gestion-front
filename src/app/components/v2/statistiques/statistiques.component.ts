@@ -82,12 +82,9 @@ export class StatistiquesComponent implements OnInit {
   }
 
   private calculerRevenuParPeriode(tarif: number, type: TypeDeLocation, dateDebut: Date, dateFin: Date): number {
-    const diffTime = dateFin.getTime() - dateDebut.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
     switch (type) {
       case TypeDeLocation.JOURNALIERE:
-        return tarif * diffDays;
+        return tarif;
       case TypeDeLocation.MENSUELLE:
         const diffMonths = this.calculerDiffMois(dateDebut, dateFin);
         return tarif * diffMonths;

@@ -16,7 +16,7 @@ export class PeriodeLocationCreerComponent {
   logementMasqueId: string | null = null;
   loading = false;
   typesDeLocation = Object.values(TypeDeLocation);
-
+  isjournaliere = false;
   constructor(
     private formBuilder: FormBuilder,
     private periodeDeLocationService: PeriodeDeLocationService,
@@ -27,10 +27,13 @@ export class PeriodeLocationCreerComponent {
       tarif: ['', [Validators.required, Validators.pattern(/^\d+([.,]\d+)?$/)]],
       dateDeDebut: ['', Validators.required],
       dateDeFin: [''],
-      typeDeLocation: ['', Validators.required],
+      typeDeLocation: ['MENSUELLE', Validators.required],
     });
     this.activatedRoute.paramMap.subscribe(params => {
       this.logementMasqueId = params.get('logementMasqueId');
+    });
+    this.periodeDeLocationForm.get('typeDeLocation')?.valueChanges.subscribe((value) => {
+      this.isjournaliere = value === TypeDeLocation.JOURNALIERE;
     });
   }
 

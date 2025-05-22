@@ -19,6 +19,8 @@ export class PeriodeLocationModifierComponent {
   typesDeLocation = Object.values(TypeDeLocation);
   msgConfirmationSuppression = "Voulez-vous vraiment supprimer la période de location pour ce logement ?"
   isModalVisible = false;
+  isjournaliere = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private periodeDeLocationService: PeriodeDeLocationService,
@@ -30,6 +32,9 @@ export class PeriodeLocationModifierComponent {
       dateDeDebut: ['', Validators.required],
       dateDeFin: [''],
       typeDeLocation: ['', Validators.required],
+    });
+    this.periodeDeLocationForm.get('typeDeLocation')?.valueChanges.subscribe((value) => {
+      this.isjournaliere = value === TypeDeLocation.JOURNALIERE;
     });
   }
 
