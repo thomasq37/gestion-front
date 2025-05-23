@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {PeriodeDeLocationService} from "../../../../services/v2/periode-de-location/periode-de-location.service";
-import {PeriodeDeLocationDTO} from "../../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
-import {TypeDeLocation} from "../../../../models/v2/enumeration/TypeDeLocation.enum";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { PeriodeDeLocationService } from "../../../../services/v2/periode-de-location/periode-de-location.service";
+import { PeriodeDeLocationDTO } from "../../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
+import { TypeDeLocation } from "../../../../models/v2/enumeration/TypeDeLocation.enum";
 
 @Component({
   selector: 'app-periode-location-modifier',
@@ -17,7 +17,7 @@ export class PeriodeLocationModifierComponent {
   periodeDeLocationMasqueId: string | null = null;
   loading = false;
   typesDeLocation = Object.values(TypeDeLocation);
-  msgConfirmationSuppression = "Voulez-vous vraiment supprimer la période de location pour ce logement ?"
+  msgConfirmationSuppression = "Voulez-vous vraiment supprimer la période de location pour ce logement ?";
   isModalVisible = false;
   isjournaliere = false;
 
@@ -33,6 +33,7 @@ export class PeriodeLocationModifierComponent {
       dateDeFin: [''],
       typeDeLocation: ['', Validators.required],
     });
+
     this.periodeDeLocationForm.get('typeDeLocation')?.valueChanges.subscribe((value) => {
       this.isjournaliere = value === TypeDeLocation.JOURNALIERE;
     });
@@ -55,41 +56,44 @@ export class PeriodeLocationModifierComponent {
       this.periodeDeLocationForm.patchValue(periodeDeLocation);
     } catch (error: any) {
       console.warn(error);
-      this.error = (error?.message || 'Impossible de charger la période de location.');
-    }
-    finally {
+      this.error = error?.message || 'Impossible de charger la période de location.';
+    } finally {
       this.loading = false;
     }
   }
 
   async modifierPeriodeDeLocationPourLogement(): Promise<void> {
     this.loading = true;
-
     const periodeDeLocation: PeriodeDeLocationDTO = this.periodeDeLocationForm.value as PeriodeDeLocationDTO;
+
     try {
-      await this.periodeDeLocationService.modifierPeriodeDeLocationPourLogement(this.logementMasqueId, this.periodeDeLocationMasqueId, periodeDeLocation);
+      await this.periodeDeLocationService.modifierEtMettreAJourCache(
+        this.logementMasqueId!,
+        this.periodeDeLocationMasqueId!,
+        periodeDeLocation
+      );
+
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 4 },
       });
     } catch (error: any) {
       console.warn(error);
-      this.error = (error?.message || 'Une erreur inconnue est survenue.');
-    }
-    finally {
+      this.error = error?.message || 'Une erreur inconnue est survenue.';
+    } finally {
       this.loading = false;
     }
   }
 
   supprimerPeriodeDeLocationPourLogement() {
-    this.periodeDeLocationService.supprimerPeriodeDeLocationPourLogement(this.logementMasqueId, this.periodeDeLocationMasqueId).then(() => {
+    this.periodeDeLocationService.supprimerPeriodeDeLocationPourLogement(this.logementMasqueId!, this.periodeDeLocationMasqueId!).then(() => {
       this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 4 },
       });
     }).catch(error => {
       console.error('Erreur lors de la suppression de la période de location:', error);
     });
-
   }
+
   openModal(): void {
     this.isModalVisible = true;
   }
@@ -97,8 +101,9 @@ export class PeriodeLocationModifierComponent {
   closeModal(): void {
     this.isModalVisible = false;
   }
+
   confirmDelete(): void {
     this.isModalVisible = false;
-    this.supprimerPeriodeDeLocationPourLogement()
+    this.supprimerPeriodeDeLocationPourLogement();
   }
 }

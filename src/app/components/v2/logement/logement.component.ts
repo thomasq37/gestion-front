@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {LogementDTO} from "../../../models/v2/entites/Logement/LogementDTO.model";
 import {LogementService} from "../../../services/v2/logement/logement.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -26,7 +26,8 @@ export class LogementComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private logementService: LogementService) {}
+    private logementService: LogementService,
+    private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
 
@@ -53,6 +54,7 @@ export class LogementComponent implements OnInit {
       this.error = 'Erreur lors du chargement des logements.';
     } finally {
       this.loading = false;
+      this.cdr.detectChanges();
     }
   }
   getBalconOuTerrasse(caracteristiques: CaracteristiquesDTO): string {

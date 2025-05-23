@@ -3,12 +3,14 @@ import { fetchWithHandling } from '../http-helpers';
 import {environment} from "../../../../environments/environment";
 import {PeriodeDeLocationDTO} from "../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
 import {SuccessResponse} from "../../../models/v2/exception/SuccessResponse.model";
+import {LogementService} from "../logement/logement.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class PeriodeDeLocationService {
   private apiUrl = `${environment.apiUrl}/logements`;
+  constructor(private logementService: LogementService) {}
 
   async listerPeriodesDeLocation(logementMasqueId: string): Promise<PeriodeDeLocationDTO[]> {
     return fetchWithHandling<PeriodeDeLocationDTO[]>(`${this.apiUrl}/${logementMasqueId}/periodes-de-location/lister`, {
@@ -53,5 +55,23 @@ export class PeriodeDeLocationService {
     return fetchWithHandling<SuccessResponse>(`${this.apiUrl}/${logementMasqueId}/periodes-de-location/${periodeDeLocationMasqueId}/supprimer`, {
       method: 'DELETE',
     });
+  }
+  async modifierEtMettreAJourCache(
+    logementMasqueId: string,
+    periodeMasqueId: string,
+    dto: PeriodeDeLocationDTO
+  ): Promise<PeriodeDeLocationDTO> {
+    const updated = await this.modifierPeriodeDeLocationPourLogement(logementMasqueId, periodeMasqueId, dto);
+    this.logementService.mettreAJourPeriodeDansLogement(logementMasqueId, updated);
+    return updated;
+  }
+
+  async creerEtMettreAJourCache(
+    logementMasqueId: string,
+    periodeDTO: PeriodeDeLocationDTO
+  ): Promise<PeriodeDeLocationDTO> {
+    const created = await this.creerPeriodeDeLocationPourLogement(logementMasqueId, periodeDTO);
+    this.logementService.mettreAJourPeriodeDansLogement(logementMasqueId, created);
+    return created;
   }
 }

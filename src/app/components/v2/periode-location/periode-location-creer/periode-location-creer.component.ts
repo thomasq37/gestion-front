@@ -42,7 +42,7 @@ export class PeriodeLocationCreerComponent {
     this.loading = true
     const periodeDeLocation: PeriodeDeLocationDTO = this.periodeDeLocationForm.value as PeriodeDeLocationDTO;
     try {
-      await this.periodeDeLocationService.creerPeriodeDeLocationPourLogement(this.logementMasqueId, periodeDeLocation);
+      await this.periodeDeLocationService.creerEtMettreAJourCache(this.logementMasqueId!, periodeDeLocation);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 4 },
       });
