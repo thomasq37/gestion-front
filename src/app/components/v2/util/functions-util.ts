@@ -2,23 +2,26 @@ import {PeriodeDeLocationDTO} from "../../../models/v2/entites/PeriodeDeLocation
 import {Frequence} from "../../../models/v2/enumeration/Frequence.enum";
 
 export class FunctionsUtil {
-  static getTarifActuel(periodesDeLocation: PeriodeDeLocationDTO[]): string {
+  static getTarifActuel(periodes: PeriodeDeLocationDTO[]): string {
+    const enCours = this.getPeriodeEnCours(periodes);
+    if (!enCours) return 'Non loué';
+
+    const typeLocation = enCours.typeDeLocation === 'JOURNALIERE' ? 'le séjour' : '/mois';
+    return `${enCours.tarif.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })} ${typeLocation}`;
+  }
+  static getPeriodeEnCours(periodes: PeriodeDeLocationDTO[]): PeriodeDeLocationDTO | undefined {
     const now = new Date();
-    const periodeEnCours = periodesDeLocation.find(periode => {
+    return periodes.find(periode => {
       const debut = new Date(periode.dateDeDebut);
       const fin = periode.dateDeFin ? new Date(periode.dateDeFin) : null;
       return debut <= now && (!fin || now <= fin);
     });
-    let typeLocation = '';
-    if(periodeEnCours){
-      typeLocation = periodeEnCours.typeDeLocation === 'JOURNALIERE' ? 'le séjour' : '/mois'
-    }
-
-    return periodeEnCours
-      ? `${periodeEnCours.tarif.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })} ${typeLocation !== '' ? typeLocation : ''}`
-      : 'Non loué';
   }
 
+  static isPeriodeEnCoursJournaliere(periodes: PeriodeDeLocationDTO[]): boolean {
+    const enCours = this.getPeriodeEnCours(periodes);
+    return enCours?.typeDeLocation === 'JOURNALIERE';
+  }
   static calculerOccurrences(frequence: Frequence, dateDeDebut: string, dateDeFin: string): number {
 
     if (dateDeFin === null) {
@@ -41,5 +44,24 @@ export class FunctionsUtil {
     }
 
     return Math.floor(jours / (joursParFrequence[frequence] || Infinity));
+  }
+  static getDureeEtJoursRestantsJournaliere(periodes: PeriodeDeLocationDTO[]): string | null {
+    const now = new Date();
+    const periode = this.getPeriodeEnCours(periodes);
+
+    if (!periode || periode.typeDeLocation !== 'JOURNALIERE' || !periode.dateDeFin) return null;
+
+    const debut = new Date(periode.dateDeDebut);
+    const fin = new Date(periode.dateDeFin);
+
+    const totalJours = Math.ceil((fin.getTime() - debut.getTime()) / (1000 * 60 * 60 * 24));
+    const joursEcoules = Math.ceil((now.getTime() - debut.getTime()) / (1000 * 60 * 60 * 24));
+    const joursAffiches = Math.min(joursEcoules, totalJours);
+
+    if (totalJours === 1) {
+      return '1 jour';
+    }
+
+    return `${joursAffiches}/${totalJours} jours`;
   }
 }

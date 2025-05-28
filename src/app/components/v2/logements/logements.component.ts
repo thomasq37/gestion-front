@@ -54,6 +54,9 @@ export class LogementsComponent implements OnInit {
   getTarifActuel(periodesDeLocation: PeriodeDeLocationDTO[]): string {
     return FunctionsUtil.getTarifActuel(periodesDeLocation);
   }
+  isPeriodeEnCoursJournaliere(periodesDeLocation: PeriodeDeLocationDTO[]): boolean {
+    return FunctionsUtil.isPeriodeEnCoursJournaliere(periodesDeLocation);
+  }
 
   creerLogement() {
     this.logementService.creerLogement().then(r =>
@@ -64,4 +67,9 @@ export class LogementsComponent implements OnInit {
     event.preventDefault();
     this.statistiquesIsVisible = !this.statistiquesIsVisible
   }
+
+  getTexteDureeSejour(logement: any): string | null {
+    return FunctionsUtil.getDureeEtJoursRestantsJournaliere(logement.periodesDeLocation);
+  }
+
 }

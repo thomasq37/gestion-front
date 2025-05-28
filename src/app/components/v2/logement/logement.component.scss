@@ -16,11 +16,20 @@
       padding: 0;
     }
 
-    .prix-loyer-actuelle{
-      color: #0eb7fc;
-      font-weight: bold;
-      font-size: 1.9rem;
+    .container-prix-temps{
+      display: block;
+      gap: .5rem;
       margin: 1.5rem 0 !important;
+      .prix-loyer-actuelle{
+        color: #0eb7fc;
+        font-weight: bold;
+        font-size: 1.9rem;
+
+      }
+      span{
+        color: #359930;
+        font-weight: bold;
+      }
     }
     .details-logement{
       display: flex;

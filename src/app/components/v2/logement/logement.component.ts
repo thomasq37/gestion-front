@@ -110,4 +110,7 @@ export class LogementComponent implements OnInit {
     this.isModalVisible = false;
     this.supprimerLogement()
   }
+  getTexteDureeSejour(logement: any): string | null {
+    return FunctionsUtil.getDureeEtJoursRestantsJournaliere(logement.periodesDeLocation);
+  }
 }

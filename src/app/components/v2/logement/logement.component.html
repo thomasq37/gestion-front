@@ -16,7 +16,16 @@
     <div class="container" *ngIf="logement">
       <div class="logement-infos" *ngIf="logement.adresse && logement.caracteristiques">
         <h2>{{logement.caracteristiques.typeDeLogement | titlecase}} {{logement.adresse.numero}} {{logement.adresse.voie}}</h2>
-        <p class="prix-loyer-actuelle">{{getTarifActuel(logement.periodesDeLocation)}}</p>
+        <div class="container-prix-temps">
+          <p class="prix-loyer-actuelle">{{getTarifActuel(logement.periodesDeLocation)}}</p>
+          <span
+            *ngIf="getTexteDureeSejour(logement) as texte"
+            class="temps-location"
+          >
+            {{ texte }}
+          </span>
+        </div>
+
         <div class="details-logement">
           <div>{{logement.caracteristiques.nombreDePieces}} pièces</div>
           <div>{{logement.caracteristiques.surfaceLogement }} m²</div>

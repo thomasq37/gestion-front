@@ -37,11 +37,21 @@
               .type-logement-nouveau{
                 color: grey;
               }
-              .prix-loyer-actuelle{
-                color: #0eb7fc;
-                font-weight: bold;
-                font-size: 1.9rem;
+              .container-prix-temps{
+                position: relative;
+                .prix-loyer-actuelle{
+                  color: #0eb7fc;
+                  font-weight: bold;
+                  font-size: 1.9rem;
+                }
+                .temps-location{
+                  position: absolute;
+                  font-weight: bold;
+                  color: #359930;
+
+                }
               }
+
             }
             .ville-logement{
               color: #676767;
