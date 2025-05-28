@@ -73,10 +73,11 @@ export class CaracteristiquesModifierComponent {
     this.loading = true
     const caracteristiques: CaracteristiquesDTO = this.caracteristiquesForm.value as CaracteristiquesDTO;
     try {
-      await this.caracteristiquesService.modifierCaracteristiquesPourLogement(this.logementMasqueId, caracteristiques);
+      await this.caracteristiquesService.modifierEtMettreAJourCache(this.logementMasqueId!, caracteristiques);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 2 },
       });
+
     } catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
@@ -92,15 +93,17 @@ export class CaracteristiquesModifierComponent {
   }
 
 
-  supprimerCaracteristiquesPourLogement() {
-    this.caracteristiquesService.supprimerCaracteristiquesPourLogement(this.logementMasqueId).then(() => {
-      this.router.navigate([`/logements/${this.logementMasqueId}`], {
+  async supprimerCaracteristiquesPourLogement(): Promise<void> {
+    try {
+      await this.caracteristiquesService.supprimerEtMettreAJourCache(this.logementMasqueId!);
+      await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 2 },
       });
-    }).catch(error => {
-      console.error('Erreur lors de la suppression des caracteristiques:', error);
-    });
+    } catch (error) {
+      console.error('Erreur lors de la suppression des caractéristiques:', error);
+    }
   }
+
   auChargementDuFichier(event: Event): void {
     this.nomFichier = CaracteristiquesFormUtil.auChargementDuFichier(event, this.caracteristiquesForm, 'dpeFichier');
   }

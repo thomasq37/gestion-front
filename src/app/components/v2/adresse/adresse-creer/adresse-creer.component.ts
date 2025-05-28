@@ -39,7 +39,7 @@ export class AdresseCreerComponent {
     this.loading = true
     const adresse: AdresseDTO = this.adresseForm.value as AdresseDTO;
     try {
-      await this.adresseService.creerAdressePourLogement(this.logementMasqueId, adresse);
+      await this.adresseService.creerEtMettreAJourCache(this.logementMasqueId!, adresse);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 1 },
       });

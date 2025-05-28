@@ -51,7 +51,7 @@ export class CaracteristiquesCreerComponent {
     this.loading = true
     const caracteristiques: CaracteristiquesDTO = this.caracteristiquesForm.value as CaracteristiquesDTO;
     try {
-      await this.caracteristiquesService.creerCaracteristiquesPourLogement(this.logementMasqueId, caracteristiques);
+      await this.caracteristiquesService.creerEtMettreAJourCache(this.logementMasqueId!, caracteristiques);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 2 },
       });

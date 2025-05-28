@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { PeriodeDeLocationService } from "../../../../services/v2/periode-de-location/periode-de-location.service";
@@ -10,7 +10,7 @@ import { TypeDeLocation } from "../../../../models/v2/enumeration/TypeDeLocation
   templateUrl: './periode-location-modifier.component.html',
   styleUrls: ['./periode-location-modifier.component.scss']
 })
-export class PeriodeLocationModifierComponent {
+export class PeriodeLocationModifierComponent implements OnInit{
   periodeDeLocationForm: FormGroup;
   error: string | null = null;
   logementMasqueId: string | null = null;
@@ -84,15 +84,21 @@ export class PeriodeLocationModifierComponent {
     }
   }
 
-  supprimerPeriodeDeLocationPourLogement() {
-    this.periodeDeLocationService.supprimerPeriodeDeLocationPourLogement(this.logementMasqueId!, this.periodeDeLocationMasqueId!).then(() => {
-      this.router.navigate([`/logements/${this.logementMasqueId}`], {
+  async supprimerPeriodeDeLocationPourLogement(): Promise<void> {
+    try {
+      await this.periodeDeLocationService.supprimerEtMettreAJourCache(
+        this.logementMasqueId!,
+        this.periodeDeLocationMasqueId!
+      );
+
+      await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 4 },
       });
-    }).catch(error => {
+    } catch (error) {
       console.error('Erreur lors de la suppression de la période de location:', error);
-    });
+    }
   }
+
 
   openModal(): void {
     this.isModalVisible = true;

@@ -74,4 +74,10 @@ export class PeriodeDeLocationService {
     this.logementService.mettreAJourPeriodeDansLogement(logementMasqueId, created);
     return created;
   }
+
+  async supprimerEtMettreAJourCache(logementMasqueId: string, periodeMasqueId: string): Promise<void> {
+    await this.supprimerPeriodeDeLocationPourLogement(logementMasqueId, periodeMasqueId);
+    this.logementService.supprimerPeriodeDansLogement(logementMasqueId, periodeMasqueId);
+  }
+
 }

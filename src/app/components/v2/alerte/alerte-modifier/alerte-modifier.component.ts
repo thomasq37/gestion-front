@@ -60,7 +60,7 @@ export class AlerteModifierComponent {
     try {
       await this.alerteService.modifierAlertePourLogement(this.logementMasqueId, this.alerteMasqueId, alerte);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 6 },
+        queryParams: { tab: 7 },
       });
     } catch (error: any) {
       console.warn(error);

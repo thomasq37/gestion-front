@@ -61,7 +61,7 @@ export class AdresseModifierComponent implements OnInit {
     this.loading = true;
     const adresse: AdresseDTO = this.adresseForm.value as AdresseDTO;
     try {
-      await this.adresseService.modifierAdressePourLogement(this.logementMasqueId, adresse);
+      await this.adresseService.modifierEtMettreAJourCache(this.logementMasqueId!, adresse);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: {tab: 1},
       });
@@ -72,14 +72,17 @@ export class AdresseModifierComponent implements OnInit {
       this.loading = false;
     }
   }
-
-  supprimerAdressePourLogement() {
-    this.adresseService.supprimerAdressePourLogement(this.logementMasqueId).then(() => {
-      this.router.navigate([`/logements/${this.logementMasqueId}`]);
-    }).catch(error => {
+  async supprimerAdressePourLogement(): Promise<void> {
+    try {
+      await this.adresseService.supprimerEtMettreAJourCache(this.logementMasqueId!);
+      await this.router.navigate([`/logements/${this.logementMasqueId}`], {
+        queryParams: { tab: 1 },
+      });
+    } catch (error) {
       console.error('Erreur lors de la suppression de l\'adresse:', error);
-    });
+    }
   }
+
   openModal(): void {
     this.isModalVisible = true;
   }

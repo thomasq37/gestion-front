@@ -9,8 +9,13 @@ export class FunctionsUtil {
       const fin = periode.dateDeFin ? new Date(periode.dateDeFin) : null;
       return debut <= now && (!fin || now <= fin);
     });
+    let typeLocation = '';
+    if(periodeEnCours){
+      typeLocation = periodeEnCours.typeDeLocation === 'JOURNALIERE' ? 'le séjour' : '/mois'
+    }
+
     return periodeEnCours
-      ? `${periodeEnCours.tarif.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })} /mois`
+      ? `${periodeEnCours.tarif.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })} ${typeLocation !== '' ? typeLocation : ''}`
       : 'Non loué';
   }
 

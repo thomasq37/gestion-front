@@ -5,6 +5,8 @@ import { fetchWithHandling } from "../http-helpers";
 import { SuccessResponse } from "../../../models/v2/exception/SuccessResponse.model";
 import { LogementVueEnsembleDTO } from "../../../models/v2/entites/Logement/LogementVueEnsembleDTO.model";
 import {PeriodeDeLocationDTO} from "../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
+import {CaracteristiquesDTO} from "../../../models/v2/entites/Caracteristiques/CaracteristiquesDTO.model";
+import {AdresseDTO} from "../../../models/v2/entites/Adresse/AdresseDTO.model";
 
 @Injectable({
   providedIn: 'root',
@@ -103,6 +105,38 @@ export class LogementService {
     } else {
       logement.periodesDeLocation.push(periode);
     }
+  }
+
+  supprimerPeriodeDansLogement(logementMasqueId: string, periodeMasqueId: string): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement || !logement.periodesDeLocation) return;
+
+    logement.periodesDeLocation = logement.periodesDeLocation.filter(
+      p => p.masqueId !== periodeMasqueId
+    );
+  }
+
+  mettreAJourCaracteristiquesDansLogement(logementMasqueId: string, dto: CaracteristiquesDTO): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement) return;
+    logement.caracteristiques = dto;
+  }
+
+  supprimerCaracteristiquesDansLogement(logementMasqueId: string): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement) return;
+    logement.caracteristiques = undefined;
+  }
+  mettreAJourAdresseDansLogement(logementMasqueId: string, dto: AdresseDTO): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement) return;
+    logement.adresse = dto;
+  }
+
+  supprimerAdresseDansLogement(logementMasqueId: string): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement) return;
+    logement.adresse = undefined;
   }
 
 
