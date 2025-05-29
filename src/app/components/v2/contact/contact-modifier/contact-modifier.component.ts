@@ -69,7 +69,7 @@ export class ContactModifierComponent implements OnInit {
     contact.telephone = this.contactForm.value.telephone?.e164Number
 
     try {
-      await this.contactService.modifierContactPourLogement(this.logementMasqueId, this.contactMasqueId, contact);
+      await this.contactService.modifierEtMettreAJourCache(this.logementMasqueId, this.contactMasqueId, contact);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 6 },
       });
@@ -83,8 +83,7 @@ export class ContactModifierComponent implements OnInit {
   }
 
   supprimerContactPourLogement() {
-    this.contactService.supprimerContactPourLogement(this.logementMasqueId, this.contactMasqueId).then(() => {
-      this.router.navigate([`/logements/${this.logementMasqueId}`], {
+    this.contactService.supprimerEtMettreAJourCache(this.logementMasqueId, this.contactMasqueId).then(() => {      this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 6 },
       });
     }).catch(error => {

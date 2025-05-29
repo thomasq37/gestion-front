@@ -34,7 +34,7 @@ export class AlerteCreerComponent {
     this.loading = true
     const alerte: AlerteDTO = this.alerteForm.value as AlerteDTO;
     try {
-      await this.alerteService.creerAlertePourLogement(this.logementMasqueId, alerte);
+      await this.alerteService.creerEtMettreAJourCache(this.logementMasqueId!, alerte);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 7 },
       });

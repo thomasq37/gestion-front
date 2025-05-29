@@ -3,13 +3,14 @@ import { environment } from '../../../../environments/environment';
 import { fetchWithHandling } from '../http-helpers';
 import { SuccessResponse } from '../../../models/v2/exception/SuccessResponse.model';
 import {DocumentDTO} from "../../../models/v2/entites/Document/DocumentDTO.model";
+import {LogementService} from "../logement/logement.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class DocumentService {
   private apiUrl = `${environment.apiUrl}/logements`;
-
+  constructor(private logementService: LogementService) {}
   /**
    * Liste tous les documents associés à un logement donné.
    */
@@ -95,4 +96,31 @@ export class DocumentService {
       }
     );
   }
+
+  async ajouterEtMettreAJourCache(
+    logementMasqueId: string,
+    documentDTO: DocumentDTO
+  ): Promise<DocumentDTO> {
+    const created = await this.ajouterDocument(logementMasqueId, documentDTO);
+    this.logementService.mettreAJourDocumentDansLogement(logementMasqueId, created);
+    return created;
+  }
+
+  async associerEtMettreAJourCache(
+    logementMasqueId: string,
+    documentMasqueId: string
+  ): Promise<void> {
+    await this.associerDocumentExistant(logementMasqueId, documentMasqueId);
+    const doc = await this.obtenirDocument(documentMasqueId);
+    this.logementService.mettreAJourDocumentDansLogement(logementMasqueId, doc);
+  }
+
+  async supprimerEtMettreAJourCache(
+    logementMasqueId: string,
+    documentMasqueId: string
+  ): Promise<void> {
+    await this.supprimerDocument(logementMasqueId, documentMasqueId);
+    this.logementService.supprimerDocumentDansLogement(logementMasqueId, documentMasqueId);
+  }
+
 }

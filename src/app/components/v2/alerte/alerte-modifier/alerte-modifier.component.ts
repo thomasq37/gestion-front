@@ -58,7 +58,7 @@ export class AlerteModifierComponent {
 
     const alerte: AlerteDTO = this.alerteForm.value as AlerteDTO;
     try {
-      await this.alerteService.modifierAlertePourLogement(this.logementMasqueId, this.alerteMasqueId, alerte);
+      await this.alerteService.modifierEtMettreAJourCache(this.logementMasqueId!, this.alerteMasqueId!, alerte);
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 7 },
       });
@@ -72,7 +72,7 @@ export class AlerteModifierComponent {
   }
 
   supprimerAlertePourLogement() {
-    this.alerteService.supprimerAlertePourLogement(this.logementMasqueId, this.alerteMasqueId).then(() => {
+    this.alerteService.supprimerEtMettreAJourCache(this.logementMasqueId!, this.alerteMasqueId!).then(() => {
       this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 7 },
       });

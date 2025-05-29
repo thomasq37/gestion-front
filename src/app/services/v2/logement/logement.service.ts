@@ -7,6 +7,9 @@ import { LogementVueEnsembleDTO } from "../../../models/v2/entites/Logement/Loge
 import {PeriodeDeLocationDTO} from "../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model";
 import {CaracteristiquesDTO} from "../../../models/v2/entites/Caracteristiques/CaracteristiquesDTO.model";
 import {AdresseDTO} from "../../../models/v2/entites/Adresse/AdresseDTO.model";
+import {AlerteDTO} from "../../../models/v2/entites/Alerte/AlerteDTO.model";
+import {DocumentDTO} from "../../../models/v2/entites/Document/DocumentDTO.model";
+import {ContactDTO} from "../../../models/v2/entites/Contact/ContactDTO.model";
 
 @Injectable({
   providedIn: 'root',
@@ -137,6 +140,67 @@ export class LogementService {
     const logement = this.logementCache.get(logementMasqueId);
     if (!logement) return;
     logement.adresse = undefined;
+  }
+
+  mettreAJourAlerteDansLogement(logementMasqueId: string, alerte: AlerteDTO): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement || !logement.alertes) return;
+
+    const index = logement.alertes.findIndex(a => a.masqueId === alerte.masqueId);
+    if (index !== -1) {
+      logement.alertes[index] = alerte;
+    } else {
+      logement.alertes.push(alerte);
+    }
+  }
+
+  supprimerAlerteDansLogement(logementMasqueId: string, alerteMasqueId: string): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement || !logement.alertes) return;
+
+    logement.alertes = logement.alertes.filter(a => a.masqueId !== alerteMasqueId);
+  }
+
+  mettreAJourDocumentDansLogement(logementMasqueId: string, document: DocumentDTO): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement) return;
+
+    if (!logement.documents) logement.documents = [];
+
+    const index = logement.documents.findIndex(d => d.masqueId === document.masqueId);
+    if (index !== -1) {
+      logement.documents[index] = document;
+    } else {
+      logement.documents.push(document);
+    }
+  }
+
+  supprimerDocumentDansLogement(logementMasqueId: string, documentMasqueId: string): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement || !logement.documents) return;
+
+    logement.documents = logement.documents.filter(d => d.masqueId !== documentMasqueId);
+  }
+
+  mettreAJourContactDansLogement(logementMasqueId: string, contact: ContactDTO): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement) return;
+
+    if (!logement.contacts) logement.contacts = [];
+
+    const index = logement.contacts.findIndex(c => c.masqueId === contact.masqueId);
+    if (index !== -1) {
+      logement.contacts[index] = contact;
+    } else {
+      logement.contacts.push(contact);
+    }
+  }
+
+  supprimerContactDansLogement(logementMasqueId: string, contactMasqueId: string): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement || !logement.contacts) return;
+
+    logement.contacts = logement.contacts.filter(c => c.masqueId !== contactMasqueId);
   }
 
 

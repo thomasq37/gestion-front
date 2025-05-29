@@ -85,12 +85,12 @@ export class DocumentCreerComponent implements OnInit {
           nom: this.selectedFile.name,
           fichier: await this.convertFileToBase64(this.selectedFile),
         };
-        await this.documentService.ajouterDocument(this.logementMasqueId, documentDTO);
+        await this.documentService.ajouterEtMettreAJourCache(this.logementMasqueId!, documentDTO);
       } else {
         // Sinon, vérifier si un document existant est sélectionné
         const documentExistant = this.documentForm.get('documentExistant')?.value;
         if (documentExistant) {
-          await this.documentService.associerDocumentExistant(this.logementMasqueId, documentExistant);
+          await this.documentService.associerEtMettreAJourCache(this.logementMasqueId!, documentExistant);
         } else {
           throw new Error('Veuillez sélectionner un fichier local ou un document existant.');
         }

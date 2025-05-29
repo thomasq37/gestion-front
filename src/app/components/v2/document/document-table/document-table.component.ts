@@ -54,16 +54,22 @@ export class DocumentTableComponent {
     URL.revokeObjectURL(url);
   }
   supprimerDocument() {
-    this.documentService.supprimerDocument(this.logementMasqueId, this.idDocumentToDelete).then(() => {
+    this.documentService.supprimerEtMettreAJourCache(this.logementMasqueId, this.idDocumentToDelete).then(() => {
+      // Supprime le document localement (affichage dans le tableau)
+      const indexToDelete = this.documents.findIndex(doc => doc.masqueId === this.idDocumentToDelete);
+      if (indexToDelete !== -1) {
+        this.documents.splice(indexToDelete, 1);
+      }
+
+      // Navigation optionnelle pour conserver l'URL propre (facultatif si tu restes sur la page)
       this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 8 },
       });
-      const indexToDelete = this.documents.findIndex(doc => doc.masqueId === this.idDocumentToDelete)
-      this.documents.splice(indexToDelete, 1);
     }).catch(error => {
-      console.error('Erreur lors de la suppression de le document:', error);
+      console.error('Erreur lors de la suppression du document :', error);
     });
   }
+
   openModal(masqueId: string): void {
     this.isModalVisible = true;
     this.idDocumentToDelete = masqueId;
