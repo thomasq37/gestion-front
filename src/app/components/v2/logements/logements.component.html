@@ -11,7 +11,7 @@
       <ul *ngIf="logements.length > 0">
         <li *ngFor="let logement of logements">
           <app-photo-caroussel [logementId]="logement.masqueId" [photos]="logement.photos" [onItem]="false"></app-photo-caroussel>
-          <a href="/logements/{{logement.masqueId}}">
+          <div class="logement" (click)="naviguerALogement(logement.masqueId)">
             <div class="logement-infos" *ngIf="logement.adresse && logement.caracteristiques">
               <div class="header-logement-infos">
                 <p class="type-logement">{{ logement.caracteristiques.typeDeLogement | titlecase }}</p>
@@ -35,7 +35,7 @@
                 <p class="type-logement-nouveau">Nouveau logement</p>
               </div>
             </div>
-          </a>
+          </div>
         </li>
       </ul>
       <button (click)="creerLogement()" class="btn-ajout-logement" *ngIf="!error && !loading">Ajouter un logement</button>

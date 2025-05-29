@@ -22,6 +22,7 @@ export class LogementService {
 
   // --- Cache local en mémoire ---
   private logementCache: Map<string, LogementDTO> = new Map();
+  private logementsVueEnsembleCache: LogementVueEnsembleDTO[] | null = null;
 
   /**
    * Crée un logement (POST)
@@ -44,11 +45,21 @@ export class LogementService {
   /**
    * Liste des logements en vue d’ensemble (GET)
    */
-  async listerLogementsVueEnsemble(): Promise<LogementVueEnsembleDTO[]> {
-    return fetchWithHandling<LogementDTO[]>(`${this.apiUrl}/lister/vue-ensemble`, {
+  async listerLogementsVueEnsemble(forceRefresh = false): Promise<LogementVueEnsembleDTO[]> {
+    if (!forceRefresh && this.logementsVueEnsembleCache) {
+      console.log("vue d'ensemble logements récupérée du cache");
+      return this.logementsVueEnsembleCache;
+    }
+
+    const logements = await fetchWithHandling<LogementVueEnsembleDTO[]>(`${this.apiUrl}/lister/vue-ensemble`, {
       method: 'GET',
     });
+
+    console.log("vue d'ensemble logements mise en cache");
+    this.logementsVueEnsembleCache = logements;
+    return logements;
   }
+
 
   /**
    * Récupère un logement en cache si disponible, sinon via l'API (GET)

@@ -77,8 +77,14 @@
     </div>
     <button type="button" class="btn-supprimer-formulaire-basique" (click)="openModal()">Supprimer l'adresse</button>
     <app-fil-ariane
-      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=1', label:'Sythèse logement'}"
-      [ongletActuel]="'Modifer l\'adresse'"></app-fil-ariane>
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 1 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Modifier l\'adresse'">
+    </app-fil-ariane>
+
   </form>
 </section>
 <app-modale-confirmation

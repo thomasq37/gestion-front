@@ -32,8 +32,14 @@
     </div>
     <button type="button" class="btn-supprimer-formulaire-basique" (click)="openModal()">Supprimer l'alerte</button>
     <app-fil-ariane
-      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=7', label:'Sythèse logement'}"
-      [ongletActuel]="'Modifer une alerte'"></app-fil-ariane>
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 7 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Modifier une alerte'">
+    </app-fil-ariane>
+
   </form>
 </section>
 <app-modale-confirmation

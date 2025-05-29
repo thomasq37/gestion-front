@@ -122,7 +122,13 @@
       </button>
     </div>
     <app-fil-ariane
-      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=2', label:'Sythèse logement'}"
-      [ongletActuel]="'Créer les caracteristiques'"></app-fil-ariane>
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 2 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Créer les caractéristiques'">
+    </app-fil-ariane>
+
   </form>
 </section>

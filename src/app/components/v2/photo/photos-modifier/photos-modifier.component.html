@@ -43,8 +43,14 @@
       Enregistrer les modifications
     </button>
     <app-fil-ariane
-      [ongletRetour]="{url: '/logements/'+ logementMasqueId, label:'Sythèse logement'}"
-      [ongletActuel]="'Modifier les photos'"></app-fil-ariane>
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 1 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Modifier les photos'">
+    </app-fil-ariane>
+
   </div>
 </section>
 

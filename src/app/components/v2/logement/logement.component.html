@@ -5,8 +5,13 @@
     <div class="container-fil-ariane">
       <app-fil-ariane
         *ngIf="logement"
-        [ongletRetour]="{url: '/logements', label:'Vue d\'ensemble'}"
-        [ongletActuel]="'Synthèse logement'"></app-fil-ariane>
+        [ongletRetour]="{
+    url: ['/logements'],
+    label: 'Vue d\'ensemble'
+  }"
+        [ongletActuel]="'Synthèse logement'">
+      </app-fil-ariane>
+
     </div>
     <app-photo-caroussel
       *ngIf="logement"

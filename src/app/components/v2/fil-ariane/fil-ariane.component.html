@@ -1,5 +1,7 @@
 <div class="fil-ariane">
-  <a href="{{ongletRetour.url}}">{{ ongletRetour.label }}</a>
+  <a [routerLink]="ongletRetour.url" [queryParams]="ongletRetour.queryParams">
+    {{ ongletRetour.label }}
+  </a>
   <span class="arrow-next">></span>
   <span class="onglet-actuel">{{ ongletActuel }}</span>
 </div>

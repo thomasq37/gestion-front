@@ -68,8 +68,14 @@
     </div>
     <button type="button" class="btn-supprimer-formulaire-basique" (click)="openModal()">Supprimer le locataire</button>
     <app-fil-ariane
-      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=5', label:'Sythèse logement'}"
-      [ongletActuel]="'Modifier un locataire'"></app-fil-ariane>
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 5 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Modifier un locataire'">
+    </app-fil-ariane>
+
   </form>
 
 </section>

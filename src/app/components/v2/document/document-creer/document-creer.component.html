@@ -40,8 +40,13 @@
       </button>
     </div>
     <app-fil-ariane
-      [ongletRetour]="{ url: '/logements/' + logementMasqueId + '?tab=7', label: 'Synthèse logement' }"
-      [ongletActuel]="'Ajouter un document'"
-    ></app-fil-ariane>
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 7 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Ajouter un document'">
+    </app-fil-ariane>
+
   </form>
 </section>

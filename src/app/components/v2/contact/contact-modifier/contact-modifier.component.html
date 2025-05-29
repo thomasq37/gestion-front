@@ -55,8 +55,14 @@
     </div>
     <button type="button" class="btn-supprimer-formulaire-basique" (click)="openModal()">Supprimer le contact</button>
     <app-fil-ariane
-      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=6', label:'Sythèse logement'}"
-      [ongletActuel]="'Modifer un contact'"></app-fil-ariane>
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 6 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Modifier un contact'">
+    </app-fil-ariane>
+
   </form>
 </section>
 <app-modale-confirmation

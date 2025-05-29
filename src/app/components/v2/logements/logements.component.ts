@@ -72,4 +72,8 @@ export class LogementsComponent implements OnInit {
     return FunctionsUtil.getDureeEtJoursRestantsJournaliere(logement.periodesDeLocation);
   }
 
+  naviguerALogement(logementId: string) {
+    this.router.navigate(['/logements', logementId]);
+
+  }
 }

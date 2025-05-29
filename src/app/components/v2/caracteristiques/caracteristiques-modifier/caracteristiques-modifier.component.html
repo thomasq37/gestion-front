@@ -122,8 +122,14 @@
       <button type="button" class="btn-supprimer-formulaire-basique" (click)="openModal()">Supprimer les caractéristiques</button>
     </div>
     <app-fil-ariane
-      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=2', label:'Sythèse logement'}"
-      [ongletActuel]="'Modifier les caracteristiques'"></app-fil-ariane>
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 2 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Modifier les caractéristiques'">
+    </app-fil-ariane>
+
   </form>
 </section>
 <app-modale-confirmation

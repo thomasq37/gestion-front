@@ -43,7 +43,13 @@
       </button>
     </div>
     <app-fil-ariane
-      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=4', label:'Sythèse logement'}"
-      [ongletActuel]="'Créer la période de location'"></app-fil-ariane>
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 4 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Créer la période de location'">
+    </app-fil-ariane>
+
   </form>
 </section>

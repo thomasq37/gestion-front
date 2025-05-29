@@ -66,8 +66,14 @@
      </button>
    </div>
     <app-fil-ariane
-      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=5', label:'Sythèse logement'}"
-      [ongletActuel]="'Ajouter un locataire'"></app-fil-ariane>
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 5 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Ajouter un locataire'">
+    </app-fil-ariane>
+
   </form>
 
 </section>

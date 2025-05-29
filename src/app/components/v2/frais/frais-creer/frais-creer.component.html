@@ -57,7 +57,13 @@
       </button>
     </div>
     <app-fil-ariane
-      [ongletRetour]="{url: '/logements/'+ logementMasqueId + '?tab=3', label:'Sythèse logement'}"
-      [ongletActuel]="'Créer un frais'"></app-fil-ariane>
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 3 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Créer un frais'">
+    </app-fil-ariane>
+
   </form>
 </section>
