@@ -124,23 +124,13 @@ export class PhotosModifierComponent implements OnInit {
 
         switch (action) {
           case 'new':
-            await this.photoService.creerPhotoPourLogement(
-              this.logementMasqueId!,
-              photo
-            );
+            await this.photoService.creerEtMettreAJourCache(this.logementMasqueId!, photo);
             break;
           case 'deleted':
-            await this.photoService.supprimerPhotoPourLogement(
-              this.logementMasqueId!,
-              photo.masqueId!
-            );
+            await this.photoService.supprimerEtMettreAJourCache(this.logementMasqueId!, photo.masqueId!);
             break;
           case 'updated':
-            await this.photoService.modifierPhotoPourLogement(
-              this.logementMasqueId!,
-              photo.masqueId!,
-              photo
-            );
+            await this.photoService.modifierEtMettreAJourCache(this.logementMasqueId!, photo.masqueId!, photo);
             break;
         }
       }

@@ -62,7 +62,11 @@ export class LocataireCreerComponent implements OnInit {
     locataire.telephone = this.locataireForm.value.telephone?.e164Number
 
     try {
-      await this.locataireService.creerLocatairePourPeriodeDeLocation(this.logementMasqueId, this.locataireForm.get('periodeDeLocation').value, locataire);
+      await this.locataireService.creerEtMettreAJourCache(
+        this.logementMasqueId,
+        this.locataireForm.get('periodeDeLocation')?.value,
+        locataire
+      );
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 5 },
       });

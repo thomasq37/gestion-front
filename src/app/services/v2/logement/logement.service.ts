@@ -10,6 +10,8 @@ import {AdresseDTO} from "../../../models/v2/entites/Adresse/AdresseDTO.model";
 import {AlerteDTO} from "../../../models/v2/entites/Alerte/AlerteDTO.model";
 import {DocumentDTO} from "../../../models/v2/entites/Document/DocumentDTO.model";
 import {ContactDTO} from "../../../models/v2/entites/Contact/ContactDTO.model";
+import {LocataireDTO} from "../../../models/v2/entites/Locataire/LocataireDTO.model";
+import {PhotoDTO} from "../../../models/v2/entites/Photo/PhotoDTO.model";
 
 @Injectable({
   providedIn: 'root',
@@ -203,6 +205,66 @@ export class LogementService {
     logement.contacts = logement.contacts.filter(c => c.masqueId !== contactMasqueId);
   }
 
+  mettreAJourLocataireDansLogement(logementMasqueId: string, periodeMasqueId: string, locataire: LocataireDTO): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement || !logement.periodesDeLocation) return;
+
+    const periode = logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId);
+    if (!periode) return;
+
+    if (!periode.locataires) {
+      periode.locataires = [];
+    }
+
+    const index = periode.locataires.findIndex(l => l.masqueId === locataire.masqueId);
+    if (index !== -1) {
+      periode.locataires[index] = locataire;
+    } else {
+      periode.locataires.push(locataire);
+    }
+  }
+  supprimerLocataireDansLogement(logementMasqueId: string, periodeMasqueId: string, locataireMasqueId: string): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement || !logement.periodesDeLocation) return;
+
+    const periode = logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId);
+    if (!periode || !periode.locataires) return;
+
+    periode.locataires = periode.locataires.filter(l => l.masqueId !== locataireMasqueId);
+  }
+  mettreAJourPhotoDansLogement(logementMasqueId: string, photo: PhotoDTO): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement) return;
+
+    if (!logement.photos) logement.photos = [];
+
+    // Si la photo à mettre à jour est principale, enlever le flag aux autres
+    if (photo.isPrincipal) {
+      logement.photos.forEach(p => {
+        if (p.masqueId !== photo.masqueId) {
+          p.isPrincipal = false;
+        }
+      });
+    }
+
+    const index = logement.photos.findIndex(p => p.masqueId === photo.masqueId);
+    if (index !== -1) {
+      logement.photos[index] = photo;
+    } else {
+      logement.photos.push(photo);
+    }
+
+    // Toujours trier après mise à jour
+    logement.photos.sort((a, b) => (b.isPrincipal ? 1 : 0) - (a.isPrincipal ? 1 : 0));
+  }
+
+
+  supprimerPhotoDansLogement(logementMasqueId: string, photoMasqueId: string): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement || !logement.photos) return;
+
+    logement.photos = logement.photos.filter(p => p.masqueId !== photoMasqueId);
+  }
 
   getLogementDepuisCache(logementMasqueId: string): LogementDTO | undefined {
     return this.logementCache.get(logementMasqueId);

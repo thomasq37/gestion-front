@@ -93,7 +93,12 @@ export class LocataireModifierComponent implements OnInit {
     const locataire: LocataireDTO = this.locataireForm.value as LocataireDTO;
     locataire.telephone = this.locataireForm.value.telephone?.e164Number
     try {
-      await this.locataireService.modifierLocatairePourPeriodeDeLocation(this.logementMasqueId, this.locataireForm.get('periodeDeLocation').value, this.locataireActuel.masqueId, locataire);
+      await this.locataireService.modifierEtMettreAJourCache(
+        this.logementMasqueId,
+        this.locataireForm.get('periodeDeLocation')?.value,
+        this.locataireActuel.masqueId,
+        locataire
+      );
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 5 },
       });
@@ -106,7 +111,11 @@ export class LocataireModifierComponent implements OnInit {
     }
   }
   supprimerLocatairePourPeriodeDeLocation() {
-    this.locataireService.supprimerLocatairePourPeriodeDeLocation(this.logementMasqueId, this.periodeDeLocationActuel.masqueId, this.locataireMasqueId).then(() => {
+    this.locataireService.supprimerEtMettreAJourCache(
+      this.logementMasqueId,
+      this.periodeDeLocationActuel.masqueId,
+      this.locataireMasqueId
+    ).then(() => {
       this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: { tab: 5 },
       });
