@@ -310,6 +310,9 @@ export class LogementService {
       liste.splice(index, 1);
     }
   }
+  clearVueEnsembleCache(): void {
+    this.logementsVueEnsembleCache = null;
+  }
 
   getLogementDepuisCache(logementMasqueId: string): LogementDTO | undefined {
     return this.logementCache.get(logementMasqueId);
