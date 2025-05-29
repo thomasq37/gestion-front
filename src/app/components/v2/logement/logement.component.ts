@@ -29,20 +29,35 @@ export class LogementComponent implements OnInit {
     private logementService: LogementService) {}
 
   ngOnInit(): void {
-
     const logementMasqueId = this.route.snapshot.paramMap.get('logementMasqueId');
     if (logementMasqueId) {
-      this.obtenirLogement(logementMasqueId);
+      this.obtenirLogement(logementMasqueId).then(() => {
+        // Une fois que le logement est chargé, on traite les queryParams
+        const periodeMasqueId = this.route.snapshot.queryParamMap.get('periodeMasqueId');
+        if (periodeMasqueId && this.logement?.periodesDeLocation?.length > 0) {
+          const periode = this.logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId);
+          if (periode) {
+            this.periodeActuelle = periode;
+          }
+          this.router.navigate([], {
+            queryParams: { periodeMasqueId: null },
+            queryParamsHandling: 'merge',
+            replaceUrl: true
+          });
+        }
+      });
     } else {
       this.error = 'Aucun identifiant de logement fourni.';
     }
+
     this.route.queryParams.subscribe(params => {
-      const tabIndex = +params['tab']; // Convertir en nombre
+      const tabIndex = +params['tab'];
       if (!isNaN(tabIndex) && tabIndex >= 0 && tabIndex < this.menuItems.length) {
         this.activeIndex = tabIndex;
       }
     });
   }
+
 
   async obtenirLogement(logementMasqueId: string): Promise<void> {
     this.loading = true;

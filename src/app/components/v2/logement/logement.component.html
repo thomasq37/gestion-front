@@ -72,6 +72,7 @@
           <app-periode-location-table
             [logementMasqueId]="logement.masqueId"
             [periodesDeLocation]="logement.periodesDeLocation"
+            [periodeActuelle]="periodeActuelle"
             (periodeSelectionnee)="onPeriodeSelectionnee($event)">
           </app-periode-location-table>
           <nav class="nav-logement periode-de-location">

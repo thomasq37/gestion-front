@@ -10,9 +10,9 @@ import {Router} from "@angular/router";
 export class PeriodeLocationTableComponent implements OnInit {
   @Input() periodesDeLocation!: PeriodeDeLocationDTO[];
   @Input() logementMasqueId!: string;
+  @Input() periodeActuelle: PeriodeDeLocationDTO | null = null;
   @Output() periodeSelectionnee = new EventEmitter<PeriodeDeLocationDTO>();
   actionsIsVisible: boolean = false;
-
   constructor(private router: Router) {
   }
 
@@ -22,6 +22,9 @@ export class PeriodeLocationTableComponent implements OnInit {
       const dateB = new Date(b.dateDeDebut).getTime();
       return dateB - dateA;
     });
+    if (this.periodeActuelle) {
+      this.actionsIsVisible = true;
+    }
   }
 
   modifierPeriodeDeLocation(logementMasqueId: string, periodeDeLocationMasqueId: string) {
@@ -33,6 +36,9 @@ export class PeriodeLocationTableComponent implements OnInit {
   }
   toggleActions() {
     this.actionsIsVisible = !this.actionsIsVisible;
+    if(!this.actionsIsVisible){
+      this.periodeSelectionnee.emit(null);
+    }
   }
 
   afficherFraisPeriodeDeLocation(periodeDeLocation: PeriodeDeLocationDTO) {

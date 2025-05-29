@@ -96,7 +96,10 @@ export class FraisModifierComponent {
       }
 
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 3 },
+        queryParams: {
+          tab: this.periodeMasqueId ? 4 : 3,
+          ...(this.periodeMasqueId ? { periodeMasqueId: this.periodeMasqueId } : {})
+        }
       });
     } catch (error: any) {
       console.warn(error);
@@ -115,7 +118,12 @@ export class FraisModifierComponent {
           this.fraisMasqueId!
         )
         .then(() => {
-          this.router.navigate([`/logements/${this.logementMasqueId}`], { queryParams: { tab: 3 } });
+          this.router.navigate([`/logements/${this.logementMasqueId}`], {
+            queryParams: {
+              tab: 4,
+              periodeMasqueId: this.periodeMasqueId!
+            }
+          });
         })
         .catch(error => {
           console.error('Erreur lors de la suppression du frais :', error);

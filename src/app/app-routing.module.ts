@@ -33,6 +33,7 @@ import {DocumentCreerComponent} from "./components/v2/document/document-creer/do
 
 
 const routes: Routes = [
+  { path: '', redirectTo: 'logements', pathMatch: 'full' }, // Route par défaut
   { path: 'logements', component: LogementsComponent, canActivate: [AuthGuard] },
   { path: 'connexion', component: ConnexionComponent, canActivate: [AlreadyAuthGuard] },
   { path: 'inscription', component: InscriptionComponent, canActivate: [AlreadyAuthGuard] },

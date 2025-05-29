@@ -65,7 +65,10 @@ export class FraisCreerComponent {
         await this.fraisService.creerFraisPourLogement(this.logementMasqueId!, frais);
       }
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: { tab: 3 },
+        queryParams: {
+          tab: this.periodeMasqueId ? 4 : 3,
+          ...(this.periodeMasqueId ? { periodeMasqueId: this.periodeMasqueId } : {})
+        }
       });
     } catch (error: any) {
       console.warn(error);
