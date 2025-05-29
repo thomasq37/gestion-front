@@ -53,17 +53,11 @@ export class FraisCreerComponent {
     this.loading = true
     const frais: FraisDTO = this.fraisForm.value as FraisDTO;
     try {
-      if (this.periodeMasqueId) {
-        // Créer un frais pour une période de location
-        await this.fraisService.creerFraisPourPeriodeDeLocation(
-          this.logementMasqueId!,
-          this.periodeMasqueId,
-          frais
-        );
-      } else {
-        // Créer un frais pour un logement
-        await this.fraisService.creerFraisPourLogement(this.logementMasqueId!, frais);
-      }
+      await this.fraisService.creerEtMettreAJourCache(
+        this.logementMasqueId!,
+        frais,
+        this.periodeMasqueId ?? undefined
+      );
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: {
           tab: this.periodeMasqueId ? 4 : 3,

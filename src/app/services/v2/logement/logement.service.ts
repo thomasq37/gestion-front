@@ -12,6 +12,7 @@ import {DocumentDTO} from "../../../models/v2/entites/Document/DocumentDTO.model
 import {ContactDTO} from "../../../models/v2/entites/Contact/ContactDTO.model";
 import {LocataireDTO} from "../../../models/v2/entites/Locataire/LocataireDTO.model";
 import {PhotoDTO} from "../../../models/v2/entites/Photo/PhotoDTO.model";
+import {FraisDTO} from "../../../models/v2/entites/Frais/FraisDTO.model";
 
 @Injectable({
   providedIn: 'root',
@@ -264,6 +265,39 @@ export class LogementService {
     if (!logement || !logement.photos) return;
 
     logement.photos = logement.photos.filter(p => p.masqueId !== photoMasqueId);
+  }
+  mettreAJourFraisDansLogement(logementMasqueId: string, frais: FraisDTO, periodeMasqueId?: string): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement) return;
+
+    const liste = periodeMasqueId
+      ? logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId)?.frais
+      : logement.frais;
+
+    if (!liste) return;
+
+    const index = liste.findIndex(f => f.masqueId === frais.masqueId);
+    if (index > -1) {
+      liste[index] = frais;
+    } else {
+      liste.push(frais);
+    }
+  }
+
+  supprimerFraisDansLogement(logementMasqueId: string, fraisMasqueId: string, periodeMasqueId?: string): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement) return;
+
+    const liste = periodeMasqueId
+      ? logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId)?.frais
+      : logement.frais;
+
+    if (!liste) return;
+
+    const index = liste.findIndex(f => f.masqueId === fraisMasqueId);
+    if (index > -1) {
+      liste.splice(index, 1);
+    }
   }
 
   getLogementDepuisCache(logementMasqueId: string): LogementDTO | undefined {

@@ -84,16 +84,13 @@ export class FraisModifierComponent {
     this.loading = true;
     const frais: FraisDTO = this.fraisForm.value as FraisDTO;
     try {
-      if (this.periodeMasqueId) {
-        await this.fraisService.modifierFraisPourPeriodeDeLocation(
-          this.logementMasqueId!,
-          this.periodeMasqueId,
-          this.fraisMasqueId!,
-          frais
-        );
-      } else {
-        await this.fraisService.modifierFraisPourLogement(this.logementMasqueId!, this.fraisMasqueId!, frais);
-      }
+      await this.fraisService.modifierEtMettreAJourCache(
+        this.logementMasqueId!,
+        this.fraisMasqueId!,
+        frais,
+        this.periodeMasqueId ?? undefined
+      );
+
 
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
         queryParams: {
@@ -110,34 +107,19 @@ export class FraisModifierComponent {
   }
 
   supprimerFrais() {
-    if (this.periodeMasqueId) {
-      this.fraisService
-        .supprimerFraisPourPeriodeDeLocation(
-          this.logementMasqueId!,
-          this.periodeMasqueId,
-          this.fraisMasqueId!
-        )
-        .then(() => {
-          this.router.navigate([`/logements/${this.logementMasqueId}`], {
-            queryParams: {
-              tab: 4,
-              periodeMasqueId: this.periodeMasqueId!
-            }
-          });
-        })
-        .catch(error => {
-          console.error('Erreur lors de la suppression du frais :', error);
+    this.fraisService
+      .supprimerEtMettreAJourCache(this.logementMasqueId!, this.fraisMasqueId!, this.periodeMasqueId ?? undefined)
+      .then(() => {
+        this.router.navigate([`/logements/${this.logementMasqueId}`], {
+          queryParams: {
+            tab: this.periodeMasqueId ? 4 : 3,
+            ...(this.periodeMasqueId ? { periodeMasqueId: this.periodeMasqueId } : {})
+          }
         });
-    } else {
-      this.fraisService
-        .supprimerFraisPourLogement(this.logementMasqueId!, this.fraisMasqueId!)
-        .then(() => {
-          this.router.navigate([`/logements/${this.logementMasqueId}`], { queryParams: { tab: 3 } });
-        })
-        .catch(error => {
-          console.error('Erreur lors de la suppression du frais :', error);
-        });
-    }
+      })
+      .catch(error => {
+        console.error('Erreur lors de la suppression du frais :', error);
+      });
   }
   openModal(): void {
     this.isModalVisible = true;
