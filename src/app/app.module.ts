@@ -51,6 +51,7 @@ import { StatistiquesComponent } from './components/v2/statistiques/statistiques
 import { DocumentTableComponent } from './components/v2/document/document-table/document-table.component';
 import { DocumentCreerComponent } from './components/v2/document/document-creer/document-creer.component';
 import {ModaleConfirmationComponent} from "./components/v2/modale-confirmation/modale-confirmation.component";
+import { ReservationsComponent } from './components/v2/airbnb/reservations/reservations.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -97,6 +98,7 @@ registerLocaleData(localeFr, 'fr');
     DocumentTableComponent,
     DocumentCreerComponent,
     ModaleConfirmationComponent,
+    ReservationsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,30 @@
+<div class="champ">
+  <label class="btn-import" for="csvInput">Importer réservations</label>
+  <input type="file" id="csvInput" accept=".csv" (change)="onCsvSelected($event)" hidden>
+</div>
+<div class="modale-overlay" *ngIf="modaleVisible" (click)="fermerModale()">
+  <div class="modale" (click)="$event.stopPropagation()">
+    <button class="close-button" [ngClass]="{ 'avec-loader': chargementEnCours }" (click)="fermerModale()">×</button>
+
+    <!-- Affichage classique -->
+    <div class="modal-body" *ngIf="!chargementEnCours">
+      <img src="assets/img/v2/plus-icon.svg" alt="icône de validation" />
+      <h2>Import</h2>
+      <p>
+        <strong>Total :</strong> {{ resultatsTraitement.total }}<br>
+        <strong>Périodes existantes :</strong> {{ resultatsTraitement.existantes }}<br>
+        <strong>Périodes à créer :</strong> {{ resultatsTraitement.nouvelles }}
+      </p>
+      <div class="modal-footer">
+        <button (click)="validerImport()">Valider</button>
+      </div>
+    </div>
+
+    <!-- Loader CSS -->
+    <div class="modal-body" [ngClass]="{ 'avec-loader': chargementEnCours }" *ngIf="chargementEnCours">
+      <div class="loader"></div>
+    </div>
+  </div>
+</div>
+
+
