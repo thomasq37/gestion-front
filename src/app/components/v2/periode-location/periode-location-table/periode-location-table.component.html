@@ -3,7 +3,12 @@
     <div class="custom-card-header">
       <h2>{{ periodesDeLocation.length === 0 ? 'Aucune période de location trouvé' : 'Périodes de location' }}</h2>
       <div class="actions-boutons">
-        <app-reservations *ngIf="actionsIsVisible" [logementMasqueId]="logementMasqueId" [periodesDeLocation]="periodesDeLocation"></app-reservations>
+        <app-reservations *ngIf="actionsIsVisible"
+                          [logementMasqueId]="logementMasqueId"
+                          [periodesDeLocation]="periodesDeLocation"
+                          (periodesSontModifies)="trierPeriodesDeLocation()"
+        >
+        </app-reservations>
         <button
           *ngIf="actionsIsVisible"
           (click)="toggleActions()">Fermer</button>

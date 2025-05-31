@@ -10,20 +10,28 @@
     1.5rem;
   color: #154dc7;
   display: flex;
+  margin-left: .3rem;
 }
-
+.btn-import{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 input[type="file"] {
   display: none;
 }
 .modale-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   background-color: #0000002e;
   display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 100;
+  overflow: auto;
 
   .modale {
     background-color: white;

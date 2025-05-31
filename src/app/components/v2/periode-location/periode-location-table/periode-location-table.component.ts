@@ -17,6 +17,9 @@ export class PeriodeLocationTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.trierPeriodesDeLocation()
+  }
+  trierPeriodesDeLocation(): void {
     this.periodesDeLocation.sort((a, b) => {
       const dateA = new Date(a.dateDeDebut).getTime();
       const dateB = new Date(b.dateDeDebut).getTime();
@@ -26,7 +29,6 @@ export class PeriodeLocationTableComponent implements OnInit {
       this.actionsIsVisible = true;
     }
   }
-
   modifierPeriodeDeLocation(logementMasqueId: string, periodeDeLocationMasqueId: string) {
     this.router.navigate([`/logements/${logementMasqueId}/periode-de-location/${periodeDeLocationMasqueId}/modifier`]);
   }

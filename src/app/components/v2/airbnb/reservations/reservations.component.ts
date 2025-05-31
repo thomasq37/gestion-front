@@ -1,13 +1,10 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ReservationDTO } from '../../../../models/v2/airbnb/ReservationDTO';
 import { PeriodeDeLocationDTO } from '../../../../models/v2/entites/PeriodeDeLocation/PeriodeDeLocationDTO.model';
 import { LocataireDTO } from '../../../../models/v2/entites/Locataire/LocataireDTO.model';
 import { TypeDeLocation } from '../../../../models/v2/enumeration/TypeDeLocation.enum';
-import {PeriodeDeLocationService} from "../../../../services/v2/periode-de-location/periode-de-location.service";
-import {LocataireService} from "../../../../services/v2/locataire/locataire.service";
-// import { PeriodeDeLocationService } from '../../../../services/v2/periode-de-location/periode-de-location.service';
-// import { LocataireService } from '../../../../services/v2/locataire/locataire.service';
-
+import { PeriodeDeLocationService } from "../../../../services/v2/periode-de-location/periode-de-location.service";
+import { LocataireService } from "../../../../services/v2/locataire/locataire.service";
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
@@ -22,17 +19,17 @@ export class ReservationsComponent implements OnInit {
   traitementEnCours = false;
   modaleVisible = false;
   chargementEnCours = false;
-
+  nombreDeLocatairesACreer = 0;
   resultatsTraitement = {
     total: 0,
     existantes: 0,
     nouvelles: 0
   };
+  @Output() periodesSontModifies = new EventEmitter<void>();
 
   constructor(
     private periodeService: PeriodeDeLocationService,
     private locataireService: LocataireService,
-    private cdr: ChangeDetectorRef // Add this
   ) {}
 
 
@@ -119,10 +116,26 @@ export class ReservationsComponent implements OnInit {
         this.resultatsTraitement.nouvelles++;
       }
     }
+    this.nombreDeLocatairesACreer = 0;
+
+    const locatairesExistant = this.getLocataires().map(l =>
+      `${l.nom.toLowerCase()}-${l.prenom.toLowerCase()}`
+    );
+    const locatairesDejaVus = new Set(locatairesExistant);
+
+    for (const resa of reservations) {
+      const [prenom, ...reste] = resa.voyageur.trim().split(' ');
+      const nom = reste.join(' ');
+      const cle = `${nom.toLowerCase()}-${prenom.toLowerCase()}`;
+
+      if (!locatairesDejaVus.has(cle)) {
+        this.nombreDeLocatairesACreer++;
+        locatairesDejaVus.add(cle);
+      }
+    }
 
     this.traitementEnCours = false;
     this.modaleVisible = true;
-    this.cdr.detectChanges();
   }
 
   async validerImport(): Promise<void> {
@@ -177,7 +190,7 @@ export class ReservationsComponent implements OnInit {
       this.modaleVisible = false;
 
       // Sécurise le cycle Angular
-      this.cdr.detectChanges();
+      this.periodesSontModifies.emit()
     }
   }
 

@@ -13,7 +13,8 @@
       <p>
         <strong>Total :</strong> {{ resultatsTraitement.total }}<br>
         <strong>Périodes existantes :</strong> {{ resultatsTraitement.existantes }}<br>
-        <strong>Périodes à créer :</strong> {{ resultatsTraitement.nouvelles }}
+        <strong>Périodes à créer :</strong> {{ resultatsTraitement.nouvelles }}<br>
+        <strong>Locataires à créer :</strong> {{ nombreDeLocatairesACreer }}
       </p>
       <div class="modal-footer">
         <button (click)="validerImport()">Valider</button>
