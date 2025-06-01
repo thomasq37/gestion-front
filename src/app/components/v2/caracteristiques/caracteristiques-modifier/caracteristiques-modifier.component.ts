@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {TypeDeLogement} from "../../../../models/v2/enumeration/TypeDeLogement.enum";
 import {DpeLettre} from "../../../../models/v2/enumeration/DpeLettre.enum";
@@ -6,16 +6,18 @@ import {CaracteristiquesService} from "../../../../services/v2/caracteristiques/
 import {ActivatedRoute, Router} from "@angular/router";
 import {CaracteristiquesDTO} from "../../../../models/v2/entites/Caracteristiques/CaracteristiquesDTO.model";
 import {CaracteristiquesFormUtil} from "../util/caracteristiques-form-util";
+import {TypeDeResidence} from "../../../../models/v2/enumeration/TypeDeResidence.enum";
 @Component({
   selector: 'app-caracteristiques-modifier',
   templateUrl: './caracteristiques-modifier.component.html',
   styleUrls: ['./caracteristiques-modifier.component.scss']
 })
-export class CaracteristiquesModifierComponent {
+export class CaracteristiquesModifierComponent implements OnInit {
   caracteristiquesForm: FormGroup;
   error: string | null = null;
   logementMasqueId: string | null = null;
   typeDeLogements = Object.values(TypeDeLogement);
+  typesDeResidence = Object.values(TypeDeResidence);
   dpeLettres = Object.values(DpeLettre);
   nomFichier: string | null = null;
   loading = false;
@@ -35,6 +37,7 @@ export class CaracteristiquesModifierComponent {
       nombreDePieces: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       surfaceLogement: ['', [Validators.required, Validators.pattern(/^\d+([.,]\d+)?$/)]],
       typeDeLogement: ['', Validators.required],
+      typeDeResidence: ['', Validators.required],
       meubleeOuNon: [''],
       balconOuTerrasse: [''],
       surfaceBalconOuTerrasse: [''],
@@ -59,7 +62,7 @@ export class CaracteristiquesModifierComponent {
       const caracteristiques = await this.caracteristiquesService.obtenirCaracteristiquesPourLogement(logementMasqueId);
       this.caracteristiquesForm.patchValue(caracteristiques);
       if (caracteristiques.dpeFichier) {
-        this.nomFichier = "1 fichier séléctionné"; // Exemple - utilisez un nom significatif
+        this.nomFichier = "1 fichier séléctionné";
       }
     } catch (error: any) {
       console.warn(error);

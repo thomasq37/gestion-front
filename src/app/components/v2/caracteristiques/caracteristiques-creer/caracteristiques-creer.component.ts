@@ -6,6 +6,7 @@ import {CaracteristiquesDTO} from "../../../../models/v2/entites/Caracteristique
 import {TypeDeLogement} from "../../../../models/v2/enumeration/TypeDeLogement.enum";
 import {DpeLettre} from "../../../../models/v2/enumeration/DpeLettre.enum";
 import {CaracteristiquesFormUtil} from "../util/caracteristiques-form-util";
+import {TypeDeResidence} from "../../../../models/v2/enumeration/TypeDeResidence.enum";
 
 @Component({
   selector: 'app-caracteristiques-creer',
@@ -17,6 +18,7 @@ export class CaracteristiquesCreerComponent {
   error: string | null = null;
   logementMasqueId: string | null = null;
   typesDeLogement = Object.values(TypeDeLogement);
+  typesDeResidence = Object.values(TypeDeResidence);
   dpeLettres = Object.values(DpeLettre);
   nomFichier: string | null = null;
   loading = false;
@@ -35,6 +37,7 @@ export class CaracteristiquesCreerComponent {
       nombreDePieces: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
       surfaceLogement: ['', [Validators.required, Validators.pattern(/^\d+([.,]\d+)?$/)]],
       typeDeLogement: ['', Validators.required],
+      typeDeResidence: ['', Validators.required],
       meubleeOuNon: [''],
       balconOuTerrasse: [''],
       surfaceBalconOuTerrasse: [''],
