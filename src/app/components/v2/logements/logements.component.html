@@ -15,7 +15,7 @@
             <div class="logement-infos" *ngIf="logement.adresse && logement.caracteristiques">
               <div class="header-logement-infos">
                 <p class="type-logement">{{ logement.caracteristiques.typeDeLogement | titlecase }}</p>
-                <div class="container-prix-temps">
+                <div *ngIf="logement.caracteristiques.typeDeResidence !== 'PRINCIPALE'" class="container-prix-temps">
                   <p class="prix-loyer-actuelle">{{getTarifActuel(logement.periodesDeLocation)}}</p>
                   <span
                     *ngIf="getTexteDureeSejour(logement) as texte"
@@ -24,6 +24,7 @@
                     {{ texte }}
                   </span>
                 </div>
+                <div class="badge-residence-principale" *ngIf="logement.caracteristiques.typeDeResidence === 'PRINCIPALE'"><img src="assets/img/v2/etoile-icone.svg" alt="etoile-icone"><span>Résidence principale</span></div>
               </div>
               <p class="ville-logement">{{logement.adresse.ville}}</p>
               <p class="details-logement">{{logement.caracteristiques.nombreDePieces}} pièces • {{logement.caracteristiques.surfaceLogement }} m² {{logement.caracteristiques.meubleeOuNon ? '•  Meublé' : ''}}  {{getBalconOuTerrasse(logement.caracteristiques)}} {{logement.caracteristiques.parkingOuNon ? '•  Parking' : ''}}</p>

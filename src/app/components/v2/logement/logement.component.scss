@@ -15,7 +15,33 @@
       font-size: 1.9rem;
       padding: 0;
     }
+    .nom-type{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nom-type.is-present{
+      margin-bottom: 1.5rem;
+    }
+    .badge-residence-principale{
+      display: flex;
+      align-content: center;
+      border: 2px solid #143b86;
+      padding: .5rem 1rem;
+      border-radius: 20px;
+      gap: .4rem;
+      color: #143b86;
+      width: max-content;
 
+      span {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      img{
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
     .container-prix-temps{
       display: block;
       gap: .5rem;

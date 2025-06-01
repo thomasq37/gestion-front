@@ -33,6 +33,10 @@ export class LogementComponent implements OnInit {
     if (logementMasqueId) {
       this.obtenirLogement(logementMasqueId).then(() => {
         // Une fois que le logement est chargé, on traite les queryParams
+        if(this.logement.caracteristiques.typeDeResidence === 'PRINCIPALE'){
+          this.activeIndex = 3
+          this.menuItems = this.menuItems.filter(item => item !== 'Périodes de locations' && item !== 'Locataires');
+        }
         const periodeMasqueId = this.route.snapshot.queryParamMap.get('periodeMasqueId');
         if (periodeMasqueId && this.logement?.periodesDeLocation?.length > 0) {
           const periode = this.logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId);
