@@ -10,6 +10,7 @@
       <div *ngIf="error" class="error">{{ error }}</div>
       <ul *ngIf="logements.length > 0">
         <li *ngFor="let logement of logements">
+          <div class="badge-residence-principale" *ngIf="logement.caracteristiques && logement.caracteristiques.typeDeResidence === 'PRINCIPALE'"><img src="assets/img/v2/etoile-icone.svg" alt="etoile-icone"><span>Résidence principale</span></div>
           <app-photo-caroussel [logementId]="logement.masqueId" [photos]="logement.photos" [onItem]="false"></app-photo-caroussel>
           <div class="logement" (click)="naviguerALogement(logement.masqueId)">
             <div class="logement-infos" *ngIf="logement.adresse && logement.caracteristiques">
@@ -24,7 +25,6 @@
                     {{ texte }}
                   </span>
                 </div>
-                <div class="badge-residence-principale" *ngIf="logement.caracteristiques.typeDeResidence === 'PRINCIPALE'"><img src="assets/img/v2/etoile-icone.svg" alt="etoile-icone"><span>Résidence principale</span></div>
               </div>
               <p class="ville-logement">{{logement.adresse.ville}}</p>
               <p class="details-logement">{{logement.caracteristiques.nombreDePieces}} pièces • {{logement.caracteristiques.surfaceLogement }} m² {{logement.caracteristiques.meubleeOuNon ? '•  Meublé' : ''}}  {{getBalconOuTerrasse(logement.caracteristiques)}} {{logement.caracteristiques.parkingOuNon ? '•  Parking' : ''}}</p>

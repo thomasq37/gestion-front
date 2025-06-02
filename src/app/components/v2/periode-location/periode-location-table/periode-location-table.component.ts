@@ -46,4 +46,12 @@ export class PeriodeLocationTableComponent implements OnInit {
   afficherFraisPeriodeDeLocation(periodeDeLocation: PeriodeDeLocationDTO) {
     this.periodeSelectionnee.emit(periodeDeLocation);
   }
+  isPeriodeEnCours(periode: PeriodeDeLocationDTO): boolean {
+    const now = new Date();
+    const dateDebut = new Date(periode.dateDeDebut);
+    const dateFin = periode.dateDeFin ? new Date(periode.dateDeFin) : null;
+
+    return dateDebut <= now && (!dateFin || now <= dateFin);
+  }
+
 }

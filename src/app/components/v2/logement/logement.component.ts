@@ -105,6 +105,21 @@ export class LogementComponent implements OnInit {
     });
     return Array.from(locatairesSet);
   }
+  getLocataireActuel(): LocataireDTO | null {
+    const now = new Date();
+    const periodeEnCours = this.logement.periodesDeLocation.find(p => {
+      const dateDebut = new Date(p.dateDeDebut);
+      const dateFin = p.dateDeFin ? new Date(p.dateDeFin) : null;
+      return dateDebut <= now && (!dateFin || now <= dateFin);
+    });
+
+    if (!periodeEnCours || !periodeEnCours.locataires?.length) {
+      return null;
+    }
+
+    return periodeEnCours.locataires[0]; // ou choisis un autre critère si nécessaire
+  }
+
 
 
   supprimerLogement() {

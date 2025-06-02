@@ -29,7 +29,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let locataire of locataires">
+        <tr *ngFor="let locataire of locataires"
+            [ngClass]="{ 'locataire-actuel': estLocataireActuel(locataire) }">
           <td>{{ locataire.nom }}</td>
           <td>{{ locataire.prenom }}</td>
           <td><a href="mailto:{{ locataire.email }}">{{ locataire.email }}</a></td>

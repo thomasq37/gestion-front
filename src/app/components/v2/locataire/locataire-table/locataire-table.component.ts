@@ -11,9 +11,14 @@ export class LocataireTableComponent {
   @Input() locataires!: LocataireDTO[];
   @Input() logementMasqueId!: string;
   actionsIsVisible: boolean = false;
+  @Input() locataireActuel: LocataireDTO | null = null;
   constructor(private router: Router) {
   }
-
+  estLocataireActuel(locataire: LocataireDTO): boolean {
+    return this.locataireActuel &&
+      this.locataireActuel.nom === locataire.nom &&
+      this.locataireActuel.prenom === locataire.prenom;
+  }
   ajouterUnLocataire(logementMasqueId: string) {
     this.router.navigate([`/logements/${logementMasqueId}/locataire/creer`]);
   }

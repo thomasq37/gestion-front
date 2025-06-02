@@ -13,6 +13,8 @@
       </app-fil-ariane>
 
     </div>
+    <div class="badge-residence-principale" *ngIf="logement && logement.caracteristiques.typeDeResidence === 'PRINCIPALE'"><img src="assets/img/v2/etoile-icone.svg" alt="etoile-icone"><span>Résidence principale</span></div>
+
     <app-photo-caroussel
       *ngIf="logement"
       [onItem]="true"
@@ -20,11 +22,7 @@
       [logementId]="logement.masqueId"></app-photo-caroussel>
     <div class="container" *ngIf="logement">
       <div class="logement-infos" *ngIf="logement.adresse && logement.caracteristiques">
-        <div class="nom-type" [ngClass]="logement.caracteristiques.typeDeResidence === 'PRINCIPALE' ? 'is-present' : ''">
-          <h2>{{logement.caracteristiques.typeDeLogement | titlecase}} {{logement.adresse.numero}} {{logement.adresse.voie}}</h2>
-          <div class="badge-residence-principale" *ngIf="logement.caracteristiques.typeDeResidence === 'PRINCIPALE'"><img src="assets/img/v2/etoile-icone.svg" alt="etoile-icone"><span>Résidence principale</span></div>
-
-        </div>
+        <h2>{{logement.caracteristiques.typeDeLogement | titlecase}} {{logement.adresse.numero}} {{logement.adresse.voie}}</h2>
         <div class="container-prix-temps" *ngIf="logement.caracteristiques.typeDeResidence !== 'PRINCIPALE'">
           <p class="prix-loyer-actuelle">{{getTarifActuel(logement.periodesDeLocation)}}</p>
           <span
@@ -104,7 +102,8 @@
         <app-locataire-table
           *ngIf="activeIndex === 5"
           [logementMasqueId]="logement.masqueId"
-          [locataires]="getLocataires()">
+          [locataires]="getLocataires()"
+          [locataireActuel]="getLocataireActuel()">
         </app-locataire-table>
         <app-contact-table
           *ngIf="activeIndex === 6"

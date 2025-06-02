@@ -32,7 +32,8 @@
         </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let periodeDeLocation of periodesDeLocation">
+          <tr *ngFor="let periodeDeLocation of periodesDeLocation"
+              [ngClass]="{ 'periode-en-cours': isPeriodeEnCours(periodeDeLocation) }">
             <td>
               <div class="locataire" *ngFor="let locataire of periodeDeLocation.locataires">
                 {{ locataire.nom }} {{ locataire.prenom }}
