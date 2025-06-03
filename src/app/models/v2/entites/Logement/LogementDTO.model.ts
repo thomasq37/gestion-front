@@ -7,6 +7,7 @@ import {PeriodeDeLocationDTO} from "../PeriodeDeLocation/PeriodeDeLocationDTO.mo
 import {PhotoDTO} from "../Photo/PhotoDTO.model";
 import {AlerteDTO} from "../Alerte/AlerteDTO.model";
 import {DocumentDTO} from "../Document/DocumentDTO.model";
+import {CreditDTO} from "../Credit/CreditDTO.model";
 
 export interface LogementDTO {
   masqueId: string;
@@ -20,4 +21,5 @@ export interface LogementDTO {
   photos: PhotoDTO[];
   documents: DocumentDTO[];
   gestionnaires: UtilisateurDTO[];
+  credit: CreditDTO | null;
 }

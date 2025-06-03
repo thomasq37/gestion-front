@@ -1,6 +1,6 @@
 import {TypeDeTaux} from "../../enumeration/TypeDeTaux.enum";
 
-export interface CaracteristiquesDTO {
+export interface CreditDTO {
   masqueId?: string;
   montantEmprunte: number;
   tauxAnnuelEffectifGlobal: number;
