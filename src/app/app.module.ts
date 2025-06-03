@@ -52,6 +52,9 @@ import { DocumentTableComponent } from './components/v2/document/document-table/
 import { DocumentCreerComponent } from './components/v2/document/document-creer/document-creer.component';
 import {ModaleConfirmationComponent} from "./components/v2/modale-confirmation/modale-confirmation.component";
 import { ReservationsComponent } from './components/v2/airbnb/reservations/reservations.component';
+import { CreditCreerComponent } from './components/v2/credit/credit-creer/credit-creer.component';
+import { CreditElementComponent } from './components/v2/credit/credit-element/credit-element.component';
+import { CreditModifierComponent } from './components/v2/credit/credit-modifier/credit-modifier.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -99,6 +102,9 @@ registerLocaleData(localeFr, 'fr');
     DocumentCreerComponent,
     ModaleConfirmationComponent,
     ReservationsComponent,
+    CreditCreerComponent,
+    CreditElementComponent,
+    CreditModifierComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ import {ContactDTO} from "../../../models/v2/entites/Contact/ContactDTO.model";
 import {LocataireDTO} from "../../../models/v2/entites/Locataire/LocataireDTO.model";
 import {PhotoDTO} from "../../../models/v2/entites/Photo/PhotoDTO.model";
 import {FraisDTO} from "../../../models/v2/entites/Frais/FraisDTO.model";
+import {CreditDTO} from "../../../models/v2/entites/Credit/CreditDTO.model";
 
 @Injectable({
   providedIn: 'root',
@@ -144,6 +145,19 @@ export class LogementService {
     if (!logement) return;
     logement.caracteristiques = undefined;
   }
+
+  mettreAJourCreditDansLogement(logementMasqueId: string, dto: CreditDTO): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement) return;
+    logement.credit = dto;
+  }
+
+  supprimerCreditDansLogement(logementMasqueId: string): void {
+    const logement = this.logementCache.get(logementMasqueId);
+    if (!logement) return;
+    logement.credit = undefined;
+  }
+
   mettreAJourAdresseDansLogement(logementMasqueId: string, dto: AdresseDTO): void {
     const logement = this.logementCache.get(logementMasqueId);
     if (!logement) return;

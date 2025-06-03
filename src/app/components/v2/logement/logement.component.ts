@@ -16,7 +16,7 @@ export class LogementComponent implements OnInit {
   logement!: LogementDTO;
   loading = false;
   error: string | null = null;
-  menuItems = ['Statistiques', 'Adresse', 'Caractéristiques', 'Frais fixes', 'Périodes de locations', 'Locataires', 'Contacts', 'Alertes', 'Documents', 'Supprimer'];
+  menuItems = ['Statistiques', 'Adresse', 'Caractéristiques', 'Frais fixes', 'Périodes de locations', 'Locataires', 'Contacts', 'Alertes', 'Documents', 'Crédit', 'Supprimer'];
   menuPeriodesDeLocation = ['Frais périodes de location'];
   activeIndexPeriodeDeLocation = 0;
   activeIndex = 0;

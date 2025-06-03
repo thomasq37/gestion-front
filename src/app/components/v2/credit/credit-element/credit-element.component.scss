@@ -1,0 +1,39 @@
+.credit-element{
+  .credit-contenu{
+    padding: 1rem;
+    .detail-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      gap: 1rem;
+      font-size: 1.3rem;
+      dd{
+        display: flex;
+        flex-direction: column;
+        gap: .2rem;
+      }
+      .icone-catgeorie {
+        width: 3.5rem;
+        border-radius: 50%;
+        background-color: #f0f1f5;
+        height: 3.5rem;
+      }
+    }
+    .detail-item.energie {
+      dd{
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+        img{
+          width: 7rem;
+        }
+      }
+    }
+    .btn-editer-basique{
+      border: none;
+      background: none;
+      text-decoration: underline;
+      color: #143b86;
+    }
+  }
+}

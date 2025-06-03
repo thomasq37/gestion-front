@@ -30,6 +30,8 @@ import {FraisCreerComponent} from "./components/v2/frais/frais-creer/frais-creer
 import {AlerteCreerComponent} from "./components/v2/alerte/alerte-creer/alerte-creer.component";
 import {AlerteModifierComponent} from "./components/v2/alerte/alerte-modifier/alerte-modifier.component";
 import {DocumentCreerComponent} from "./components/v2/document/document-creer/document-creer.component";
+import {CreditCreerComponent} from "./components/v2/credit/credit-creer/credit-creer.component";
+import {CreditModifierComponent} from "./components/v2/credit/credit-modifier/credit-modifier.component";
 
 
 const routes: Routes = [
@@ -42,6 +44,8 @@ const routes: Routes = [
   { path: 'logements/:logementMasqueId/adresse/modifier', component: AdresseModifierComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/caracteristiques/creer', component: CaracteristiquesCreerComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/caracteristiques/modifier', component: CaracteristiquesModifierComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId/credit/creer', component: CreditCreerComponent, canActivate: [AuthGuard] },
+  { path: 'logements/:logementMasqueId/credit/modifier', component: CreditModifierComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/locataire/creer', component: LocataireCreerComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/locataire/:locataireMasqueId/modifier', component: LocataireModifierComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/contact/creer', component: ContactCreerComponent, canActivate: [AuthGuard] },

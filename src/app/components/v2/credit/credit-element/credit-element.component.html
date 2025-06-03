@@ -1,0 +1,66 @@
+<section class="credit-element">
+  <div class="custom-card">
+    <div class="custom-card-header">
+      <h2>{{credit === null ? 'Crédit à renseigner' : 'Crédit'}}</h2>
+      <img (click)="modifierOuCreerCredit(credit, logementMasqueId)" src="assets/img/v2/edit-icon.svg" alt="icone de modification">
+    </div>
+    <div class="credit-contenu" *ngIf="credit">
+      <div class="detail-item">
+        <dt><img class="icone-catgeorie" src="assets/img/v2/adresse-icon.jpg" alt="Icône d'adresse"></dt>
+        <dd>
+          <strong>Montant emprunté:</strong>
+          <p>{{ credit.montantEmprunte | number:'1.0-2':'fr-FR'}} €</p>
+        </dd>
+      </div>
+      <div class="detail-item">
+        <dt><img class="icone-catgeorie" src="assets/img/v2/adresse-icon.jpg" alt="Icône d'adresse"></dt>
+        <dd>
+          <strong>TAEG:</strong>
+          <p>{{ credit.tauxAnnuelEffectifGlobal }}%</p>
+        </dd>
+      </div>
+      <div class="detail-item">
+        <dt><img class="icone-catgeorie" src="assets/img/v2/adresse-icon.jpg" alt="Icône d'adresse"></dt>
+        <dd>
+          <strong>Durée en mois:</strong>
+          <p>{{ credit.dureeMois }}</p>
+        </dd>
+      </div>
+      <div class="detail-item">
+        <dt><img class="icone-catgeorie" src="assets/img/v2/adresse-icon.jpg" alt="Icône d'adresse"></dt>
+        <dd>
+          <strong>Mensualité:</strong>
+          <p>{{ credit.mensualite | number:'1.0-2':'fr-FR'}} €</p>
+        </dd>
+      </div>
+      <div class="detail-item">
+        <dt><img class="icone-catgeorie" src="assets/img/v2/adresse-icon.jpg" alt="Icône d'adresse"></dt>
+        <dd>
+          <strong>Coût total:</strong>
+          <p>{{ credit.coutTotal | number:'1.0-2':'fr-FR'}} €</p>
+        </dd>
+      </div>
+      <div class="detail-item">
+        <dt><img class="icone-catgeorie" src="assets/img/v2/adresse-icon.jpg" alt="Icône d'adresse"></dt>
+        <dd>
+          <strong>Type de taux:</strong>
+          <p>{{ credit.typeDeTaux }}</p>
+        </dd>
+      </div>
+      <div class="detail-item">
+        <dt><img class="icone-catgeorie" src="assets/img/v2/adresse-icon.jpg" alt="Icône d'adresse"></dt>
+        <dd>
+          <strong>Jour de paiement échance:</strong>
+          <p>{{ credit.jourDePaiementEcheance }} de chaque mois</p>
+        </dd>
+      </div>
+      <div class="detail-item">
+        <dt><img class="icone-catgeorie" src="assets/img/v2/adresse-icon.jpg" alt="Icône d'adresse"></dt>
+        <dd>
+          <strong>Date de début:</strong>
+          <p>{{ credit.dateDebut | customDate }}</p>
+        </dd>
+      </div>
+    </div>
+  </div>
+</section>

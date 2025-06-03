@@ -1,0 +1,79 @@
+<section class="formulaire-basique" >
+  <app-loader *ngIf="loading"></app-loader>
+  <form *ngIf="!loading" [formGroup]="creditForm" (ngSubmit)="modifierCreditPourLogement()">
+    <div class="header">
+      <h1>Modifier le credit</h1>
+    </div>
+    <div class="champs">
+      <div class="champ">
+        <label for="montantEmprunte">Montant emprunté</label>
+        <input
+          type="number"
+          id="montantEmprunte"
+          formControlName="montantEmprunte"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="tauxAnnuelEffectifGlobal">TAEG (%)</label>
+        <input
+          type="number"
+          id="tauxAnnuelEffectifGlobal"
+          formControlName="tauxAnnuelEffectifGlobal"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="dureeMois">Durée en mois</label>
+        <input
+          type="number"
+          id="dureeMois"
+          formControlName="dureeMois"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="typeDeTaux">Type de taux</label>
+        <select id="typeDeTaux" formControlName="typeDeTaux" aria-required="true">
+          <option value="" disabled>Sélectionner un type de taux</option>
+          <option *ngFor="let typeDeTaux of typesDeTaux" [value]="typeDeTaux">{{ typeDeTaux }}</option>
+        </select>
+      </div>
+      <div class="champ">
+        <label for="jourDePaiementEcheance">Jour de paiement (du 1 au 28)</label>
+        <input
+          type="number"
+          id="jourDePaiementEcheance"
+          formControlName="jourDePaiementEcheance"
+          aria-required="true">
+      </div>
+      <div class="champ">
+        <label for="dateDebut">Date de début</label>
+        <input
+          type="date"
+          id="dateDebut"
+          formControlName="dateDebut"
+          aria-required="true">
+      </div>
+      <div class="error">
+        {{ error }}
+      </div>
+      <button type="submit" [disabled]="!creditForm.valid">
+        Enregistrer les modifications
+      </button>
+      <button type="button" class="btn-supprimer-formulaire-basique" (click)="openModal()">Supprimer le crédit</button>
+    </div>
+    <app-fil-ariane
+      [ongletRetour]="{
+    url: ['/logements', logementMasqueId],
+    queryParams: { tab: 9 },
+    label: 'Synthèse logement'
+  }"
+      [ongletActuel]="'Modifier le crédit'">
+    </app-fil-ariane>
+
+  </form>
+</section>
+<app-modale-confirmation
+  *ngIf="isModalVisible"
+  [message]=msgConfirmationSuppression
+  (confirm)="confirmDelete()"
+  (cancel)="closeModal()"
+></app-modale-confirmation>
