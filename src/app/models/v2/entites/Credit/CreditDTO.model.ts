@@ -1,4 +1,5 @@
 import {TypeDeTaux} from "../../enumeration/TypeDeTaux.enum";
+import {FraisDTO} from "../Frais/FraisDTO.model";
 
 export interface CreditDTO {
   masqueId?: string;
@@ -10,5 +11,5 @@ export interface CreditDTO {
   typeDeTaux: TypeDeTaux;
   jourDePaiementEcheance: number;
   dateDebut: string;
-
+  frais?: FraisDTO[];
 }

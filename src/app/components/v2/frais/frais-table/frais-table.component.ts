@@ -13,7 +13,8 @@ import { CategorieFrais } from 'src/app/models/v2/enumeration/CategorieFrais.enu
 export class FraisTableComponent implements OnInit, OnChanges {
   @Input() frais!: FraisDTO[];
   @Input() logementMasqueId!: string;
-  @Input() periodeMasqueId?: string; // Identifiant de la période de location
+  @Input() periodeMasqueId?: string;
+  @Input() creditMasqueId?: string;
   totalPages: number = 0;
   currentPage: number = 1;
   itemsPerPage: number = 10;
@@ -21,7 +22,7 @@ export class FraisTableComponent implements OnInit, OnChanges {
   actionsIsVisible: boolean = false;
   occurrencesMap: { [key: string]: number } = {};
   protected readonly FunctionsUtil = FunctionsUtil;
-  public readonly CategorieFrais = CategorieFrais; // Référence publique à l'enum
+  public readonly CategorieFrais = CategorieFrais;
   constructor(private router: Router) {
   }
   ngOnInit() {
@@ -59,7 +60,6 @@ export class FraisTableComponent implements OnInit, OnChanges {
       if (priorityDiff !== 0) {
         return priorityDiff;
       }
-      // d'abbord les frais recents
       return new Date(b.dateDeDebut).getTime() - new Date(a.dateDeDebut).getTime();
     });
   }
@@ -80,16 +80,24 @@ export class FraisTableComponent implements OnInit, OnChanges {
   }
 
   modifierFrais(fraisMasqueId: string) {
-    const queryParams = this.periodeMasqueId
-      ? { periodeMasqueId: this.periodeMasqueId }
-      : {};
+    let queryParams = {};
+    if(this.periodeMasqueId){
+      queryParams = { periodeMasqueId: this.periodeMasqueId }
+    }
+    else if(this.creditMasqueId){
+      queryParams = { creditMasqueId: this.creditMasqueId }
+    }
     this.router.navigate([`/logements/${this.logementMasqueId}/frais/${fraisMasqueId}/modifier`], { queryParams });
   }
 
   ajouterUnFrais() {
-    const queryParams = this.periodeMasqueId
-      ? { periodeMasqueId: this.periodeMasqueId }
-      : {};
+    let queryParams = {};
+    if(this.periodeMasqueId){
+      queryParams = { periodeMasqueId: this.periodeMasqueId }
+    }
+    else if(this.creditMasqueId){
+      queryParams = { creditMasqueId: this.creditMasqueId }
+    }
     this.router.navigate([`/logements/${this.logementMasqueId}/frais/creer`], { queryParams });
   }
 

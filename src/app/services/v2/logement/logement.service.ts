@@ -291,14 +291,20 @@ export class LogementService {
 
     logement.photos = logement.photos.filter(p => p.masqueId !== photoMasqueId);
   }
-  mettreAJourFraisDansLogement(logementMasqueId: string, frais: FraisDTO, periodeMasqueId?: string): void {
+  mettreAJourFraisDansLogement(logementMasqueId: string, frais: FraisDTO, periodeMasqueId?: string, creditMasqueId?: string): void {
     const logement = this.logementCache.get(logementMasqueId);
     if (!logement) return;
 
-    const liste = periodeMasqueId
-      ? logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId)?.frais
-      : logement.frais;
-
+    let liste: FraisDTO[];
+    if(periodeMasqueId){
+      liste = logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId)?.frais
+    }
+    else if (creditMasqueId){
+      liste = logement.credit.frais
+    }
+    else{
+      liste = logement.frais
+    }
     if (!liste) return;
 
     const index = liste.findIndex(f => f.masqueId === frais.masqueId);
@@ -309,14 +315,19 @@ export class LogementService {
     }
   }
 
-  supprimerFraisDansLogement(logementMasqueId: string, fraisMasqueId: string, periodeMasqueId?: string): void {
+  supprimerFraisDansLogement(logementMasqueId: string, fraisMasqueId: string, periodeMasqueId?: string, creditMasqueId?: string): void {
     const logement = this.logementCache.get(logementMasqueId);
     if (!logement) return;
-
-    const liste = periodeMasqueId
-      ? logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId)?.frais
-      : logement.frais;
-
+    let liste: FraisDTO[];
+    if(periodeMasqueId){
+      liste = logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId)?.frais
+    }
+    else if (creditMasqueId){
+      liste = logement.credit.frais
+    }
+    else{
+      liste = logement.frais
+    }
     if (!liste) return;
 
     const index = liste.findIndex(f => f.masqueId === fraisMasqueId);

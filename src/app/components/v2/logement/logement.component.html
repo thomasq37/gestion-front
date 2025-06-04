@@ -120,11 +120,29 @@
           [logementMasqueId]="logement.masqueId"
           [documents]="logement.documents">
         </app-document-table>
-        <app-credit-element
-          *ngIf="activeIndex === 9"
-          [logementMasqueId]="logement.masqueId"
-          [credit]="logement.credit">
-        </app-credit-element>
+        <div *ngIf="activeIndex === 9">
+          <app-credit-element
+            [logementMasqueId]="logement.masqueId"
+            [credit]="logement.credit"
+            (demandeAfficherFrais)="onDemandeAfficherFrais($event)">
+          </app-credit-element>
+          <nav class="nav-logement credit">
+            <ul>
+              <li
+                *ngFor="let item of menuCredit"
+                [ngClass]="{'active': activeIndexCredit === 0}"
+              >
+                {{ item }}
+              </li>
+            </ul>
+          </nav>
+          <app-frais-table
+            [logementMasqueId]="logement.masqueId"
+            [creditMasqueId]="logement.credit.masqueId"
+            [frais]="logement.credit.frais">
+          </app-frais-table>
+        </div>
+
         <button *ngIf="activeIndex === 10" class="btn-supprimer-logement" (click)="openModal()">Supprimer le logement</button>
       </div>
 

@@ -100,31 +100,93 @@ export class FraisService {
       method: 'DELETE',
     });
   }
-  async creerEtMettreAJourCache(logementMasqueId: string, fraisDTO: FraisDTO, periodeMasqueId?: string): Promise<FraisDTO> {
-    const created = periodeMasqueId
-      ? await this.creerFraisPourPeriodeDeLocation(logementMasqueId, periodeMasqueId, fraisDTO)
-      : await this.creerFraisPourLogement(logementMasqueId, fraisDTO);
 
-    this.logementService.mettreAJourFraisDansLogement(logementMasqueId, created, periodeMasqueId);
+  // frais pour credit
+
+  async creerFraisPourCredit(
+    logementMasqueId: string,
+    creditMasqueId: string,
+    fraisDTO: FraisDTO
+  ): Promise<FraisDTO> {
+    return fetchWithHandling<FraisDTO>(`${this.apiUrl}/${logementMasqueId}/frais/credit/${creditMasqueId}/ajouter`, {
+      method: 'POST',
+      body: JSON.stringify(fraisDTO),
+    });
+  }
+  async obtenirFraisPourCredit(
+    logementMasqueId: string,
+    creditMasqueId: string,
+    fraisMasqueId: string
+  ): Promise<FraisDTO> {
+    return fetchWithHandling<FraisDTO>(`${this.apiUrl}/${logementMasqueId}/frais/${fraisMasqueId}/credit/${creditMasqueId}/obtenir`, {
+      method: 'GET',
+    });
+  }
+  async modifierFraisPourCredit(
+    logementMasqueId: string,
+    creditMasqueId: string,
+    fraisMasqueId: string,
+    fraisDTO: FraisDTO
+  ): Promise<FraisDTO> {
+    return fetchWithHandling<FraisDTO>(`${this.apiUrl}/${logementMasqueId}/frais/${fraisMasqueId}/credit/${creditMasqueId}/modifier`, {
+      method: 'PATCH',
+      body: JSON.stringify(fraisDTO),
+    });
+  }
+  async supprimerFraisPourCredit(
+    logementMasqueId: string,
+    creditMasqueId: string,
+    fraisMasqueId: string
+  ): Promise<SuccessResponse> {
+    return fetchWithHandling<SuccessResponse>(`${this.apiUrl}/${logementMasqueId}/frais/${fraisMasqueId}/credit/${creditMasqueId}/supprimer`, {
+      method: 'DELETE',
+    });
+  }
+
+  // cache
+
+  async creerEtMettreAJourCache(logementMasqueId: string, fraisDTO: FraisDTO, periodeMasqueId?: string, creditMasqueId?: string): Promise<FraisDTO> {
+    let created: FraisDTO | PromiseLike<FraisDTO>;
+    if(periodeMasqueId){
+      created = await this.creerFraisPourPeriodeDeLocation(logementMasqueId, periodeMasqueId, fraisDTO);
+    }
+    else if(creditMasqueId){
+      created = await this.creerFraisPourCredit(logementMasqueId, creditMasqueId, fraisDTO);
+
+    }
+    else {
+      created = await this.creerFraisPourLogement(logementMasqueId, fraisDTO);
+    }
+    this.logementService.mettreAJourFraisDansLogement(logementMasqueId, created, periodeMasqueId, creditMasqueId);
     return created;
   }
 
-  async modifierEtMettreAJourCache(logementMasqueId: string, fraisMasqueId: string, fraisDTO: FraisDTO, periodeMasqueId?: string): Promise<FraisDTO> {
-    const updated = periodeMasqueId
-      ? await this.modifierFraisPourPeriodeDeLocation(logementMasqueId, periodeMasqueId, fraisMasqueId, fraisDTO)
-      : await this.modifierFraisPourLogement(logementMasqueId, fraisMasqueId, fraisDTO);
-
-    this.logementService.mettreAJourFraisDansLogement(logementMasqueId, updated, periodeMasqueId);
+  async modifierEtMettreAJourCache(logementMasqueId: string, fraisMasqueId: string, fraisDTO: FraisDTO, periodeMasqueId?: string, creditMasqueId?: string): Promise<FraisDTO> {
+    let updated: FraisDTO | PromiseLike<FraisDTO>;
+    if(periodeMasqueId){
+      updated = await this.modifierFraisPourPeriodeDeLocation(logementMasqueId, periodeMasqueId, fraisMasqueId, fraisDTO)
+    }
+    else if(creditMasqueId){
+      updated = await this.modifierFraisPourCredit(logementMasqueId, creditMasqueId, fraisMasqueId, fraisDTO)
+    }
+    else {
+      updated = await this.modifierFraisPourLogement(logementMasqueId, fraisMasqueId, fraisDTO);
+    }
+    this.logementService.mettreAJourFraisDansLogement(logementMasqueId, updated, periodeMasqueId, creditMasqueId);
     return updated;
   }
 
-  async supprimerEtMettreAJourCache(logementMasqueId: string, fraisMasqueId: string, periodeMasqueId?: string): Promise<void> {
-    if (periodeMasqueId) {
+  async supprimerEtMettreAJourCache(logementMasqueId: string, fraisMasqueId: string, periodeMasqueId?: string, creditMasqueId?: string): Promise<void> {
+    if(periodeMasqueId){
       await this.supprimerFraisPourPeriodeDeLocation(logementMasqueId, periodeMasqueId, fraisMasqueId);
-    } else {
+    }
+    else if(creditMasqueId){
+      await this.supprimerFraisPourCredit(logementMasqueId, creditMasqueId, fraisMasqueId);
+    }
+    else {
       await this.supprimerFraisPourLogement(logementMasqueId, fraisMasqueId);
     }
 
-    this.logementService.supprimerFraisDansLogement(logementMasqueId, fraisMasqueId, periodeMasqueId);
+    this.logementService.supprimerFraisDansLogement(logementMasqueId, fraisMasqueId, periodeMasqueId, creditMasqueId);
   }
 }

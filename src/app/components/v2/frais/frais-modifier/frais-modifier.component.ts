@@ -17,6 +17,8 @@ export class FraisModifierComponent {
   logementMasqueId: string | null = null;
   periodeMasqueId: string | null = null;
   fraisMasqueId: string | null = null;
+  creditMasqueId: string | null = null;
+
   loading = false;
   frequences = Object.values(Frequence);
   categoriesFrais = Object.keys(CategorieFrais).map((key) => ({
@@ -51,6 +53,9 @@ export class FraisModifierComponent {
     this.activatedRoute.queryParamMap.subscribe(queryParams => {
       this.periodeMasqueId = queryParams.get('periodeMasqueId');
     });
+    this.activatedRoute.queryParamMap.subscribe(queryParams => {
+      this.creditMasqueId = queryParams.get('creditMasqueId');
+    });
     this.activatedRoute.paramMap.subscribe(params => {
       this.logementMasqueId = params.get('logementMasqueId');
       this.fraisMasqueId = params.get('fraisMasqueId');
@@ -68,7 +73,15 @@ export class FraisModifierComponent {
           this.periodeMasqueId,
           this.fraisMasqueId!
         );
-      } else {
+      }
+      else if (this.creditMasqueId) {
+        frais = await this.fraisService.obtenirFraisPourCredit(
+          this.logementMasqueId!,
+          this.creditMasqueId,
+          this.fraisMasqueId!
+        );
+      }
+      else {
         frais = await this.fraisService.obtenirFraisPourLogement(this.logementMasqueId!, this.fraisMasqueId!);
       }
       this.fraisForm.patchValue(frais);
@@ -88,15 +101,26 @@ export class FraisModifierComponent {
         this.logementMasqueId!,
         this.fraisMasqueId!,
         frais,
-        this.periodeMasqueId ?? undefined
+        this.periodeMasqueId ?? undefined,
+        this.creditMasqueId ?? undefined
       );
+
+      let tab = 3;
+      const queryParams: any = {};
+
+      if (this.creditMasqueId) {
+        tab = 9;
+        queryParams.creditMasqueId = this.creditMasqueId;
+      } else if (this.periodeMasqueId) {
+        tab = 4;
+        queryParams.periodeMasqueId = this.periodeMasqueId;
+      }
+
+      queryParams.tab = tab;
 
 
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: {
-          tab: this.periodeMasqueId ? 4 : 3,
-          ...(this.periodeMasqueId ? { periodeMasqueId: this.periodeMasqueId } : {})
-        }
+        queryParams
       });
     } catch (error: any) {
       console.warn(error);
@@ -110,11 +134,21 @@ export class FraisModifierComponent {
     this.fraisService
       .supprimerEtMettreAJourCache(this.logementMasqueId!, this.fraisMasqueId!, this.periodeMasqueId ?? undefined)
       .then(() => {
+        let tab = 3;
+        const queryParams: any = {};
+
+        if (this.creditMasqueId) {
+          tab = 9;
+          queryParams.creditMasqueId = this.creditMasqueId;
+        } else if (this.periodeMasqueId) {
+          tab = 4;
+          queryParams.periodeMasqueId = this.periodeMasqueId;
+        }
+
+        queryParams.tab = tab;
+
         this.router.navigate([`/logements/${this.logementMasqueId}`], {
-          queryParams: {
-            tab: this.periodeMasqueId ? 4 : 3,
-            ...(this.periodeMasqueId ? { periodeMasqueId: this.periodeMasqueId } : {})
-          }
+          queryParams
         });
       })
       .catch(error => {

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CreditDTO} from "../../../../models/v2/entites/Credit/CreditDTO.model";
 import {Router} from "@angular/router";
 
@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 export class CreditElementComponent {
   @Input() credit!: CreditDTO;
   @Input() logementMasqueId!: string;
+  @Output() demandeAfficherFrais = new EventEmitter<boolean>();
   constructor(private router: Router) {}
   modifierOuCreerCredit(credit: CreditDTO, logementMasqueId: string) {
     if(credit === null || credit === undefined) {
@@ -18,5 +19,9 @@ export class CreditElementComponent {
     else{
       this.router.navigate([`/logements/${logementMasqueId}/credit/modifier`]);
     }
+  }
+
+  toggleFrais() {
+    this.demandeAfficherFrais.emit(true);
   }
 }

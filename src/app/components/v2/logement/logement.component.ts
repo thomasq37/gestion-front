@@ -18,11 +18,16 @@ export class LogementComponent implements OnInit {
   error: string | null = null;
   menuItems = ['Statistiques', 'Adresse', 'Caractéristiques', 'Frais fixes', 'Périodes de locations', 'Locataires', 'Contacts', 'Alertes', 'Documents', 'Crédit', 'Supprimer'];
   menuPeriodesDeLocation = ['Frais périodes de location'];
+  menuCredit = ['Frais associés au crédit'];
+
   activeIndexPeriodeDeLocation = 0;
+  activeIndexCredit = 0;
+
   activeIndex = 0;
   periodeActuelle: PeriodeDeLocationDTO | null = null;
   msgConfirmationSuppression = "Voulez-vous vraiment supprimer ce logement ?"
   isModalVisible = false;
+  demandeAfficherFrais: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -146,5 +151,9 @@ export class LogementComponent implements OnInit {
   }
   getTexteDureeSejour(logement: any): string | null {
     return FunctionsUtil.getDureeEtJoursRestantsJournaliere(logement.periodesDeLocation);
+  }
+
+  onDemandeAfficherFrais($event: any) {
+    this.demandeAfficherFrais = true
   }
 }

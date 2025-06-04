@@ -1,5 +1,6 @@
 <section class="credit-element">
   <div class="custom-card">
+    <button (click)="toggleFrais()">Afficher frais</button>
     <div class="custom-card-header">
       <h2>{{credit === null ? 'Crédit à renseigner' : 'Crédit'}}</h2>
       <img (click)="modifierOuCreerCredit(credit, logementMasqueId)" src="assets/img/v2/edit-icon.svg" alt="icone de modification">

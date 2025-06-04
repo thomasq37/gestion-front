@@ -16,6 +16,7 @@ export class FraisCreerComponent {
   error: string | null = null;
   logementMasqueId: string | null = null;
   periodeMasqueId: string | null = null;
+  creditMasqueId: string | null = null;
   loading = false;
   frequences = Object.values(Frequence);
   isPonctuelle: boolean = false;
@@ -43,6 +44,9 @@ export class FraisCreerComponent {
     this.activatedRoute.queryParamMap.subscribe(queryParams => {
       this.periodeMasqueId = queryParams.get('periodeMasqueId');
     });
+    this.activatedRoute.queryParamMap.subscribe(queryParams => {
+      this.creditMasqueId = queryParams.get('creditMasqueId');
+    });
     this.fraisForm.get('frequence')?.valueChanges.subscribe((value) => {
       this.isPonctuelle = value === Frequence.PONCTUELLE;
     });
@@ -56,15 +60,27 @@ export class FraisCreerComponent {
       await this.fraisService.creerEtMettreAJourCache(
         this.logementMasqueId!,
         frais,
-        this.periodeMasqueId ?? undefined
+        this.periodeMasqueId ?? undefined,
+        this.creditMasqueId ?? undefined
       );
+
+      let tab = 3;
+      const queryParams: any = {};
+
+      if (this.creditMasqueId) {
+        tab = 9;
+        queryParams.creditMasqueId = this.creditMasqueId;
+      } else if (this.periodeMasqueId) {
+        tab = 4;
+        queryParams.periodeMasqueId = this.periodeMasqueId;
+      }
+
+      queryParams.tab = tab;
+
       await this.router.navigate([`/logements/${this.logementMasqueId}`], {
-        queryParams: {
-          tab: this.periodeMasqueId ? 4 : 3,
-          ...(this.periodeMasqueId ? { periodeMasqueId: this.periodeMasqueId } : {})
-        }
+        queryParams
       });
-    } catch (error: any) {
+    }catch (error: any) {
       console.warn(error);
       this.error = (error?.message || 'Une erreur inconnue est survenue.');
     }
