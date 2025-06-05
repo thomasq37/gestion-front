@@ -46,7 +46,7 @@
       <nav class="nav-logement">
         <ul>
           <li
-            *ngFor="let item of menuItems; let i = index"
+            *ngFor="let item of displayedMenuItems; let i = index"
             (click)="setActive(i)"
             [ngClass]="{'active': activeIndex === i}"
           >
@@ -56,26 +56,26 @@
       </nav>
       <div class="data-logement">
         <app-statistiques
-          *ngIf="activeIndex === 0"
+          *ngIf="getRealActiveIndex() === 0"
           [logement]="logement"
         ></app-statistiques>
         <app-adresse-element
-          *ngIf="activeIndex === 1"
+          *ngIf="getRealActiveIndex() === 1"
           [logementMasqueId]="logement.masqueId"
           [adresse]="logement.adresse">
         </app-adresse-element>
         <app-caracteristiques-element
-          *ngIf="activeIndex === 2"
+          *ngIf="getRealActiveIndex() === 2"
           [adresse]="logement.adresse"
           [logementMasqueId]="logement.masqueId"
           [caracteristiques]="logement.caracteristiques">
         </app-caracteristiques-element>
         <app-frais-table
-          *ngIf="activeIndex === 3"
+          *ngIf="getRealActiveIndex() === 3"
           [logementMasqueId]="logement.masqueId"
           [frais]="logement.frais">
         </app-frais-table>
-        <div *ngIf="activeIndex === 4">
+        <div *ngIf="getRealActiveIndex() === 4">
           <app-periode-location-table
             [logementMasqueId]="logement.masqueId"
             [periodesDeLocation]="logement.periodesDeLocation"
@@ -100,27 +100,27 @@
           </app-frais-table>
         </div>
         <app-locataire-table
-          *ngIf="activeIndex === 5"
+          *ngIf="getRealActiveIndex() === 5"
           [logementMasqueId]="logement.masqueId"
           [locataires]="getLocataires()"
           [locataireActuel]="getLocataireActuel()">
         </app-locataire-table>
         <app-contact-table
-          *ngIf="activeIndex === 6"
+          *ngIf="getRealActiveIndex() === 6"
           [logementMasqueId]="logement.masqueId"
           [contacts]="logement.contacts">
         </app-contact-table>
         <app-alerte-table
-          *ngIf="activeIndex === 7"
+          *ngIf="getRealActiveIndex() === 7"
           [logementMasqueId]="logement.masqueId"
           [alertes]="logement.alertes">
         </app-alerte-table>
         <app-document-table
-          *ngIf="activeIndex === 8"
+          *ngIf="getRealActiveIndex() === 8"
           [logementMasqueId]="logement.masqueId"
           [documents]="logement.documents">
         </app-document-table>
-        <div *ngIf="activeIndex === 9">
+        <div *ngIf="getRealActiveIndex() === 9">
           <app-credit-element
             [logementMasqueId]="logement.masqueId"
             [credit]="logement.credit"
@@ -137,13 +137,14 @@
             </ul>
           </nav>
           <app-frais-table
+            *ngIf="logement.credit"
             [logementMasqueId]="logement.masqueId"
             [creditMasqueId]="logement.credit.masqueId"
-            [frais]="logement.credit.frais">
+            [frais]="logement.credit.frais ?? []">
           </app-frais-table>
         </div>
 
-        <button *ngIf="activeIndex === 10" class="btn-supprimer-logement" (click)="openModal()">Supprimer le logement</button>
+        <button *ngIf="getRealActiveIndex() === 10" class="btn-supprimer-logement" (click)="openModal()">Supprimer le logement</button>
       </div>
 
     </div>

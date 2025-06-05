@@ -17,6 +17,14 @@ export class LogementComponent implements OnInit {
   loading = false;
   error: string | null = null;
   menuItems = ['Statistiques', 'Adresse', 'Caractéristiques', 'Frais fixes', 'Périodes de locations', 'Locataires', 'Contacts', 'Alertes', 'Documents', 'Crédit', 'Supprimer'];
+  menuResidencePrincipaleItems = ['Statistiques', 'Adresse', 'Caractéristiques', 'Frais fixes', 'Contacts', 'Alertes', 'Documents', 'Crédit', 'Supprimer'];
+
+  // Menu affiché (dynamique)
+  displayedMenuItems: string[] = [];
+
+  // Mapping des index affichés vers les index réels
+  indexMapping: number[] = [];
+
   menuPeriodesDeLocation = ['Frais périodes de location'];
   menuCredit = ['Frais associés au crédit'];
 
@@ -37,23 +45,8 @@ export class LogementComponent implements OnInit {
     const logementMasqueId = this.route.snapshot.paramMap.get('logementMasqueId');
     if (logementMasqueId) {
       this.obtenirLogement(logementMasqueId).then(() => {
-        // Une fois que le logement est chargé, on traite les queryParams
-        if(this.logement.caracteristiques.typeDeResidence === 'PRINCIPALE'){
-          this.activeIndex = 3
-          this.menuItems = this.menuItems.filter(item => item !== 'Périodes de locations' && item !== 'Locataires');
-        }
-        const periodeMasqueId = this.route.snapshot.queryParamMap.get('periodeMasqueId');
-        if (periodeMasqueId && this.logement?.periodesDeLocation?.length > 0) {
-          const periode = this.logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId);
-          if (periode) {
-            this.periodeActuelle = periode;
-          }
-          this.router.navigate([], {
-            queryParams: { periodeMasqueId: null },
-            queryParamsHandling: 'merge',
-            replaceUrl: true
-          });
-        }
+        this.setupMenus();
+        this.handleQueryParams();
       });
     } else {
       this.error = 'Aucun identifiant de logement fourni.';
@@ -61,10 +54,59 @@ export class LogementComponent implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       const tabIndex = +params['tab'];
-      if (!isNaN(tabIndex) && tabIndex >= 0 && tabIndex < this.menuItems.length) {
-        this.activeIndex = tabIndex;
+      if (!isNaN(tabIndex) && tabIndex >= 0) {
+        this.setActiveByRealIndex(tabIndex);
       }
     });
+  }
+
+  private setupMenus(): void {
+    if (this.logement.caracteristiques.typeDeResidence === 'PRINCIPALE') {
+      this.displayedMenuItems = [...this.menuResidencePrincipaleItems];
+      // Créer le mapping : index affiché -> index réel
+      this.indexMapping = [0, 1, 2, 3, 6, 7, 8, 9, 10]; // Skip 4 (Périodes) et 5 (Locataires)
+    } else {
+      this.displayedMenuItems = [...this.menuItems];
+      this.indexMapping = this.menuItems.map((_, index) => index); // Mapping 1:1
+    }
+  }
+
+  private handleQueryParams(): void {
+    const periodeMasqueId = this.route.snapshot.queryParamMap.get('periodeMasqueId');
+    if (periodeMasqueId && this.logement?.periodesDeLocation?.length > 0) {
+      const periode = this.logement.periodesDeLocation.find(p => p.masqueId === periodeMasqueId);
+      if (periode) {
+        this.periodeActuelle = periode;
+      }
+      this.router.navigate([], {
+        queryParams: { periodeMasqueId: null },
+        queryParamsHandling: 'merge',
+        replaceUrl: true
+      });
+    }
+  }
+
+  setActive(displayedIndex: number): void {
+    this.activeIndex = displayedIndex;
+    const realIndex = this.indexMapping[displayedIndex];
+
+    // Mettre à jour l'URL avec l'index réel
+    this.router.navigate([], {
+      queryParams: { tab: realIndex },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  private setActiveByRealIndex(realIndex: number): void {
+    const displayedIndex = this.indexMapping.indexOf(realIndex);
+    if (displayedIndex !== -1) {
+      this.activeIndex = displayedIndex;
+    }
+  }
+
+  // Getter pour obtenir l'index réel actuel
+  getRealActiveIndex(): number {
+    return this.indexMapping[this.activeIndex];
   }
 
 
@@ -85,16 +127,6 @@ export class LogementComponent implements OnInit {
     }
     return '';
   }
-  setActive(index: number): void {
-    this.activeIndex = index;
-    this.periodeActuelle = null
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: { tab: index },
-      queryParamsHandling: 'merge',
-    });
-  }
-
   getTarifActuel(periodesDeLocation: PeriodeDeLocationDTO[]): string {
     return FunctionsUtil.getTarifActuel(periodesDeLocation);
   }

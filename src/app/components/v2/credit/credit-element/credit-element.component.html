@@ -1,6 +1,5 @@
 <section class="credit-element">
   <div class="custom-card">
-    <button (click)="toggleFrais()">Afficher frais</button>
     <div class="custom-card-header">
       <h2>{{credit === null ? 'Crédit à renseigner' : 'Crédit'}}</h2>
       <img (click)="modifierOuCreerCredit(credit, logementMasqueId)" src="assets/img/v2/edit-icon.svg" alt="icone de modification">
@@ -32,6 +31,13 @@
         <dd>
           <strong>Mensualité:</strong>
           <p>{{ credit.mensualite | number:'1.0-2':'fr-FR'}} €</p>
+        </dd>
+      </div>
+      <div *ngIf="credit.frais.length > 0" class="detail-item">
+        <dt><img class="icone-catgeorie" src="assets/img/v2/adresse-icon.jpg" alt="Icône d'adresse"></dt>
+        <dd>
+          <strong>Mensualité total (avec frais):</strong>
+          <p>{{ getMensualiteAvecFraisAssocie() | number:'1.0-2':'fr-FR'}} €</p>
         </dd>
       </div>
       <div class="detail-item">
