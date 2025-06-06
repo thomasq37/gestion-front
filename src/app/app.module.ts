@@ -56,6 +56,8 @@ import { CreditCreerComponent } from './components/v2/credit/credit-creer/credit
 import { CreditElementComponent } from './components/v2/credit/credit-element/credit-element.component';
 import { CreditModifierComponent } from './components/v2/credit/credit-modifier/credit-modifier.component';
 import { NavigationGlobaleComponent } from './components/v2/navigation-globale/navigation-globale.component';
+import { PlacementVueEnsembleComponent } from './components/v2/placements/placement-vue-ensemble/placement-vue-ensemble.component';
+import { OutilsVueEnsembleComponent } from './components/v2/outils/outils-vue-ensemble/outils-vue-ensemble.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -107,6 +109,8 @@ registerLocaleData(localeFr, 'fr');
     CreditElementComponent,
     CreditModifierComponent,
     NavigationGlobaleComponent,
+    PlacementVueEnsembleComponent,
+    OutilsVueEnsembleComponent,
   ],
   imports: [
     BrowserModule,

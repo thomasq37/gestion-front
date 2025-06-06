@@ -32,6 +32,10 @@ import {AlerteModifierComponent} from "./components/v2/alerte/alerte-modifier/al
 import {DocumentCreerComponent} from "./components/v2/document/document-creer/document-creer.component";
 import {CreditCreerComponent} from "./components/v2/credit/credit-creer/credit-creer.component";
 import {CreditModifierComponent} from "./components/v2/credit/credit-modifier/credit-modifier.component";
+import {
+  PlacementVueEnsembleComponent
+} from "./components/v2/placements/placement-vue-ensemble/placement-vue-ensemble.component";
+import {OutilsVueEnsembleComponent} from "./components/v2/outils/outils-vue-ensemble/outils-vue-ensemble.component";
 
 
 const routes: Routes = [
@@ -58,6 +62,9 @@ const routes: Routes = [
   { path: 'logements/:logementMasqueId/alerte/creer', component: AlerteCreerComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/alerte/:alerteMasqueId/modifier', component: AlerteModifierComponent, canActivate: [AuthGuard] },
   { path: 'logements/:logementMasqueId/document/creer', component: DocumentCreerComponent, canActivate: [AuthGuard] },
+
+  { path: 'placements', component: PlacementVueEnsembleComponent, canActivate: [AuthGuard] },
+  { path: 'outils', component: OutilsVueEnsembleComponent, canActivate: [AuthGuard] },
 
 ];
 @NgModule({

@@ -8,9 +8,12 @@
   padding: 10px 0;
   border-top: 1px solid #c2c2c2;
   nav{
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     .nav-item{
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
       button{
         display: flex;
         flex-direction: column;
