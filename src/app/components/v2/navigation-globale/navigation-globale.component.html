@@ -1,0 +1,33 @@
+<div class="nav-container">
+  <nav class="nav-menu">
+    <div class="nav-item">
+      <button
+        class="nav-link"
+        [class.active]="isRouteActive('/logements')"
+        (click)="navigateToLogements()">
+        <img src="assets/img/v2/icone-logements{{isRouteActive('/logements') ? '-selectionne' : ''}}.svg" alt="icone">
+        <span class="nav-text">Logements</span>
+      </button>
+    </div>
+
+    <div class="nav-item">
+      <button
+        class="nav-link"
+        [class.active]="isRouteActive('/placements')"
+        (click)="navigateToPlacements()">
+        <img src="assets/img/v2/icone-placement{{isRouteActive('/placements') ? '-selectionne' : ''}}.svg" alt="icone">
+        <span class="nav-text">Placements</span>
+      </button>
+    </div>
+
+    <div class="nav-item">
+      <button
+        class="nav-link"
+        [class.active]="isRouteActive('/outils')"
+        (click)="navigateToOutils()">
+        <img src="assets/img/v2/icone-calcul{{isRouteActive('/outils') ? '-selectionne' : ''}}.svg" alt="icone">
+        <span class="nav-text">Outils</span>
+      </button>
+    </div>
+  </nav>
+</div>

@@ -55,6 +55,7 @@ import { ReservationsComponent } from './components/v2/airbnb/reservations/reser
 import { CreditCreerComponent } from './components/v2/credit/credit-creer/credit-creer.component';
 import { CreditElementComponent } from './components/v2/credit/credit-element/credit-element.component';
 import { CreditModifierComponent } from './components/v2/credit/credit-modifier/credit-modifier.component';
+import { NavigationGlobaleComponent } from './components/v2/navigation-globale/navigation-globale.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -105,6 +106,7 @@ registerLocaleData(localeFr, 'fr');
     CreditCreerComponent,
     CreditElementComponent,
     CreditModifierComponent,
+    NavigationGlobaleComponent,
   ],
   imports: [
     BrowserModule,
