@@ -58,6 +58,7 @@ import { CreditModifierComponent } from './components/v2/credit/credit-modifier/
 import { NavigationGlobaleComponent } from './components/v2/navigation-globale/navigation-globale.component';
 import { PlacementVueEnsembleComponent } from './components/v2/placements/placement-vue-ensemble/placement-vue-ensemble.component';
 import { OutilsVueEnsembleComponent } from './components/v2/outils/outils-vue-ensemble/outils-vue-ensemble.component';
+import { OutilCapaciteEmpruntComponent } from './components/v2/outils/outil-capacite-emprunt/outil-capacite-emprunt.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -111,6 +112,7 @@ registerLocaleData(localeFr, 'fr');
     NavigationGlobaleComponent,
     PlacementVueEnsembleComponent,
     OutilsVueEnsembleComponent,
+    OutilCapaciteEmpruntComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,13 @@
 <div class="section-outils-vue-ensemble">
-  <p>outils-vue-ensemble works!</p>
+  <app-header [h1]="'Outils'"></app-header>
+  <div class="container">
+    <ul class="outils-liste">
+      <li class="custom-card" (click)="naviguerAOutilCapaciteEmprunt()">
+        <h2>Ma capacité d'emprunt</h2>
+        <p>Calcul ta capacité d'emprunt en fonction de tes revenus et charges actuelles</p>
+      </li>
+    </ul>
+  </div>
   <app-navigation-globale></app-navigation-globale>
 </div>
 

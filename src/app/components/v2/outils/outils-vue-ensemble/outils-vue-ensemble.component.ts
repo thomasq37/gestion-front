@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-outils-vue-ensemble',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./outils-vue-ensemble.component.scss']
 })
 export class OutilsVueEnsembleComponent {
+  constructor(private router: Router) {}
 
+  naviguerAOutilCapaciteEmprunt() {
+    this.router.navigate(['/outils/ma-capacite-emprunt']);
+  }
 }

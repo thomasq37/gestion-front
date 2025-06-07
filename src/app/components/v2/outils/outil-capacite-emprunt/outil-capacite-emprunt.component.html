@@ -1,0 +1,27 @@
+<div class="section-outil-capacite-emprunt">
+  <app-header [h1]="'Ma capacite d\'emprunt'"></app-header>
+  <div class="container">
+    <ul class="form-etape-indicateurs">
+      <li [ngClass]="etapeEnCours === 1 ? 'etape-en-cours' : ''">
+        <div class="numero">
+          <span>1</span>
+        </div>
+        <span class="nom-etape">Revenus</span>
+      </li>
+      <li [ngClass]="etapeEnCours === 3 ? 'etape-en-cours' : ''">
+        <div class="numero">
+          <span>2</span>
+        </div>
+        <span class="nom-etape">Charges</span>
+      </li>
+      <li [ngClass]="etapeEnCours === 3 ? 'etape-en-cours' : ''">
+        <div class="numero">
+          <span>3</span>
+        </div>
+        <span class="nom-etape">Emprunt</span>
+      </li>
+    </ul>
+  </div>
+  <app-navigation-globale></app-navigation-globale>
+</div>
+

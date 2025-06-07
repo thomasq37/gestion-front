@@ -36,6 +36,9 @@ import {
   PlacementVueEnsembleComponent
 } from "./components/v2/placements/placement-vue-ensemble/placement-vue-ensemble.component";
 import {OutilsVueEnsembleComponent} from "./components/v2/outils/outils-vue-ensemble/outils-vue-ensemble.component";
+import {
+  OutilCapaciteEmpruntComponent
+} from "./components/v2/outils/outil-capacite-emprunt/outil-capacite-emprunt.component";
 
 
 const routes: Routes = [
@@ -65,6 +68,7 @@ const routes: Routes = [
 
   { path: 'placements', component: PlacementVueEnsembleComponent, canActivate: [AuthGuard] },
   { path: 'outils', component: OutilsVueEnsembleComponent, canActivate: [AuthGuard] },
+  { path: 'outils/ma-capacite-emprunt', component: OutilCapaciteEmpruntComponent, canActivate: [AuthGuard] },
 
 ];
 @NgModule({
