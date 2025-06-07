@@ -1,30 +1,7 @@
 <div class="section-outil-capacite-emprunt">
-  <div class="actions">
-    <button (click)="naviguerEtape(etapeEnCours - 1)" [ngClass]="etapeEnCours === 1 ? 'hidden' : ''">Étape précédente</button>
-    <button
-      (click)="naviguerEtape(etapeEnCours + 1)"
-      [ngClass]="etapeEnCours === 3 ? 'none' : ''"
-      [disabled]="
-        (etapeEnCours === 1 && !dernierMontantValide()) ||
-        (etapeEnCours === 2 && !dernierMontantChargeValide())
-      ">Étape suivante</button>
-    <button
-      *ngIf="etapeEnCours === 3 && !formCalcule"
-      [disabled]="!emprunt.valid"
-      (click)="calculerMaCapaciteEmprunt()">
-      Calculer
-    </button>
 
-    <button
-      *ngIf="etapeEnCours === 3 && formCalcule"
-      class="btn-supprimer"
-      (click)="reinitialiserFormulaire()">
-      Réinitialiser
-    </button>
-  </div>
   <app-header [h1]="'Ma capacite d\'emprunt'"></app-header>
   <div class="container">
-
     <ul class="form-etape-indicateurs">
       <li [ngClass]="etapeEnCours === 1 ? 'etape-en-cours' : ''">
         <div class="numero">
@@ -265,6 +242,29 @@
         </div>
       </form>
     </section>
+    <div class="actions">
+      <button (click)="naviguerEtape(etapeEnCours - 1)" [ngClass]="etapeEnCours === 1 ? 'hidden' : ''">Étape précédente</button>
+      <button
+        (click)="naviguerEtape(etapeEnCours + 1)"
+        [ngClass]="etapeEnCours === 3 ? 'none' : ''"
+        [disabled]="
+        (etapeEnCours === 1 && !dernierMontantValide()) ||
+        (etapeEnCours === 2 && !dernierMontantChargeValide())
+      ">Étape suivante</button>
+      <button
+        *ngIf="etapeEnCours === 3 && !formCalcule"
+        [disabled]="!emprunt.valid"
+        (click)="calculerMaCapaciteEmprunt()">
+        Calculer
+      </button>
+
+      <button
+        *ngIf="etapeEnCours === 3 && formCalcule"
+        class="btn-supprimer"
+        (click)="reinitialiserFormulaire()">
+        Réinitialiser
+      </button>
+    </div>
 
 
   </div>

@@ -2,22 +2,7 @@
   min-height: 90vh;
   margin-bottom: 7rem;
   position: relative;
-  .actions{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    button{
-      &.hidden{
-        visibility: hidden;
-      }
-      &.none{
-        display: none;
-      }
-    }
-  }
+
   button{
     background: white;
     border: 1px solid #143b86;
@@ -48,6 +33,18 @@
 
   }
   .container{
+    .actions{
+      display: flex;
+      justify-content: space-between;
+      button{
+        &.hidden{
+          visibility: hidden;
+        }
+        &.none{
+          display: none;
+        }
+      }
+    }
     .form-etape-indicateurs{
       display: flex;
       justify-content: space-around;
@@ -81,6 +78,7 @@
       }
     }
     .formulaire{
+      margin-bottom: 4rem;
       form{
         .champs{
           .resume-revenus-charges{
