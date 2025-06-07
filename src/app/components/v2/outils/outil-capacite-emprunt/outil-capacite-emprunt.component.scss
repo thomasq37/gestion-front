@@ -1,8 +1,28 @@
 .section-outil-capacite-emprunt{
+  button{
+    background: white;
+    border: 1px solid #143b86;
+    color: #143b86;
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 1.3rem;
+  }
+  .btn-ajouter{
+    margin-top: 1rem;
+    &[disabled]{
+      opacity: 0.5;
+    }
+  }
+  .btn-supprimer{
+    border: 1px solid red;
+    color: red;
+
+  }
   .container{
     .form-etape-indicateurs{
       display: flex;
       justify-content: space-around;
+      margin-bottom: 2rem;
       li{
         display: flex;
         flex-direction: column;
@@ -28,6 +48,42 @@
         }
         .nom-etape{
           font-size: 1.3rem;
+        }
+      }
+    }
+    .formulaire{
+      form{
+        .champs{
+          .champ-paire{
+            margin-top: 2rem;
+          }
+          .champ{
+            .montant{
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              margin-bottom: 1rem;
+            }
+            .pourcentage{
+              margin-top: 1rem;
+            }
+            input{
+              width: 100%;
+              padding: .5rem;
+              border-radius: 5px;
+              border: 1px solid #777777;
+            }
+            .slider{
+              padding-bottom: 0;
+            }
+          }
+        }
+        .header{
+          p{
+            color: grey;
+            font-size: 1.4rem;
+            text-align: center;
+          }
         }
       }
     }

@@ -21,6 +21,90 @@
         <span class="nom-etape">Emprunt</span>
       </li>
     </ul>
+    <section *ngIf="etapeEnCours === 1" class="formulaire">
+      <form [formGroup]="revenusForm" class="etape-form">
+        <div class="header">
+          <p>Indiquez tous vos revenus nets mensuels et le pourcentage pris en charge par la banque</p>
+        </div>
+
+        <div class="champs" formArrayName="revenus">
+          <div
+            class="champ-paire"
+            *ngFor="let revenu of revenus.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <div class="champ">
+              <label class="montant">
+                <span>Montant mensuel</span>
+                <button
+                  type="button"
+                  class="btn-supprimer"
+                  *ngIf="i > 0"
+                  (click)="supprimerRevenu(i)">
+                Supprimer ce revenu
+              </button></label>
+              <input
+                type="number"
+                formControlName="montant"
+                placeholder="0"
+                min="1"
+                step="50"
+              />
+            </div>
+
+            <div class="champ">
+              <label class="pourcentage">
+                Pourcentage pris en charge :
+                {{ revenus.at(i).get('pourcentagePrisEnCharge')?.value }}%
+              </label>
+              <input
+                type="range"
+                formControlName="pourcentagePrisEnCharge"
+                min="0"
+                max="100"
+                step="5"
+                class="slider"
+              />
+              <div class="pourcentage-info">
+                <small>
+                  Montant pris en charge :
+                  <strong>{{
+                      calculerMontantPrisEnCharge(i) | currency: 'EUR':'symbol':'1.0-0'
+                    }}</strong>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="btn-ajouter"
+          [disabled]="!dernierMontantValide()"
+          (click)="ajouterRevenu()"
+        >
+          Ajouter un revenu
+        </button>
+      </form>
+
+    </section>
+    <section *ngIf="etapeEnCours === 2" class="formulaire">
+      <form  [formGroup]="charges" class="etape-form">
+        <div class="header">
+          <h2>Vos charges mensuels</h2>
+          <p>Indiquez toutes vos charges fixes mensuels (crédits en cours, etc)</p>
+        </div>
+      </form>
+    </section>
+    <section *ngIf="etapeEnCours === 3" class="formulaire">
+      <form [formGroup]="emprunt" class="etape-form">
+        <div class="header">
+          <h2>Votre projet d'emprunt</h2>
+          <p>Indiquez le prêt que vous souhiatez effectuer (taux, montant)</p>
+        </div>
+      </form>
+    </section>
+
   </div>
   <app-navigation-globale></app-navigation-globale>
 </div>
