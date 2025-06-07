@@ -1,4 +1,23 @@
 .section-outil-capacite-emprunt{
+  min-height: 90vh;
+  margin-bottom: 7rem;
+  position: relative;
+  .actions{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    button{
+      &.hidden{
+        visibility: hidden;
+      }
+      &.none{
+        display: none;
+      }
+    }
+  }
   button{
     background: white;
     border: 1px solid #143b86;
@@ -6,16 +25,26 @@
     padding: 2px 5px;
     border-radius: 5px;
     font-size: 1.3rem;
-  }
-  .btn-ajouter{
-    margin-top: 1rem;
     &[disabled]{
       opacity: 0.5;
     }
+    &:hover,
+    &:focus{
+      background: #143b86;
+      color: white;
+    }
+  }
+  .btn-ajouter{
+    margin-top: 1rem;
   }
   .btn-supprimer{
     border: 1px solid red;
     color: red;
+    &:hover,
+    &:focus{
+      background: red;
+      color: white;
+    }
 
   }
   .container{
@@ -54,10 +83,16 @@
     .formulaire{
       form{
         .champs{
+          .resume-revenus-charges{
+            margin: 2rem 0;
+          }
           .champ-paire{
             margin-top: 2rem;
           }
           .champ{
+            &.capacite{
+              margin-top: 2rem;
+            }
             .montant{
               display: flex;
               justify-content: space-between;

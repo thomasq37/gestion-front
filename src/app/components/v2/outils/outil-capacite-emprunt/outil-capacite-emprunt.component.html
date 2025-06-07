@@ -1,6 +1,30 @@
 <div class="section-outil-capacite-emprunt">
+  <div class="actions">
+    <button (click)="naviguerEtape(etapeEnCours - 1)" [ngClass]="etapeEnCours === 1 ? 'hidden' : ''">Étape précédente</button>
+    <button
+      (click)="naviguerEtape(etapeEnCours + 1)"
+      [ngClass]="etapeEnCours === 3 ? 'none' : ''"
+      [disabled]="
+        (etapeEnCours === 1 && !dernierMontantValide()) ||
+        (etapeEnCours === 2 && !dernierMontantChargeValide())
+      ">Étape suivante</button>
+    <button
+      *ngIf="etapeEnCours === 3 && !formCalcule"
+      [disabled]="!emprunt.valid"
+      (click)="calculerMaCapaciteEmprunt()">
+      Calculer
+    </button>
+
+    <button
+      *ngIf="etapeEnCours === 3 && formCalcule"
+      class="btn-supprimer"
+      (click)="reinitialiserFormulaire()">
+      Réinitialiser
+    </button>
+  </div>
   <app-header [h1]="'Ma capacite d\'emprunt'"></app-header>
   <div class="container">
+
     <ul class="form-etape-indicateurs">
       <li [ngClass]="etapeEnCours === 1 ? 'etape-en-cours' : ''">
         <div class="numero">
@@ -8,7 +32,7 @@
         </div>
         <span class="nom-etape">Revenus</span>
       </li>
-      <li [ngClass]="etapeEnCours === 3 ? 'etape-en-cours' : ''">
+      <li [ngClass]="etapeEnCours === 2 ? 'etape-en-cours' : ''">
         <div class="numero">
           <span>2</span>
         </div>
@@ -48,7 +72,6 @@
                 formControlName="montant"
                 placeholder="0"
                 min="1"
-                step="50"
               />
             </div>
 
@@ -62,7 +85,6 @@
                 formControlName="pourcentagePrisEnCharge"
                 min="0"
                 max="100"
-                step="5"
                 class="slider"
               />
               <div class="pourcentage-info">
@@ -89,21 +111,161 @@
 
     </section>
     <section *ngIf="etapeEnCours === 2" class="formulaire">
-      <form  [formGroup]="charges" class="etape-form">
+      <form [formGroup]="charges" class="etape-form">
         <div class="header">
-          <h2>Vos charges mensuels</h2>
-          <p>Indiquez toutes vos charges fixes mensuels (crédits en cours, etc)</p>
+          <p>Indiquez toutes vos charges fixes mensuelles (crédits en cours, etc.) pris en compte par la banque dans votre taux d'endettement</p>
         </div>
+
+        <div class="champs" formArrayName="charges">
+          <div
+            class="champ-paire"
+            *ngFor="let charge of listeCharges.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <div class="champ">
+              <label class="montant">
+                <span>Montant mensuel</span>
+                <button
+                  type="button"
+                  class="btn-supprimer"
+                  *ngIf="i > 0"
+                  (click)="supprimerCharge(i)">
+                  Supprimer cette charge
+                </button>
+              </label>
+              <input
+                type="number"
+                formControlName="montant"
+                placeholder="0"
+                min="1"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="btn-ajouter"
+          [disabled]="!dernierMontantChargeValide()"
+          (click)="ajouterCharge()">
+          Ajouter une charge
+        </button>
       </form>
     </section>
     <section *ngIf="etapeEnCours === 3" class="formulaire">
       <form [formGroup]="emprunt" class="etape-form">
         <div class="header">
-          <h2>Votre projet d'emprunt</h2>
-          <p>Indiquez le prêt que vous souhiatez effectuer (taux, montant)</p>
+          <p>Indiquez le prêt que vous souhaitez effectuer (taux du prêt, taux d'endettement autorisé)</p>
+        </div>
+
+        <div class="champs">
+          <div class="resume-revenus-charges">
+            <div class="champ">
+              <div class="pourcentage-info">
+                <small>
+                  Total des revenus pris en charge :
+                  <strong>{{ getTotalRevenusPrisEnCharge() | currency: 'EUR':'symbol':'1.0-0' }}</strong>
+                </small>
+              </div>
+            </div>
+
+            <div class="champ">
+              <div class="pourcentage-info">
+                <small>
+                  Total des charges :
+                  <strong>{{ getTotalCharges() | currency: 'EUR':'symbol':'1.0-0' }}</strong>
+                </small>
+              </div>
+            </div>
+
+            <div class="champ">
+              <div class="pourcentage-info">
+                <small>
+                  Taux d'endettement actuel :
+                  <strong>{{ getTauxEndettement() | number: '1.0-2' }}%</strong>
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <ng-container *ngIf="!formCalcule">
+
+            <div class="champ">
+              <label for="taux">Taux d’intérêt (en %)</label>
+              <input
+                type="number"
+                formControlName="taux"
+                id="taux"
+                placeholder="0"
+                step="0.1"
+              />
+            </div>
+
+            <div class="champ">
+              <label for="tauxEndettementAutorise">Taux d’endettement autorisé (en %)</label>
+              <input
+                type="number"
+                formControlName="tauxEndettementAutorise"
+                id="tauxEndettementAutorise"
+                placeholder="33"
+                step="0.1"
+              />
+            </div>
+          </ng-container>
+          <div *ngIf="formCalcule" class="champ">
+            <div class="pourcentage-info">
+              <small>
+                Taux d’endettement autorisé :
+                <strong>{{ emprunt.get('tauxEndettementAutorise')?.value }}%</strong>
+              </small>
+            </div>
+          </div>
+
+          <div *ngIf="formCalcule" class="champ">
+            <div class="pourcentage-info">
+              <small>
+                Taux d’intérêt du prêt :
+                <strong>{{ emprunt.get('taux')?.value }}%</strong>
+              </small>
+            </div>
+          </div>
+
+          <div *ngIf="formCalcule && mensualiteCible !== null" class="champ">
+            <div class="pourcentage-info">
+              <small>
+                Mensualité cible autorisée :
+                <strong>{{ mensualiteCible | currency:'EUR':'symbol':'1.0-0' }}</strong>
+              </small>
+            </div>
+          </div>
+
+          <div *ngIf="formCalcule && capacitesParDuree.length > 0" class="champ capacite">
+            <div class="pourcentage-info">
+              <small>
+                Capacité d’emprunt estimée :
+              </small>
+            </div>
+
+            <div class="pourcentage-info" *ngFor="let capacite of capacitesParDuree">
+              <small>
+                Durée : <strong>{{ capacite.duree }} ans</strong> —
+                Montant empruntable : <strong>{{ capacite.montant | currency:'EUR':'symbol':'1.0-0' }}</strong>
+              </small>
+            </div>
+          </div>
+
+          <div *ngIf="formCalcule && capacitesParDuree.length === 0" class="champ">
+            <div class="pourcentage-info">
+              <small style="color: red;">
+                ⚠️ Votre taux d’endettement dépasse le seuil autorisé : aucune mensualité disponible.
+              </small>
+            </div>
+          </div>
+
         </div>
       </form>
     </section>
+
 
   </div>
   <app-navigation-globale></app-navigation-globale>
