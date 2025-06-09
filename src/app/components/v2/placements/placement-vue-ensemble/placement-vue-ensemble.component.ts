@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PlacementService} from "../../../../services/v2/placement/placement.service";
 import {PlacementVueEnsembleDTO} from "../../../../models/v2/entites/Placement/PlacementVueEnsembleDTO.model";
 import {Router} from "@angular/router";
 
@@ -14,7 +15,7 @@ export class PlacementVueEnsembleComponent {
 
   constructor(
     private router: Router,
-    ) {}
+    private placementService: PlacementService) {}
 
   ngOnInit(): void {
     this.listerPlacements();
@@ -24,7 +25,7 @@ export class PlacementVueEnsembleComponent {
     this.loading = true;
     this.error = null;
     try {
-      //this.placements = await this.placementService.listerPlacements();
+      this.placements = await this.placementService.listerPlacements();
     } catch (err) {
       this.error = 'Erreur lors du chargement des placements.';
     } finally {
