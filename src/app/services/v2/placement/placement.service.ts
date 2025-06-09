@@ -17,7 +17,7 @@ export class PlacementService {
   }
 
   async supprimerPlacement(masqueId: string): Promise<SuccessResponse> {
-    return fetchWithHandling<SuccessResponse>(`${this.apiUrl}/${masqueId}`, {
+    return fetchWithHandling<SuccessResponse>(`${this.apiUrl}/${masqueId}/supprimer`, {
       method: 'DELETE',
     });
   }
@@ -37,8 +37,21 @@ export class PlacementService {
   }
   async creerEtMettreAJourCache(dto: PlacementVueEnsembleDTO): Promise<PlacementVueEnsembleDTO> {
     const created = await this.creerPlacement(dto);
-    // tu peux ajouter ici un cache local si besoin
     return created;
   }
 
+  async modifierEtMettreAJourCache(masqueId: string, dto: PlacementVueEnsembleDTO): Promise<PlacementVueEnsembleDTO> {
+    const updated = await this.modifierPlacement(masqueId, dto);
+    return updated;
+  }
+
+  async supprimerEtMettreAJourCache(masqueId: string): Promise<void> {
+    await this.supprimerPlacement(masqueId);
+  }
+
+  async obtenirPlacement(masqueId: string): Promise<PlacementVueEnsembleDTO> {
+    return fetchWithHandling<PlacementVueEnsembleDTO>(`${this.apiUrl}/${masqueId}/obtenir`, {
+      method: 'GET',
+    });
+  }
 }

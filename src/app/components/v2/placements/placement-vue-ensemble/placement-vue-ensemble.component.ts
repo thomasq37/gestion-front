@@ -36,4 +36,8 @@ export class PlacementVueEnsembleComponent {
   creerPlacement() {
     this.router.navigate(['/placements/creer']);
   }
+
+  modifierPlacement(placementMasqueId: string) {
+    this.router.navigate([`/placements/${placementMasqueId}/modifier`]);
+  }
 }

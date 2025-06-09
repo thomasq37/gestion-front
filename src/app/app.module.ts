@@ -60,6 +60,7 @@ import { PlacementVueEnsembleComponent } from './components/v2/placements/placem
 import { OutilsVueEnsembleComponent } from './components/v2/outils/outils-vue-ensemble/outils-vue-ensemble.component';
 import { OutilCapaciteEmpruntComponent } from './components/v2/outils/outil-capacite-emprunt/outil-capacite-emprunt.component';
 import { PlacementCreerComponent } from './components/v2/placements/placement-creer/placement-creer.component';
+import { PlacementModifierComponent } from './components/v2/placements/placement-modifier/placement-modifier.component';
 
 registerLocaleData(localeFr, 'fr');
 
@@ -115,6 +116,7 @@ registerLocaleData(localeFr, 'fr');
     OutilsVueEnsembleComponent,
     OutilCapaciteEmpruntComponent,
     PlacementCreerComponent,
+    PlacementModifierComponent,
   ],
   imports: [
     BrowserModule,

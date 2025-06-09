@@ -1,0 +1,42 @@
+<section class="formulaire-basique">
+  <app-loader *ngIf="loading"></app-loader>
+  <form *ngIf="!loading" [formGroup]="placementForm" (ngSubmit)="modifierPlacement()">
+    <div class="header">
+      <h1>Modifier un placement</h1>
+    </div>
+
+    <div class="champs">
+      <div class="champ">
+        <label for="nom">Nom</label>
+        <input type="text" id="nom" formControlName="nom">
+      </div>
+
+      <div class="champ">
+        <label for="capital">Capital</label>
+        <input type="number" id="capital" formControlName="capital">
+      </div>
+
+      <div class="error">
+        {{ error }}
+      </div>
+
+      <button type="submit" [disabled]="!placementForm.valid">
+        Enregistrer les modifications
+      </button>
+    </div>
+
+    <button type="button" class="btn-supprimer-formulaire-basique" (click)="openModal()">Supprimer le placement</button>
+
+    <app-fil-ariane
+      [ongletRetour]="{ url: ['/placements'], label: 'Mes placements' }"
+      [ongletActuel]="'Modifier un placement'">
+    </app-fil-ariane>
+  </form>
+</section>
+
+<app-modale-confirmation
+  *ngIf="isModalVisible"
+  [message]="msgConfirmationSuppression"
+  (confirm)="confirmDelete()"
+  (cancel)="closeModal()"
+></app-modale-confirmation>

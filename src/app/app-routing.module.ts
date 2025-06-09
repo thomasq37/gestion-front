@@ -40,6 +40,7 @@ import {
   OutilCapaciteEmpruntComponent
 } from "./components/v2/outils/outil-capacite-emprunt/outil-capacite-emprunt.component";
 import {PlacementCreerComponent} from "./components/v2/placements/placement-creer/placement-creer.component";
+import {PlacementModifierComponent} from "./components/v2/placements/placement-modifier/placement-modifier.component";
 
 
 const routes: Routes = [
@@ -69,6 +70,7 @@ const routes: Routes = [
 
   { path: 'placements', component: PlacementVueEnsembleComponent, canActivate: [AuthGuard] },
   { path: 'placements/creer', component: PlacementCreerComponent, canActivate: [AuthGuard] },
+  { path: 'placements/:placementMasqueId/modifier', component: PlacementModifierComponent, canActivate: [AuthGuard] },
 
   { path: 'outils', component: OutilsVueEnsembleComponent, canActivate: [AuthGuard] },
   { path: 'outils/ma-capacite-emprunt', component: OutilCapaciteEmpruntComponent, canActivate: [AuthGuard] },

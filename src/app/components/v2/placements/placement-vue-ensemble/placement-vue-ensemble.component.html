@@ -1,5 +1,5 @@
 <section class="placements">
-  <app-header [h1]="'placements'"></app-header>
+  <app-header [h1]="'Mes placements'"></app-header>
 
   <div class="contenu-placements {{loading ? 'on-load' : ''}}">
     <div class="container">
@@ -9,9 +9,12 @@
       <app-loader *ngIf="loading"></app-loader>
       <div *ngIf="error" class="error">{{ error }}</div>
       <ul *ngIf="placements.length > 0">
-        <li  class="custom-card"  *ngFor="let placement of placements">
-          <h2>{{placement.nom}}</h2>
-          <p>{{placement.capital}}€</p>
+        <li (click)="modifierPlacement(placement.masqueId)"  class="custom-card"  *ngFor="let placement of placements">
+          <div class="custom-card-info">
+            <h2>{{placement.nom}}</h2>
+            <p>{{placement.capital}}€</p>
+          </div>
+          <img ngSrc="assets/img/v2/edit-icon.svg" alt="icone editer" height="29.5" width="30">
         </li>
       </ul>
       <button (click)="creerPlacement()" class="btn-ajouter-placement" *ngIf="!error && !loading">Ajouter un placement</button>
