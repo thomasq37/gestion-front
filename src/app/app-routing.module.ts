@@ -39,6 +39,7 @@ import {OutilsVueEnsembleComponent} from "./components/v2/outils/outils-vue-ense
 import {
   OutilCapaciteEmpruntComponent
 } from "./components/v2/outils/outil-capacite-emprunt/outil-capacite-emprunt.component";
+import {PlacementCreerComponent} from "./components/v2/placements/placement-creer/placement-creer.component";
 
 
 const routes: Routes = [
@@ -67,6 +68,8 @@ const routes: Routes = [
   { path: 'logements/:logementMasqueId/document/creer', component: DocumentCreerComponent, canActivate: [AuthGuard] },
 
   { path: 'placements', component: PlacementVueEnsembleComponent, canActivate: [AuthGuard] },
+  { path: 'placements/creer', component: PlacementCreerComponent, canActivate: [AuthGuard] },
+
   { path: 'outils', component: OutilsVueEnsembleComponent, canActivate: [AuthGuard] },
   { path: 'outils/ma-capacite-emprunt', component: OutilCapaciteEmpruntComponent, canActivate: [AuthGuard] },
 

@@ -1,5 +1,23 @@
-<div class="placement-vue-ensemble">
-  <p>placement-vue-ensemble works!</p>
-  <app-navigation-globale></app-navigation-globale>
-</div>
+<section class="placements">
+  <app-header [h1]="'placements'"></app-header>
 
+  <div class="contenu-placements {{loading ? 'on-load' : ''}}">
+    <div class="container">
+      <div class="placements-title" *ngIf="!loading && !error">
+        <p>Retrouvez ici l'ensemble de vos placements et les informations principales</p>
+      </div>
+      <app-loader *ngIf="loading"></app-loader>
+      <div *ngIf="error" class="error">{{ error }}</div>
+      <ul *ngIf="placements.length > 0">
+        <li  class="custom-card"  *ngFor="let placement of placements">
+          <h2>{{placement.nom}}</h2>
+          <p>{{placement.capital}}</p>
+        </li>
+      </ul>
+      <button (click)="creerPlacement()" class="btn-ajouter-placement" *ngIf="!error && !loading">Ajouter un placement</button>
+
+    </div>
+
+    <app-navigation-globale></app-navigation-globale>
+</div>
+</section>
