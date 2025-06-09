@@ -40,4 +40,8 @@ export class PlacementVueEnsembleComponent {
   modifierPlacement(placementMasqueId: string) {
     this.router.navigate([`/placements/${placementMasqueId}/modifier`]);
   }
+  getTotalPlacements(): number {
+    return this.placements.reduce((total, placement) => total + (placement.capital || 0), 0);
+  }
+
 }

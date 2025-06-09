@@ -4,6 +4,7 @@
     .container{
       .placements-title{
         margin-bottom: 2rem;
+
       }
       ul{
         display: flex;
@@ -32,6 +33,13 @@
             width: 5rem;
           }
 
+        }
+      }
+      .total-placements{
+        margin: 2rem 0 !important;
+        span{
+          color: #143b86;
+          font-weight: bold;
         }
       }
       .btn-ajouter-placement{
