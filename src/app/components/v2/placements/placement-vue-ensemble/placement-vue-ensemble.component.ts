@@ -29,7 +29,7 @@ export class PlacementVueEnsembleComponent {
     } catch (err) {
       this.error = 'Erreur lors du chargement des placements.';
     } finally {
-      this.loading = true;
+      this.loading = false;
     }
   }
 
