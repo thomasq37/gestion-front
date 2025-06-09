@@ -1,8 +1,12 @@
 
 .placements{
-  min-height: 90vh;
-  margin-bottom: 7rem;
+
   .contenu-placements{
+    min-height: 90vh;
+    margin-bottom: 7rem;
+    &.on-load{
+      display: flex;
+    }
     .container{
       .placements-title{
         margin-bottom: 2rem;
