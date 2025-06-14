@@ -61,8 +61,8 @@ import { OutilsVueEnsembleComponent } from './components/v2/outils/outils-vue-en
 import { OutilCapaciteEmpruntComponent } from './components/v2/outils/outil-capacite-emprunt/outil-capacite-emprunt.component';
 import { PlacementCreerComponent } from './components/v2/placements/placement-creer/placement-creer.component';
 import { PlacementModifierComponent } from './components/v2/placements/placement-modifier/placement-modifier.component';
-import {NgChartsModule} from "ng2-charts";
 import { TotalCompteModifierComponent } from './components/v2/placements/total-compte-modifier/total-compte-modifier.component';
+import {NgChartsModule} from "ng2-charts";
 
 registerLocaleData(localeFr, 'fr');
 
@@ -121,21 +121,21 @@ registerLocaleData(localeFr, 'fr');
     PlacementModifierComponent,
     TotalCompteModifierComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        NgbModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NgbCarouselModule,
-        ReactiveFormsModule,
-        NgOptimizedImage,
-        BrowserAnimationsModule,
-        NgxIntlTelInputModule,
-        BsDropdownModule.forRoot(),
-        NgChartsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbCarouselModule,
+    ReactiveFormsModule,
+    NgOptimizedImage,
+    BrowserAnimationsModule,
+    NgxIntlTelInputModule,
+    BsDropdownModule.forRoot(),
+    NgChartsModule,
+  ],
     providers: [
         AuthGuard,
         { provide: LOCALE_ID, useValue: 'fr' }
