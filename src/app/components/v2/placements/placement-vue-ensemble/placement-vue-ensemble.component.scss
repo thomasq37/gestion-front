@@ -94,6 +94,8 @@
     margin-bottom: 2rem;
   }
   .liste-evolution{
+    display: flex;
+    flex-direction: column-reverse !important;
     li{
       display: flex;
       .actions-evolution {

@@ -58,6 +58,8 @@ export class PlacementVueEnsembleComponent {
   async chargerEvolution(): Promise<void> {
     try {
       this.totalCompteHistorique = await this.totalCompteService.listerTotalComptes();
+
+      // Tri par date croissante
       this.totalCompteHistorique.sort((a, b) =>
         a.dateEnregistrement.localeCompare(b.dateEnregistrement)
       );
@@ -67,6 +69,16 @@ export class PlacementVueEnsembleComponent {
       );
       const data = this.totalCompteHistorique.map(tc => tc.montant);
 
+      // Calcul de la couleur de la courbe
+      const derniereValeur = data[data.length - 1];
+      const avantDerniereValeur = data.length >= 2 ? data[data.length - 2] : derniereValeur;
+
+      const couleur = derniereValeur > avantDerniereValeur
+        ? '#2ecc71'   // Vert
+        : derniereValeur < avantDerniereValeur
+          ? '#f39c12' // Orange
+          : '#999999'; // Neutre (gris)
+
       this.chartData = {
         labels,
         datasets: [{
@@ -74,7 +86,11 @@ export class PlacementVueEnsembleComponent {
           label: 'Évolution du capital (€)',
           fill: false,
           tension: 0.2,
-          borderWidth: 2
+          borderColor: couleur,
+          backgroundColor: couleur,
+          borderWidth: 2,
+          pointRadius: 4,
+          pointHoverRadius: 6
         }]
       };
     } catch (e) {
