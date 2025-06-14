@@ -41,6 +41,9 @@ import {
 } from "./components/v2/outils/outil-capacite-emprunt/outil-capacite-emprunt.component";
 import {PlacementCreerComponent} from "./components/v2/placements/placement-creer/placement-creer.component";
 import {PlacementModifierComponent} from "./components/v2/placements/placement-modifier/placement-modifier.component";
+import {
+  TotalCompteModifierComponent
+} from "./components/v2/placements/total-compte-modifier/total-compte-modifier.component";
 
 
 const routes: Routes = [
@@ -74,7 +77,7 @@ const routes: Routes = [
 
   { path: 'outils', component: OutilsVueEnsembleComponent, canActivate: [AuthGuard] },
   { path: 'outils/ma-capacite-emprunt', component: OutilCapaciteEmpruntComponent, canActivate: [AuthGuard] },
-
+  { path: 'placements/total-compte/:masqueId/modifier', component: TotalCompteModifierComponent, canActivate: [AuthGuard] },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

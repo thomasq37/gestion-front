@@ -8,6 +8,22 @@
       display: flex;
     }
     .container{
+      .actions{
+        margin-bottom: 2rem;
+        button{
+          padding: 0.25rem 1rem;
+          background: white;
+          border-radius: 5px;
+          color: #143b86;
+          border: 1px solid;
+          &:hover,
+          &:focus,
+          &.selected{
+            background-color: #143b86;
+            color: white;
+          }
+        }
+      }
       .placements-title{
         margin-bottom: 2rem;
 
@@ -64,5 +80,54 @@
     }
   }
 
+  .btn-enregistrer-total{
+    padding:
+      0.25rem 1rem;
+    color: white;
+    border-radius:
+      0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.22);
+    font-weight: bold;
+    border:
+      1px solid green;
+    background-color: green;
+    margin-bottom: 2rem;
+  }
+  .liste-evolution{
+    li{
+      display: flex;
+      .actions-evolution {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        button{
+          margin-left: 2rem;
+          padding: 0.25rem 1rem;
+          background: white;
+          border-radius: 5px;
+          color: red;
+          border: 1px solid;
+          &:hover,
+          &:focus,
+          &.selected{
+            background-color: red;
+            color: white;
+          }
+          &.btn-modifier{
+            color: #143b86;
+            border: 1px solid;
+            &:hover,
+            &:focus,
+            &.selected{
+              background-color: #143b86;
+              color: white;
+            }
+          }
+        }
+      }
+    }
 
+
+
+  }
 }

@@ -1,0 +1,43 @@
+<section class="formulaire-basique">
+  <app-loader *ngIf="loading"></app-loader>
+
+  <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="modifier()">
+    <div class="header">
+      <h1>Modifier un enregistrement</h1>
+    </div>
+
+    <div class="champs">
+      <div class="champ">
+        <label for="montant">Montant</label>
+        <input type="number" id="montant" formControlName="montant">
+      </div>
+
+      <div class="champ">
+        <label for="dateEnregistrement">Date</label>
+        <input type="date" id="dateEnregistrement" formControlName="dateEnregistrement">
+      </div>
+
+      <div class="error">
+        {{ error }}
+      </div>
+
+      <button type="submit" [disabled]="!form.valid">Enregistrer les modifications</button>
+    </div>
+
+    <button type="button" class="btn-supprimer-formulaire-basique" (click)="openModal()">
+      Supprimer l’enregistrement
+    </button>
+
+    <app-fil-ariane
+      [ongletRetour]="{ url: ['/placements'], label: 'Mes placements' }"
+      [ongletActuel]="'Modifier un enregistrement'">
+    </app-fil-ariane>
+  </form>
+</section>
+
+<app-modale-confirmation
+  *ngIf="isModalVisible"
+  [message]="msgConfirmationSuppression"
+  (confirm)="confirmDelete()"
+  (cancel)="closeModal()">
+</app-modale-confirmation>

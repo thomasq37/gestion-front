@@ -6,10 +6,18 @@
       <div class="placements-title" *ngIf="!loading && !error">
         <p>Retrouvez ici l'ensemble de vos placements et les informations principales</p>
       </div>
+
+      <div *ngIf="!loading && placements.length > 0" class="actions">
+        <button [ngClass]="afficherListe ? 'selected' : ''" (click)="toggleListeEvolutions()">Liste</button>
+        <button [ngClass]="!afficherListe ? 'selected' : ''" (click)="toggleListeEvolutions()">Évolution</button>
+      </div>
+
       <app-loader *ngIf="loading"></app-loader>
       <div *ngIf="error" class="error">{{ error }}</div>
-      <ul *ngIf="placements.length > 0">
-        <li (click)="modifierPlacement(placement.masqueId)"  class="custom-card"  *ngFor="let placement of placements">
+
+      <!-- Liste des placements -->
+      <ul *ngIf="afficherListe && placements.length > 0">
+        <li (click)="modifierPlacement(placement.masqueId)" class="custom-card" *ngFor="let placement of placements">
           <div class="custom-card-info">
             <h2>{{placement.nom}}</h2>
             <p>{{placement.capital | number:'1.0-2':'fr-FR'}} €</p>
@@ -17,12 +25,41 @@
           <img ngSrc="assets/img/v2/edit-icon.svg" alt="icone editer" height="29.5" width="30">
         </li>
       </ul>
-      <p *ngIf="placements.length > 0" class="total-placements"><span>Capital total:</span> {{ getTotalPlacements() | number:'1.0-2':'fr-FR' }} €</p>
 
-      <button (click)="creerPlacement()" class="btn-ajouter-placement" *ngIf="!error && !loading">Ajouter un placement</button>
+      <!-- Graphique d'évolution -->
+      <div *ngIf="!afficherListe && totalCompteHistorique.length > 0" class="graphique-evolution">
+        <canvas baseChart
+                [data]="chartData"
+                [options]="chartOptions"
+                [type]="'line'">
+        </canvas>
+      </div>
 
+      <app-modale-confirmation
+        *ngIf="isModalVisible"
+        [message]="msgConfirmationSuppression"
+        (confirm)="confirmerSuppression()"
+        (cancel)="fermerModalSuppression()">
+      </app-modale-confirmation>
+      <p *ngIf="placements.length > 0" class="total-placements">
+        <span>Capital total:</span> {{ getTotalPlacements() | number:'1.0-2':'fr-FR' }} €
+      </p>
+      <ul class="liste-evolution" *ngIf="!afficherListe && totalCompteHistorique.length > 0">
+        <li *ngFor="let total of totalCompteHistorique">
+          <span>{{ total.dateEnregistrement | date:'dd/MM/yyyy' }} : {{ total.montant | number:'1.0-2':'fr-FR' }} €</span>
+          <div class="actions-evolution">
+            <button class="btn-modifier" (click)="naviguerVersModificationTotal(total.masqueId)">Modifier</button>
+            <button class="btn-supprimer" (click)="ouvrirModalSuppression(total.masqueId)">Supprimer</button>
+          </div>      </ul>
+      <button *ngIf="placements.length > 0 && afficherListe" class="btn-enregistrer-total" (click)="sauvegarderCapitalActuel()">
+        {{msgTotalEnregistrer}}
+      </button>
+
+      <button (click)="creerPlacement()" class="btn-ajouter-placement" *ngIf="!error && !loading && afficherListe">
+        Ajouter un placement
+      </button>
     </div>
 
     <app-navigation-globale></app-navigation-globale>
-</div>
+  </div>
 </section>
