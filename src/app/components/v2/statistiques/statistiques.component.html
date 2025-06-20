@@ -2,28 +2,48 @@
   <div class="custom-card">
     <div class="custom-card-header">
       <h2>Statistiques</h2>
+      <div class="select-annee">
+        <label for="periode">Période :</label>
+        <select id="periode" [(ngModel)]="anneeSelectionnee" (change)="mettreAJourStats()">
+          <option value="tout">Depuis le début</option>
+          <option *ngFor="let annee of anneesDisponibles.slice(1)" [value]="annee">{{ annee }}</option>
+        </select>
+      </div>
     </div>
+
     <div class="statistiques-contenu">
       <table>
         <tbody>
-          <tr>
-            <td class="categorie">Total des revenus</td>
-            <td>{{ totalRevenus | number:'1.0-2':'fr-FR'}} €</td>
-          </tr>
-          <tr>
-            <td class="categorie">Total des dépenses</td>
-            <td>{{ totalDepenses | number:'1.0-2':'fr-FR'}} €</td>
-          </tr>
-          <tr>
-            <td class="categorie">Bénéfice net</td>
-            <td>{{ (totalRevenus - totalDepenses) | number:'1.0-2':'fr-FR'}} €</td>
-          </tr>
-          <tr>
-            <td class="categorie">Taux d'occupation</td>
-            <td>{{ tauxOccupation }} %</td>
-          </tr>
+        <tr>
+          <td class="categorie">Total des revenus</td>
+          <td>{{ totalRevenus | number:'1.0-2':'fr-FR' }} €</td>
+        </tr>
+        <tr>
+          <td class="categorie">Total des dépenses</td>
+          <td>{{ totalDepenses | number:'1.0-2':'fr-FR' }} €</td>
+        </tr>
+        <tr>
+          <td class="categorie">Bénéfice net</td>
+          <td>
+              <span [ngClass]="(totalRevenus - totalDepenses) >= 0 ? 'positif' : 'negatif'">
+                {{ (totalRevenus - totalDepenses) | number:'1.0-2':'fr-FR' }} €
+              </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="categorie">Taux d'occupation</td>
+          <td>{{ tauxOccupation }} %</td>
+        </tr>
         </tbody>
       </table>
     </div>
+  </div>
+
+  <div class="graphique-statistiques">
+    <canvas baseChart
+            [data]="chartData"
+            [options]="chartOptions"
+            [type]="chartType">
+    </canvas>
   </div>
 </section>
