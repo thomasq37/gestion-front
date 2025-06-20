@@ -17,6 +17,19 @@ export class DocumentCreerComponent implements OnInit {
   error: string | null = null;
   loading = false;
 
+  // Types de fichiers acceptés
+  private readonly acceptedFileTypes = [
+    'application/pdf',
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
+    'image/gif',
+    'image/webp'
+  ];
+
+  // Extensions acceptées pour l'affichage
+  private readonly acceptedExtensions = ['.pdf', '.jpg', '.jpeg', '.png', '.gif', '.webp'];
+
   constructor(
     private formBuilder: FormBuilder,
     private documentService: DocumentService,
@@ -25,6 +38,7 @@ export class DocumentCreerComponent implements OnInit {
   ) {
     this.documentForm = this.formBuilder.group({
       documentExistant: new FormControl('', Validators.required), // ID du document existant
+      nomFichier: new FormControl(''), // Nom personnalisé pour le fichier
     });
 
     this.activatedRoute.paramMap.subscribe((params) => {
@@ -47,8 +61,8 @@ export class DocumentCreerComponent implements OnInit {
       const file = input.files[0];
 
       // Vérification du type de fichier
-      if (file.type !== 'application/pdf') {
-        this.error = 'Seuls les fichiers PDF sont autorisés.';
+      if (!this.acceptedFileTypes.includes(file.type)) {
+        this.error = 'Seuls les fichiers PDF et les images (JPG, PNG, GIF, WebP) sont autorisés.';
         this.selectedFile = null;
         input.value = ''; // Réinitialise l'input
         return;
@@ -66,9 +80,80 @@ export class DocumentCreerComponent implements OnInit {
       // Si toutes les vérifications passent
       this.error = null; // Réinitialise les erreurs
       this.selectedFile = file;
+
+      // NOUVELLE LOGIQUE : Désactiver et vider le select des documents existants
+      this.documentForm.get('documentExistant')?.setValue('');
+      this.documentForm.get('documentExistant')?.disable();
+
+      // Pré-remplir le nom du fichier (sans l'extension) si aucun nom n'est déjà saisi
+      const currentName = this.documentForm.get('nomFichier')?.value;
+      if (!currentName) {
+        const nameWithoutExtension = this.getFileNameWithoutExtension(file.name);
+        this.documentForm.patchValue({ nomFichier: nameWithoutExtension });
+      }
     }
   }
 
+  // Méthode pour obtenir le nom du fichier sans extension
+  private getFileNameWithoutExtension(fileName: string): string {
+    const lastDotIndex = fileName.lastIndexOf('.');
+    return lastDotIndex > 0 ? fileName.substring(0, lastDotIndex) : fileName;
+  }
+
+  // Méthode pour obtenir l'extension du fichier
+  private getFileExtension(fileName: string): string {
+    const lastDotIndex = fileName.lastIndexOf('.');
+    return lastDotIndex > 0 ? fileName.substring(lastDotIndex) : '';
+  }
+
+  // Méthode pour obtenir la liste des extensions acceptées
+  getAcceptedExtensions(): string {
+    return this.acceptedExtensions.join(', ');
+  }
+
+  // Méthode pour vérifier si le fichier sélectionné est une image
+  isSelectedFileAnImage(): boolean {
+    if (!this.selectedFile) return false;
+    return this.selectedFile.type.startsWith('image/');
+  }
+
+  // Méthode pour obtenir une URL de prévisualisation de l'image
+  getImagePreviewUrl(): string | null {
+    if (!this.selectedFile || !this.isSelectedFileAnImage()) return null;
+    return URL.createObjectURL(this.selectedFile);
+  }
+
+  // Méthode pour obtenir le nom final du fichier
+  getFinalFileName(): string {
+    if (!this.selectedFile) return '';
+
+    const customName = this.documentForm.get('nomFichier')?.value?.trim();
+    const extension = this.getFileExtension(this.selectedFile.name);
+
+    return customName ? `${customName}${extension}` : this.selectedFile.name;
+  }
+
+  // Nouvelle méthode pour gérer le changement du select
+  onDocumentExistantChange(): void {
+    const documentExistantValue = this.documentForm.get('documentExistant')?.value;
+
+    if (documentExistantValue) {
+      // Si un document existant est sélectionné, supprimer le fichier local
+      this.removeSelectedFile();
+
+      // Désactiver l'input file
+      const fileInput = document.getElementById('fichier') as HTMLInputElement;
+      if (fileInput) {
+        fileInput.disabled = true;
+      }
+    } else {
+      // Si aucun document existant n'est sélectionné, réactiver l'input file
+      const fileInput = document.getElementById('fichier') as HTMLInputElement;
+      if (fileInput) {
+        fileInput.disabled = false;
+      }
+    }
+  }
 
   async ajouterDocument(): Promise<void> {
     if (!this.logementMasqueId) {
@@ -80,9 +165,11 @@ export class DocumentCreerComponent implements OnInit {
     try {
       // Vérifier si un fichier local est sélectionné
       if (this.selectedFile) {
+        const finalFileName = this.getFinalFileName();
+
         const documentDTO: DocumentDTO = {
           masqueId: '',
-          nom: this.selectedFile.name,
+          nom: finalFileName,
           fichier: await this.convertFileToBase64(this.selectedFile),
         };
         await this.documentService.ajouterEtMettreAJourCache(this.logementMasqueId!, documentDTO);
@@ -116,8 +203,31 @@ export class DocumentCreerComponent implements OnInit {
       reader.readAsDataURL(file);
     });
   }
+
+  // Méthode modifiée avec logique simplifiée
   isFormInvalid(): boolean {
-    // Désactiver si un fichier est sélectionné ET un document existant est choisi
-    return (!this.selectedFile && !this.documentForm.valid) || (this.selectedFile && this.documentForm.get('documentExistant')?.value);
+    // Le formulaire est valide si :
+    // - Un fichier local est sélectionné OU
+    // - Un document existant est sélectionné
+    return !this.selectedFile && !this.documentForm.get('documentExistant')?.value;
+  }
+
+  // Méthode modifiée pour réactiver le select
+  removeSelectedFile(): void {
+    this.selectedFile = null;
+    this.error = null;
+
+    // Réinitialiser l'input file
+    const fileInput = document.getElementById('fichier') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+      fileInput.disabled = false; // Réactiver l'input file
+    }
+
+    // NOUVELLE LOGIQUE : Réactiver le select des documents existants
+    this.documentForm.get('documentExistant')?.enable();
+
+    // Vider le nom personnalisé du fichier
+    this.documentForm.patchValue({ nomFichier: '' });
   }
 }

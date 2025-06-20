@@ -9,13 +9,46 @@
       <!-- Ajouter un fichier local -->
       <div class="champ">
         <label for="fichier">Fichier local</label>
+        <div class="file-input-container">
+          <input
+            type="file"
+            id="fichier"
+            (change)="onFileSelected($event)"
+            aria-required="true"
+            accept=".pdf,.jpg,.jpeg,.png,.gif,.webp"
+            [disabled]="documentForm.get('documentExistant')?.value"
+          />
+        </div>
+        <button
+          *ngIf="selectedFile"
+          type="button"
+          class="btn-remove-file"
+          (click)="removeSelectedFile()"
+          title="Supprimer le fichier sélectionné"
+        >
+          ✕ Supprimer
+        </button>
+        <small class="file-info">
+          Types acceptés : {{ getAcceptedExtensions() }} (max 7 Mo)
+        </small>
+        <!-- Message informatif quand désactivé -->
+        <small class="file-info" *ngIf="documentForm.get('documentExistant')?.value">
+          <em>Désactivé car un document existant est sélectionné</em>
+        </small>
+      </div>
+
+      <!-- Nom personnalisé du fichier (affiché seulement si un fichier est sélectionné) -->
+      <div class="champ" *ngIf="selectedFile">
+        <label for="nom-fichier">Nom du document</label>
         <input
-          type="file"
-          id="fichier"
-          (change)="onFileSelected($event)"
-          aria-required="true"
-          accept="application/pdf"
+          type="text"
+          id="nom-fichier"
+          formControlName="nomFichier"
+          placeholder="Nom du document (sans extension)"
         />
+        <small class="file-info">
+          Nom final : <strong>{{ getFinalFileName() }}</strong>
+        </small>
       </div>
 
       <!-- Choisir parmi les documents existants -->
@@ -24,27 +57,34 @@
         <select
           id="documents-existants"
           formControlName="documentExistant"
+          (change)="onDocumentExistantChange()"
         >
           <option value="">-- Choisir un document existant --</option>
           <option *ngFor="let doc of documentsDisponibles" [value]="doc.masqueId">
             {{ doc.nom }}
           </option>
         </select>
+        <!-- Message informatif quand désactivé -->
+        <small class="file-info" *ngIf="selectedFile">
+          <em>Désactivé car un fichier local est sélectionné</em>
+        </small>
       </div>
 
-      <div class="error">
+      <div class="error" *ngIf="error">
         {{ error }}
       </div>
+
       <button type="submit" [disabled]="isFormInvalid()">
         Ajouter un document
       </button>
     </div>
+
     <app-fil-ariane
       [ongletRetour]="{
-    url: ['/logements', logementMasqueId],
-    queryParams: { tab: 7 },
-    label: 'Synthèse logement'
-  }"
+        url: ['/logements', logementMasqueId],
+        queryParams: { tab: 7 },
+        label: 'Synthèse logement'
+      }"
       [ongletActuel]="'Ajouter un document'">
     </app-fil-ariane>
 

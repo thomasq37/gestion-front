@@ -1,0 +1,19 @@
+.btn-remove-file {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #c82333;
+  }
+
+  &:focus {
+    outline: 2px solid #0056b3;
+    outline-offset: 2px;
+  }
+}

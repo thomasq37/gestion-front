@@ -43,10 +43,12 @@ export class DocumentService {
    * Récupère les détails d'un document spécifique.
    */
   async obtenirDocument(
+    logementMasqueId: string,
     documentMasqueId: string
   ): Promise<DocumentDTO> {
+    console.log(`${this.apiUrl}/${logementMasqueId}/documents/${documentMasqueId}/obtenir`);
     return fetchWithHandling<DocumentDTO>(
-      `${this.apiUrl}/documents/${documentMasqueId}/obtenir`,
+      `${this.apiUrl}/${logementMasqueId}/documents/${documentMasqueId}/obtenir`,
       {
         method: 'GET',
       }
@@ -75,6 +77,7 @@ export class DocumentService {
     logementMasqueId: string,
     documentMasqueId: string
   ): Promise<SuccessResponse> {
+    console.log(`${this.apiUrl}/${logementMasqueId}/documents/associer/${documentMasqueId}`)
     return fetchWithHandling<SuccessResponse>(
       `${this.apiUrl}/${logementMasqueId}/documents/associer/${documentMasqueId}`,
       {
@@ -101,6 +104,7 @@ export class DocumentService {
     logementMasqueId: string,
     documentDTO: DocumentDTO
   ): Promise<DocumentDTO> {
+    console.log(logementMasqueId)
     const created = await this.ajouterDocument(logementMasqueId, documentDTO);
     this.logementService.mettreAJourDocumentDansLogement(logementMasqueId, created);
     return created;
@@ -111,7 +115,7 @@ export class DocumentService {
     documentMasqueId: string
   ): Promise<void> {
     await this.associerDocumentExistant(logementMasqueId, documentMasqueId);
-    const doc = await this.obtenirDocument(documentMasqueId);
+    const doc = await this.obtenirDocument(logementMasqueId, documentMasqueId);
     this.logementService.mettreAJourDocumentDansLogement(logementMasqueId, doc);
   }
 

@@ -146,7 +146,7 @@ export class ReservationsComponent implements OnInit {
         const dateDeDebut = this.convertirDate(resa.dateDeDebut);
         const dateDeFin = this.convertirDate(resa.dateDeFin);
         const tarif = resa.montant;
-        const typeDeLocation = TypeDeLocation.MENSUELLE;
+        const typeDeLocation = TypeDeLocation.JOURNALIERE;
 
         const [prenom, ...reste] = resa.voyageur.trim().split(' ');
         const nom = reste.join(' ');
